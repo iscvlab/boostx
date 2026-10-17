@@ -1,5 +1,34 @@
 # Changelog
 
+## v2.0.0
+
+- **Core 8 Portable Skill Suite Expansion**:
+  - **`/deep-researchx` (NEW)**: Universal, domain-agnostic 5-Wave Multi-Agent Deep Research & 100%-Proof Synthesis Engine:
+    - **Wave 1 (`Intent × Domain` 2D Contract)**: Dynamically synthesizes evaluation axes, quotas, and disambiguation rules across Built Environment/Case Studies, Physical Sciences/Simulations, Software/Systems, Natural Sciences, and Policy/Strategy.
+    - **Wave 2 (Parallel Harvester Swarm)**: Concurrent subagent fan-out with mandatory primary deep-link scraping (banning bare homepage URLs and snippet-only claims).
+    - **Wave 3 & 3.5 (Blind Adversarial Auditor + `scripts/verify_evidence.py` + Prune & Replace Loop)**: Independent red-team falsification of completion vs policy years, attributions, units, and metrics, paired with a deterministic Python CLI verifier (`verify_evidence.py`) and zero-forgery replacement harvesting.
+    - **Wave 4 & 5 (100%-Proof Synthesis & Composable Handoff)**: Strict `[VERIFIED FACT]` vs `[RECOMMENDED SYNTHESIS]` binding, dual Markdown + JSON/SQLite persistence, and direct spec-to-code handoff into `/boostx` and `/goal`.
+  - **`/researchx` (NEW)**: Fast tactical primary-source research protocol:
+    - **3-Tier Execution Routing**: Inline probe (`≤ 2` sources) vs single isolated scout vs parallel multi-angle swarm.
+    - **4-Tier Primary-Source Authority Ladder**: Local pinned manifests (`package.json`, `pyproject.toml`, `*.csproj`, `metadata.txt`) and local SQLite/XML/AST probes first, version-matched official specs second, upstream source/tests third, standards/papers fourth.
+    - **Capability-Aware Subagent Routing**: Prevents read-only subagent write deadlocks and enforces `≤ 150`-word compressed main-thread return digests.
+  - **`/boostx` (v2.0 Upgrade)**:
+    - **2D `Task × Project` Goal Contract Synthesis**: Crosses 6 Task Archetypes (`DEBUG/RCA`, `BUILD/FEATURE`, `SIMULATE/SOLVER`, `REFACTOR/SIMPLIFY`, `OPTIMIZE/SCALE`, `AUDIT/PLAN/SHIP`) with 5 Project Verification Harnesses (`CAD/Rhino/GH`, `GIS/QGIS`, `Web UI/Figma`, `Data/GCP/ML`, `Agent Skills/CLI`).
+    - **Simulation Physics Triad**: Enforces explicit CAD-to-SI unit bridges, CFL/timestep caps, zero-load identity checks (zero `NaN`/`Inf`), and 1D analytical toy benchmarks.
+    - **Composable Escalation**: Native hooks for `/goal` marathon state checkpointing, `/researchx` tactical lookups, and `/deep-researchx` 5-wave formulation.
+  - **`/create-skill` & `/publish-audit` (`--platform skill` Globalization & Context Budget Guard)**:
+    - Added `--platform skill` profile to `audit_engine.py` verifying frontmatter schema, `≤ 350`-char description budget (preventing system-prompt truncation of sibling skills), Universal Globalization placement, POSIX link integrity, and `sys.dont_write_bytecode` hygiene.
+  - **`/brief` & `/update-doc` Upgrades**:
+    - `/brief`: Added 4-tier authority hierarchy, Two-Pass reading (`Pass A` structural skeleton/cardinality before `Pass B` section deep dive), and deferred/frozen zone gates.
+    - `/update-doc`: Added 4-level Conflict Arbitration Hierarchy (Code/Data Receipts > Canonical SSOT > Chat Lock > Drafts), ghost reference sweeps, quantitative cardinality sweeps, and Sync Ledger output.
+
+### Install
+
+See README. Tag: `v2.0.0`.
+```bash
+git clone --branch v2.0.0 https://github.com/napattan/agent-skills.git
+```
+
 ## v1.3.0
 
 - `/publish-audit`:

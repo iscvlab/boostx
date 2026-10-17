@@ -1,96 +1,107 @@
 ---
 name: brief
 description: >
-  Load related workspace markdown, then do the user's task in the same turn.
-  Use when the user runs /brief, /brief <task>, or says read the docs then,
-  get ready and, or brief then.
-  Do NOT use for documentation sync (/update-doc), publishing (/publish-audit,
-  /publish-qgis), creating skills (/create-skill), or session recap (/handoff).
-argument-hint: "<task>"
-disable-model-invocation: true
+  Load related workspace markdown, extract structural architecture and locked invariants, then execute the user's task in the same turn.
+  Use when the user runs /brief, /brief <task>, or asks to read the docs then, get ready and, or brief then.
+  Do NOT use for documentation sync (/update-doc), publishing (/publish-audit, /publish-qgis), creating skills (/create-skill), or session recap (/handoff).
 ---
 
-# `/brief` (portable)
+# `/brief` (Portable)
 
-Read a small set of related **markdown** in the **current workspace**, then do the user's task. Same SKILL.md on Claude Code, Grok, Gemini/Antigravity, Cursor, Codex, and similar loaders. IDE or CLI. Windows, macOS, Linux. Not locked to one machine or one repo.
+Read a focused, high-authority set of **markdown documents** in the **current workspace**, extract overarching structural architecture and locked invariants, then execute the user's task. Portable across Antigravity IDE, Claude Code, Cursor, and multi-agent platforms. Windows, macOS, and Linux.
 
-Do not invent a filename list. Do not crawl the whole tree. Do not paste file bodies back to the user.
+Do not crawl the entire tree. Do not dump raw file contents back to the user.
 
-Red failure: answering from memory and contradicting the workspace source of truth, or starting work before the plan/handoff that already locked the next step.
+Red failure modes to prevent:
+1. Suggesting answers or structures from memory that contradict the workspace source of truth.
+2. Tunneling into keyword snippets in large documents while missing the overarching structural framework or section count.
+3. Hallucinating content inside deferred zones marked for future research.
 
-## When not to
+---
 
-| Need | Use instead |
-|:---|:---|
-| Sync or rewrite docs | `/update-doc` |
-| Pre-flight or QGIS zip | `/publish-audit`, `/publish-qgis` |
-| Author a skill | `/create-skill` |
-| Write a session recap | `/handoff` |
+## When Not to Use
 
-If the task is only one of those, name that skill and stop.
+| Need | Use Instead |
+| :--- | :--- |
+| Sync or rewrite documentation across the workspace | `/update-doc` |
+| Pre-flight checks or QGIS plugin packaging | `/publish-audit`, `/publish-qgis` |
+| Author or distill a skill | `/create-skill` |
+| Write an end-of-session recap | `/handoff` |
 
-## SOP (every run)
+If the task is exclusively one of these workflows, delegate to that skill and halt.
 
-### 1. Parse the task
+---
 
-Slash arguments, or the rest of the user message after `/brief`. Files the user attached or named are seeds, not the corpus.
+## Standard Operating Procedure (Every Run)
 
-No task: discover, show the briefing table, **stop**. Do not invent work.
+### Step 1: Parse the Task
 
-### 2. Seed terms
+* Extract slash arguments or the text following `/brief`.
+* Attached or explicitly named files serve as direct entry seeds, not the entire corpus.
+* **Empty task rule**: If no task is provided, run discovery, display the Briefing Table, and **halt**. Do not invent unrequested work.
 
-From the task: identifiers, product names, status words, paths. Drop stopwords.
+### Step 2: Semantic Seed Expansion
 
-### 3. Discover markdown
+Extract core nouns, identifiers, and status words from the prompt, discarding generic stopwords. Expand seeds with first-degree structural and architectural synonyms:
+* **Framework & Scaffolding**: `agenda` / `plan` → `framework`, `outline`, `phases`, `acts`, `stages`, `roadmap`, `curriculum`, `architecture`.
+* **Authority & Invariants**: `rules` / `specs` → `invariants`, `master`, `ssot`, `constraints`, `guardrails`, `locked`, `frozen`.
+* **Scope & Context**: `summary` → `overview`, `table of contents`, `executive summary`, `index`.
 
-Search `*.md` in the current workspace, including hidden skill/config dirs when the host allows.
+### Step 3: Discover & Prioritize Markdown
 
-Exclude: `.git`, `node_modules`, `dist`, `__pycache__`, `.venv`, vendor bundles.
+Search `*.md` in the current workspace, including hidden skill or configuration directories when host permissions allow.
 
-Use whatever search exists:
+* **Exclusions**: `.git`, `node_modules`, `dist`, `build`, `__pycache__`, `.venv`, vendor bundles.
+* **Discovery Tools**: Use available platform search (`rg --hidden`, `grep`, or PowerShell `Select-String`).
 
-- Host `grep` / `rg --hidden` if present
-- PowerShell `Select-String`
-- Do not require `rg`
+#### Authority Hierarchy (Cap at 8 Files)
 
-Existence check (do not require these names): `AGENTS.md`, `CONTEXT.md`, root `README.md`, `START_HERE.md`, `HANDOFF.md`, names matching `*STRATEGY*`, `*PLAN*`, `CAREER_*`. These are **types**, not a baked-in project.
+Rank discovered documents using this 4-tier authority ladder rather than raw keyword frequency:
 
-Grep seed terms in `*.md`.
+1. **Tier 1 (Explicit Intent)**: User-pinned or directly specified file paths.
+2. **Tier 2 (Canonical SSOT & Version Leaders)**: Master specifications, architectural roadmaps, and latest version files (e.g. `*_v5` strictly supersedes and suppresses `*_v4` and earlier iterative drafts).
+3. **Tier 3 (Active Operational Plans)**: Active sprint plans, handoffs, and implementation trackers.
+4. **Tier 4 (Contextual Hits)**: Ranked by search relevance solely as a tiebreaker among equal-tier files.
 
-Rank, then cap at **8** files:
+#### The Two-Pass Reading Protocol for Large Documents (> 200 lines)
 
-1. User-attached or named paths
-2. Short named sources of truth (strategy, plan, handoff, start-here, career, root README)
-3. Hit count
+Never grep isolated keyword lines without establishing structural context:
+* **Pass A (Structural Skeleton & Cardinality)**: Read the document header, Table of Contents, Executive Summary, and Level 1–2 Headings (`#`, `##`). Determine the exact declared structural count (e.g. number of acts, phases, tiers, or modules).
+* **Pass B (Targeted Deep Dive)**: Read only the specific sections matching the user's task.
+* **Supersession Invariant**: When multiple versioned files exist, inspect only the latest canonical version.
 
-Prefer one source of truth over five copies of the same claim. If `AGENTS.md` is already in context, do not re-read it; note it as already loaded.
+### Step 4: Boundary & HTML Gates
 
-Files longer than about 200 lines: headings plus matching sections, not the whole file.
+* **Deferred Zone Gate**: Actively scan for explicit boundary markers: `[RESEARCH FIRST]`, `[DO NOT EDIT]`, `[FROZEN]`, `[TBD]`, `[POSTPONE]`. Note any areas marked as out-of-scope or awaiting user research.
+* **HTML Gate**: Skip HTML files by default. Open an HTML file only if the task explicitly references an active web page, dashboard, or layout file by name. Never crawl arbitrary web assets.
 
-### 4. HTML gate
+### Step 5: Briefing Table
 
-Skip HTML by default.
+Present the structured briefing table before proceeding:
 
-Open HTML only if the task is about a page the user will see (html, css, dashboard, layout, "this page") **and** a specific path is named or sits in the relation set. Then that file only. Never crawl all HTML. Do not ingest source or data dumps as briefing material; the later task step may open code as usual.
+| Source Document | Authority Tier | Structural Framework / Cardinality | Locked Invariants to Obey | Deferred / Do-Not-Touch Zones |
+| :--- | :---: | :--- | :--- | :--- |
+| `path/to/spec.md` | SSOT (vLatest) | Declared count (e.g. 6 Acts, 4 Phases) | Core rules, performance metrics | Explicitly deferred items |
 
-### 5. Briefing table
+* If two authoritative documents conflict, state the contradiction explicitly before editing or generating content.
+* Public status terms (`LIVE`, `REGISTERED`, `PREPARED`, `IN PIPELINE`, `DRAFT`) belong to `/update-doc`; adhere to that vocabulary without inventing alternate statuses.
+* Ensure all user-facing text uses direct Unicode characters (e.g. `→`, `•`, `✓`, `²`) and zero LaTeX delimiters.
 
-| File | Why | Locked fact I will obey |
+### Step 6: Pre-Flight Verification & Execution
 
-If two docs disagree, list the conflict before editing public claims.
+Before generating output, verify alignment against the Briefing Table:
+1. **Cardinality Check**: Does the planned outline match the exact number of phases, acts, or sections declared in the SSOT?
+2. **Boundary Check**: Does the planned output avoid answering or populating sections marked as "Deferred" or "Research First"?
+3. **Alignment Gate**: If the user prompt appears to ask for a structure that contradicts the locked SSOT, highlight the discrepancy and confirm before generating.
+4. **Execute**: Complete the parsed task within the validated boundaries. Do not execute unrequested document rewrites.
 
-Public-status words (LIVE, REGISTERED, PREPARED, IN PIPELINE, DRAFT) are owned by `/update-doc`. Obey that vocabulary. Do not invent a second glossary.
+---
 
-User-facing/release copy: no em/en dashes (hyphen `-` is fine). No LaTeX.
+## Quality Rubric
 
-### 6. Do the task
-
-Execute the parsed task, obeying the locked facts. Do not start `/update-doc` or rewrite strategy docs unless the task asked for that.
-
-## Rubric
-
-- [ ] Task parsed, or empty-args stop after the table
-- [ ] Markdown discovered with the host's search; cap 8
-- [ ] HTML skipped unless the page-gate fired
-- [ ] Briefing table shown; conflicts listed
-- [ ] Task done, or deferred to the skill in **When not to**
+- [ ] Task parsed cleanly, or empty-task command stopped immediately after the table.
+- [ ] Markdown discovered via authority hierarchy (SSOT and latest version precedence over hit count); capped at 8 files.
+- [ ] Large documents (> 200 lines) read using Pass A (Structural Skeleton/Cardinality) before Pass B (Section Deep Dive).
+- [ ] Deferred zones, frozen markers, and out-of-scope sections identified.
+- [ ] Briefing Table rendered with Cardinality, Invariants, and Deferred Zones.
+- [ ] Task executed in strict alignment with discovered scaffolding and boundaries.

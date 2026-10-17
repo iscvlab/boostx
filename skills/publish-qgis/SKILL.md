@@ -1,9 +1,9 @@
 ---
 name: publish-qgis
 description: >
-  Deterministic QGIS plugin release preparation, semantic version management, single-root archive packaging, Qt6/QGIS 4 forward-compatibility verification ('QGIS 4 Ready' badge), and publication protocol for plugins.qgis.org (/publish-qgis).
-  Use this skill when the user asks to publish or update a QGIS plugin, build release zip for QGIS, release to QGIS plugin portal, bump QGIS plugin version, verify Qt6 compatibility, or mentions /publish-qgis.
-  Do NOT use for general QGIS canvas GIS modeling (use /qgis instead) or Rhino/Grasshopper plugins (use /publish-food4rhino).
+  Deterministic QGIS plugin release packaging, semantic versioning, single-root zip build, and Qt6/QGIS 4 verification for plugins.qgis.org (/publish-qgis).
+  Use when publishing or updating a QGIS plugin, building a release zip, bumping metadata.txt version, or verifying Qt6 compatibility.
+  Do NOT use for general QGIS GIS modeling (/qgis) or Rhino/Grasshopper plugins (/publish-food4rhino).
 ---
 
 # QGIS Plugin Release & Publishing Protocol (`/publish-qgis`)

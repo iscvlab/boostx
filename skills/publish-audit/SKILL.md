@@ -1,12 +1,10 @@
 ---
 name: publish-audit
 description: >
-  Pre-flight security, secret, privacy, quality, Flake8 compliance, and packaging audit before publishing
-  to GitHub, QGIS, or Food4Rhino (/publish-audit).
+  Pre-flight security, secret, privacy, quality, and agent skill globalization audit (/publish-audit).
   Use when the user asks to audit before publish, scan for secrets or tokens, check API keys,
-  or run /publish-audit, preflight audit, or check before publish.
-  Do NOT use for general refactoring, UI styling, live penetration testing, or doc-only sync
-  (use /update-doc). Do NOT use for QGIS zip/Qt6 packaging mechanics (use /publish-qgis).
+  or run /publish-audit, preflight audit, or audit a global agent skill.
+  Do NOT use for documentation sync (/update-doc) or QGIS zip packaging (/publish-qgis).
 ---
 
 # `/publish-audit` (portable & 100% risk-proof)
@@ -17,10 +15,11 @@ Pre-flight security, privacy, and code quality engine for a **target directory**
 
 ## Platforms & Security Gates
 
-Engine flag `--platform`: `generic` | `qgis` | `food4rhino` | `github`.
+Engine flag `--platform`: `generic` | `qgis` | `food4rhino` | `github` | `skill`.
 
 | Profile | Blocking (must fix before release) | Advisory |
 |:---|:---|:---|
+| **skill** | Missing or malformed `SKILL.md` frontmatter; invalid `name` regex (`^[a-z0-9-]+$`) or >64 chars; `description` >1024 chars; machine user paths (`C:\Users\<user>`); secrets/tokens; backslashes in markdown links; recursive self-nesting (`skill/skill`); Python syntax errors in `scripts/*.py` | Non-globalized skill placement (isolated in workspace `.agents/skills/` instead of `~/.gemini/config/skills/`); description >500 chars (risking Antigravity system prompt context budget exhaustion); missing negative exclusion (`Do NOT use for...`); `disable-model-invocation: true` (hidden from agent prompt in Antigravity); non-standard `argument-hint`; hardcoded ephemeral counts (`all \d+ layers`); packaging debris (`__pycache__`, `.pyc`, `.DS_Store`); missing UTF-8 guard in helper scripts |
 | **qgis** | Credentials / tokens (HF, PyPI, AWS, OpenAI, GitHub, Slack); machine user paths (`C:\Users\<user>`); unescaped `%` in `metadata.txt`; missing required metadata fields; `__init__.py` lacking `classFactory(iface)`; Qt6/QGIS 4 AST violations; Flake8 lint/syntax errors; unsafe `eval`/`exec`/`shell=True`/`pickle` | Packaging debris; missing icon; broad `except: pass` |
 | **food4rhino** | Secrets; machine paths; **no `.gha`/`.dll`**; unsafe code | Missing sample `.gh` |
 | **github** | Secrets; machine paths; **no LICENSE**; Flake8 violations | Missing README; debris; README words Published / LIVE / 1-click install without receipt |
@@ -30,7 +29,7 @@ Public-claim **vocabulary** (LIVE, REGISTERED, PREPARED, IN PIPELINE) is owned b
 
 ---
 
-## 5-Pillar Security & Quality Architecture
+## 6-Pillar Security & Quality Architecture
 
 1. **Secrets & Privacy Gate (Zero Leaks)**:
    - Scans against high-entropy patterns: AWS, GitHub Classic & Fine-Grained, OpenAI, Anthropic, Google AI, HuggingFace, PyPI, GitLab, NPM, RSA/SSH keys, DB connection strings.
@@ -41,14 +40,21 @@ Public-claim **vocabulary** (LIVE, REGISTERED, PREPARED, IN PIPELINE) is owned b
    - Blocks unsafe deserialization: `pickle.load()`, `pickle.loads()`.
    - Blocks unsafe temp files: `tempfile.mktemp()`.
 3. **Flake8 Code Quality Gate**:
-   - Automatically executes Flake8 audit against the project's local `.flake8` configuration.
+   - Automatically executes Flake8 audit against the project's local `.flake8` configuration (bypassed for `--platform skill`).
    - Blocks releases on syntax errors, undefined variables, and style violations.
-4. **Platform Invariant Enforcer**:
+4. **Agent Skill Invariant Enforcer (`--platform skill`)**:
+   - **Universal Globalization Verification**: Audits physical path to ensure the skill is stored in the Global Customizations Root (`~/.gemini/config/skills/`), warning if isolated in a project `.agents/skills` silo.
+   - **Context Budget Protection**: Warns on descriptions > 500 characters to prevent triggering Antigravity's system prompt context budget limit and causing other skills to be silently excluded.
+   - Validates `SKILL.md` frontmatter schema (`name`, `description`).
+   - Audits model-invocation disclosure (flags `disable-model-invocation: true` to prevent accidental exclusion from Antigravity IDE prompt context).
+   - Enforces POSIX forward slashes in markdown links (`[text](path/to/file)`) and verifies relative link target existence.
+   - Detects hardcoded ephemeral snapshot counts (e.g. `all \d+ layers`) and enforces invariant behavioral formulation.
+5. **Platform Invariant Enforcer (QGIS / Food4Rhino / GitHub)**:
    - QGIS: Validates `metadata.txt` (zero unescaped `%`), verifies `def classFactory(iface)` in `__init__.py`, and checks Qt6/QGIS 4 readiness via `check_qt6.py`.
    - Food4Rhino: Verifies compiled `.gha`/`.dll` assembly.
    - GitHub: Verifies OSI-compliant `LICENSE`.
-5. **Packaging Hygiene**:
-   - Detects build debris (`.pyc`, `Thumbs.db`, `.DS_Store`, `.swp`, `.env`).
+6. **Packaging Hygiene**:
+   - Detects build debris (`.pyc`, `__pycache__`, `Thumbs.db`, `.DS_Store`, `.swp`, `.env`).
 
 ---
 
@@ -56,11 +62,19 @@ Public-claim **vocabulary** (LIVE, REGISTERED, PREPARED, IN PIPELINE) is owned b
 
 ### 1. Run the engine
 
-From this skill's folder (or any copy of `scripts/audit_engine.py`):
+Execute via cross-platform paths:
 
+**macOS / Linux**:
 ```bash
-python .agents/skills/publish-audit/scripts/audit_engine.py <target_directory> --platform <generic|qgis|food4rhino|github>
+python ~/.gemini/config/skills/publish-audit/scripts/audit_engine.py <target_directory> --platform <generic|qgis|food4rhino|github|skill>
 ```
+
+**Windows (PowerShell / Command Prompt)**:
+```powershell
+python "$env:USERPROFILE\.gemini\config\skills\publish-audit\scripts\audit_engine.py" <target_directory> --platform <generic|qgis|food4rhino|github|skill>
+```
+
+*(Or from workspace if locally committed: `python .agents/skills/publish-audit/scripts/audit_engine.py <target_dir> --platform <profile>`)*
 
 ### 2. Flags
 

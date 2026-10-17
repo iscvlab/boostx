@@ -14,6 +14,9 @@ import subprocess
 import configparser
 from pathlib import Path
 
+# Prevent bytecode debris in audited directories
+sys.dont_write_bytecode = True
+
 # Enforce UTF-8 standard output
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -60,8 +63,8 @@ SECRET_PATTERNS = [
 # ---------------------------------------------------------------------------
 PATH_PATTERNS = [
     ("Windows Absolute User Path", re.compile(r"(?i)\b([a-z]:[/\\]users[/\\](?!<)[a-zA-Z0-9_\-\.]+)")),
-    ("macOS Absolute User Path", re.compile(r"(?i)\b(/Users/(?!<)[a-zA-Z0-9_\-\.]+)")),
-    ("Linux Absolute Home Path", re.compile(r"(?i)\b(/home/(?!<)[a-zA-Z0-9_\-\.]+)")),
+    ("macOS Absolute User Path", re.compile(r"(?i)(?:^|[\s\"'`=:(])(/Users/(?!<)[a-zA-Z0-9_\-\.]+)")),
+    ("Linux Absolute Home Path", re.compile(r"(?:^|[\s\"'`=:(])(/home/(?!<)[a-z0-9_\-\.]+)")),
 ]
 
 EXCLUDED_PATH_ALLOWLIST = {
@@ -363,10 +366,11 @@ def run_audit(
     print(f"🔍 Starting /publish-audit on: {target}")
     print(f"📦 Platform Profile: {platform.upper()}\n")
 
-    # Collect files
+    # Check packaging hygiene for directories
     all_files = []
     for root, dirs, files in os.walk(target):
-        # Ignore .git, __pycache__, dist, build from walk
+        if "__pycache__" in dirs:
+            result.add_warning(f"Packaging debris detected: `__pycache__` directory at `{Path(root) / '__pycache__'}`")
         dirs[:] = [d for d in dirs if d not in {".git", "__pycache__", "dist", "build", ".idea", ".vscode"}]
         for f in files:
             all_files.append(Path(root) / f)
@@ -413,12 +417,15 @@ def run_audit(
         audit_python_ast(py, result)
 
     # 4. Flake8 Code Quality Audit
-    if not skip_flake8:
+    if not skip_flake8 and platform.lower() != "skill":
         print("🔍 Checking Flake8 code quality & styling...")
         audit_flake8(target, result)
 
     # 5. Platform-Specific Invariants
-    if platform.lower() == "qgis":
+    if platform.lower() == "skill":
+        audit_skill_invariants(target, result)
+
+    elif platform.lower() == "qgis":
         meta_file = target / "metadata.txt"
         audit_qgis_metadata(meta_file, result)
         audit_qgis_plugin_invariants(target, result, skip_qt6=skip_qt6)
@@ -443,26 +450,214 @@ def run_audit(
         if not sample_gh:
             result.add_warning("No sample `.gh` canvas found. Recommended for Food4Rhino.")
 
-    # 6. License & README
-    has_readme = any(f.name.lower().startswith("readme") for f in all_files)
-    has_license = any(f.name.lower().startswith("license") for f in all_files)
-    plat = platform.lower()
-    if not has_readme:
-        result.add_warning("Missing README.md.")
-    if not has_license:
-        if plat == "github":
-            result.add_blocking("Missing LICENSE. GitHub platform profile requires an OSI-style LICENSE file.")
-        else:
-            result.add_warning("Missing LICENSE file.")
+    # 6. License & README (skipped for skill profile)
+    if platform.lower() != "skill":
+        has_readme = any(f.name.lower().startswith("readme") for f in all_files)
+        has_license = any(f.name.lower().startswith("license") for f in all_files)
+        plat = platform.lower()
+        if not has_readme:
+            result.add_warning("Missing README.md.")
+        if not has_license:
+            if plat == "github":
+                result.add_blocking("Missing LICENSE. GitHub platform profile requires an OSI-style LICENSE file.")
+            else:
+                result.add_warning("Missing LICENSE file.")
 
     return result
+
+
+def audit_skill_invariants(target: Path, result: AuditResult):
+    """Audit agent skill directory against /create-skill standards (frontmatter, links, invariants)."""
+    skill_md = target / "SKILL.md"
+    if not skill_md.exists():
+        result.add_blocking("Missing mandatory `SKILL.md` in skill directory", str(target))
+        return
+
+    # Check recursive self-nesting
+    if (target / target.name).exists() and (target / target.name).is_dir():
+        result.add_blocking(f"Recursive self-nesting detected: `{target.name}/{target.name}`", str(target))
+
+    # Check Universal Globalization Scope
+    target_abs = str(target.resolve()).replace("\\", "/")
+    if "/.agents/skills/" in target_abs or target_abs.endswith("/.agents/skills") or "/.agents/" in target_abs:
+        result.add_warning(
+            f"Skill is isolated in workspace `.agents/skills/` ({target.name}). "
+            "Universal Globalization standard requires all agent skills to be stored in the Global Customizations "
+            "Root (`~/.gemini/config/skills/<name>/` / `OneDrive/gemini-config/skills/<name>/`) so they appear "
+            "in every workspace and synchronize automatically across all devices.",
+            str(skill_md),
+        )
+
+    try:
+        content = skill_md.read_text(encoding="utf-8", errors="replace")
+    except Exception as e:
+        result.add_blocking(f"Failed to read `SKILL.md`: {e}", str(skill_md))
+        return
+
+    # Parse YAML frontmatter
+    lines = content.splitlines()
+    if not lines or lines[0].strip() != "---":
+        result.add_blocking("Frontmatter must start with `---` on line 1", str(skill_md), 1)
+        return
+
+    fm_lines = []
+    end_idx = -1
+    for i, line in enumerate(lines[1:], 2):
+        if line.strip() == "---":
+            end_idx = i
+            break
+        fm_lines.append(line)
+
+    if end_idx == -1:
+        result.add_blocking("Frontmatter missing closing `---` delimiter", str(skill_md))
+        return
+
+    fm_data = {}
+    try:
+        import yaml
+        fm_data = yaml.safe_load("\n".join(fm_lines)) or {}
+    except Exception:
+        # Fallback simple parser
+        for fm_line in fm_lines:
+            if ":" in fm_line:
+                k, v = fm_line.split(":", 1)
+                fm_data[k.strip()] = v.strip()
+
+    if not isinstance(fm_data, dict):
+        result.add_blocking("YAML frontmatter must be a valid key-value mapping", str(skill_md))
+        return
+
+    # 1. Check Name
+    name = fm_data.get("name")
+    name_regex = re.compile(r"^[a-z0-9-]+$")
+    if not name:
+        result.add_blocking("Frontmatter missing mandatory field: `name`", str(skill_md))
+    else:
+        name_str = str(name).strip()
+        if not name_regex.match(name_str):
+            result.add_blocking(
+                f"Invalid skill name format `{name_str}`. Must be lowercase alphanumeric and hyphens (`^[a-z0-9-]+$`)",
+                str(skill_md),
+            )
+        if len(name_str) > 64:
+            result.add_blocking(f"Skill name exceeds 64 characters ({len(name_str)} chars)", str(skill_md))
+        if name_str != target.name and not target.name.startswith("_"):
+            result.add_warning(
+                f"Skill folder name `{target.name}` does not match frontmatter name `{name_str}`", str(skill_md)
+            )
+
+    # 2. Check Description
+    desc = fm_data.get("description")
+    if not desc:
+        result.add_blocking("Frontmatter missing mandatory field: `description`", str(skill_md))
+    else:
+        desc_str = str(desc).strip()
+        if len(desc_str) > 1024:
+            result.add_blocking(f"Skill description exceeds 1024 characters ({len(desc_str)} chars)", str(skill_md))
+        elif len(desc_str) > 500:
+            result.add_warning(
+                f"Skill description is {len(desc_str)} characters long (>500 chars). "
+                "Aim for a compact description (≤ 250-400 chars) to prevent triggering Antigravity's "
+                "system prompt context budget limit, which silently drops skills from the active list.",
+                str(skill_md),
+            )
+
+        is_disabled = fm_data.get("disable-model-invocation", False) is True
+        if not is_disabled:
+            has_pos = any(k in desc_str.lower() for k in ["use when", "use this skill", "trigger", "when the user"])
+            if not has_pos:
+                result.add_warning(
+                    "Description lacks clear positive triggers (e.g. `Use when...`, `Use this skill when...`)",
+                    str(skill_md),
+                )
+            has_neg = any(k in desc_str.lower() for k in ["do not use", "not for", "don't use", "exclude"])
+            if not has_neg:
+                result.add_warning(
+                    "Description lacks explicit negative exclusion clause (e.g. `Do NOT use for...`)",
+                    str(skill_md),
+                )
+
+    # 3. Check Frontmatter Compatibility Flags
+    if fm_data.get("disable-model-invocation", False) is True:
+        result.add_warning(
+            "`disable-model-invocation: true` detected. This skill is user-invoked only and will be "
+            "completely stripped from the LLM prompt context (<skills>) in Antigravity IDE. "
+            "Avoid if you expect pair-programming agents to discover and invoke it autonomously.",
+            str(skill_md),
+        )
+    if "argument-hint" in fm_data:
+        result.add_warning(
+            "Non-standard Claude Code frontmatter `argument-hint` detected. "
+            "Antigravity natively standardizes on `name` and `description`.",
+            str(skill_md),
+        )
+
+    # 4. Anti-Hardcoded Ephemeral Metrics Scanner
+    ephemeral_pat = re.compile(r"(?i)\b(all\s+\d+\s+layers|\b\d+\s+layers\b)")
+    for i, line in enumerate(lines, 1):
+        m = ephemeral_pat.search(line)
+        if m:
+            result.add_warning(
+                f"Potential hardcoded ephemeral snapshot metric detected: `{m.group(0)}`. "
+                "Formulate guardrails as invariant behavioral protocols (e.g. 'Zero Full-Project Dumps', "
+                "'Bounded Scope', 'Targeted Indexing') instead of volatile dataset counts.",
+                str(skill_md),
+                i,
+            )
+
+    # 5. Markdown Links & Forward-Slash Audit
+    for md_file in target.rglob("*.md"):
+        try:
+            md_text = md_file.read_text(encoding="utf-8", errors="replace")
+        except Exception:
+            continue
+
+        # Strip fenced code blocks and inline code spans to avoid false positives on syntax examples
+        clean_md = re.sub(r"```[\s\S]*?```", "", md_text)
+        clean_md = re.sub(r"`[^`\n]+`", "", clean_md)
+
+        for m in re.finditer(r"\[([^\]]+)\]\(([^)]+)\)", clean_md):
+            link_text, link_url = m.group(1), m.group(2)
+            if "\\" in link_url:
+                result.add_blocking(
+                    f"Markdown link contains backslash: `[{link_text}]({link_url})`. "
+                    "Always use POSIX forward slashes (`/`).",
+                    str(md_file),
+                )
+            if not link_url.startswith(("http://", "https://", "#", "mailto:")):
+                rel_clean = link_url.split("#")[0].split("?")[0].strip()
+                if rel_clean:
+                    target_file = (md_file.parent / rel_clean).resolve()
+                    if not target_file.exists():
+                        result.add_warning(
+                            f"Broken relative markdown link: `[{link_text}]({link_url})` (file not found)",
+                            str(md_file),
+                        )
+
+    # 6. Helper Scripts Audit
+    scripts_dir = target / "scripts"
+    if scripts_dir.exists() and scripts_dir.is_dir():
+        for py_file in scripts_dir.rglob("*.py"):
+            try:
+                py_src = py_file.read_text(encoding="utf-8", errors="replace")
+                ast.parse(py_src, filename=str(py_file))
+            except SyntaxError as se:
+                result.add_blocking(f"Python SyntaxError in helper script: {se}", str(py_file), se.lineno or 0)
+            except Exception as e:
+                result.add_warning(f"Could not parse script: {e}", str(py_file))
+                continue
+
+            if "sys.stdout" not in py_src or "reconfigure" not in py_src:
+                result.add_warning(
+                    "Helper script lacks UTF-8 `sys.stdout.reconfigure(encoding='utf-8')` guard", str(py_file)
+                )
 
 
 def main():
     parser = argparse.ArgumentParser(description="Universal Package Pre-Flight Audit Engine (/publish-audit)")
     parser.add_argument("target", help="Path to project directory to audit")
     parser.add_argument(
-        "--platform", choices=["generic", "qgis", "food4rhino", "github"], default="generic",
+        "--platform", choices=["generic", "qgis", "food4rhino", "github", "skill"], default="generic",
         help="Platform profile to evaluate against"
     )
     parser.add_argument("--skip-flake8", action="store_true", help="Skip Flake8 code quality audit")
