@@ -1,13 +1,13 @@
 ---
-name: update-doc
+name: syncx
 description: >
-  Synchronize documentation after a system, API, schema, metric, or architectural change.
-  Use when the user runs /update-doc, /doc-sync, /audit-docs, /verify-docs, or asks to sync docs,
+  Synchronize documentation after a system, API, schema, metric, or architectural change (/syncx, /update-doc, /doc-sync).
+  Use when the user runs /syncx, /update-doc, /doc-sync, /audit-docs, or asks to sync docs,
   purge stale references, arbitrate conflicting documentation, or resolve outdated numbers across markdown and HTML.
-  Do NOT use for package publishing or QGIS zip builds (/publish-audit, /publish-qgis) or authoring skills (/create-skill).
+  Do NOT use for package publishing or QGIS zip builds (/publishx-audit, /publishx-qgis) or authoring skills (/create-skillx).
 ---
 
-# `/update-doc` (Portable)
+# `/syncx` (Portable Cross-Document Synchronizer)
 
 Cross-document synchronization, conflict arbitration, and zero-stale audit for **whatever repository is open now**.
 
@@ -44,7 +44,7 @@ Use these 5 canonical terms in public documentation and deliverables:
 | **IN PIPELINE** | Intended next; not released. |
 | **DRAFT** | Internal only. |
 
-Do not write LIVE, Published, or 1-click install without a verifiable receipt (URL, version table, or installer). `/publish-audit` advises on these terms; this skill owns their formal definitions.
+Do not write LIVE, Published, or 1-click install without a verifiable receipt (URL, version table, or installer). `/publishx-audit` advises on these terms; this skill owns their formal definitions.
 
 ### Formatting and Typography Rules
 * **No Em or En Dashes**: Use standard ASCII hyphens `-` in all user-facing lines and generated documentation.
@@ -86,12 +86,13 @@ From the active conversation and git status, explicitly record:
 
 ### Step 2: Dynamic Workspace Scan & Ghost Sweep
 
-Search markdown, HTML, and web documentation across the workspace (including hidden directories like `.agents/`, excluding `.git/` and `node_modules/`):
+Search markdown, HTML, and web documentation across the workspace (including hidden directories like `.agents/`, excluding `.git/`, `node_modules/`, and **any directory containing an `.obsidian/` subfolder**):
 
-1. **Target Asset Discovery**:
+1. **Target Asset Discovery & Opt-In Second Brain Boundary**:
    * *Markdown Suites*: Root README, module docs, schemas, roadmaps, specifications, and portfolios.
    * *Interactive Web Artifacts*: Presentation slide decks, architecture viewers, dashboard portals, storyboards, and reports.
    * *Shadow Mirrors*: Identify whether modified documents are duplicated in distribution packages (e.g. `dist/docs/`, `package_name/docs_reference/`, or mirrored sub-workspaces).
+   * *Strict Opt-In `/syncx /obsidianx` Boundary*: By default, **never** scan or modify an Obsidian vault (`*/.obsidian/..`) during `/syncx`. Only when `/obsidianx` (or `/obsidian-vault`) is explicitly paired in the command (`/syncx /obsidianx`) should you resolve the active vault via [`/obsidianx`](../obsidianx/SKILL.md) and synchronize affected reusable atomic notes and `Hub - *.md` tables alongside repository docs.
 2. **Ghost Reference & Dead Link Sweep**:
    * If any file was renamed, merged, or deleted, grep the workspace for its old base name and relative path.
    * Update or remove dangling hyperlinks, navigation cards, and table references pointing to the deceased file.
@@ -135,7 +136,7 @@ Verify completion programmatically before concluding:
 
 1. **Zero-Stale Grep Sweep**: Search the active relation set for deprecated terms. Expected result: **zero hits** (outside historical changelogs).
 2. **Hyperlink and Anchor Verification**: Verify all relative links (`../`) and HTML anchor IDs resolve properly.
-3. **Execute Project Auditor**: If the repository provides an auditor script (e.g. `python .agents/skills/update-doc/scripts/audit_workspace_docs.py`), execute it and verify exit code 0.
+3. **Execute Project Auditor**: If the repository provides an auditor script (e.g. `python .agents/skills/syncx/scripts/audit_workspace_docs.py`), execute it and verify exit code 0.
 4. **Render the Synchronization Ledger**: Present the final audit scorecard:
 
 | Tier | File Path | Action | Deprecated Value Purged | Ground-Truth Invariant Verified | Status |

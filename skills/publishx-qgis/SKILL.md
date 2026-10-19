@@ -1,15 +1,15 @@
 ---
-name: publish-qgis
+name: publishx-qgis
 description: >
-  Deterministic QGIS plugin release packaging, semantic versioning, single-root zip build, and Qt6/QGIS 4 verification for plugins.qgis.org (/publish-qgis).
+  Deterministic QGIS plugin release packaging, semantic versioning, single-root zip build, and Qt6/QGIS 4 verification for plugins.qgis.org (/publishx-qgis, /publish-qgis).
   Use when publishing or updating a QGIS plugin, building a release zip, bumping metadata.txt version, or verifying Qt6 compatibility.
   Do NOT use for general QGIS GIS modeling (/qgis) or Rhino/Grasshopper plugins (/publish-food4rhino).
 ---
 
-# QGIS Plugin Release & Publishing Protocol (`/publish-qgis`)
+# QGIS Plugin Release & Publishing Protocol (`/publishx-qgis`)
 
 **Deterministic release packaging, Qt6 forward-compatibility enforcement, and publication protocol for the official QGIS Python Plugins Repository ([plugins.qgis.org](https://plugins.qgis.org)).**  
-Eliminates packaging rejections, enforces semantic versioning, guarantees the green **"QGIS 4 Ready"** badge, and validates metadata against Django/Python `configparser` interpolation constraints.
+Elimates packaging rejections, enforces semantic versioning, guarantees the green **"QGIS 4 Ready"** badge, and validates metadata against Django/Python `configparser` interpolation constraints.
 
 ---
 
@@ -88,10 +88,10 @@ Before packaging, run the universal security, Flake8, and Qt6 forward-compatibil
 
 ```bash
 # 1. Run Pre-Flight Security, Privacy & Flake8 Scan
-python .agents/skills/publish-audit/scripts/audit_engine.py <plugin_dir> --platform qgis
+python .agents/skills/publishx-audit/scripts/audit_engine.py <plugin_dir> --platform qgis
 
 # 2. Run Qt6 / QGIS 4 Forward-Compatibility AST Linter directly
-python .agents/skills/publish-qgis/scripts/check_qt6.py <plugin_dir>
+python .agents/skills/publishx-qgis/scripts/check_qt6.py <plugin_dir>
 ```
 
 * **Security & Secrets Gate**: Zero detected API keys (AWS, GitHub, HF, PyPI, OpenAI), zero hardcoded developer machine paths (`C:\Users\<user>\...`), zero unhandled `B110: try_except_pass` blocks, and zero unescaped `%` symbols in `metadata.txt`.
@@ -136,13 +136,13 @@ Run the deterministic packaging engine:
 
 ```bash
 # Package current version (automatically enforces all 5 gates):
-python .agents/skills/publish-qgis/scripts/package_qgis.py <plugin_dir>
+python .agents/skills/publishx-qgis/scripts/package_qgis.py <plugin_dir>
 
 # Automatically bump patch version and package:
-python .agents/skills/publish-qgis/scripts/package_qgis.py <plugin_dir> --bump patch
+python .agents/skills/publishx-qgis/scripts/package_qgis.py <plugin_dir> --bump patch
 
 # Explicitly override internal package folder name:
-python .agents/skills/publish-qgis/scripts/package_qgis.py <plugin_dir> --package-name <slug>
+python .agents/skills/publishx-qgis/scripts/package_qgis.py <plugin_dir> --package-name <slug>
 
 # (Optional overrides for debugging):
 # --skip-qt6        Bypass Qt6 check
@@ -201,7 +201,7 @@ To guarantee that the root folder inside the ZIP always matches the portal's reg
 | Error Message on Portal | Root Cause | Instant Fix |
 | :--- | :--- | :--- |
 | `Plugin folder name mismatch: ... (X) is different from the original (Y)` | The original version was registered with root folder `Y`, but current package uses `X`. | Add `package_name=Y` to `metadata.txt` (or run `package_qgis.py <dir> --package-name Y`). Re-package and upload. |
-| `Qt6 Check [N issues]` (Red Tab) | Unscoped Qt enums (e.g. `Qt.AlignCenter`) or direct `PyQt5` import | Run `python .agents/skills/publish-qgis/scripts/check_qt6.py <plugin_dir>` to list exact lines and replacements. Re-package and upload. |
+| `Qt6 Check [N issues]` (Red Tab) | Unscoped Qt enums (e.g. `Qt.AlignCenter`) or direct `PyQt5` import | Run `python .agents/skills/publishx-qgis/scripts/check_qt6.py <plugin_dir>` to list exact lines and replacements. Re-package and upload. |
 | `Errors parsing metadata.txt. '%' must be followed by '%' or '('` | Raw unescaped `%` in `description` or `about` | Replace `%` with `percent` or `%%` in `metadata.txt`. |
 | `Zip file must contain a single top-level directory` | Zipped loose files without parent folder | Use `package_qgis.py` which automatically prefixes all archive paths with `<plugin_slug>/`. |
 | `A plugin with this name and version number already exists` | Attempting to upload a version string that is already in the database, including **unapproved** uploads | Run `package_qgis.py <plugin_dir> --bump patch` from the highest uploaded version. Do not roll back to an unused lower number. |

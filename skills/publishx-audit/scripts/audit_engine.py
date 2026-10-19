@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Universal Package & Release Pre-Flight Audit Engine (/publish-audit).
+Universal Package & Release Pre-Flight Audit Engine (/publishx-audit).
 Performs secret, privacy, security, Flake8 quality, and platform-specific audits
 prior to releasing to GitHub, QGIS, or Food4Rhino.
 """
@@ -329,9 +329,9 @@ def audit_qgis_plugin_invariants(target: Path, result: AuditResult, skip_qt6: bo
 
     # Optional Qt6 AST check if check_qt6 is available
     if not skip_qt6:
-        qt6_script = Path(__file__).resolve().parent.parent.parent / "publish-qgis" / "scripts" / "check_qt6.py"
+        qt6_script = Path(__file__).resolve().parent.parent.parent / "publishx-qgis" / "scripts" / "check_qt6.py"
         if not qt6_script.exists():
-            qt6_script = target.parent / ".agents" / "skills" / "publish-qgis" / "scripts" / "check_qt6.py"
+            qt6_script = target.parent / ".agents" / "skills" / "publishx-qgis" / "scripts" / "check_qt6.py"
 
         if qt6_script.exists():
             try:
@@ -363,7 +363,7 @@ def run_audit(
         result.add_blocking(f"Target directory does not exist: {target}")
         return result
 
-    print(f"🔍 Starting /publish-audit on: {target}")
+    print(f"🔍 Starting /publishx-audit on: {target}")
     print(f"📦 Platform Profile: {platform.upper()}\n")
 
     # Check packaging hygiene for directories
@@ -406,7 +406,7 @@ def run_audit(
                     result.add_warning(
                         "README may overclaim public availability (Published / LIVE / 1-click). "
                         "Use REGISTERED / PREPARED / IN PIPELINE unless a receipt exists. "
-                        "Vocabulary is owned by /update-doc; this is advisory.",
+                        "Vocabulary is owned by /syncx; this is advisory.",
                         str(f),
                         i,
                     )
@@ -436,7 +436,7 @@ def run_audit(
             zips = list(dist_dir.glob("*.zip"))
             if zips:
                 result.add_warning(
-                    "dist/*.zip present. For QGIS single-root zip shape and Qt6 checks, run /publish-qgis. "
+                    "dist/*.zip present. For QGIS single-root zip shape and Qt6 checks, run /publishx-qgis. "
                     "This audit does not reimplement zip packaging."
                 )
 
@@ -467,7 +467,7 @@ def run_audit(
 
 
 def audit_skill_invariants(target: Path, result: AuditResult):
-    """Audit agent skill directory against /create-skill standards (frontmatter, links, invariants)."""
+    """Audit agent skill directory against /create-skillx standards (frontmatter, links, invariants)."""
     skill_md = target / "SKILL.md"
     if not skill_md.exists():
         result.add_blocking("Missing mandatory `SKILL.md` in skill directory", str(target))
@@ -654,7 +654,7 @@ def audit_skill_invariants(target: Path, result: AuditResult):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Universal Package Pre-Flight Audit Engine (/publish-audit)")
+    parser = argparse.ArgumentParser(description="Universal Package Pre-Flight Audit Engine (/publishx-audit)")
     parser.add_argument("target", help="Path to project directory to audit")
     parser.add_argument(
         "--platform", choices=["generic", "qgis", "food4rhino", "github", "skill"], default="generic",

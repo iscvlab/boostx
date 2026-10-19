@@ -4,7 +4,7 @@ description: >
   BoostX deep reasoning, Task × Project goal synthesis, and high-discipline problem solving (/boostx).
   Use when solving complex coding tasks, bugs, physics/CAD simulations, or architecture via falsifiable hypotheses,
   Ponytail × Deep Module ladder, red-green loops, Dual-OS/OneDrive/CLI parity, or with /goal.
-  Do NOT use for trivial edits, syntax typos, or doc-only sync (use /update-doc).
+  Do NOT use for trivial edits, syntax typos, or doc-only sync (use /syncx).
 ---
 
 # Antigravity BoostX Protocol (`/boostx`)
@@ -33,7 +33,7 @@ Match ceremony to task scope in Step 0:
 * **Tier 1 — Tactical Strike (1–2 files, localized bug/feature)**:
   1-line falsifiable hypothesis → minimal Ponytail surgical diff → 1 red→green verification check → done.
 * **Tier 2 — Architectural Build (Multi-file feature, simulation solver, or refactor)**:
-  Load workspace invariants (`/brief` mindset) → design Deep Module seam → incremental red→green verification → sync project logs.
+  Load workspace invariants (`/briefx` mindset) → design Deep Module seam → incremental red→green verification → sync project logs.
 * **Tier 3 — `/goal` Marathon Mode (Long-running autonomous execution)**:
   Activate Section 4.A (`/goal` Autonomous Marathon Contract) with scratch checkpointing, 3-strike anti-spin circuit breakers, subagent context offloading, and a strict exit gate before emitting `<!-- GOAL_COMPLETE -->`.
 
@@ -70,10 +70,10 @@ Select **ONLY the active Task Row** (zero overhead from unselected rows) and cro
 
 Cross the selected Task Row with the **Project Archetype Verification Harness**:
 * **CAD / Rhino / Grasshopper (`.cs`, `.gh`, `.py`)**: Headless build (`dotnet build`), DataTree branch alignment (`{0;0}` topology invariants), non-blocking solver execution, and `/components-log` sync.
-* **GIS / QGIS (`metadata.txt`, `qgis.core`, `PyQt5/6`)**: CRS transformation safety, Qt5/Qt6 enum parity (`/publish-qgis`), memory layer cleanup, and headless PyQGIS validation.
+* **GIS / QGIS (`metadata.txt`, `qgis.core`, `PyQt5/6`)**: CRS transformation safety, Qt5/Qt6 enum parity (`/publishx-qgis`), memory layer cleanup, and headless PyQGIS validation.
 * **Web UI / Figma / Diagrams (`.html`, `.tsx`, `.css`, `.svg`)**: Zero console/runtime errors, DOM/viewport overflow bounds, and `/ui-design-brain` or `/diagram-design` token parity.
 * **Data / GCP / ML (`bigquery`, `spark`, `.sql`, `.ipynb`)**: Step 0 Auth Pre-Flight (`/google-cloud-auth-verification`), SQL `--dry_run` cost check, schema grain integrity, and `/ml-best-practices` anti-leakage checks.
-* **Agent Skills / CLI / Configs (`SKILL.md`, `hooks.json`, `.gemini`)**: `/create-skill` token/trigger hygiene, zero hardcoded user profile paths, and OneDrive + IDE/CLI surface parity.
+* **Agent Skills / CLI / Configs (`SKILL.md`, `hooks.json`, `.gemini`)**: `/create-skillx` token/trigger hygiene, zero hardcoded user profile paths, and OneDrive + IDE/CLI surface parity.
 
 State the 3-line contract concisely before mutating files:
 > **🎯 BoostX Goal Contract** — `[Task Archetype]` × `[Project Archetype]` (`Tier 1|2|3`)
@@ -103,29 +103,29 @@ State the 3-line contract concisely before mutating files:
 Before implementing, use fast semantic triage (`/laya` mindset) to prune dead-end hypotheses and evaluate 2–3 solution vectors against the **Ponytail × Deep Module Ladder**:
 
 1. **Vector Comparison**:
-   - **Vector A (Simplification / Deletion / Config)**: Eliminates the complexity altogether (YAGNI) or fixes config/stdlib usage.
-   - **Vector B (Surgical Local Fix)**: Smallest touchpoint; patches the root cause at the immediate seam.
-   - **Vector C (Deep Module Seam)**: When new structure is genuinely needed, design a **Deep Module** (`/codebase-design`): *a tiny, obvious public interface hiding substantial internal logic*—never shallow pass-through wrappers or speculative abstractions.
+  - **Vector A (Simplification / Deletion / Config)**: Eliminates the complexity altogether (YAGNI) or fixes config/stdlib usage.
+  - **Vector B (Surgical Local Fix)**: Smallest touchpoint; patches the root cause at the immediate seam.
+  - **Vector C (Deep Module Seam)**: When new structure is genuinely needed, design a **Deep Module** (`/codebase-design`): *a tiny, obvious public interface hiding substantial internal logic*—never shallow pass-through wrappers or speculative abstractions.
 2. **The Ponytail Ladder Filter**:
-   - **Step 1 (YAGNI)**: Does this feature or abstraction really need to exist? Delete or skip speculative code.
-   - **Step 2 (Codebase Reuse)**: Does a helper, utility, or established pattern already exist in the repository?
-   - **Step 3 (Stdlib / Native First)**: Prefer standard library functions (`os`, `sys`, `json`, `math`, `pathlib`) and native platform features over adding external libraries.
-   - **Step 4 (Shortest Working Diff & Debt Tagging)**: Choose the approach with minimal blast radius. Tag any deliberate shortcut with `// ponytail: <reason>` so `/ponytail-debt` can harvest it.
+  - **Step 1 (YAGNI)**: Does this feature or abstraction really need to exist? Delete or skip speculative code.
+  - **Step 2 (Codebase Reuse)**: Does a helper, utility, or established pattern already exist in the repository?
+  - **Step 3 (Stdlib / Native First)**: Prefer standard library functions (`os`, `sys`, `json`, `math`, `pathlib`) and native platform features over adding external libraries.
+  - **Step 4 (Shortest Working Diff & Debt Tagging)**: Choose the approach with minimal blast radius. Tag any deliberate shortcut with `// ponytail: <reason>` so `/ponytail-debt` can harvest it.
 
 ---
 
 ### Phase 3: Surgical Execution & Dual-OS Standards
 
 1. **Single Variable Mutation**:
-   - Modify only one logical seam at a time to satisfy the invariants. Never stack multiple untested edits across files.
+  - Modify only one logical seam at a time to satisfy the invariants. Never stack multiple untested edits across files.
 2. **Surgical Line Edits Over Whole-File Overwrites**:
-   - For modifying existing code, always use surgical line-replacement tools (`replace_file_content` / `multi_replace_file_content`).
-   - Reserve `write_to_file` strictly for new files to prevent accidental deletion of existing comments, types, or docstrings.
-   - Never pass `ArtifactMetadata` when modifying or writing project codebase files.
+  - For modifying existing code, always use surgical line-replacement tools (`replace_file_content` / `multi_replace_file_content`).
+  - Reserve `write_to_file` strictly for new files to prevent accidental deletion of existing comments, types, or docstrings.
+  - Never pass `ArtifactMetadata` when modifying or writing project codebase files.
 3. **Preserve Documentation & Comments**:
-   - Maintain existing comments, docstrings, and type annotations unless specifically obsolete.
+  - Maintain existing comments, docstrings, and type annotations unless specifically obsolete.
 4. **Clean Typography**:
-   - Use direct Unicode symbols (`→`, `←`, `×`, `≈`, `±`, `≤`, `≥`, `✓`, `✨`) instead of inline LaTeX math notation.
+  - Use direct Unicode symbols (`→`, `←`, `×`, `≈`, `±`, `≤`, `≥`, `✓`, `✨`) instead of inline LaTeX math notation.
 
 ---
 
@@ -134,23 +134,23 @@ Before implementing, use fast semantic triage (`/laya` mindset) to prune dead-en
 A BoostX task is **only complete when terminal execution logs provide concrete proof**:
 
 1. **Tier 1: Before State (Repro / Baseline Proof)**:
-   - Confirm the initial failure log (Track A), pre-flight baseline probe (Track B), or analytical toy benchmark (Track C).
+  - Confirm the initial failure log (Track A), pre-flight baseline probe (Track B), or analytical toy benchmark (Track C).
 2. **Tier 2: After State (Pass, Boundary & Mutation Proof)**:
-   - Run the exact feedback signal on the updated code and demonstrate a clean **GREEN** pass.
-   - Verify at least one boundary edge case (null/empty input, zero-load/`dt=0` identity case with zero `NaN`/`Inf`, max limit).
-   - **Mutation Sanity Check**: Confirm that reverting the core fix would cause the verification check to fail.
+  - Run the exact feedback signal on the updated code and demonstrate a clean **GREEN** pass.
+  - Verify at least one boundary edge case (null/empty input, zero-load/`dt=0` identity case with zero `NaN`/`Inf`, max limit).
+  - **Mutation Sanity Check**: Confirm that reverting the core fix would cause the verification check to fail.
 3. **Tier 3: Ponytail Bloat Strip, Regression & Anti-Hardcode Sweep**:
-   - Strip any newly added helper, import, or wrapper that can be removed without breaking the Green signal.
-   - Run sibling tests/compilers to guarantee zero regressions.
-   - **Portability & Anti-Hardcode Audit**: Sweep all modified or created files for hardcoded machine user paths (`C:\Users\<User>\...`, `/Users/<username>/...`, `/home/<username>/...`) or secrets:
-     - PowerShell (Windows):
-       ```powershell
-       git diff --name-only | ForEach-Object { Select-String -Path $_ -Pattern '(?i)([a-z]:[/\\]users|/Users/|/home/)' }
-       ```
-     - Bash/Zsh (macOS/Linux):
-       ```bash
-       git diff --name-only | xargs grep -E -i "([a-z]:/users|/Users/|/home/)"
-       ```
+  - Strip any newly added helper, import, or wrapper that can be removed without breaking the Green signal.
+  - Run sibling tests/compilers to guarantee zero regressions.
+  - **Portability & Anti-Hardcode Audit**: Sweep all modified or created files for hardcoded machine user paths (`C:\Users\<User>\...`, `/Users/<username>/...`, `/home/<username>/...`) or secrets:
+    - PowerShell (Windows):
+      ```powershell
+      git diff --name-only | ForEach-Object { Select-String -Path $_ -Pattern '(?i)([a-z]:[/\\]users|/Users/|/home/)' }
+      ```
+    - Bash/Zsh (macOS/Linux):
+      ```bash
+      git diff --name-only | xargs grep -E -i "([a-z]:/users|/Users/|/home/)"
+      ```
 
 ---
 
@@ -159,35 +159,35 @@ A BoostX task is **only complete when terminal execution logs provide concrete p
 Whenever engineering across the multi-machine ecosystem (Windows Desktop PC, ASUS Laptop, macOS MacBook synced via OneDrive, across both **Antigravity IDE** and **Antigravity CLI `agy`**):
 
 1. **Strict Relative & Dynamic Home Path Invariant (OneDrive Multi-PC Safe)**:
-   - Never hardcode machine-specific user profile paths (`C:\Users\<User>\...` or `/Users/<username>/...`) in configuration files, plugin hooks, skills, scripts, or documentation—hardcoded usernames break other PCs as soon as OneDrive syncs.
-   - Always derive paths relative to script location or current working directory:
-     ```python
-     SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-     ```
-   - For global configuration entries, use home-relative `~/` or runtime environment expansion (`$env:USERPROFILE`, `$HOME`, `pathlib.Path.home()`, `os.path.expanduser("~")`).
+  - Never hardcode machine-specific user profile paths (`C:\Users\<User>\...` or `/Users/<username>/...`) in configuration files, plugin hooks, skills, scripts, or documentation—hardcoded usernames break other PCs as soon as OneDrive syncs.
+  - Always derive paths relative to script location or current working directory:
+    ```python
+    SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+    ```
+  - For global configuration entries, use home-relative `~/` or runtime environment expansion (`$env:USERPROFILE`, `$HOME`, `pathlib.Path.home()`, `os.path.expanduser("~")`).
 2. **POSIX Path Separators**:
-   - Always use forward slashes `/` or `pathlib.Path` / `os.path.join` across Python, JavaScript, and configuration files.
+  - Always use forward slashes `/` or `pathlib.Path` / `os.path.join` across Python, JavaScript, and configuration files.
 3. **Shell Dialect & NTFS Junction Awareness**:
-   - Distinguish between PowerShell on Windows (`Get-ChildItem`, `Select-String`, `$env:VAR`) and zsh/bash on macOS/Linux (`ls`, `grep`, `export VAR`).
-   - Remember that in Windows PowerShell 5.1, `Get-ChildItem -Recurse` does not traverse into NTFS directory junctions (such as `~/.gemini/config` → `OneDrive/gemini-config`) unless you `cd` into or directly target the resolved path.
+  - Distinguish between PowerShell on Windows (`Get-ChildItem`, `Select-String`, `$env:VAR`) and zsh/bash on macOS/Linux (`ls`, `grep`, `export VAR`).
+  - Remember that in Windows PowerShell 5.1, `Get-ChildItem -Recurse` does not traverse into NTFS directory junctions (such as `~/.gemini/config` → `OneDrive/gemini-config`) unless you `cd` into or directly target the resolved path.
 4. **Antigravity Dual-Surface Parity (`Antigravity IDE` ↔ `Antigravity CLI / agy`)**:
-   - `agy` CLI executes plugin hooks (`PreToolUse`/`PostToolUse` in `hooks.json`) strictly as direct process invocations without a shell wrapper and **fails-closed** on non-zero exit codes.
-   - Always use relative script filenames inside plugin hook definitions (never hardcoded user profile paths or shell-only `; exit 0` suffixes) so hooks work identically across IDE and CLI on all OneDrive-synced machines.
+  - `agy` CLI executes plugin hooks (`PreToolUse`/`PostToolUse` in `hooks.json`) strictly as direct process invocations without a shell wrapper and **fails-closed** on non-zero exit codes.
+  - Always use relative script filenames inside plugin hook definitions (never hardcoded user profile paths or shell-only `; exit 0` suffixes) so hooks work identically across IDE and CLI on all OneDrive-synced machines.
 5. **Encoding & Line Endings Standard**:
-   - Always enforce UTF-8 output streams in Python tools:
-     ```python
-     if sys.stdout and hasattr(sys.stdout, "reconfigure"):
-         sys.stdout.reconfigure(encoding="utf-8")
-     ```
-   - Ensure git attributes enforce LF normalization to prevent CRLF sync churn across OneDrive or Git.
+  - Always enforce UTF-8 output streams in Python tools:
+    ```python
+    if sys.stdout and hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
+    ```
+  - Ensure git attributes enforce LF normalization to prevent CRLF sync churn across OneDrive or Git.
 6. **Atomic File Writes for Cloud Sync**:
-   - When writing to cloud-synced folders (OneDrive, Google Drive), write to a temporary file and atomically replace to avoid creating sync-conflict duplicates (`filename (1).ext`) or leaving `.lck` files.
+  - When writing to cloud-synced folders (OneDrive, Google Drive), write to a temporary file and atomically replace to avoid creating sync-conflict duplicates (`filename (1).ext`) or leaving `.lck` files.
 7. **Zero-Directory-Nesting Invariant**:
-   - When copying or moving directory trees, prevent self-named recursive subdirectories (`dir/dir`). Never create nested secondary NTFS junctions inside `skills/<name>/`.
+  - When copying or moving directory trees, prevent self-named recursive subdirectories (`dir/dir`). Never create nested secondary NTFS junctions inside `skills/<name>/`.
 8. **Ephemeral Scratch Hygiene**:
-   - All temporary repro scripts or scratch test files must live in designated scratch folders or be removed prior to task completion (`git status --short`).
+  - All temporary repro scripts or scratch test files must live in designated scratch folders or be removed prior to task completion (`git status --short`).
 9. **Dual-OS Shell Launcher Parity Invariant**:
-   - Any server runner, pipeline precomputation job, or batch execution script created in the workspace must provide synchronized dual entry-points (`.bat`/`.cmd` for Windows and `.sh` with `#!/usr/bin/env bash` for macOS/Linux).
+  - Any server runner, pipeline precomputation job, or batch execution script created in the workspace must provide synchronized dual entry-points (`.bat`/`.cmd` for Windows and `.sh` with `#!/usr/bin/env bash` for macOS/Linux).
 
 ---
 
@@ -196,20 +196,23 @@ Whenever engineering across the multi-machine ecosystem (Windows Desktop PC, ASU
 ### A. `/goal` Autonomous Marathon Contract
 When `/boostx` is paired with `/goal` for long-running autonomous execution:
 1. **Persistent Scratch Checkpoint Ledger**: For runs >10 steps, maintain `<artifactDir>/scratch/boostx_state.md` tracking:
-   - *Step 0 BoostX Goal Contract & Acceptance Criteria*
-   - *Verified Completed Milestones (with command proof)*
-   - *Falsified Dead Ends (so post-compaction rounds never repeat failed approaches)*
+  - *Step 0 BoostX Goal Contract & Acceptance Criteria*
+  - *Verified Completed Milestones (with command proof)*
+  - *Falsified Dead Ends (so post-compaction rounds never repeat failed approaches)*
 2. **3-Strike Anti-Spin Circuit Breaker**:
-   - If the same command, test, or approach fails **3 times**, **STOP** editing production files. Isolate a <30-line reproduction script in `scratch/` or pivot hypotheses.
-   - If a global environment lock (e.g., broken system hook or missing external credential) blocks tool execution and cannot be bypassed in-session, output a concise diagnostic + copy-paste fix and terminate cleanly rather than spinning in an infinite loop.
+  - If the same command, test, or approach fails **3 times**, **STOP** editing production files. Isolate a <30-line reproduction script in `scratch/` or pivot hypotheses.
+  - If a global environment lock (e.g., broken system hook or missing external credential) blocks tool execution and cannot be bypassed in-session, output a concise diagnostic + copy-paste fix and terminate cleanly rather than spinning in an infinite loop.
 3. **Anti-Premature `GOAL_COMPLETE` Gate**:
-   - Never emit `<!-- GOAL_COMPLETE -->` on the same turn a major code edit is written unless fresh Phase 4 verification has executed and passed *after* the final edit.
+  - Never emit `<!-- GOAL_COMPLETE -->` on the same turn a major code edit is written unless fresh Phase 4 verification has executed and passed *after* the final edit.
 
-### B. Composable `/researchx` & `/deep-researchx` Escalation Rule (Zero Default Overhead)
-* **Stay Local & Fast by Default**: Do **not** run external web/literature research on standard debugging, refactoring, or UI tasks.
-* **When to Escalate**:
-  * Invoke [`/researchx`](../researchx/SKILL.md) for fast tactical primary-source lookups (checking an unfamiliar SDK signature, pinned version, or single physical constant).
+### B. Composable `/researchx`, `/deep-researchx` & Opt-In `/obsidianx` Rules (Zero Default Overhead)
+* **Stay Local & Fast by Default**: Do **not** run external web/literature research or touch any Obsidian vault on standard debugging, refactoring, or UI tasks unless the corresponding skill is triggered.
+* **When to Escalate to `/researchx` or `/deep-researchx`**:
+  * Invoke [`/researchx`](../researchx/SKILL.md) for fast tactical primary-source lookups (checking an unfamiliar SDK signature, pinned version, or single physical constant). When paired (`/researchx /boostx` or `/researchx /boostx /goal`), lock the verified equation, SI unit bridge, or API signature directly into Phase 1 as the Red → Green verification gate.
   * Invoke [`/deep-researchx`](../deep-researchx/SKILL.md) when the user explicitly pairs `/deep-researchx` or `/deep-research`, OR when a task requires multi-agent precedent harvesting, blind adversarial fact-auditing, multi-system architecture benchmarking, or full mathematical/standard formulation with a 1D analytical benchmark.
+* **Strict Opt-In `/obsidianx` Rule**:
+  * **Without `/obsidianx`**: Never read from or write to any Obsidian vault.
+  * **With `/obsidianx` (`/boostx /obsidianx` or `/researchx /boostx /obsidianx`)**: Dynamically resolve `VAULT_ROOT` via [`/obsidianx`](../obsidianx/SKILL.md) in Phase 1 (`00 *Index*.md` → `Hub - *.md`) to load reusable domain formulas/contracts, and in Phase 4 automatically ratchet newly engineered reusable patterns, solver formulas, or component contracts into `VAULT_ROOT` (verifying `BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`).
 
 ### C. Anti-Hanging & Session Timeout Safety
 * **No Long Blocking Commands**: Never run commands that block synchronously for >30 seconds.
@@ -231,4 +234,5 @@ Before declaring any BoostX task finished (and mandatory before `<!-- GOAL_COMPL
 - [ ] **Non-Interactive CLI Enforced**: Commands pass `-y` / `--no-input` / `PAGER=cat` to prevent session hanging.
 - [ ] **Green Signal & Physics Triad Verified**: Fresh verification output proves pass state, boundary safety (`NaN`/`Inf`/null guards), and mutation validity.
 - [ ] **Zero Regressions & Anti-Hardcode Sweep**: Confirmed sibling modules intact; zero machine-specific user paths (`C:\Users\<User>\...`, `/Users/<username>/...`) or secrets in diff.
-- [ ] **Scratch Debris Cleaned & Knowledge Ratcheted**: Temporary test scripts removed; any newly discovered project invariant is noted or synced via `/update-doc` / `/components-log`.
+- [ ] **Scratch Debris Cleaned & Knowledge Ratcheted**: Temporary test scripts removed; repo invariants synced via `/syncx` / `/components-log` (and if `/obsidianx` was included in the command, reusable domain specs ratcheted to the vault with `0` broken links).
+

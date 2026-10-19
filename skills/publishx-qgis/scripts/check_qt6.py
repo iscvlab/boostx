@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Deterministic Qt6 / QGIS 4 Forward-Compatibility Checker (/publish-qgis).
+Deterministic Qt6 / QGIS 4 Forward-Compatibility Checker (/publishx-qgis).
 Performs AST static analysis to ensure 100% compliance with plugins.qgis.org
 Qt6 / QGIS 4 automated checks (guaranteeing the official 'QGIS 4 Ready' badge).
 """

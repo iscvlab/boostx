@@ -1,13 +1,13 @@
 ---
-name: create-skill
+name: create-skillx
 description: >
-  Build, distill, and verify global agent skills for Antigravity and multi-agent frameworks (/create-skill).
-  Use when user says "create skill", "make this a skill", "turn this workflow into a skill", "/create-skill",
+  Build, distill, and verify global agent skills for Antigravity and multi-agent frameworks (/create-skillx, /create-skill).
+  Use when user says "create skill", "make this a skill", "turn this workflow into a skill", "/create-skillx", "/create-skill",
   or wants to author, optimize, or lint a global agent skill.
-  Do NOT use for documentation sync (/update-doc) or pre-flight auditing (/publish-audit).
+  Do NOT use for documentation sync (/syncx) or pre-flight auditing (/publishx-audit).
 ---
 
-# Antigravity Skill Creator (`/create-skill`) — BoostX Edition
+# Antigravity Skill Creator (`/create-skillx`) — BoostX Edition
 
 Authoring, distilling, optimizing, and verifying production-grade agent skills across **Antigravity IDE**, **Claude Code**, and cross-platform multi-agent environments.
 
@@ -20,7 +20,7 @@ This skill synthesizes three core frameworks:
 
 ## 1. Scope & Universal Globalization Policy
 
-Every agent skill authored via `/create-skill` **MUST be created in the Global Customizations Root** so that it is instantly accessible across **every workspace** and synchronized across **every device** (Windows Desktop PC, ASUS Laptop, and macOS MacBook):
+Every agent skill authored via `/create-skillx` **MUST be created in the Global Customizations Root** so that it is instantly accessible across **every workspace** and synchronized across **every device** (Windows Desktop PC, ASUS Laptop, and macOS MacBook):
 
 | Target Path | Physical Cloud Storage | Behavior Across Workspaces & Devices |
 | :--- | :--- | :--- |
@@ -121,7 +121,7 @@ Run the Ponytail Senior Dev Filter to determine the simplest structure:
 * **Rung 1 (YAGNI / Rule Check)**: Does this actually need a skill? If it's a 2-line behavioral preference ("always use UTF-8", "no LaTeX math"), put it in `AGENTS.md` / rules instead.
 * **Rung 2 (Tool Reuse)**: Do native tools or installed MCP servers (`gh`, `git`, `qgis`, `rhino`) already do this? If yes, instruct the model to call them directly. Do NOT write wrapper code.
 * **Rung 3 (Structure Selection)**:
-  * **Workflow Archetype**: Ordered steps, sequential checklist, completion criteria (e.g., `/update-doc`, deployment pipeline).
+  * **Workflow Archetype**: Ordered steps, sequential checklist, completion criteria (e.g., `/syncx`, deployment pipeline).
   * **Task Toolkit Archetype**: Independent sub-actions with quick-starts (e.g., `/illustrator`, PDF toolkit).
   * **Reference Archetype**: Rules, domain definitions, style guidelines (e.g., `writing-great-skills`).
 * **Rung 4 (Code vs. No-Code)**:
@@ -218,12 +218,12 @@ Execute the universal audit engine with the `--platform skill` profile:
 
 **macOS / Linux**:
 ```bash
-python ~/.gemini/config/skills/publish-audit/scripts/audit_engine.py <skill_directory> --platform skill
+python ~/.gemini/config/skills/publishx-audit/scripts/audit_engine.py <skill_directory> --platform skill
 ```
 
 **Windows (PowerShell)**:
 ```powershell
-python "$env:USERPROFILE\.gemini\config\skills\publish-audit\scripts\audit_engine.py" <skill_directory> --platform skill
+python "$env:USERPROFILE\.gemini\config\skills\publishx-audit\scripts\audit_engine.py" <skill_directory> --platform skill
 ```
 
 Must exit with **`VERDICT: PASS`** (0 blocking issues) before declaring completion.

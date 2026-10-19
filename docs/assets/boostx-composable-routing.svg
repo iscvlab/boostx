@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1447.0049999999997 782.7030000000001" width="1447.0049999999997" height="782.7030000000001" style="--bg:#FFFFFF;--fg:#3B3B3B;--line:#3B3B3B;--accent:#005FB8;--muted:#3B3B3BCC;--surface:#F8F8F8;--border:#3B3B3B;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="5" refX="1" refY="2.5" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.5, 8 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+</defs>
+<polyline class="edge" data-from="Prompt" data-to="Gate" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="531.2502499999999,76.9 531.2502499999999,124.9" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Gate" data-to="NoVault" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="NO (Default)
+e.g. /briefx, /researchx /boostx" points="503.8330833333333,261.9858333333334 503.8330833333333,325.403 368.6379999999999,325.403 368.6379999999999,420.00300000000004" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Gate" data-to="Resolve" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="YES (Opt-In Combo)
+e.g. /researchx /boostx /obsidianx" points="558.6674166666667,261.9858333333333 558.6674166666667,325.403 693.8625,325.403 693.8625,420.00300000000004" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Resolve" data-to="BriefCombo" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="/briefx /obsidianx" points="617.0328,507.60300000000007 617.0328,526.7030000000001 180.27600000000007,526.7030000000001 180.27600000000007,619.0530000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Resolve" data-to="ResCombo" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="/researchx /obsidianx" points="668.2526,507.60300000000007 668.2526,543.6030000000001 505.871,543.6030000000001 505.871,619.0530000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Resolve" data-to="BoostCombo" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="/researchx /boostx /obsidianx
+(+ optional /goal)" points="719.4723999999999,507.60300000000007 719.4723999999999,543.6030000000001 881.8539999999999,543.6030000000001 881.8539999999999,619.0530000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Resolve" data-to="SyncCombo" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="/syncx /obsidianx" points="770.6922,507.60300000000007 770.6922,519.6030000000001 1253.7614999999998,519.6030000000001 1253.7614999999998,619.0530000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<g class="edge-label" data-from="Gate" data-to="NoVault" data-label="NO (Default)
+e.g. /briefx, /researchx /boostx">
+  <rect x="290.6379999999999" y="332.403" width="155.458" height="44.6" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="368.3669999999999" y="354.70300000000003" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)"><tspan x="368.3669999999999" dy="-3.3000000000000007">NO (Default)</tspan><tspan x="368.3669999999999" dy="14.3">e.g. /briefx, /researchx /boostx</tspan></text>
+</g>
+<g class="edge-label" data-from="Gate" data-to="Resolve" data-label="YES (Opt-In Combo)
+e.g. /researchx /boostx /obsidianx">
+  <rect x="594.8625" y="332.403" width="197.632" height="44.6" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="693.6785" y="354.70300000000003" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)"><tspan x="693.6785" dy="-3.3000000000000007">YES (Opt-In Combo)</tspan><tspan x="693.6785" dy="14.3">e.g. /researchx /boostx /obsidianx</tspan></text>
+</g>
+<g class="edge-label" data-from="Resolve" data-to="BriefCombo" data-label="/briefx /obsidianx">
+  <rect x="123.77600000000007" y="533.7030000000001" width="112.69000000000001" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="180.12100000000007" y="548.8530000000001" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">/briefx /obsidianx</text>
+</g>
+<g class="edge-label" data-from="Resolve" data-to="ResCombo" data-label="/researchx /obsidianx">
+  <rect x="434.371" y="550.6030000000001" width="142.39000000000001" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="505.566" y="565.753" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">/researchx /obsidianx</text>
+</g>
+<g class="edge-label" data-from="Resolve" data-to="BoostCombo" data-label="/researchx /boostx /obsidianx
+(+ optional /goal)">
+  <rect x="791.8539999999999" y="550.6030000000001" width="179.218" height="44.6" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="881.463" y="572.903" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)"><tspan x="881.463" dy="-3.3000000000000007">/researchx /boostx /obsidianx</tspan><tspan x="881.463" dy="14.3">(+ optional /goal)</tspan></text>
+</g>
+<g class="edge-label" data-from="Resolve" data-to="SyncCombo" data-label="/syncx /obsidianx">
+  <rect x="1181.2614999999998" y="526.6030000000001" width="144.17199999999997" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1253.3474999999999" y="541.753" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">/syncx /obsidianx</text>
+</g>
+<g class="node" data-id="Prompt" data-label="User Prompt + Slash Combination" data-shape="rectangle">
+  <rect x="413.94525" y="40" width="234.60999999999993" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="531.2502499999999" y="58.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">User Prompt + Slash Combination</text>
+</g>
+<g class="node" data-id="Gate" data-label="Is /obsidianx
+in the command?" data-shape="diamond">
+  <polygon points="531.2502499999999,124.9 613.5017499999999,207.1515 531.2502499999999,289.403 448.99875,207.1515" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="531.2502499999999" y="207.1515" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="531.2502499999999" dy="-3.9000000000000012">Is /obsidianx</tspan><tspan x="531.2502499999999" dy="16.900000000000002">in the command?</tspan></text>
+</g>
+<g class="node" data-id="NoVault" data-label="Standard Repo-Only Execution
+• Zero vault reads or writes
+• Any folder with .obsidian/ is ignored in repo scans" data-shape="rectangle">
+  <rect x="199.46299999999997" y="420.00300000000004" width="338.34999999999997" height="70.7" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="368.6379999999999" y="455.35300000000007" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="368.6379999999999" dy="-12.350000000000001">Standard Repo-Only Execution</tspan><tspan x="368.6379999999999" dy="16.900000000000002">• Zero vault reads or writes</tspan><tspan x="368.6379999999999" dy="16.900000000000002">• Any folder with .obsidian/ is ignored in repo scans</tspan></text>
+</g>
+<g class="node" data-id="Resolve" data-label="Step 0: Dynamic Vault Resolver
+1. Read OS obsidian.json (open: true)
+2. Fallback: scan ., .., ../.. for .obsidian/
+3. Read Hop-0 Router (00 &lt;i&gt;Index&lt;/i&gt;.md)" data-shape="rectangle">
+  <rect x="565.813" y="420.00300000000004" width="256.09899999999993" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="693.8625" y="463.80300000000005" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="693.8625" dy="-20.8">Step 0: Dynamic Vault Resolver</tspan><tspan x="693.8625" dy="16.900000000000002">1. Read OS obsidian.json (open: true)</tspan><tspan x="693.8625" dy="16.900000000000002">2. Fallback: scan ., .., ../.. for .obsidian/</tspan><tspan x="693.8625" dy="16.900000000000002">3. Read Hop-0 Router (00 <tspan font-style="italic">Index</tspan>.md)</tspan></text>
+</g>
+<g class="node" data-id="BriefCombo" data-label="/briefx + Vault 2-Hop Lookup
+1. Repo SSOTs (Cap 8 files)
+2. 2-Hop read from Vault for domain specs" data-shape="rectangle">
+  <rect x="40" y="619.0530000000001" width="280.552" height="70.7" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="180.276" y="654.4030000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="180.276" dy="-12.350000000000001">/briefx + Vault 2-Hop Lookup</tspan><tspan x="180.276" dy="16.900000000000002">1. Repo SSOTs (Cap 8 files)</tspan><tspan x="180.276" dy="16.900000000000002">2. 2-Hop read from Vault for domain specs</tspan></text>
+</g>
+<g class="node" data-id="ResCombo" data-label="/researchx + Vault Cache &amp; Ratchet
+1. Check Vault Hop 0-&gt;1-&gt;2 before web/DB probe
+2. Probe delta -&gt; Save repo report
+3. Auto-Ratchet reusable facts into Vault" data-shape="rectangle">
+  <rect x="348.552" y="619.0530000000001" width="314.638" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="505.871" y="662.8530000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="505.871" dy="-20.8">/researchx + Vault Cache &amp; Ratchet</tspan><tspan x="505.871" dy="16.900000000000002">1. Check Vault Hop 0-&gt;1-&gt;2 before web/DB probe</tspan><tspan x="505.871" dy="16.900000000000002">2. Probe delta -&gt; Save repo report</tspan><tspan x="505.871" dy="16.900000000000002">3. Auto-Ratchet reusable facts into Vault</tspan></text>
+</g>
+<g class="node" data-id="BoostCombo" data-label="Full Stack Research -&gt; Build -&gt; Ratchet
+1. Vault Cache + Primary-Source Probe
+2. Lock 2D Contract &amp; Toy Benchmark
+3. BoostX Phase 1-4 Execution
+4. Auto-Ratchet new reusable specs to Vault + Verify Graph" data-shape="rectangle">
+  <rect x="691.19" y="619.0530000000001" width="381.3279999999998" height="104.50000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="881.8539999999999" y="671.3030000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="881.8539999999999" dy="-29.250000000000004">Full Stack Research -&gt; Build -&gt; Ratchet</tspan><tspan x="881.8539999999999" dy="16.900000000000002">1. Vault Cache + Primary-Source Probe</tspan><tspan x="881.8539999999999" dy="16.900000000000002">2. Lock 2D Contract &amp; Toy Benchmark</tspan><tspan x="881.8539999999999" dy="16.900000000000002">3. BoostX Phase 1-4 Execution</tspan><tspan x="881.8539999999999" dy="16.900000000000002">4. Auto-Ratchet new reusable specs to Vault + Verify Graph</tspan></text>
+</g>
+<g class="node" data-id="SyncCombo" data-label="Repo + Second Brain Sync
+Synchronize repo docs AND update matching
+Vault atomic nodes + Hub tables" data-shape="rectangle">
+  <rect x="1100.5179999999998" y="619.0530000000001" width="306.48699999999997" height="70.7" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1253.7614999999998" y="654.4030000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="1253.7614999999998" dy="-12.350000000000001">Repo + Second Brain Sync</tspan><tspan x="1253.7614999999998" dy="16.900000000000002">Synchronize repo docs AND update matching</tspan><tspan x="1253.7614999999998" dy="16.900000000000002">Vault atomic nodes + Hub tables</tspan></text>
+</g>
+</svg>

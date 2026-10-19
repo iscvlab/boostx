@@ -1,13 +1,13 @@
 ---
-name: publish-audit
+name: publishx-audit
 description: >
-  Pre-flight security, secret, privacy, quality, and agent skill globalization audit (/publish-audit).
+  Pre-flight security, secret, privacy, quality, and agent skill globalization audit (/publishx-audit, /publish-audit).
   Use when the user asks to audit before publish, scan for secrets or tokens, check API keys,
-  or run /publish-audit, preflight audit, or audit a global agent skill.
-  Do NOT use for documentation sync (/update-doc) or QGIS zip packaging (/publish-qgis).
+  or run /publishx-audit, /publish-audit, preflight audit, or audit a global agent skill.
+  Do NOT use for documentation sync (/syncx) or QGIS zip packaging (/publishx-qgis).
 ---
 
-# `/publish-audit` (portable & 100% risk-proof)
+# `/publishx-audit` (portable & 100% risk-proof)
 
 Pre-flight security, privacy, and code quality engine for a **target directory**. Works on any OS. No workspace-specific paths.
 
@@ -25,7 +25,7 @@ Engine flag `--platform`: `generic` | `qgis` | `food4rhino` | `github` | `skill`
 | **github** | Secrets; machine paths; **no LICENSE**; Flake8 violations | Missing README; debris; README words Published / LIVE / 1-click install without receipt |
 | **generic** | Secrets; machine paths; syntax errors; Flake8 violations | Debris; README/LICENSE |
 
-Public-claim **vocabulary** (LIVE, REGISTERED, PREPARED, IN PIPELINE) is owned by `/update-doc`. This skill only **advises** on Published / LIVE / 1-click in README files.
+Public-claim **vocabulary** (LIVE, REGISTERED, PREPARED, IN PIPELINE) is owned by `/syncx`. This skill only **advises** on Published / LIVE / 1-click in README files.
 
 ---
 
@@ -66,15 +66,15 @@ Execute via cross-platform paths:
 
 **macOS / Linux**:
 ```bash
-python ~/.gemini/config/skills/publish-audit/scripts/audit_engine.py <target_directory> --platform <generic|qgis|food4rhino|github|skill>
+python ~/.gemini/config/skills/publishx-audit/scripts/audit_engine.py <target_directory> --platform <generic|qgis|food4rhino|github|skill>
 ```
 
 **Windows (PowerShell / Command Prompt)**:
 ```powershell
-python "$env:USERPROFILE\.gemini\config\skills\publish-audit\scripts\audit_engine.py" <target_directory> --platform <generic|qgis|food4rhino|github|skill>
+python "$env:USERPROFILE\.gemini\config\skills\publishx-audit\scripts/audit_engine.py" <target_directory> --platform <generic|qgis|food4rhino|github|skill>
 ```
 
-*(Or from workspace if locally committed: `python .agents/skills/publish-audit/scripts/audit_engine.py <target_dir> --platform <profile>`)*
+*(Or from workspace if locally committed: `python .agents/skills/publishx-audit/scripts/audit_engine.py <target_dir> --platform <profile>`)*
 
 ### 2. Flags
 
@@ -97,4 +97,4 @@ Advisory:  <count>
 ```
 
 If a secret is found, the engine automatically masks it (`abcd...wxyz`).
-For generating the deterministic QGIS release zip after audit passes, run `/publish-qgis`.
+For generating the deterministic QGIS release zip after audit passes, run `/publishx-qgis`.

@@ -3,7 +3,7 @@ name: deep-researchx
 description: >
   Multi-agent 5-wave deep research, blind adversarial fact auditing, and 100%-proof synthesis (/deep-researchx, /deep-research).
   Use when running /deep-researchx or /deep-research for precedent harvesting, dataset fact-checking, multi-system benchmarks, or scientific/spec verification.
-  Do NOT use for quick lookups (/researchx), workspace briefing (/brief), or doc sync (/update-doc).
+  Do NOT use for quick lookups (/researchx), workspace briefing (/briefx), or doc sync (/syncx).
 ---
 
 # Antigravity Deep-ResearchX Protocol (`/deep-researchx`)
@@ -38,7 +38,7 @@ graph TD
 
 **Never start searching or scraping before locking the evaluation framework and proof criteria.**
 
-### A. Context Inheritance First (`/brief` Hook)
+### A. Context Inheritance First (`/briefx` Hook)
 Before inventing new rules, perform a fast bounded check of the active workspace for existing domain conventions (`CONTEXT.md`, `AGENTS.md`, `Guidelines/*.md`, `docs/*protocol*.md`, or target `.json`/`.sqlite` schemas). If local rules exist, inherit their exact schema, category/date buckets, and narrative format.
 
 ### B. Synthesize the 2D Research Contract (`Intent × Domain`)
@@ -155,10 +155,15 @@ Before writing any conclusion, design proposal, architectural recommendation, or
 3. **Context-Compressed Main Chat Digest (`≤ 150 Words`)**:
    * Never dump the full multi-page study into the chat window. Output a concise executive digest, the Wave 3 Verification Scorecard, and clickable `file://` links to the saved artifacts.
 
-### B. Composable Power Modes (`/deep-researchx` × `/boostx` × `/goal`)
+### B. Composable Power Modes (`/deep-researchx` × `/boostx` × `/obsidianx` × `/goal`)
+* **Default Isolation Rule (Without `/obsidianx`)**:
+  * When `/obsidianx` is **not** in the user's command, never read from or write to any Obsidian vault.
 * **Paired with [`/boostx`](../boostx/SKILL.md) (`/deep-researchx /boostx`)**:
   * **Automatic Spec-to-Code Bridge**: Once Wave 5 locks the verified governing equations, SI unit bridge, schema, and **1D Analytical Toy Benchmark** into `RESEARCH_<TOPIC>.md`, immediately transition into **BoostX Phase 1–4** in the same workflow—using the researched analytical benchmark as the exact **Red → Green verification gate** for the code implementation.
-* **Paired with `/goal` (`/goal /deep-researchx`)**:
+* **Paired with [`/obsidianx`](../obsidianx/SKILL.md) (`/deep-researchx /obsidianx` or `/deep-researchx /boostx /obsidianx`)**:
+  * **Wave 1 Second Brain Prior-Art Check**: Dynamically resolve `VAULT_ROOT` via [`/obsidianx`](../obsidianx/SKILL.md) and inspect `00 *Index*.md` → `Hub - *.md` so existing verified precedents, species, or mathematical models are not redundantly re-harvested.
+  * **Wave 5 Automatic Knowledge Ratchet**: After Wave 4 verification passes, automatically mint or update the reusable atomic notes (`#tier/method`, `#tier/asset`, `#tier/career-cluster`) and parent `Hub - *.md` tables in `VAULT_ROOT` with unique `[[wikilink]]` neighbor signatures, then run the 1-line Vault Graph Integrity check (`BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`).
+* **Paired with `/goal` (`/goal /deep-researchx` or `/deep-researchx /boostx /obsidianx /goal`)**:
   * **Autonomous Marathon Mode**: Maintain `<artifactDir>/scratch/deep_research_state.md` tracking Wave progress, verified records (`X/Y verified`), and rejected candidates across turns. Continue looping Wave 2 ↔ Wave 3.5 across turns until **100% of the target quota and verification gates pass with zero unverified claims** before emitting `<!-- GOAL_COMPLETE -->`.
 
 ---
@@ -172,4 +177,5 @@ Before declaring `/deep-researchx` finished (and mandatory before `<!-- GOAL_COM
 - [ ] **Blind Adversarial Audit Executed**: Separate Auditor pass + `verify_evidence.py` verified exact dates/versions, attributions, units, and deep-link URLs.
 - [ ] **Zero Data Forgery (Prune & Replace)**: All out-of-bounds or unverifiable candidates were deleted and replaced with verified records until 100% of quotas passed.
 - [ ] **100%-Proof Recommendation Gate**: Every claim has a primary-source receipt, and `[VERIFIED FACT]` is cleanly separated from `[RECOMMENDED SYNTHESIS]`.
-- [ ] **Deliverable Persisted & Verified**: Saved Markdown study (and any `.json`/`.sqlite` payload) passes `verify_evidence.py` with `0 Blocking Errors`.
+- [ ] **Deliverable Persisted & Verified**: Saved Markdown study (and any `.json`/`.sqlite` payload) passes `verify_evidence.py` with `0 Blocking Errors` (and if `/obsidianx` was included, the Second Brain ratchet passed `BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`).
+

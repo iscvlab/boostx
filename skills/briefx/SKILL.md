@@ -1,12 +1,12 @@
 ---
-name: brief
+name: briefx
 description: >
-  Load related workspace markdown, extract structural architecture and locked invariants, then execute the user's task in the same turn.
-  Use when the user runs /brief, /brief <task>, or asks to read the docs then, get ready and, or brief then.
-  Do NOT use for documentation sync (/update-doc), publishing (/publish-audit, /publish-qgis), creating skills (/create-skill), or session recap (/handoff).
+  Load related workspace markdown, extract structural architecture and locked invariants, then execute the user's task in the same turn (/briefx, /brief).
+  Use when the user runs /briefx or /brief, or asks to read the docs then, get ready and, or brief then.
+  Do NOT use for documentation sync (/syncx), publishing (/publishx-audit, /publishx-qgis), creating skills (/create-skillx), or session handoff (/kickoffx).
 ---
 
-# `/brief` (Portable)
+# `/briefx` (Portable)
 
 Read a focused, high-authority set of **markdown documents** in the **current workspace**, extract overarching structural architecture and locked invariants, then execute the user's task. Portable across Antigravity IDE, Claude Code, Cursor, and multi-agent platforms. Windows, macOS, and Linux.
 
@@ -23,10 +23,10 @@ Red failure modes to prevent:
 
 | Need | Use Instead |
 | :--- | :--- |
-| Sync or rewrite documentation across the workspace | `/update-doc` |
-| Pre-flight checks or QGIS plugin packaging | `/publish-audit`, `/publish-qgis` |
-| Author or distill a skill | `/create-skill` |
-| Write an end-of-session recap | `/handoff` |
+| Sync or rewrite documentation across the workspace | `/syncx` |
+| Pre-flight checks or QGIS plugin packaging | `/publishx-audit`, `/publishx-qgis` |
+| Author or distill a skill | `/create-skillx` |
+| Write an end-of-session kickoff handoff | `/kickoffx` |
 
 If the task is exclusively one of these workflows, delegate to that skill and halt.
 
@@ -36,7 +36,7 @@ If the task is exclusively one of these workflows, delegate to that skill and ha
 
 ### Step 1: Parse the Task
 
-* Extract slash arguments or the text following `/brief`.
+* Extract slash arguments or the text following `/briefx` (or `/brief`).
 * Attached or explicitly named files serve as direct entry seeds, not the entire corpus.
 * **Empty task rule**: If no task is provided, run discovery, display the Briefing Table, and **halt**. Do not invent unrequested work.
 
@@ -51,7 +51,10 @@ Extract core nouns, identifiers, and status words from the prompt, discarding ge
 
 Search `*.md` in the current workspace, including hidden skill or configuration directories when host permissions allow.
 
-* **Exclusions**: `.git`, `node_modules`, `dist`, `build`, `__pycache__`, `.venv`, vendor bundles.
+* **Exclusions**: `.git`, `node_modules`, `dist`, `build`, `__pycache__`, `.venv`, vendor bundles, and **any directory containing an `.obsidian/` subfolder** (so Obsidian Second Brain notes never pollute or consume the 8-file Repository SSOT cap during standard `/briefx` runs).
+* **Strict Opt-In `/briefx /obsidianx` Combinator Rule**:
+  * **Default (Without `/obsidianx`)**: Do **not** read or query any Obsidian vault.
+  * **Opt-In (`/briefx /obsidianx`)**: When `/obsidianx` (or `/obsidian-vault`) is explicitly included in the command, keep the 8-file discovery cap strictly for project repository SSOTs, and perform an additional bounded 2-Hop read via [`/obsidianx`](../obsidianx/SKILL.md) (`00 *Index*.md` → target `Hub - *.md` → 1–2 atomic notes) to include reusable domain formulas, precedents, or component specs in the Briefing Table.
 * **Discovery Tools**: Use available platform search (`rg --hidden`, `grep`, or PowerShell `Select-String`).
 
 #### Authority Hierarchy (Cap at 8 Files)
@@ -84,7 +87,7 @@ Present the structured briefing table before proceeding:
 | `path/to/spec.md` | SSOT (vLatest) | Declared count (e.g. 6 Acts, 4 Phases) | Core rules, performance metrics | Explicitly deferred items |
 
 * If two authoritative documents conflict, state the contradiction explicitly before editing or generating content.
-* Public status terms (`LIVE`, `REGISTERED`, `PREPARED`, `IN PIPELINE`, `DRAFT`) belong to `/update-doc`; adhere to that vocabulary without inventing alternate statuses.
+* Public status terms (`LIVE`, `REGISTERED`, `PREPARED`, `IN PIPELINE`, `DRAFT`) belong to `/syncx`; adhere to that vocabulary without inventing alternate statuses.
 * Ensure all user-facing text uses direct Unicode characters (e.g. `→`, `•`, `✓`, `²`) and zero LaTeX delimiters.
 
 ### Step 6: Pre-Flight Verification & Execution

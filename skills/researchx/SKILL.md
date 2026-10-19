@@ -3,12 +3,12 @@ name: researchx
 description: >
   Primary-source research, local SDK/DB/binary inspection, and cited architecture study protocol (/researchx).
   Use when running /researchx, verifying APIs or physics constants, inspecting local packages/files, or benchmarking architectures.
-  Do NOT use for workspace briefing (/brief), bug repro (/diagnosing-bugs), or doc sync (/update-doc).
+  Do NOT use for workspace briefing (/briefx), bug repro (/diagnosing-bugs), or doc sync (/syncx).
 ---
 
 # Antigravity ResearchX Protocol (`/researchx`)
 
-When `/researchx` is invoked or high-rigor primary-source investigation is required, enter the **Antigravity ResearchX Protocol**. ResearchX is the fast tactical investigative counterpart to [`/boostx`](../boostx/SKILL.md): it replaces secondary-blog guesswork and context-bloating raw dumps with **version-pinned primary sources, direct local binary/DB/AST inspection, capability-aware subagent routing, and `/brief`-ready Markdown architecture studies**.
+When `/researchx` is invoked or high-rigor primary-source investigation is required, enter the **Antigravity ResearchX Protocol**. ResearchX is the fast tactical investigative counterpart to [`/boostx`](../boostx/SKILL.md): it replaces secondary-blog guesswork and context-bloating raw dumps with **version-pinned primary sources, direct local binary/DB/AST inspection, capability-aware subagent routing, and `/briefx`-ready Markdown architecture studies**.
 
 > **Escalation to [`/deep-researchx`](../deep-researchx/SKILL.md)**: For exhaustive multi-agent precedent/dataset harvesting, blind adversarial fact-auditing, or 5-wave multi-system synthesis with `verify_evidence.py`, escalate to [`/deep-researchx`](../deep-researchx/SKILL.md).
 
@@ -91,8 +91,8 @@ Never drop loose `.md` files into a repository root (preserving clean `git statu
 2. **Default Repository Path**: If inside a project workspace with no existing folder, save to `docs/research/YYYY-MM-DD-<topic-slug>.md` (or `RESEARCH_<TOPIC_SLUG>.md` when matching an existing uppercase root/docs convention).
 3. **Workspace-less / Ephemeral Session Fallback**: When no active repository is open (or the user wants a standalone study without touching repo files), write to `<artifactDir>/RESEARCH_<TOPIC_SLUG>.md` and surface a clickable `file://` link.
 
-### B. `/brief`-Ready Research Note Schema
-Structure every saved Markdown file so both humans and downstream [`/brief`](../brief/SKILL.md) (Pass A structural skeleton reads), `/plan`, and [`/boostx`](../boostx/SKILL.md) runs can consume it in seconds:
+### B. `/briefx`-Ready Research Note Schema
+Structure every saved Markdown file so both humans and downstream [`/briefx`](../briefx/SKILL.md) (Pass A structural skeleton reads), `/planx`, and [`/boostx`](../boostx/SKILL.md) runs can consume it in seconds:
 
 ```markdown
 # Primary-Source Research: <Title>
@@ -124,6 +124,15 @@ Structure every saved Markdown file so both humans and downstream [`/brief`](../
 * **Recommended Next Step**: <Ready for `/boostx` implementation | Needs `/prototype` throwaway test | Needs `/grill-with-docs` decision>
 ```
 
+### C. Composable `/boostx` & Opt-In `/obsidianx` Pipelines
+* **Default Isolation Rule (Without `/obsidianx`)**:
+  * When `/obsidianx` is **not** in the user's command (e.g., `/researchx` or `/researchx /boostx /goal`), **never** read from or write to any Obsidian vault.
+* **Paired with [`/boostx`](../boostx/SKILL.md) (`/researchx /boostx` or `/researchx /boostx /goal`)**:
+  * **Spec-to-Code Bridge**: Once `/researchx` locks the verified primary-source API signature, governing equation, SI unit bridge, or closed-form analytical benchmark, pass that exact contract directly into **BoostX Phase 1** as the falsifiable Red → Green verification signal.
+* **Paired with [`/obsidianx`](../obsidianx/SKILL.md) (`/researchx /obsidianx` or `/researchx /boostx /obsidianx`)**:
+  1. **Step 0 Tier-1 Second Brain Cache**: Dynamically resolve `VAULT_ROOT` via [`/obsidianx`](../obsidianx/SKILL.md) (`obsidian.json` / `.obsidian/` marker) and inspect `00 *Index*.md` → `Hub - *.md` first so already-verified formulas, precedents, or component specs are reused without redundant external web searches.
+  2. **Automatic Knowledge Ratchet**: After saving the repository research report, automatically mint or update the corresponding reusable atomic note(s) and `Hub - *.md` table inside `VAULT_ROOT` (enforcing unique `[[wikilink]]` neighbor signatures) and run the 1-line Vault Graph Integrity check (`BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`).
+
 ---
 
 ## 5. Verification & Completion Rubric
@@ -134,4 +143,6 @@ Before declaring `/researchx` complete, verify every checkpoint:
 - [ ] **100% Primary-Source Citations**: Every technical claim links to a Tier 1–4 primary source (`file:///...#L10-L20` or canonical `https://...` URL); zero secondary blog posts cited as proof.
 - [ ] **Quantitative & Structural Clarity**: Complex comparisons include a `mermaid` diagram and a structured Markdown evidence table using clean Unicode symbols (`→`, `×`, `≈`, `±`, `≤`, `≥`, `✓`).
 - [ ] **Clean Destination Hygiene**: Saved to existing repo convention, `docs/research/`, or `<artifactDir>`—never polluting the repository root with untracked scratch debris.
+- [ ] **Opt-In Composable Ratchet Verified**: If `/obsidianx` was included in the command, reusable domain findings were ratcheted into the resolved vault with `0` broken links and `0` duplicate neighbor sets (and untouched if `/obsidianx` was omitted).
 - [ ] **Context-Compressed Main Thread**: If delegated to a subagent, the main thread received a concise digest (`≤ 150 words` + clickable file link) rather than a duplicate multi-thousand-word raw dump.
+

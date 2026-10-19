@@ -1,5 +1,35 @@
 # Changelog
 
+## v3.0.0
+
+- **Unified BoostX (`-x`) Composable Ecosystem & 12-Skill Suite Expansion**:
+  - **Standardized `-x` Command Namespace**: Unified all core workflow skills under the `-x` suffix while preserving backward-compatible legacy triggers in YAML descriptions:
+    - `/brief` → **`/briefx`**
+    - `/obsidian-vault` → **`/obsidianx`**
+    - `/update-doc` → **`/syncx`**
+    - `/plan` → **`/planx`**
+    - `/context` → **`/contextx`**
+    - `/kickoff` → **`/kickoffx`**
+    - `/create-skill` → **`/create-skillx`**
+    - `/publish-audit` → **`/publishx-audit`**
+    - `/publish-qgis` → **`/publishx-qgis`**
+    - Retained **`/boostx`**, **`/researchx`**, and **`/deep-researchx`**.
+  - **4 Newly Added Skills in Public Distribution (`8 → 12 Skills`)**:
+    - **`/obsidianx` (NEW)**: Portable 2-Hop Obsidian Second Brain & Cross-Domain Knowledge Graph Architect. Features zero-hardcode dynamic vault resolution via OS `obsidian.json` (`open: true`) or ancestor `.obsidian/` discovery, strict opt-in execution (zero vault I/O when `/obsidianx` is omitted from the prompt), 2-Hop navigation (`00 Index.md` → `Hub - <Domain>.md` → Atomic Note), Cross-Domain Concept Bridges, and a 4-check Post-Ratchet Graph Verifier.
+    - **`/planx` (NEW)**: Interactive `implementation_plan.md` architect with blast-radius discovery, inline structured grilling questions, trade-off options, and approval gate before code execution.
+    - **`/contextx` (NEW)**: IDE conversation transcript compaction analyzer (`scripts/check_context.py`) reporting compaction round, total session steps, and 4-tier memory drift risk (`HEALTHY`, `NOMINAL`, `CAUTION`, `CRITICAL`).
+    - **`/kickoffx` (NEW)**: End-of-session handover protocol enforcing pre-handover `/syncx` verification, strategic next-step options, and a self-contained copy-pasteable kickoff prompt for fresh conversations.
+  - **Composable Pipeline Wiring & Visual Architecture Diagrams**:
+    - Wired left-to-right composable handoffs (`Context → Research → Plan/Execute → Sync + Modifiers`) across `/briefx`, `/researchx`, `/deep-researchx`, `/planx`, `/boostx`, `/syncx`, and `/obsidianx`.
+    - Added vector architecture diagrams (`docs/assets/boostx-master-ecosystem.svg` and `docs/assets/boostx-composable-routing.svg`).
+
+### Install
+
+See README. Tag: `v3.0.0`.
+```bash
+git clone --branch v3.0.0 https://github.com/napattan/boostx.git
+```
+
 ## v2.0.0
 
 - **Core 8 Portable Skill Suite Expansion**:
@@ -26,7 +56,7 @@
 
 See README. Tag: `v2.0.0`.
 ```bash
-git clone --branch v2.0.0 https://github.com/napattan/agent-skills.git
+git clone --branch v2.0.0 https://github.com/napattan/boostx.git
 ```
 
 ## v1.3.0
@@ -46,7 +76,7 @@ git clone --branch v2.0.0 https://github.com/napattan/agent-skills.git
 
 See README. Tag: `v1.3.0`.
 ```bash
-git clone --branch v1.3.0 https://github.com/napattan/agent-skills.git
+git clone --branch v1.3.0 https://github.com/napattan/boostx.git
 ```
 
 ## v1.2.0
@@ -62,7 +92,7 @@ git clone --branch v1.3.0 https://github.com/napattan/agent-skills.git
 
 See README. Tag: `v1.2.0`.
 ```bash
-git clone --branch v1.2.0 https://github.com/napattan/agent-skills.git
+git clone --branch v1.2.0 https://github.com/napattan/boostx.git
 ```
 
 ## v1.1.0
@@ -74,7 +104,7 @@ git clone --branch v1.2.0 https://github.com/napattan/agent-skills.git
 
 See README. Tag: `v1.1.0`.
 ```bash
-git clone --branch v1.1.0 https://github.com/napattan/agent-skills.git
+git clone --branch v1.1.0 https://github.com/napattan/boostx.git
 ```
 
 ## v1.0.0
@@ -106,5 +136,5 @@ First tagged public line of this skill suite.
 
 See README. Tag: `v1.0.0`.
 ```bash
-git clone --branch v1.0.0 https://github.com/napattan/agent-skills.git
+git clone --branch v1.0.0 https://github.com/napattan/boostx.git
 ```

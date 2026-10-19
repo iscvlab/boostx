@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Deterministic QGIS Plugin Packaging & High-Security Release Script (/publish-qgis).
+Deterministic QGIS Plugin Packaging & High-Security Release Script (/publishx-qgis).
 Enforces:
 1. Metadata validity & INI interpolation escaping
 2. Architecture invariant: classFactory(iface) hook in __init__.py
@@ -517,7 +517,7 @@ def package_plugin(
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Deterministic QGIS Plugin Packaging & Release (/publish-qgis)"
+        description="Deterministic QGIS Plugin Packaging & Release (/publishx-qgis)"
     )
     parser.add_argument("plugin_dir", help="Path to plugin directory containing metadata.txt and __init__.py")
     parser.add_argument(
