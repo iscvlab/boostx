@@ -206,7 +206,7 @@
   <text x="1400" y="548" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• /deep-researchx /layax Triage</text>
   <text x="1400" y="565" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Graceful Native Fallback</text>
   <rect x="1296" y="576" width="208" height="22" rx="3" fill="var(--_badge-fill)" stroke="var(--_inner-stroke)" stroke-width="0.75" />
-  <text x="1400" y="591" text-anchor="middle" font-size="10" font-weight="600" fill="var(--_badge-text)">Alias: /laya (convaiinnovations)</text>
+  <text x="1400" y="591" text-anchor="middle" font-size="10" font-weight="600" fill="var(--_badge-text)">CLI: scripts/laya_triage.py</text>
 </g>
 
 <!-- BOTTOM COMPOSABLE PIPELINE & RATCHET BAR (UNDER STAGES 1-3) -->

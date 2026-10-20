@@ -8,7 +8,7 @@
 [![Verification](https://img.shields.io/badge/Protocol-BoostX_Verified_✓-emerald)](#-bundled-zero-dependency-cli-engines)
 
 > **A unified, composable `-x` skill ecosystem and verification harness for AI coding agents.**  
-> Thirteen portable `SKILL.md` protocols and six zero-dependency Python CLI engines that run identically across **Claude Code, Grok, Google Gemini / Antigravity, Cursor, and Codex** on **Windows, macOS, and Linux**.
+> Thirteen portable `SKILL.md` protocols and seven zero-dependency Python CLI engines that run identically across **Claude Code, Grok, Google Gemini / Antigravity, Cursor, and Codex** on **Windows, macOS, and Linux**.
 
 Sister toolkit: **[mcp-bridges](https://github.com/iscvlab/mcp-bridges)** (Model Context Protocol automation bridges for QGIS, Rhino 3D, Grasshopper, Adobe Illustrator, and Figma).
 
@@ -147,7 +147,7 @@ boostx/skills/
 |:---|:---|:---|:---|
 | **BriefX** | `/briefx` (`/brief`) | Discovers related markdown in the active repository via a **4-tier authority hierarchy** (hard-capped at 8 files), applies **Two-Pass reading** (`Pass A` structural skeleton/cardinality scan before `Pass B` targeted section reading), verifies frozen/deferred boundaries, and executes `/briefx <task>` in the same turn. | Answering from stale LLM memory, keyword-grep tunneling without knowing total section counts, or modifying frozen modules. |
 | **ObsidianX** | `/obsidianx` (`/obsidian-vault`) | **Dynamic Vault Resolver** reads OS `obsidian.json` (`open: true`) or parent directories with zero hardcoded paths. Enforces the **2-Hop Navigation Rule** (`00 Index.md` → `Hub - <Domain>.md` → Atomic Note), requires **Cross-Domain Bridges** (`## Cross-Domain Connections`), and runs a **4-Check Graph Verification** (`0` broken wikilinks, `0` orphans, `100%` frontmatter, `0` duplicate concepts). | Dumping 50+ markdown notes into context, hardcoded vault paths breaking across PCs, or polluting vaults with transient repo tasks. |
-| **Layax** | `/layax` (`/laya`) | **System 1 Semantic Decision & Triage Sidecar** powered by `convaiinnovations/laya` (~7–33 ms single-pass inference). Provides local categorical routing (`choice`), ordinal rubric evaluation (`score`), and calibrated contradiction testing (`noul`) when chained with `/syncx /layax`, `/briefx /layax`, `/deep-researchx /layax`, or `/publishx-audit /layax`, with 100% graceful fallback to native tools when `laya` is not installed. | Burning thousands of LLM tokens on large-corpus section shortlisting or missing subtle semantic contradictions between docs. |
+| **Layax** | `/layax` (`/laya`) | **System 1 Semantic Decision & Triage Sidecar** (`scripts/laya_triage.py`) powered by `convaiinnovations/laya` (~7–33 ms single-pass inference). Provides fence-safe heading chunking (`≤ 1,200` chars / `#L<start>-L<end>`), auto-routed English/multilingual checkpoints (`laya.is_english`), categorical routing (`choice`), ordinal rubric evaluation (`score`), and calibrated contradiction testing (`noul`) with 100% graceful fallback to native tools when `laya` is not installed. | Silent 512-token truncation, burning thousands of LLM tokens on large-corpus section shortlisting, or missing subtle semantic contradictions between docs. |
 
 ### Stage 2: Research & Proof
 
@@ -213,7 +213,7 @@ Both `/syncx` and `/publishx-audit` enforce five canonical status terms across a
 
 ## 5. Bundled Zero-Dependency CLI Engines
 
-All six bundled Python CLI scripts run on **Python 3.8+ standard library only** (`ast`, `re`, `json`, `zipfile`, `urllib`, `configparser`, `hashlib`, `pathlib`) with UTF-8 stream guards (`sys.stdout.reconfigure(encoding='utf-8')`) and zero bytecode pollution (`sys.dont_write_bytecode = True`):
+All seven bundled Python CLI scripts run on **Python 3.8+ standard library** (`ast`, `re`, `json`, `zipfile`, `urllib`, `configparser`, `hashlib`, `pathlib`, with optional `laya` neural acceleration in `laya_triage.py`) with UTF-8 stream guards (`sys.stdout.reconfigure(encoding='utf-8')`) and zero bytecode pollution (`sys.dont_write_bytecode = True`):
 
 ```bash
 # 1. Pre-flight security, secret, AST, Flake8 & platform audit (/publishx-audit)
@@ -234,6 +234,9 @@ python skills/publishx-qgis/scripts/package_qgis.py <plugin_dir> --bump patch
 
 # 6. IDE conversation transcript compaction & context health diagnostic (/contextx)
 python skills/contextx/scripts/check_context.py
+
+# 7. System 1 heading-aware chunker, section shortlister & contradiction triage (/layax)
+python skills/layax/scripts/laya_triage.py <target_dir_or_file> --mode shortlist --query "<topic>"
 ```
 
 ---
@@ -322,7 +325,8 @@ boostx/
     ├── kickoffx/
     │   └── SKILL.md
     ├── layax/
-    │   └── SKILL.md
+    │   ├── SKILL.md
+    │   └── scripts/laya_triage.py
     ├── obsidianx/
     │   └── SKILL.md
     ├── planx/
