@@ -20,6 +20,8 @@ import configparser
 import importlib.util
 from pathlib import Path
 
+sys.dont_write_bytecode = True
+
 # Enforce UTF-8 standard output
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -103,8 +105,8 @@ SECRET_PATTERNS = [
 
 PATH_PATTERNS = [
     ("Windows User Path", re.compile(r"(?i)\b([a-z]:[/\\]users[/\\](?!<)[a-zA-Z0-9_\-\.]+)")),
-    ("macOS User Path", re.compile(r"(?i)\b(/Users/(?!<)[a-zA-Z0-9_\-\.]+)")),
-    ("Linux Home Path", re.compile(r"(?i)\b(/home/(?!<)[a-zA-Z0-9_\-\.]+)")),
+    ("macOS User Path", re.compile(r"(?i)(?:^|[\s\"'`=:(])(/Users/(?!<)[a-zA-Z0-9_\-\.]+)")),
+    ("Linux Home Path", re.compile(r"(?:^|[\s\"'`=:(])(/home/(?!<)[a-z0-9_\-\.]+)")),
 ]
 
 EXCLUDED_PATH_ALLOWLIST = {
@@ -242,7 +244,7 @@ def audit_security_and_privacy(plugin_dir: Path) -> list:
                                         f"Insecure `{node.func.value.id}.{node.func.attr}()`"
                                     )
                             elif isinstance(node.func, ast.Attribute) and (
-                                node.func.attr in {"Popen", "run", "call", "check_call"}
+                                node.func.attr in {"Popen", "run", "call", "check_call", "check_output"}
                             ):
                                 for kw in node.keywords:
                                     if kw.arg == "shell" and isinstance(kw.value, ast.Constant) and (

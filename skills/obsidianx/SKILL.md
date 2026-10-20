@@ -12,7 +12,7 @@ Operate an AI-first Obsidian Second Brain structured as a **Flat-Root 2-Hop Smal
 
 > [!IMPORTANT]
 > **Strict Opt-In Combinator Invariant**:
-> Other workspace skills (`/briefx`, `/syncx`, `/researchx`, `/deep-researchx`, `/boostx`, `/goal`) **MUST NEVER** read from or write to the Obsidian vault unless `/obsidianx` (or legacy alias `/obsidian-vault`) is explicitly included in the user's command combination (e.g., `/researchx /boostx /obsidianx`).
+> Other workspace skills (`/briefx`, `/planx`, `/syncx`, `/researchx`, `/deep-researchx`, `/boostx`, `/kickoffx`, `/goal`) **MUST NEVER** read from or write to the Obsidian vault unless `/obsidianx` (or legacy alias `/obsidian-vault`) is explicitly included in the user's command combination (e.g., `/researchx /boostx /obsidianx`).
 
 ---
 
@@ -32,14 +32,18 @@ Never hardcode vault folder names, project names, or machine user paths. Wheneve
 
 ```python
 import sys, os, json, pathlib
+sys.dont_write_bytecode = True
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-candidates = [
-    pathlib.Path(os.environ.get("APPDATA", "")) / "obsidian/obsidian.json",
-    pathlib.Path.home() / "Library/Application Support/obsidian/obsidian.json",
-    pathlib.Path.home() / ".config/obsidian/obsidian.json",
-]
+appdata = os.environ.get("APPDATA", "").strip()
+candidates = (
+    ([pathlib.Path(appdata) / "obsidian/obsidian.json"] if appdata else [])
+    + [
+        pathlib.Path.home() / "Library/Application Support/obsidian/obsidian.json",
+        pathlib.Path.home() / ".config/obsidian/obsidian.json",
+    ]
+)
 vault = None
 for cfg in candidates:
     if cfg.is_file():
@@ -67,7 +71,7 @@ print("HOP0_ROUTER:", routers[0] if routers else None)
 
 ## 2. 2-Hop Small-World GraphRAG Architecture
 
-The vault uses a **100% flat root directory (`<VAULT_ROOT>/*.md`)** so file tools (`view_file`, `grep`, `glob`) resolve every note deterministically without subfolder guessing:
+The vault uses a **100% flat root directory (`<VAULT_ROOT>/*.md`)** so file tools (`read_file` / `view_file`, `grep`, `glob`) resolve every note deterministically without subfolder guessing:
 
 ```mermaid
 graph LR
@@ -144,6 +148,7 @@ When `/obsidianx` is combined with other slash skills in the same prompt, execut
 | Skill Combination | Step 0 Retrieval (Read from Vault) | Completion Action (Automatic Knowledge Ratchet) |
 | :--- | :--- | :--- |
 | **`/briefx /obsidianx`** | Resolve `VAULT_ROOT` → Read `00 *Index*.md` → `Hub - *` to load domain equations, precedents, and component invariants alongside the 8-file Repo SSOT cap. | Include Second Brain domain invariants in the Briefing Table (no vault writes unless requested). |
+| **`/planx /obsidianx`** | Resolve `VAULT_ROOT` → Read `00 *Index*.md` → `Hub - *` to pull reusable equations, SI unit bridges, and component contracts into Phase 1 of `/planx`. | Bind reusable Second Brain specs directly into `implementation_plan.md` Architecture & Verification sections. |
 | **`/researchx /obsidianx`** | Resolve `VAULT_ROOT` → Check `00 *Index*.md` → `Hub - *` as a **Tier-1 Prior-Art Cache** before running external web searches or redundant local DB probes. | Save the primary research study to the repo **AND** automatically mint/update reusable atomic notes + `Hub - *` index tables in `VAULT_ROOT`, then run the Graph Integrity Gate. |
 | **`/deep-researchx /obsidianx`** | In Wave 1, inspect `00 *Index*.md` → `Hub - *` so existing verified precedents, species, or formulas are not re-harvested. | In Wave 5, automatically ratchet newly verified precedents, formulas, or dataset summaries into `VAULT_ROOT` and run the Graph Integrity Gate. |
 | **`/boostx /obsidianx`** | In BoostX Phase 1, load governing physics formulas, SI unit bridges, or component contracts from `00 *Index*.md` → `Hub - *`. | In BoostX Phase 4, automatically ratchet any newly engineered reusable algorithm, solver contract, or architectural pattern into `VAULT_ROOT`. |

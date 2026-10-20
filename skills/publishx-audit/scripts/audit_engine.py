@@ -215,8 +215,9 @@ def audit_python_ast(path: Path, result: AuditResult):
         def visit_ExceptHandler(self, node):
             # Check try-except-pass on generic Exception (Bandit B110)
             if node.body and len(node.body) == 1 and isinstance(node.body[0], ast.Pass):
-                line_text = lines[node.lineno - 1] if node.lineno <= len(lines) else ""
-                if "# nosec" not in line_text:
+                end_line = getattr(node.body[0], "lineno", node.lineno)
+                span_lines = lines[max(0, node.lineno - 1): min(len(lines), end_line)]
+                if not any("# nosec" in ln for ln in span_lines):
                     is_broad = False
                     if node.type is None:  # bare except:
                         is_broad = True
@@ -330,8 +331,6 @@ def audit_qgis_plugin_invariants(target: Path, result: AuditResult, skip_qt6: bo
     # Optional Qt6 AST check if check_qt6 is available
     if not skip_qt6:
         qt6_script = Path(__file__).resolve().parent.parent.parent / "publishx-qgis" / "scripts" / "check_qt6.py"
-        if not qt6_script.exists():
-            qt6_script = target.parent / ".agents" / "skills" / "publishx-qgis" / "scripts" / "check_qt6.py"
 
         if qt6_script.exists():
             try:
@@ -651,6 +650,20 @@ def audit_skill_invariants(target: Path, result: AuditResult):
                 result.add_warning(
                     "Helper script lacks UTF-8 `sys.stdout.reconfigure(encoding='utf-8')` guard", str(py_file)
                 )
+            if "dont_write_bytecode" not in py_src:
+                result.add_warning(
+                    "Helper script lacks `sys.dont_write_bytecode = True` guard (risks `__pycache__` debris)",
+                    str(py_file),
+                )
+            for idx_py, py_line in enumerate(py_src.splitlines(), 1):
+                m_eph = ephemeral_pat.search(py_line)
+                if m_eph:
+                    result.add_warning(
+                        f"Potential hardcoded ephemeral snapshot metric in script: `{m_eph.group(0)}`. "
+                        "Keep global skill scripts 100% repository-agnostic.",
+                        str(py_file),
+                        idx_py,
+                    )
 
 
 def main():

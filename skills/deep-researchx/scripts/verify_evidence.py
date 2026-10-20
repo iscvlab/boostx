@@ -23,22 +23,28 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 PLACEHOLDER_PATTERNS = [
-    ("Unresolved [TBD] / [TODO] marker", re.compile(r"\[(?:TBD|TODO|FIXME|INSERT[^\]]*)\]", re.IGNORECASE)),
+    (
+        "Unresolved [TBD] / [TODO] / [UNVERIFIED] marker",
+        re.compile(r"\[(?:TBD|TODO|FIXME|UNVERIFIED|INSERT[^\]]*)\]", re.IGNORECASE),
+    ),
     ("Dummy example domain", re.compile(r"https?://(?:www\.)?example\.(?:com|org|net)\b", re.IGNORECASE)),
     ("Truncated placeholder URL", re.compile(r"https?://\.\.\.")),
 ]
 
-URL_REGEX = re.compile(r"https?://[^\s\)\]>\"'`]+")
+URL_REGEX = re.compile(r"https?://[^\s\]>\"'`|]+")
 
 
 def extract_urls(text: str):
-    """Extract unique HTTP/HTTPS URLs from text, stripping trailing punctuation."""
+    """Extract unique HTTP/HTTPS URLs from text, preserving balanced parentheses inside URLs."""
     raw = URL_REGEX.findall(text)
     cleaned = []
     seen = set()
     for u in raw:
         u_clean = u.rstrip(".,;:!?'\"")
-        if u_clean not in seen:
+        # Strip trailing ')' only when unmatched (e.g. closing a Markdown link '[label](url)')
+        while u_clean.endswith(")") and u_clean.count(")") > u_clean.count("("):
+            u_clean = u_clean[:-1].rstrip(".,;:!?'\"")
+        if u_clean and u_clean not in seen:
             seen.add(u_clean)
             cleaned.append(u_clean)
     return cleaned
@@ -161,8 +167,12 @@ def main():
     blocking = []
     warnings = []
 
-    # 1. Placeholder Scan (strip fenced code blocks in Markdown first to avoid template examples)
-    scan_text = re.sub(r"```[\s\S]*?```", "", text) if target_path.suffix.lower() == ".md" else text
+    # 1. Placeholder Scan (strip fenced code blocks and inline code spans in Markdown first)
+    if target_path.suffix.lower() == ".md":
+        scan_text = re.sub(r"```[\s\S]*?```", "", text)
+        scan_text = re.sub(r"`[^`\n]+`", "", scan_text)
+    else:
+        scan_text = text
     for label, pat in PLACEHOLDER_PATTERNS:
         for m in pat.finditer(scan_text):
             blocking.append(f"[{target_path.name}] {label} detected: `{m.group(0)}`")

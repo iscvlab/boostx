@@ -83,10 +83,10 @@ Output the 4-line contract before spawning scouts:
 
 ## 3. Wave 2: Parallel Harvester Swarm (`invoke_subagent`)
 
-Decompose the investigation across **2–4 concurrent Harvester Subagents** in a single `invoke_subagent` call (e.g., splitting by category, era bucket, candidate system, or local code vs. external standards):
+Decompose the investigation across **2–4 concurrent Harvester Subagents** via parallel `invoke_subagent` calls in the same turn (e.g., splitting by category, era bucket, candidate system, or local code vs. external standards):
 
 1. **Deep-Link Content Scraping Mandatory**:
-   * Harvesters must **never** trust search-snippet blurbs alone. For every candidate fact or case study, the Harvester must fetch the actual page text (`read_url_content` or local file read) to extract verbatim evidence.
+   * Harvesters must **never** trust search-snippet blurbs alone. For every candidate fact or case study, the Harvester must fetch the actual page or file text (`read_file`, `read_url_content`, `search_web`, or Python `urllib`) to extract verbatim evidence.
    * **Ban on Root-Domain Lazy Links**: Never cite a bare homepage (`https://example.org/`) as proof. Every citation must be a specific deep link (`https://example.org/projects/specific-project-slug`) or exact local `file:///path#L10-L20`.
 2. **Structured Evidence Dossier Return**:
    * Each Harvester returns a structured dossier containing:
@@ -155,9 +155,13 @@ Before writing any conclusion, design proposal, architectural recommendation, or
 3. **Context-Compressed Main Chat Digest (`≤ 150 Words`)**:
    * Never dump the full multi-page study into the chat window. Output a concise executive digest, the Wave 3 Verification Scorecard, and clickable `file://` links to the saved artifacts.
 
-### B. Composable Power Modes (`/deep-researchx` × `/boostx` × `/obsidianx` × `/goal`)
+### B. Composable Power Modes (`/deep-researchx` × `/layax` × `/planx` × `/boostx` × `/obsidianx` × `/goal`)
 * **Default Isolation Rule (Without `/obsidianx`)**:
   * When `/obsidianx` is **not** in the user's command, never read from or write to any Obsidian vault.
+* **Paired with [`/layax`](../layax/SKILL.md) (`/deep-researchx /layax`)**:
+  * **Wave 2.5 Fast Candidate Triage**: Between Wave 2 (Harvester Swarm) and Wave 3 (Blind Adversarial Auditor), use `/layax` (`score` + `noul`) to locally score harvested records for relevance and scope compliance in milliseconds, pruning out-of-bounds candidates before spawning expensive Auditor turns.
+* **Paired with [`/planx`](../planx/SKILL.md) (`/deep-researchx /planx`)**:
+  * **Evidence-to-Plan Bridge**: Pass Wave 4's `[VERIFIED FACT]` receipts, equations, and benchmarks directly into `/planx` Phase 1 to construct `implementation_plan.md` with inline grilling options.
 * **Paired with [`/boostx`](../boostx/SKILL.md) (`/deep-researchx /boostx`)**:
   * **Automatic Spec-to-Code Bridge**: Once Wave 5 locks the verified governing equations, SI unit bridge, schema, and **1D Analytical Toy Benchmark** into `RESEARCH_<TOPIC>.md`, immediately transition into **BoostX Phase 1–4** in the same workflow—using the researched analytical benchmark as the exact **Red → Green verification gate** for the code implementation.
 * **Paired with [`/obsidianx`](../obsidianx/SKILL.md) (`/deep-researchx /obsidianx` or `/deep-researchx /boostx /obsidianx`)**:

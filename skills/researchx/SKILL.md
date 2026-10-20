@@ -22,9 +22,9 @@ Match execution topology to research scope and host subagent capabilities in Ste
 
 | Tier | Scope & Trigger Condition | Execution Strategy |
 | :--- | :--- | :--- |
-| **Tier 1 — Fast Inline Probe** | ≤ 2 known sources, single API signature check, or quick local manifest/SQLite/XML schema probe. | Execute directly in the main thread (`view_file`, `read_url_content`, `search_web`, or 1-liner Python stdlib inspection). **Zero subagent cold-start latency.** |
+| **Tier 1 — Fast Inline Probe** | ≤ 2 known sources, single API signature check, or quick local manifest/SQLite/XML schema probe. | Execute directly in the main thread (`read_file` / `view_file`, `read_url_content`, `search_web`, or 1-liner Python stdlib inspection). **Zero subagent cold-start latency.** |
 | **Tier 2 — Single Isolated Scout** | Deep single-topic investigation requiring 3+ docs, upstream code tracing, or heavy web reading. | Spawn **1 background subagent** so raw search/file dumps stay out of the main context window. |
-| **Tier 3 — Parallel Multi-Angle Swarm** | Comparing ≥ 2 libraries/architectures, or investigating **Local Pinned Code + External Specs + Empirical Benchmarks** simultaneously. | Spawn **2–3 concurrent subagents** in a single `invoke_subagent` call (one per angle/library), then synthesize into a single comparative Markdown report. |
+| **Tier 3 — Parallel Multi-Angle Swarm** | Comparing ≥ 2 libraries/architectures, or investigating **Local Pinned Code + External Specs + Empirical Benchmarks** simultaneously. | Spawn **2–3 concurrent subagents** via parallel `invoke_subagent` calls in the same turn (one per angle/library), then synthesize into a single comparative Markdown report. |
 
 ### B. Host Subagent Write-Permission & Return Contract
 In multi-agent runtimes (Antigravity IDE, `agy` CLI, Claude Code), prevent **Read-Only Subagent Deadlocks** and **Main-Context Bloat**:
@@ -71,7 +71,7 @@ Follow every technical claim back to the source that owns it. Rank evidence stri
    * **Manifests & Lockfiles**: Always inspect `package.json`, `pnpm-lock.yaml`, `pyproject.toml`, `requirements.txt`, `*.csproj`, or `metadata.txt` **first** so you never research v5 docs for a repo pinned to v3.
    * **Installed Code, Types & Local Databases**: Inspect `.d.ts` type definitions, `.venv`/`node_modules` source, C# assemblies, or local `.sqlite`/`.xml`/`.3dm` files on disk. Local runtime truth beats outdated documentation.
 2. **Tier 2 — Version-Matched First-Party Specs & Official Documentation**:
-   * Official API references, language specifications, W3C/IETF RFCs, and vendor docs matching the target version (`read_url_content` / `search_web`).
+   * Official API references, language specifications, W3C/IETF RFCs, and vendor docs matching the target version (`read_url_content`, `search_web`, or Python `urllib`).
 3. **Tier 3 — Upstream Source Code, Test Suites & Issue Trackers**:
    * Canonical upstream repository source files (`file:line`), unit tests (which prove actual expected inputs/outputs), release notes, and maintainer issue threads.
 4. **Tier 4 — Engineering Standards & Peer-Reviewed Literature**:
@@ -121,12 +121,16 @@ Structure every saved Markdown file so both humans and downstream [`/briefx`](..
 ## 3. Contradictions, Unknowns & Next Action
 * **Doc vs. Code Discrepancies**: <Where official docs disagreed with actual source/runtime behavior, if any>
 * **Unresolved Gaps (`[UNVERIFIED]`)**: <Questions primary sources did not answer>
-* **Recommended Next Step**: <Ready for `/boostx` implementation | Needs `/prototype` throwaway test | Needs `/grill-with-docs` decision>
+* **Recommended Next Step**: <Ready for `/boostx` implementation | Needs `/prototype` throwaway test | Needs `/planx` architectural decision>
 ```
 
-### C. Composable `/boostx` & Opt-In `/obsidianx` Pipelines
+### C. Composable `/layax`, `/planx`, `/boostx` & Opt-In `/obsidianx` Pipelines
 * **Default Isolation Rule (Without `/obsidianx`)**:
   * When `/obsidianx` is **not** in the user's command (e.g., `/researchx` or `/researchx /boostx /goal`), **never** read from or write to any Obsidian vault.
+* **Paired with [`/layax`](../layax/SKILL.md) (`/researchx /layax`)**:
+  * Use `/layax` (`score` / `shortlist_choice`) to locally shortlist candidate docs or API sections before reading full specifications.
+* **Paired with [`/planx`](../planx/SKILL.md) (`/researchx /planx`)**:
+  * Pass verified primary-source API signatures and constraints directly into `/planx` Phase 1 to construct `implementation_plan.md`.
 * **Paired with [`/boostx`](../boostx/SKILL.md) (`/researchx /boostx` or `/researchx /boostx /goal`)**:
   * **Spec-to-Code Bridge**: Once `/researchx` locks the verified primary-source API signature, governing equation, SI unit bridge, or closed-form analytical benchmark, pass that exact contract directly into **BoostX Phase 1** as the falsifiable Red → Green verification signal.
 * **Paired with [`/obsidianx`](../obsidianx/SKILL.md) (`/researchx /obsidianx` or `/researchx /boostx /obsidianx`)**:

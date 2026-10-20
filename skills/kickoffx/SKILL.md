@@ -13,9 +13,9 @@ Prepare a seamless, zero-loss transition from a compacted or ending conversation
 This skill performs a three-way bridge:
 1. **Doc Sync Verification**: Ensures decisions made in this session are committed to documentation before exiting.
 2. **Strategic Options Formulation**: Analyzes active roadmaps to offer 2–3 structured next-step paths.
-3. **Pristine Kickoff Prompt Generation**: Assembles a self-contained prompt block containing locked invariants, active file paths, and recommended slash commands (`/briefx`, `/boostx`, `/goal`) for the new chat.
+3. **Pristine Kickoff Prompt Generation**: Assembles a self-contained prompt block containing locked invariants, active file paths, and task-matched `-x` slash commands (`/briefx`, `/planx`, `/researchx`, `/deep-researchx`, `/layax`, `/obsidianx`, `/boostx`, `/goal`) for the new chat.
 
-Portable across Antigravity IDE, Claude Code, Cursor, and multi-agent platforms. Windows, macOS, and Linux.
+Portable across Antigravity IDE, `agy` CLI, Claude Code, Cursor, and multi-agent platforms across Windows, macOS, and Linux.
 
 Red failure modes to prevent:
 1. Leaving uncommitted, unsynchronized facts behind when starting a fresh chat.
@@ -38,10 +38,12 @@ Red failure modes to prevent:
 
 | Need | Use Instead |
 | :--- | :--- |
-| Check current context compaction round or memory health | `/contextx` |
-| Deep multi-file document synchronization sweep | `/syncx` |
-| Author or distill a skill | `/create-skillx` |
-| Regular task briefing inside an active chat | `/briefx` |
+| Check current context compaction round or memory health | [`/contextx`](../contextx/SKILL.md) |
+| Deep multi-file document synchronization sweep | [`/syncx`](../syncx/SKILL.md) |
+| Create an implementation plan inside an active session | [`/planx`](../planx/SKILL.md) |
+| Run primary-source or 5-wave deep research | [`/researchx`](../researchx/SKILL.md), [`/deep-researchx`](../deep-researchx/SKILL.md) |
+| Author or distill a skill | [`/create-skillx`](../create-skillx/SKILL.md) |
+| Regular task briefing inside an active chat | [`/briefx`](../briefx/SKILL.md) |
 
 ---
 
@@ -53,7 +55,7 @@ Before formulating the next session's work, verify that the current conversation
 
 1. Check `git status --short` (or recent file edits) to identify modified, untracked, or staged files.
 2. Verify that active documentation accurately reflects the latest decisions made in this session.
-3. If documents were edited or spatial metrics were recalculated, confirm that `/syncx` verification has been completed.
+3. If documents were edited or spatial/quantitative metrics were recalculated, confirm that [`/syncx`](../syncx/SKILL.md) verification has been completed (and if `/obsidianx` was used in the session, confirm reusable domain knowledge was ratcheted).
 4. *Sync Guard*: If uncommitted or unsynced state exists, advise the user or sync it before finalizing handoff.
 
 ---
@@ -70,7 +72,7 @@ Determine which path applies based on how the user invoked `/kickoffx`:
 #### Path B — Bare `/kickoffx` Invoked Without a Specific Topic (`Select Option First → Write Kickoff Later`)
 1. **Turn 1 (Formulate & Ask Options ONLY — Do NOT Write the Kickoff Prompt Yet)**:
    - Analyze the active workspace roadmap, master plan, or presentation deck to formulate **2–3 clear, high-impact options** for the next conversation:
-     * **Option A (Recommended — Direct Continuation)**: The immediate next logical subsection, slide, or task on the active roadmap.
+     * **Option A (Recommended — Direct Continuation)**: The immediate next logical subsection, slide, module, or task on the active roadmap.
      * **Option B (Technical Deep Dive / Parallel Scope)**: Evidence modeling, script execution, simulation, or multi-slide pairing.
      * **Option C (Bookmark Polish / Synthesis)**: Returning to bookmarked cards/maps, visualization polish, or executive review.
    - Present the options concisely (using the `ask_question` tool if available, or a clean numbered/lettered list in chat) and ask: *"Which focus would you like me to write the `/kickoffx` prompt for?"*
@@ -81,9 +83,22 @@ Determine which path applies based on how the user invoked `/kickoffx`:
 
 ---
 
-### Step 3: Pristine Kickoff Prompt Synthesis
+### Step 3: Pristine Kickoff Prompt Synthesis & Smart Command Selector
 
-Generate a self-contained, copy-pasteable prompt block formatted inside a fenced markdown code block. The prompt **MUST** follow this 5-part architecture:
+#### A. Task-Smart Recommended Execution Command Selector
+Select the exact `-x` slash command pipeline for the bottom of the Kickoff Prompt based on the next session's workload (avoiding unnecessary PyTorch cold-start when files are already pinned, while activating [`/layax`](../layax/SKILL.md) whenever semantic triage or contradiction hunting is needed):
+
+| Next Session Task Archetype | Recommended Command Line to Generate |
+| :--- | :--- |
+| **Standard Build / Debug / CAD / UI** *(Target files already pinned)* | `/briefx "[Topic Name]" /boostx /goal` |
+| **Architecture & Design Decision First** *(Needs inline grilling plan)* | `/briefx "[Topic Name]" /planx` |
+| **Tactical API / Formula / DB Lookup → Implementation** | `/briefx "[Topic Name]" /researchx /boostx /goal` |
+| **Multi-File Doc Sync / Semantic Conflict Audit** | `/briefx "[Topic Name]" /syncx /layax` |
+| **Large Unpinned Corpus / Deep Research / Dataset Triage** | `/deep-researchx /layax "[Topic Name]" /boostx /goal` *(or `/briefx /layax`)* |
+| **Any Task Reading or Ratcheting Second Brain Knowledge** | Append `/obsidianx` (e.g., `/briefx "[Topic Name]" /boostx /obsidianx /goal`) |
+
+#### B. 5-Part Kickoff Prompt Architecture
+Generate a self-contained, copy-pasteable prompt block formatted inside a fenced markdown code block:
 
 ````markdown
 ```markdown
@@ -96,7 +111,7 @@ Operate as a Senior Computational Design Technologist / Lead Engineer.
 - Formatting Standards: Native Unicode symbols only (→, •, ✓, ², etc.), GFM tables with outer boundary pipes.
 
 ## Scope & Target Files
-- `[Primary File]` (Active document to edit or review)
+- `[Primary File]` (Active document or module to edit or review)
 - `[Reference Spec]` (SSOT / Master Roadmap)
 
 ## Locked Invariants & Session Decisions (DO NOT RE-ARGUE OR DRIFT)
@@ -108,7 +123,7 @@ Operate as a Senior Computational Design Technologist / Lead Engineer.
 [Detailed, actionable instructions for what the agent should accomplish first in this new session].
 
 ## Recommended Execution Command
-/briefx "[Topic Name]" /boostx /goal
+[Selected Task-Smart Command from Table 3.A, e.g.: /briefx "[Topic Name]" /boostx /goal]
 ```
 ````
 
@@ -129,4 +144,4 @@ Deliver the final instructions to the user:
   - If explicit topic given → wrote Kickoff Prompt immediately in 1 turn without redundant option questioning.
   - If bare `/kickoffx` given → presented Options A/B/C first (`ask_question` or concise list) and waited for selection before generating the Kickoff Prompt.
 - [ ] **Strict Terminal-Session Guardrail enforced**: Never executed the chosen option inside the current chat; treated option selection strictly as a directive to write/rewrite the Kickoff Prompt.
-- [ ] Kickoff prompt generated in a single copy-pasteable markdown code block with locked invariants, negative constraints, and `/briefx` / `/boostx` / `/goal` recommendations.
+- [ ] **Task-Smart Command Selector applied**: Included `/layax`, `/planx`, `/researchx`, `/deep-researchx`, or `/obsidianx` when matched to the next session's workload, while keeping pinned-file build kickoffs lean (`/briefx "[Topic]" /boostx /goal`).

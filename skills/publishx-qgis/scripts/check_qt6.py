@@ -12,6 +12,7 @@ import sys
 from pathlib import Path
 from typing import Dict, List, Set, Tuple
 
+sys.dont_write_bytecode = True
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
@@ -278,8 +279,15 @@ class Qt6CompatibilityVisitor(ast.NodeVisitor):
         self.generic_visit(node)
 
     def visit_Attribute(self, node: ast.Attribute):
+        cls_name = None
         if isinstance(node.value, ast.Name):
             cls_name = node.value.id
+        elif isinstance(node.value, ast.Attribute) and isinstance(node.value.value, ast.Name):
+            # Support module-qualified access such as QtCore.Qt.AlignCenter or QtWidgets.QFrame.NoFrame
+            if node.value.attr in KNOWN_QT_SCOPED_ENUMS or node.value.attr in {"QImage", "QPainter", "QRegExp"}:
+                cls_name = node.value.attr
+
+        if cls_name:
             attr = node.attr
 
             # Check removed/renamed APIs

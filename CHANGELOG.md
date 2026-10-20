@@ -2,7 +2,7 @@
 
 ## v3.0.0
 
-- **Unified BoostX (`-x`) Composable Ecosystem & 12-Skill Suite Expansion**:
+- **Unified BoostX (`-x`) Composable Ecosystem & 13-Skill Suite Expansion**:
   - **Standardized `-x` Command Namespace**: Unified all core workflow skills under the `-x` suffix while preserving backward-compatible legacy triggers in YAML descriptions:
     - `/brief` → **`/briefx`**
     - `/obsidian-vault` → **`/obsidianx`**
@@ -10,17 +10,21 @@
     - `/plan` → **`/planx`**
     - `/context` → **`/contextx`**
     - `/kickoff` → **`/kickoffx`**
+    - `/laya` → **`/layax`**
     - `/create-skill` → **`/create-skillx`**
     - `/publish-audit` → **`/publishx-audit`**
     - `/publish-qgis` → **`/publishx-qgis`**
     - Retained **`/boostx`**, **`/researchx`**, and **`/deep-researchx`**.
-  - **4 Newly Added Skills in Public Distribution (`8 → 12 Skills`)**:
+  - **5 Newly Added Skills in Public Distribution (`8 → 13 Skills`)**:
     - **`/obsidianx` (NEW)**: Portable 2-Hop Obsidian Second Brain & Cross-Domain Knowledge Graph Architect. Features zero-hardcode dynamic vault resolution via OS `obsidian.json` (`open: true`) or ancestor `.obsidian/` discovery, strict opt-in execution (zero vault I/O when `/obsidianx` is omitted from the prompt), 2-Hop navigation (`00 Index.md` → `Hub - <Domain>.md` → Atomic Note), Cross-Domain Concept Bridges, and a 4-check Post-Ratchet Graph Verifier.
-    - **`/planx` (NEW)**: Interactive `implementation_plan.md` architect with blast-radius discovery, inline structured grilling questions, trade-off options, and approval gate before code execution.
+    - **`/planx` (NEW — BoostX v2.0 Architecture Planner)**: Locks a 2D Plan Contract (`Scope × Risk`), runs blast-radius & invariant discovery, evaluates Ponytail × Deep Module Vectors A/B/C, embeds an Inline Grilling Decision Matrix (`DEC-01..N`) and Red → Green Verification Table inside `implementation_plan.md` with zero chat Q&A spam, and halts for user approval.
+    - **`/layax` (NEW — System 1 Semantic Decision & Triage Sidecar)**: Non-autoregressive System 1 decision layer (`choice`, `score`, `noul`) powered by `convaiinnovations/laya` (~7–33 ms local forward pass). Accelerates `/syncx /layax` contradiction hunting, `/briefx /layax` large-corpus section shortlisting, `/deep-researchx /layax` candidate triage, and `/publishx-audit /layax` public claim verification, with 100% graceful fallback to native tools when `laya` is not installed.
     - **`/contextx` (NEW)**: IDE conversation transcript compaction analyzer (`scripts/check_context.py`) reporting compaction round, total session steps, and 4-tier memory drift risk (`HEALTHY`, `NOMINAL`, `CAUTION`, `CRITICAL`).
-    - **`/kickoffx` (NEW)**: End-of-session handover protocol enforcing pre-handover `/syncx` verification, strategic next-step options, and a self-contained copy-pasteable kickoff prompt for fresh conversations.
+    - **`/kickoffx` (NEW)**: End-of-session handover protocol enforcing pre-handover `/syncx` verification, task-smart command routing, strategic next-step options, and a self-contained copy-pasteable kickoff prompt for fresh conversations.
+  - **6th Bundled Zero-Dependency CLI Engine (`syncx/scripts/audit_workspace_docs.py`)**:
+    - Added repo-agnostic workspace documentation auditor verifying relative links, Zero-LaTeX compliance, SHA-256 mirror parity, and `--deprecated` sweeps.
   - **Composable Pipeline Wiring & Visual Architecture Diagrams**:
-    - Wired left-to-right composable handoffs (`Context → Research → Plan/Execute → Sync + Modifiers`) across `/briefx`, `/researchx`, `/deep-researchx`, `/planx`, `/boostx`, `/syncx`, and `/obsidianx`.
+    - Wired left-to-right composable handoffs (`Context → Research → Plan/Execute → Sync + Modifiers/Sidecars`) across `/briefx`, `/researchx`, `/deep-researchx`, `/planx`, `/boostx`, `/syncx`, `/obsidianx`, and `/layax`.
     - Added vector architecture diagrams (`docs/assets/boostx-master-ecosystem.svg` and `docs/assets/boostx-composable-routing.svg`).
 
 ### Install

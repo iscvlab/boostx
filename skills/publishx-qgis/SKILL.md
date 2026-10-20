@@ -8,26 +8,19 @@ description: >
 
 # QGIS Plugin Release & Publishing Protocol (`/publishx-qgis`)
 
-**Deterministic release packaging, Qt6 forward-compatibility enforcement, and publication protocol for the official QGIS Python Plugins Repository ([plugins.qgis.org](https://plugins.qgis.org)).**  
-Elimates packaging rejections, enforces semantic versioning, guarantees the green **"QGIS 4 Ready"** badge, and validates metadata against Django/Python `configparser` interpolation constraints.
+**Deterministic release packaging, Qt6 forward-compatibility enforcement, and publication protocol for the official QGIS Python Plugins Repository ([plugins.qgis.org](https://plugins.qgis.org/plugins/)).**  
+Eliminates packaging rejections, enforces semantic versioning, guarantees the green **"QGIS 4 Ready"** badge, and validates metadata against Django/Python `configparser` interpolation constraints.
 
 ---
 
 ## 1. Non-Negotiable QGIS Packaging Invariants
 
-```
-┌────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                           THE 4 INVARIANTS                                             │
-├──────────────────────────┬──────────────────────────┬──────────────────────────┬───────────────────────┤
-│ 1. ROOT SLUG CONTINUITY  │ 2. ZERO RAW `%` IN INI   │ 3. CLASSFACTORY HOOK     │ 4. QT6 / QGIS 4 SCOPING│
-│ The ZIP file MUST have a │ Python's configparser    │ `__init__.py` MUST       │ All enums must be     │
-│ single top folder that   │ treats `%` as variable   │ define:                  │ scoped and imported via│
-│ matches the portal's     │ interpolation.           │ ```python                │ `qgis.PyQt` shim to   │
-│ original package_name!   │ Use `percent` or `%%`    │ def classFactory(iface): │ earn the green        │
-│ NEVER zip files at root! │ in `metadata.txt`.       │     return MyPlugin(iface│ "QGIS 4 Ready" badge. │
-│                          │                          │ ```                      │                       │
-└──────────────────────────┴──────────────────────────┴──────────────────────────┴───────────────────────┘
-```
+| Invariant | Mandatory Requirement |
+| :--- | :--- |
+| **1. Root Slug Continuity** | The ZIP file MUST have a single top-level folder matching the portal's original `package_name`. NEVER zip loose files at the root. |
+| **2. Zero Raw `%` in INI** | Python's `configparser` treats `%` as variable interpolation. Always write `percent` or `%%` in `metadata.txt`. |
+| **3. `classFactory` Hook** | `__init__.py` MUST define `def classFactory(iface): return MyPlugin(iface)`. |
+| **4. Qt6 / QGIS 4 Scoping** | All enums must be scoped (`Qt.AlignmentFlag.AlignCenter`) and imported via the `qgis.PyQt` shim to earn the green **"QGIS 4 Ready"** badge. |
 
 ---
 
@@ -75,24 +68,26 @@ When plugins are uploaded to `plugins.qgis.org`, the portal executes an automate
 
 ## 3. Release Lifecycle: 4 Progressive Steps
 
-```
-┌─────────────────────────┐     ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│         STEP 1          │     │     STEP 2      │     │     STEP 3      │     │     STEP 4      │
-│ Pre-Flight Security &   │ ──> │ Version Bump &  │ ──> │ Deterministic   │ ──> │ Portal Upload & │
-│ Qt6 Compatibility Audit │     │ Metadata Lock   │     │ ZIP Packaging   │     │ Git Release Tag │
-└─────────────────────────┘     └─────────────────┘     └─────────────────┘     └─────────────────┘
+```mermaid
+flowchart LR
+    S1["Step 1: Pre-Flight Security & Qt6 Audit"] --> S2["Step 2: Version Bump & Metadata Lock"]
+    S2 --> S3["Step 3: Deterministic ZIP Packaging"]
+    S3 --> S4["Step 4: Portal Upload & Git Release Tag"]
 ```
 
 ### Step 1: Execute Pre-Flight Audits
-Before packaging, run the universal security, Flake8, and Qt6 forward-compatibility scan:
+Before packaging, run the universal security, Flake8, and Qt6 forward-compatibility scan via the Global Customizations Root:
 
-```bash
-# 1. Run Pre-Flight Security, Privacy & Flake8 Scan
-python .agents/skills/publishx-audit/scripts/audit_engine.py <plugin_dir> --platform qgis
-
-# 2. Run Qt6 / QGIS 4 Forward-Compatibility AST Linter directly
-python .agents/skills/publishx-qgis/scripts/check_qt6.py <plugin_dir>
-```
+* **Windows (PowerShell)**:
+  ```powershell
+  python "$env:USERPROFILE\.gemini\config\skills\publishx-audit\scripts\audit_engine.py" "<plugin_dir>" --platform qgis
+  python "$env:USERPROFILE\.gemini\config\skills\publishx-qgis\scripts\check_qt6.py" "<plugin_dir>"
+  ```
+* **macOS / Linux**:
+  ```bash
+  python ~/.gemini/config/skills/publishx-audit/scripts/audit_engine.py "<plugin_dir>" --platform qgis
+  python ~/.gemini/config/skills/publishx-qgis/scripts/check_qt6.py "<plugin_dir>"
+  ```
 
 * **Security & Secrets Gate**: Zero detected API keys (AWS, GitHub, HF, PyPI, OpenAI), zero hardcoded developer machine paths (`C:\Users\<user>\...`), zero unhandled `B110: try_except_pass` blocks, and zero unescaped `%` symbols in `metadata.txt`.
 * **Flake8 Quality Gate**: Zero style or lint violations against the local `.flake8` configuration.
@@ -115,7 +110,7 @@ QGIS enforces strict unique version numbers per plugin name in its database. You
 name=My Plugin Name
 qgisMinimumVersion=3.16
 description=Short one-sentence summary in English.
-about=Detailed description. If using percentages, write '50 percent' or '50%%' — NEVER raw '%'.
+about=Detailed description. If using percentages, write '50 percent' or '50%%' - NEVER raw '%'.
 category=Cartography
 version=1.0.0
 author=Your Name
@@ -134,21 +129,23 @@ tags=axonometric,isometric,cartography,diagram
 ### Step 3: Package Release ZIP Archive (5 Integrated Quality Gates)
 Run the deterministic packaging engine:
 
-```bash
-# Package current version (automatically enforces all 5 gates):
-python .agents/skills/publishx-qgis/scripts/package_qgis.py <plugin_dir>
+* **Windows (PowerShell)**:
+  ```powershell
+  # Package current version (automatically enforces all 5 gates):
+  python "$env:USERPROFILE\.gemini\config\skills\publishx-qgis\scripts\package_qgis.py" "<plugin_dir>"
 
-# Automatically bump patch version and package:
-python .agents/skills/publishx-qgis/scripts/package_qgis.py <plugin_dir> --bump patch
+  # Automatically bump patch version and package:
+  python "$env:USERPROFILE\.gemini\config\skills\publishx-qgis\scripts\package_qgis.py" "<plugin_dir>" --bump patch
 
-# Explicitly override internal package folder name:
-python .agents/skills/publishx-qgis/scripts/package_qgis.py <plugin_dir> --package-name <slug>
-
-# (Optional overrides for debugging):
-# --skip-qt6        Bypass Qt6 check
-# --skip-flake8     Bypass Flake8 check
-# --skip-security   Bypass secret/path check
-```
+  # Explicitly override internal package folder name:
+  python "$env:USERPROFILE\.gemini\config\skills\publishx-qgis\scripts\package_qgis.py" "<plugin_dir>" --package-name "<slug>"
+  ```
+* **macOS / Linux**:
+  ```bash
+  python ~/.gemini/config/skills/publishx-qgis/scripts/package_qgis.py "<plugin_dir>"
+  python ~/.gemini/config/skills/publishx-qgis/scripts/package_qgis.py "<plugin_dir>" --bump patch
+  python ~/.gemini/config/skills/publishx-qgis/scripts/package_qgis.py "<plugin_dir>" --package-name "<slug>"
+  ```
 
 #### Deterministic Package Name Resolution Ladder:
 To guarantee that the root folder inside the ZIP always matches the portal's registered `package_name` (avoiding `Plugin folder name mismatch` rejections), `package_qgis.py` evaluates this 5-rung ladder:
@@ -162,7 +159,7 @@ To guarantee that the root folder inside the ZIP always matches the portal's reg
 1. **Root Slug Continuity**: Enforces exact root folder name matching across all version releases.
 2. **Mandatory Qt6 Gate**: Validates all Python files against the AST compliance visitor before creating archive.
 3. **Mandatory Flake8 Gate**: Runs Flake8 against `.flake8` config and halts if style/syntax errors exist.
-4. **Mandatory Security Gate**: Scans for leaked tokens/credentials and developer machine user paths (`C:\Users\<user>`).
+4. **Mandatory Security Gate**: Scans for leaked tokens/credentials and developer machine user paths (`C:\Users\<user>`, `/Users/<user>`, `/home/<user>`).
 5. **Metadata Validation**: Validates all required fields, INI syntax, and escapes invalid characters.
 6. **Deterministic ZIP Timestamps & Permissions**: Normalizes file timestamps to a fixed epoch and standard `0o644` permissions for reproducible builds without leaking author machine states.
 7. **Build Debris Elimination**: Automatically strips `__pycache__`, `.git`, `.DS_Store`, `test_*.py`, scratch files, and portal scanner configs (`.flake8`, `.bandit`, `.secrets.baseline`). Shipping those configs marks the version **Validated (configured)** and asks admins to review suppressed rules. Keep them in git for local lint; never put them in the ZIP. Portal flake8 already uses `--max-line-length=120`.
@@ -201,7 +198,7 @@ To guarantee that the root folder inside the ZIP always matches the portal's reg
 | Error Message on Portal | Root Cause | Instant Fix |
 | :--- | :--- | :--- |
 | `Plugin folder name mismatch: ... (X) is different from the original (Y)` | The original version was registered with root folder `Y`, but current package uses `X`. | Add `package_name=Y` to `metadata.txt` (or run `package_qgis.py <dir> --package-name Y`). Re-package and upload. |
-| `Qt6 Check [N issues]` (Red Tab) | Unscoped Qt enums (e.g. `Qt.AlignCenter`) or direct `PyQt5` import | Run `python .agents/skills/publishx-qgis/scripts/check_qt6.py <plugin_dir>` to list exact lines and replacements. Re-package and upload. |
+| `Qt6 Check [N issues]` (Red Tab) | Unscoped Qt enums (e.g. `Qt.AlignCenter`) or direct `PyQt5` import | Run `check_qt6.py <plugin_dir>` to list exact lines and replacements. Re-package and upload. |
 | `Errors parsing metadata.txt. '%' must be followed by '%' or '('` | Raw unescaped `%` in `description` or `about` | Replace `%` with `percent` or `%%` in `metadata.txt`. |
 | `Zip file must contain a single top-level directory` | Zipped loose files without parent folder | Use `package_qgis.py` which automatically prefixes all archive paths with `<plugin_slug>/`. |
 | `A plugin with this name and version number already exists` | Attempting to upload a version string that is already in the database, including **unapproved** uploads | Run `package_qgis.py <plugin_dir> --bump patch` from the highest uploaded version. Do not roll back to an unused lower number. |

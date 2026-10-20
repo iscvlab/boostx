@@ -71,10 +71,10 @@ python ~/.gemini/config/skills/publishx-audit/scripts/audit_engine.py <target_di
 
 **Windows (PowerShell / Command Prompt)**:
 ```powershell
-python "$env:USERPROFILE\.gemini\config\skills\publishx-audit\scripts/audit_engine.py" <target_directory> --platform <generic|qgis|food4rhino|github|skill>
+python "$env:USERPROFILE\.gemini\config\skills\publishx-audit\scripts\audit_engine.py" <target_directory> --platform <generic|qgis|food4rhino|github|skill>
 ```
 
-*(Or from workspace if locally committed: `python .agents/skills/publishx-audit/scripts/audit_engine.py <target_dir> --platform <profile>`)*
+*(Optional sidecar: chain [`/layax`](../layax/SKILL.md) via `/publishx-audit /layax` to semantically verify `LIVE` / `REGISTERED` / `PREPARED` public claims against receipts).*
 
 ### 2. Flags
 

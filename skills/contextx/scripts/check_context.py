@@ -9,10 +9,12 @@ Part of the /contextx skill. Cross-platform (Windows, macOS, Linux).
 Zero external dependencies (Python stdlib only).
 """
 
+import argparse
+import json
 import os
 import sys
-import json
-import argparse
+
+sys.dont_write_bytecode = True
 
 # BoostX UTF-8 stream guard
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
@@ -67,8 +69,8 @@ def analyze_transcript(conv_dir):
     compaction_checkpoints = []
 
     with open(transcript_path, "r", encoding="utf-8", errors="replace") as f:
-        for idx, line in enumerate(f):
-            total_steps += 1
+        for step_num, line in enumerate(f, 1):
+            total_steps = step_num
             try:
                 data = json.loads(line)
             except Exception:
@@ -82,41 +84,43 @@ def analyze_transcript(conv_dir):
                 user_inputs += 1
 
             if msg_type == "CHECKPOINT" or "resuming from a compaction" in content.lower():
-                if "resuming from a compaction" in content.lower():
-                    compaction_checkpoints.append(idx)
+                compaction_checkpoints.append(step_num)
 
     compaction_round = len(compaction_checkpoints)
     last_compaction_step = compaction_checkpoints[-1] if compaction_checkpoints else 0
     steps_since_compaction = (total_steps - last_compaction_step) if compaction_checkpoints else total_steps
 
-    # Health status evaluation
-    if compaction_round == 0 and total_steps < 120:
-        health = "HEALTHY"
-        level_icon = "🟢"
-        risk_desc = "Optimal context capacity. Zero compaction rounds."
-        recommendation = "Safe to continue in the current conversation."
-        action = "CONTINUE"
-    elif compaction_round <= 1 and total_steps < 250:
-        health = "NOMINAL"
-        level_icon = "🟡"
-        risk_desc = "Good context retention with mild history compaction."
-        recommendation = "Safe for continued execution. Keep edits focused."
-        action = "CONTINUE"
-    elif compaction_round == 2 or total_steps < 350:
-        health = "CAUTION"
-        level_icon = "🟠"
-        risk_desc = "Memory pruning active. Early constraints may begin to drift."
-        recommendation = "Wrap up the active milestone soon. Plan to start a fresh chat for the next phase."
-        action = "PREPARE_TRANSITION"
-    else:
+    # Health status evaluation (strictly aligned with contextx/SKILL.md 4-tier rubric)
+    if compaction_round >= 3 or total_steps >= 350:
         health = "CRITICAL"
         level_icon = "🔴"
-        risk_desc = f"Heavy compaction (Round {compaction_round}). High risk of hallucinated constraints and timeouts."
+        risk_desc = (
+            f"Heavy compaction (Round {compaction_round}, {total_steps} steps). "
+            "High risk of hallucinated constraints and timeouts."
+        )
         recommendation = (
             "Strongly recommend starting a fresh conversation now. "
             "Run `/kickoffx` to verify doc sync and generate the prompt for the next session."
         )
         action = "START_NEW_CHAT"
+    elif compaction_round == 2 or total_steps >= 250:
+        health = "CAUTION"
+        level_icon = "🟠"
+        risk_desc = "Memory pruning active. Early constraints may begin to drift."
+        recommendation = "Wrap up the active milestone soon. Plan to start a fresh chat for the next phase."
+        action = "PREPARE_TRANSITION"
+    elif compaction_round == 1 or total_steps >= 120:
+        health = "NOMINAL"
+        level_icon = "🟡"
+        risk_desc = "Good context retention with mild history compaction."
+        recommendation = "Safe for continued execution. Keep edits focused."
+        action = "CONTINUE"
+    else:
+        health = "HEALTHY"
+        level_icon = "🟢"
+        risk_desc = "Optimal context capacity. Zero compaction rounds."
+        recommendation = "Safe to continue in the current conversation."
+        action = "CONTINUE"
 
     return {
         "conv_id": os.path.basename(conv_dir),

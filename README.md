@@ -2,13 +2,13 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-v3.0.0-blue.svg)](https://github.com/iscvlab/boostx/releases/tag/v3.0.0)
-[![Skills](https://img.shields.io/badge/Suite-12_Composable_Skills-005FB8)](#-the-12-skill-suite)
+[![Skills](https://img.shields.io/badge/Suite-13_Composable_Skills-005FB8)](#-the-13-skill-suite)
 [![Platforms](https://img.shields.io/badge/Platforms-Claude_•_Grok_•_Gemini_•_Cursor_•_Codex-8A2BE2)](#-universal-installation)
 [![Dual-OS](https://img.shields.io/badge/Dual--OS-Windows_•_macOS_•_Linux-success)](#-portable-by-design)
 [![Verification](https://img.shields.io/badge/Protocol-BoostX_Verified_✓-emerald)](#-bundled-zero-dependency-cli-engines)
 
 > **A unified, composable `-x` skill ecosystem and verification harness for AI coding agents.**  
-> Twelve portable `SKILL.md` protocols and five zero-dependency Python CLI engines that run identically across **Claude Code, Grok, Google Gemini / Antigravity, Cursor, and Codex** on **Windows, macOS, and Linux**.
+> Thirteen portable `SKILL.md` protocols and six zero-dependency Python CLI engines that run identically across **Claude Code, Grok, Google Gemini / Antigravity, Cursor, and Codex** on **Windows, macOS, and Linux**.
 
 Sister toolkit: **[mcp-bridges](https://github.com/iscvlab/mcp-bridges)** (Model Context Protocol automation bridges for QGIS, Rhino 3D, Grasshopper, Adobe Illustrator, and Figma).
 
@@ -16,7 +16,7 @@ Sister toolkit: **[mcp-bridges](https://github.com/iscvlab/mcp-bridges)** (Model
 
 ## 1. Master Ecosystem Architecture
 
-BoostX organizes software engineering, scientific research, spatial/physics simulation, and documentation governance into **five deterministic lifecycle stages** across **12 composable `-x` skills**:
+BoostX organizes software engineering, scientific research, spatial/physics simulation, and documentation governance into **five deterministic lifecycle stages** plus a **cross-stage System 1 semantic sidecar** across **13 composable `-x` skills**:
 
 <p align="center">
   <img src="docs/assets/boostx-master-ecosystem.svg" alt="BoostX Master 5-Stage Ecosystem Architecture" width="100%" />
@@ -36,7 +36,7 @@ graph LR
         DRX["/deep-researchx<br>5-Wave Proof Engine"]
     end
     subgraph S3["Stage 3: Plan & Execute"]
-        PLX["/planx<br>Interactive Design Griller"]
+        PLX["/planx<br>BoostX v2.0 Architecture Planner"]
         BSX["/boostx<br>4-Phase Deep Solver"]
     end
     subgraph S4["Stage 4: Sync & Release Gates"]
@@ -45,9 +45,10 @@ graph LR
         PAX["/publishx-audit<br>6-Pillar Security Gate"]
         PQX["/publishx-qgis<br>QGIS 4 / Qt6 Packager"]
     end
-    subgraph S5["Stage 5: Session Continuity"]
+    subgraph S5["Stage 5: Continuity & Sidecar"]
         CTX["/contextx<br>Compaction Diagnostics"]
         KOX["/kickoffx<br>Session Handover Architect"]
+        LX["/layax<br>System 1 Semantic Sidecar"]
     end
 
     BX --> RX
@@ -61,6 +62,10 @@ graph LR
     PAX --> PQX
     SX -.-> KOX
     CTX --> KOX
+    LX -.-> BX
+    LX -.-> DRX
+    LX -.-> SX
+    LX -.-> PAX
 ```
 
 </details>
@@ -72,8 +77,8 @@ graph LR
 Every skill in BoostX is designed to work either **standalone** or **chained left-to-right** in a single prompt:
 
 ```text
-[Stage 1: Context]  →  [Stage 2: Research]  →  [Stage 3: Plan / Execute]  →  [Stage 4: Sync]  +  [Modifiers]
-     /briefx        →      /researchx       →     /planx  or  /boostx     →      /syncx       +  /obsidianx /goal
+[Stage 1: Context]  →  [Stage 2: Research]  →  [Stage 3: Plan / Execute]  →  [Stage 4: Sync]  +  [Modifiers / Sidecars]
+     /briefx        →      /researchx       →     /planx  or  /boostx     →      /syncx       +  /obsidianx /layax /goal
 ```
 
 ### Strict Opt-In Second Brain Isolation (`/obsidianx`)
@@ -109,14 +114,15 @@ flowchart TD
 | `/researchx /boostx <task>` | Primary-source SDK/DB/AST probe → lock 2D Goal Contract → Red-Green-Verify build | Implementing a technical feature or solver that depends on exact API/physics specs |
 | `/researchx /boostx /obsidianx` | Vault 2-Hop cache check → probe missing delta → BoostX 4-phase build → Auto-Ratchet new specs into Vault | Compounding reusable engineering or scientific knowledge while shipping production code |
 | `/deep-researchx /boostx /goal` | 5-wave multi-agent harvest + `verify_evidence.py` audit → full-stack implementation until 100% milestone completion | Long-running, multi-milestone research-to-production engineering sprints |
-| `/planx <task>` | Blast-radius discovery → author `implementation_plan.md` with inline trade-off grilling → halt for approval | Stress-testing architectural decisions and edge cases before writing a single line of code |
+| `/planx <task>` | 2D Plan Contract → Ponytail × Deep Module Vector A/B/C → `implementation_plan.md` with Inline Grilling Matrix & Red → Green table → halt for approval | Stress-testing architectural decisions and edge cases before writing a single line of code |
+| `/syncx /layax` | Fast System 1 `noul` semantic contradiction triage + `audit_workspace_docs.py` + 5-tier inner-to-outer doc sync | Catching semantic contradictions across markdown/HTML docs alongside deterministic regex/link audits |
 | `/syncx /obsidianx` | 5-tier inner-to-outer repo doc sync + update matching atomic notes and Hub tables in the Obsidian vault | Keeping both repository documentation and long-term knowledge graphs 100% synchronized |
 | `/publishx-audit` → `/publishx-qgis` | Run 6-pillar security/AST/Flake8/skill audit (`audit_engine.py`), then build Qt6-verified single-root QGIS zip | Releasing open-source packages to GitHub, `plugins.qgis.org`, or Food4Rhino |
-| `/contextx` → `/kickoffx` | Diagnose transcript compaction health (`check_context.py`) → run pre-handover `/syncx` → generate fresh session prompt | Transitioning cleanly to a fresh chat window before context degradation or timeouts occur |
+| `/contextx` → `/kickoffx` | Diagnose transcript compaction health (`check_context.py`) → run pre-handover `/syncx` → generate task-smart fresh session prompt | Transitioning cleanly to a fresh chat window before context degradation or timeouts occur |
 
 ---
 
-## 3. The 12-Skill Suite
+## 3. The 13-Skill Suite
 
 ```text
 boostx/skills/
@@ -125,21 +131,23 @@ boostx/skills/
 ├── /contextx         transcript compaction diagnostics, step metrics & memory drift risk scorecard
 ├── /create-skillx    author, distill & globalize portable SKILL.md files with ≤ 350-char budget guard
 ├── /deep-researchx   5-wave multi-agent deep research, blind adversarial audit & 100%-proof engine
-├── /kickoffx         end-of-session sync check, strategic options & self-contained handover prompt
+├── /kickoffx         end-of-session sync check, task-smart command selector & handover prompt
+├── /layax            System 1 fast semantic decision, section shortlisting & conflict triage sidecar
 ├── /obsidianx        opt-in 2-hop Obsidian Second Brain router, cross-domain bridges & auto-ratchet
-├── /planx            interactive implementation_plan.md architect with inline trade-off grilling
+├── /planx            BoostX v2.0 architecture planner with Vector A/B/C & inline grilling matrix
 ├── /publishx-audit   6-pillar secret, Python AST, Flake8, platform & skill globalization audit gate
 ├── /publishx-qgis    QGIS 4 / Qt6 scoped enum AST checker & deterministic single-root zip packager
 ├── /researchx        tactical primary-source research, local SDK/DB/binary probe & architecture study
-└── /syncx            5-tier cross-document sync, 4-level conflict arbitration & zero-stale ledger
+└── /syncx            5-tier cross-document sync, SHA-256 mirror auditor & zero-stale ledger
 ```
 
-### Stage 1: Context & Memory
+### Stage 1: Context, Triage & Memory
 
 | Skill | Command (Legacy Aliases) | Core Architecture & Protocol | Failure Modes Prevented |
 |:---|:---|:---|:---|
 | **BriefX** | `/briefx` (`/brief`) | Discovers related markdown in the active repository via a **4-tier authority hierarchy** (hard-capped at 8 files), applies **Two-Pass reading** (`Pass A` structural skeleton/cardinality scan before `Pass B` targeted section reading), verifies frozen/deferred boundaries, and executes `/briefx <task>` in the same turn. | Answering from stale LLM memory, keyword-grep tunneling without knowing total section counts, or modifying frozen modules. |
 | **ObsidianX** | `/obsidianx` (`/obsidian-vault`) | **Dynamic Vault Resolver** reads OS `obsidian.json` (`open: true`) or parent directories with zero hardcoded paths. Enforces the **2-Hop Navigation Rule** (`00 Index.md` → `Hub - <Domain>.md` → Atomic Note), requires **Cross-Domain Bridges** (`## Cross-Domain Connections`), and runs a **4-Check Graph Verification** (`0` broken wikilinks, `0` orphans, `100%` frontmatter, `0` duplicate concepts). | Dumping 50+ markdown notes into context, hardcoded vault paths breaking across PCs, or polluting vaults with transient repo tasks. |
+| **Layax** | `/layax` (`/laya`) | **System 1 Semantic Decision & Triage Sidecar** powered by `convaiinnovations/laya` (~7–33 ms single-pass inference). Provides local categorical routing (`choice`), ordinal rubric evaluation (`score`), and calibrated contradiction testing (`noul`) when chained with `/syncx /layax`, `/briefx /layax`, `/deep-researchx /layax`, or `/publishx-audit /layax`, with 100% graceful fallback to native tools when `laya` is not installed. | Burning thousands of LLM tokens on large-corpus section shortlisting or missing subtle semantic contradictions between docs. |
 
 ### Stage 2: Research & Proof
 
@@ -152,14 +160,14 @@ boostx/skills/
 
 | Skill | Command (Legacy Aliases) | Core Architecture & Protocol | Failure Modes Prevented |
 |:---|:---|:---|:---|
-| **PlanX** | `/planx` (`/plan`) | Pre-execution architectural planner. Runs a fast blast-radius scan, constructs `implementation_plan.md` with **inline structured grilling questions**, trade-off options, `(Recommended)` picks, and clickable `[file](file:///...)#L10-L20` links, then halts for user alignment before any production file is edited. | Jumping straight into code on underspecified requirements, noisy chat Q&A walls, or unapproved breaking changes. |
+| **PlanX** | `/planx` (`/plan`) | **BoostX v2.0 Architectural Planner**. Locks a **2D Plan Contract (`Scope × Risk`)**, runs blast-radius & invariant discovery, evaluates **Ponytail × Deep Module Vectors A/B/C** (`Vector A (Recommended): Zero-New-File / Stdlib Seam`), embeds an **Inline Grilling Decision Matrix** (`DEC-01..N`) and **Red → Green Verification Matrix** inside `implementation_plan.md` with zero chat Q&A spam, and halts for user approval. | Jumping straight into code on underspecified requirements, noisy chat Q&A walls, or over-engineered multi-file abstractions. |
 | **BoostX** | `/boostx` | Flagship **4-Phase Engineering & Simulation Solver**: (1) **2D `Task × Project` Goal Contract** & **Tri-Track Signal Gate** (Track A bug repro, Track B greenfield probe, Track C **Simulation Physics Triad**: SI unit bridge, CFL stability cap, zero-load identity check), (2) **Ponytail × Deep Module Ladder** (`YAGNI → Reuse → Stdlib → Deep Seam → Shortest Diff`), (3) **Universal Parity** (Dual-OS + OneDrive + IDE/CLI), (4) **3-Tier Verification** (Before proof, After/Mutation proof, Bloat & Anti-Hardcode sweep). | Speculative blind fixes, shallow pass-through wrapper bloat, numerical `NaN`/`Inf` blowups in CAD/CFD solvers, and machine-bound paths. |
 
 ### Stage 4: Synchronization & Release Gates
 
 | Skill | Command (Legacy Aliases) | Core Architecture & Protocol | Failure Modes Prevented |
 |:---|:---|:---|:---|
-| **SyncX** | `/syncx` (`/update-doc`, `/doc-sync`, `/audit-docs`) | Exhaustive multi-file synchronizer. Applies a **4-Level Conflict Arbitration Hierarchy** (`Level 1: Code/Data Receipts > Level 2: Canonical SSOT > Level 3: Session User Lock > Level 4: Drafts`), runs ghost-link and quantitative cardinality sweeps, synchronizes **Tiers 1-5** from inner code contracts to outer HTML decks/mirrors, and outputs a verified **Synchronization Ledger**. | Touching 1-2 surface files while leaving stale numbers elsewhere, propagating unverified metrics, or breaking HTML slide/card counters. |
+| **SyncX** | `/syncx` (`/update-doc`, `/doc-sync`, `/audit-docs`) | Exhaustive multi-file synchronizer with bundled `scripts/audit_workspace_docs.py`. Applies a **4-Level Conflict Arbitration Hierarchy** (`Level 1: Code/Data Receipts > Level 2: Canonical SSOT > Level 3: Session User Lock > Level 4: Drafts`), verifies relative links, Zero-LaTeX compliance, SHA-256 mirror parity, and `--deprecated` sweeps across **Tiers 1-5**, and outputs a verified **Synchronization Ledger**. | Touching 1-2 surface files while leaving stale numbers elsewhere, propagating unverified metrics, or breaking HTML slide/card counters. |
 | **Create-SkillX** | `/create-skillx` (`/create-skill`) | **4-Step Cognitive Distillation Protocol** for authoring agent skills: (1) Universal Globalization into `~/.gemini/config/skills/<name>/`, (2) **Context Budget Guard** (`≤ 350 chars` YAML description with explicit `Use when...` and `Do NOT use for...` triggers so host IDEs never drop sibling skills), (3) progressive disclosure into `references/` and `scripts/`, and (4) mandatory `--platform skill` audit. | Workspace-siloed skills invisible to other projects, bloated frontmatter descriptions that overflow system prompts, and unverified helper scripts. |
 | **PublishX-Audit** | `/publishx-audit` (`/publish-audit`) | **6-Pillar Pre-Flight Release Gate** (`scripts/audit_engine.py`) supporting `generic`, `github`, `qgis`, `food4rhino`, and `skill` profiles. Scans 16 high-entropy secret patterns, hardcoded user paths (`C:\Users\...`, `/Users/...`), Python AST security risks (`eval`, `shell=True`, `pickle`), Flake8 compliance, and platform-specific package invariants. | Leaked API keys, developer username leaks in committed files, shell injection vulnerabilities, and broken skill frontmatter. |
 | **PublishX-QGIS** | `/publishx-qgis` (`/publish-qgis`) | **5-Gate Deterministic QGIS Release Packager** (`scripts/package_qgis.py` + `scripts/check_qt6.py`). Enforces `metadata.txt` INI `%` escaping, `classFactory(iface)` verification, **Qt6 / QGIS 4 scoped enum AST checks** (earning the official *QGIS 4 Ready* badge), pure runtime file filtering, SemVer bumping, and fixed-epoch `(2026, 1, 1)` single-root ZIP creation. | `plugins.qgis.org` server `InterpolationSyntaxError`, Qt5 unscoped enum crashes in QGIS 4, and top-level ZIP folder mismatches. |
@@ -169,7 +177,7 @@ boostx/skills/
 | Skill | Command (Legacy Aliases) | Core Architecture & Protocol | Failure Modes Prevented |
 |:---|:---|:---|:---|
 | **ContextX** | `/contextx` (`/context`) | Runs `scripts/check_context.py` against the active IDE conversation transcript (`transcript.jsonl`) to count `CHECKPOINT` compaction boundaries, total trajectory steps, and steps since last compaction. Outputs a 4-tier health scorecard (`🟢 HEALTHY`, `🟡 NOMINAL`, `🟠 CAUTION`, `🔴 CRITICAL`). | Continuing complex multi-file edits after 2-3 context compactions when early architectural constraints have been pruned. |
-| **KickoffX** | `/kickoffx` (`/kickoff`) | End-of-session handover protocol. Runs a pre-handover `/syncx` verification check, presents a structured **Next-Step Options Table** (`Option A Recommended`, `Option B`, `Option C`), and generates a **self-contained copy-pasteable Kickoff Prompt** with locked invariants and file paths for the next chat window. | Starting a fresh conversation with vague context, losing mid-session decisions, or leaving unsynchronized documentation behind. |
+| **KickoffX** | `/kickoffx` (`/kickoff`) | End-of-session handover protocol. Runs a pre-handover `/syncx` verification check, presents a structured **Next-Step Options Table** (`Option A Recommended`, `Option B`, `Option C`), applies the **Task-Smart Recommended Command Selector** (auto-routing `/layax` only for large-corpus/audit tasks), and generates a **self-contained copy-pasteable Kickoff Prompt**. | Starting a fresh conversation with vague context, losing mid-session decisions, or leaving unsynchronized documentation behind. |
 
 ---
 
@@ -205,23 +213,26 @@ Both `/syncx` and `/publishx-audit` enforce five canonical status terms across a
 
 ## 5. Bundled Zero-Dependency CLI Engines
 
-All five bundled Python CLI scripts run on **Python 3.8+ standard library only** (`ast`, `re`, `json`, `zipfile`, `urllib`, `configparser`, ` pathlib`) with UTF-8 stream guards (`sys.stdout.reconfigure(encoding='utf-8')`) and zero bytecode pollution (`sys.dont_write_bytecode = True`):
+All six bundled Python CLI scripts run on **Python 3.8+ standard library only** (`ast`, `re`, `json`, `zipfile`, `urllib`, `configparser`, `hashlib`, `pathlib`) with UTF-8 stream guards (`sys.stdout.reconfigure(encoding='utf-8')`) and zero bytecode pollution (`sys.dont_write_bytecode = True`):
 
 ```bash
 # 1. Pre-flight security, secret, AST, Flake8 & platform audit (/publishx-audit)
 python skills/publishx-audit/scripts/audit_engine.py <target_dir> --platform github
 python skills/publishx-audit/scripts/audit_engine.py skills/<skill_name> --platform skill
 
-# 2. Deep-research evidence, deep-link URL & JSON schema verifier (/deep-researchx)
+# 2. Repo-agnostic workspace documentation, link, SHA-256 mirror & stale-term auditor (/syncx)
+python skills/syncx/scripts/audit_workspace_docs.py <workspace_dir> --deprecated old_term
+
+# 3. Deep-research evidence, deep-link URL & JSON schema verifier (/deep-researchx)
 python skills/deep-researchx/scripts/verify_evidence.py <report.md> <dataset.json> --min-items 10 --check-http
 
-# 3. Qt6 / QGIS 4 forward-compatibility AST scanner (/publishx-qgis)
+# 4. Qt6 / QGIS 4 forward-compatibility AST scanner (/publishx-qgis)
 python skills/publishx-qgis/scripts/check_qt6.py <plugin_dir>
 
-# 4. Deterministic single-root QGIS plugin release packager (/publishx-qgis)
+# 5. Deterministic single-root QGIS plugin release packager (/publishx-qgis)
 python skills/publishx-qgis/scripts/package_qgis.py <plugin_dir> --bump patch
 
-# 5. IDE conversation transcript compaction & context health diagnostic (/contextx)
+# 6. IDE conversation transcript compaction & context health diagnostic (/contextx)
 python skills/contextx/scripts/check_context.py
 ```
 
@@ -229,7 +240,7 @@ python skills/contextx/scripts/check_context.py
 
 ## 6. Universal Installation
 
-Clone this repository, then place or link the `skills/` folders into **your host's skill root**. Because every `SKILL.md` uses standard YAML frontmatter (`name` + `description`), the exact same files work across all hosts without modification:
+Clone this repository, then place or link the `skills/*` folders into **your host's skill root**. Because every `SKILL.md` uses standard YAML frontmatter (`name` + `description`), the exact same files work across all hosts without modification:
 
 | Host / Agent Platform | Global Skill Root | Workspace Skill Root |
 |:---|:---|:---|
@@ -255,20 +266,22 @@ chmod +x scripts/install.sh
 ./scripts/install.sh --all
 ```
 
-### Option B: Direct Clone into a Specific Host Root
+### Option B: Direct Copy into a Specific Host Root
 
 ```bash
+git clone https://github.com/iscvlab/boostx.git
+
 # Claude Code
-git clone https://github.com/iscvlab/boostx.git ~/.claude/skills
+mkdir -p ~/.claude/skills && cp -r boostx/skills/* ~/.claude/skills/
 
 # Grok
-git clone https://github.com/iscvlab/boostx.git ~/.grok/skills
+mkdir -p ~/.grok/skills && cp -r boostx/skills/* ~/.grok/skills/
 
 # Google Gemini / Antigravity
-git clone https://github.com/iscvlab/boostx.git ~/.gemini/config/skills
+mkdir -p ~/.gemini/config/skills && cp -r boostx/skills/* ~/.gemini/config/skills/
 
 # Project-local (.agents/skills)
-git clone https://github.com/iscvlab/boostx.git .agents/skills
+mkdir -p .agents/skills && cp -r boostx/skills/* .agents/skills/
 ```
 
 To pin the `v3.0.0` release tag:
@@ -308,6 +321,8 @@ boostx/
     │   └── scripts/verify_evidence.py
     ├── kickoffx/
     │   └── SKILL.md
+    ├── layax/
+    │   └── SKILL.md
     ├── obsidianx/
     │   └── SKILL.md
     ├── planx/
@@ -325,7 +340,9 @@ boostx/
     └── syncx/
         ├── LICENSE
         ├── SKILL.md
-        └── scripts/README.md
+        └── scripts/
+            ├── README.md
+            └── audit_workspace_docs.py
 ```
 
 ---

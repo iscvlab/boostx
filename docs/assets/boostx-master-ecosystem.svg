@@ -57,9 +57,16 @@
 
 <!-- Stage 5 -->
 <g class="stage-group" data-stage="5">
-  <rect x="1264" y="24" width="272" height="602" fill="var(--_group-fill)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <rect x="1264" y="24" width="272" height="362" fill="var(--_group-fill)" stroke="var(--_inner-stroke)" stroke-width="1" />
   <rect x="1264" y="24" width="272" height="36" fill="var(--_group-hdr)" stroke="var(--_inner-stroke)" stroke-width="1" />
   <text x="1400" y="47" text-anchor="middle" font-size="12" font-weight="700" fill="var(--_text)" letter-spacing="0.5">STAGE 5 · CONTINUITY</text>
+</g>
+
+<!-- System 1 Sidecar Group -->
+<g class="stage-group" data-stage="sidecar">
+  <rect x="1264" y="402" width="272" height="224" fill="var(--_group-fill)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <rect x="1264" y="402" width="272" height="34" fill="var(--_group-hdr)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1400" y="424" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--_text)" letter-spacing="0.5">CROSS-STAGE · SYSTEM 1 SIDECAR</text>
 </g>
 
 <!-- STAGE 1 NODES -->
@@ -110,10 +117,10 @@
 <g class="node" data-id="planx">
   <rect x="662" y="82" width="244" height="138" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.85" />
   <text x="784" y="108" text-anchor="middle" font-size="14" font-weight="700" fill="var(--_text)">/planx</text>
-  <text x="784" y="127" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--_arrow)">Interactive Architecture Planner</text>
-  <text x="784" y="149" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Blast-Radius &amp; Invariant Discovery</text>
-  <text x="784" y="167" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Inline Trade-Off Grilling &amp; Options</text>
-  <text x="784" y="185" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Zero-Assumptions Approval Gate</text>
+  <text x="784" y="127" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--_arrow)">BoostX v2.0 Architecture Planner</text>
+  <text x="784" y="149" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• 2D Plan Contract &amp; Vector A/B/C</text>
+  <text x="784" y="167" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Inline Grilling Decision Matrix</text>
+  <text x="784" y="185" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Red → Green Verification Table</text>
   <text x="784" y="205" text-anchor="middle" font-size="10.5" font-weight="500" fill="var(--_text-muted)">Alias: /plan</text>
 </g>
 
@@ -130,13 +137,13 @@
 
 <!-- STAGE 4 NODES -->
 <g class="node" data-id="syncx">
-  <rect x="972" y="82" width="244" height="122" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.85" />
-  <text x="1094" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="var(--_text)">/syncx</text>
-  <text x="1094" y="124" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--_arrow)">5-Tier Cross-Doc Synchronizer</text>
-  <text x="1094" y="145" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• 4-Level Conflict Arbitration Ladder</text>
-  <text x="1094" y="163" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Inner-to-Outer Sync &amp; Ghost Sweep</text>
-  <text x="1094" y="181" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Zero-Stale Verification Ledger</text>
-  <text x="1094" y="197" text-anchor="middle" font-size="10" font-weight="500" fill="var(--_text-muted)">Aliases: /update-doc, /doc-sync</text>
+  <rect x="972" y="82" width="244" height="124" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.85" />
+  <text x="1094" y="105" text-anchor="middle" font-size="14" font-weight="700" fill="var(--_text)">/syncx</text>
+  <text x="1094" y="123" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--_arrow)">5-Tier Cross-Doc Synchronizer</text>
+  <text x="1094" y="142" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• 4-Level Conflict Arbitration Ladder</text>
+  <text x="1094" y="159" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• SHA-256 Mirror &amp; Ghost Link Audit</text>
+  <rect x="984" y="171" width="220" height="24" rx="3" fill="var(--_badge-fill)" stroke="var(--_inner-stroke)" stroke-width="0.75" />
+  <text x="1094" y="187" text-anchor="middle" font-size="10" font-weight="600" fill="var(--_badge-text)">CLI: audit_workspace_docs.py</text>
 </g>
 
 <g class="node" data-id="create-skillx">
@@ -169,24 +176,37 @@
 
 <!-- STAGE 5 NODES -->
 <g class="node" data-id="contextx">
-  <rect x="1280" y="82" width="240" height="150" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.85" />
-  <text x="1400" y="108" text-anchor="middle" font-size="14" font-weight="700" fill="var(--_text)">/contextx</text>
-  <text x="1400" y="127" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--_arrow)">Context &amp; Compaction Diagnostics</text>
-  <text x="1400" y="149" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Parses Live IDE Transcript JSONL</text>
-  <text x="1400" y="167" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Compaction Round &amp; Step Count</text>
-  <text x="1400" y="185" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Risk Scorecard (Healthy → Critical)</text>
-  <rect x="1300" y="197" width="200" height="24" rx="3" fill="var(--_badge-fill)" stroke="var(--_inner-stroke)" stroke-width="0.75" />
-  <text x="1400" y="213" text-anchor="middle" font-size="10.5" font-weight="600" fill="var(--_badge-text)">CLI: scripts/check_context.py</text>
+  <rect x="1280" y="74" width="240" height="138" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.85" />
+  <text x="1400" y="98" text-anchor="middle" font-size="14" font-weight="700" fill="var(--_text)">/contextx</text>
+  <text x="1400" y="116" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--_arrow)">Context &amp; Compaction Diagnostics</text>
+  <text x="1400" y="136" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Parses Live IDE Transcript JSONL</text>
+  <text x="1400" y="153" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Compaction Round &amp; Step Count</text>
+  <text x="1400" y="170" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Risk Scorecard (Healthy → Critical)</text>
+  <rect x="1300" y="180" width="200" height="22" rx="3" fill="var(--_badge-fill)" stroke="var(--_inner-stroke)" stroke-width="0.75" />
+  <text x="1400" y="195" text-anchor="middle" font-size="10" font-weight="600" fill="var(--_badge-text)">CLI: scripts/check_context.py</text>
 </g>
 
 <g class="node" data-id="kickoffx">
-  <rect x="1280" y="270" width="240" height="140" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.85" />
-  <text x="1400" y="296" text-anchor="middle" font-size="14" font-weight="700" fill="var(--_text)">/kickoffx</text>
-  <text x="1400" y="315" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--_arrow)">Session Handover Architect</text>
-  <text x="1400" y="337" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Pre-Handover /syncx Check Gate</text>
-  <text x="1400" y="355" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Next-Phase Strategic Options Table</text>
-  <text x="1400" y="373" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Self-Contained Fresh Chat Prompt</text>
-  <text x="1400" y="395" text-anchor="middle" font-size="10.5" font-weight="500" fill="var(--_text-muted)">Alias: /kickoff</text>
+  <rect x="1280" y="232" width="240" height="138" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.85" />
+  <text x="1400" y="256" text-anchor="middle" font-size="14" font-weight="700" fill="var(--_text)">/kickoffx</text>
+  <text x="1400" y="274" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--_arrow)">Session Handover Architect</text>
+  <text x="1400" y="294" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Pre-Handover /syncx Check Gate</text>
+  <text x="1400" y="311" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Task-Smart Command Routing</text>
+  <text x="1400" y="328" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Self-Contained Fresh Chat Prompt</text>
+  <text x="1400" y="352" text-anchor="middle" font-size="10.5" font-weight="500" fill="var(--_text-muted)">Alias: /kickoff</text>
+</g>
+
+<!-- SYSTEM 1 SIDECAR NODE (/layax) -->
+<g class="node" data-id="layax">
+  <rect x="1280" y="450" width="240" height="160" fill="var(--_node-fill)" stroke="var(--_arrow)" stroke-width="1.25" />
+  <text x="1400" y="475" text-anchor="middle" font-size="14" font-weight="700" fill="var(--_text)">/layax</text>
+  <text x="1400" y="494" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--_arrow)">System 1 Semantic Triage Sidecar</text>
+  <text x="1400" y="514" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Fast choice, score &amp; noul (~7-33ms)</text>
+  <text x="1400" y="531" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• /syncx /layax · /briefx /layax</text>
+  <text x="1400" y="548" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• /deep-researchx /layax Triage</text>
+  <text x="1400" y="565" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Graceful Native Fallback</text>
+  <rect x="1296" y="576" width="208" height="22" rx="3" fill="var(--_badge-fill)" stroke="var(--_inner-stroke)" stroke-width="0.75" />
+  <text x="1400" y="591" text-anchor="middle" font-size="10" font-weight="600" fill="var(--_badge-text)">Alias: /laya (convaiinnovations)</text>
 </g>
 
 <!-- BOTTOM COMPOSABLE PIPELINE & RATCHET BAR (UNDER STAGES 1-3) -->
@@ -209,8 +229,8 @@
   <text x="474" y="586" text-anchor="middle" font-size="10.5" fill="var(--_text-sec)">2-Hop Vault Cache + Auto-Ratchet</text>
 
   <rect x="640" y="506" width="264" height="102" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
-  <text x="772" y="528" text-anchor="middle" font-size="12" font-weight="700" fill="var(--_text)">3. Verification &amp; Handover Chains</text>
-  <text x="772" y="548" text-anchor="middle" font-size="11" fill="var(--_arrow)" font-weight="600">/syncx /obsidianx</text>
+  <text x="772" y="528" text-anchor="middle" font-size="12" font-weight="700" fill="var(--_text)">3. Sidecar &amp; Release Chains</text>
+  <text x="772" y="548" text-anchor="middle" font-size="11" fill="var(--_arrow)" font-weight="600">/syncx /layax • /briefx /layax</text>
   <text x="772" y="566" text-anchor="middle" font-size="11" fill="var(--_arrow)" font-weight="600">/publishx-audit → /publishx-qgis</text>
   <text x="772" y="586" text-anchor="middle" font-size="10.5" fill="var(--_text-sec)">/contextx → /kickoffx → Fresh Chat</text>
 </g>
@@ -235,12 +255,9 @@
 <!-- publishx-audit -> publishx-qgis -->
 <polyline points="1094,476 1094,494" fill="none" stroke="var(--_arrow)" stroke-width="1.25" marker-end="url(#arrowhead)" />
 <!-- syncx -> kickoffx -->
-<polyline points="1216,143 1248,143 1248,340 1280,340" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrowhead-gray)" />
+<polyline points="1216,143 1248,143 1248,301 1280,301" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrowhead-gray)" />
 <!-- contextx -> kickoffx -->
-<polyline points="1400,232 1400,270" fill="none" stroke="var(--_arrow)" stroke-width="1.25" marker-end="url(#arrowhead)" />
-<!-- kickoffx -> fresh session loop indicator -->
-<rect x="1280" y="445" width="240" height="64" fill="var(--_badge-fill)" stroke="var(--_arrow)" stroke-width="0.85" />
-<text x="1400" y="471" text-anchor="middle" font-size="12" font-weight="700" fill="var(--_badge-text)">Fresh Session Handoff</text>
-<text x="1400" y="491" text-anchor="middle" font-size="10.5" fill="var(--_text-sec)">Zero Context Degradation Loop</text>
-<polyline points="1400,410 1400,445" fill="none" stroke="var(--_arrow)" stroke-width="1.25" marker-end="url(#arrowhead)" />
+<polyline points="1400,212 1400,232" fill="none" stroke="var(--_arrow)" stroke-width="1.25" marker-end="url(#arrowhead)" />
+<!-- layax -> syncx / publishx-audit sidecar link -->
+<polyline points="1280,530 1248,530 1248,414 1216,414" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrowhead-gray)" />
 </svg>

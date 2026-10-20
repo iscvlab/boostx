@@ -1,5 +1,5 @@
 # BoostX Composable Agent Skills Installer (Windows PowerShell)
-# Copies the 12-skill BoostX suite into host skill roots that exist on this machine.
+# Copies the 13-skill BoostX suite into host skill roots that exist on this machine.
 
 param(
     [switch]$Antigravity,
@@ -68,5 +68,5 @@ if (-not [string]::IsNullOrEmpty($Workspace) -and (Test-Path $Workspace)) {
 }
 
 Write-Host "`n============================================================" -ForegroundColor Cyan
-Write-Host "  ✓ BoostX v3.0.0 Installation Complete! All 12 skills ready." -ForegroundColor Green
+Write-Host "  ✓ BoostX v3.0.0 Installation Complete! All 13 skills ready." -ForegroundColor Green
 Write-Host "============================================================" -ForegroundColor Cyan

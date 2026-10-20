@@ -100,7 +100,7 @@ State the 3-line contract concisely before mutating files:
 
 ### Phase 2: Architectural Exploration & Ponytail × Deep Module Ladder
 
-Before implementing, use fast semantic triage (`/laya` mindset) to prune dead-end hypotheses and evaluate 2–3 solution vectors against the **Ponytail × Deep Module Ladder**:
+Before implementing, use fast semantic triage ([`/layax`](../layax/SKILL.md) mindset) to prune dead-end hypotheses and evaluate 2–3 solution vectors against the **Ponytail × Deep Module Ladder**:
 
 1. **Vector Comparison**:
   - **Vector A (Simplification / Deletion / Config)**: Eliminates the complexity altogether (YAGNI) or fixes config/stdlib usage.
@@ -119,8 +119,8 @@ Before implementing, use fast semantic triage (`/laya` mindset) to prune dead-en
 1. **Single Variable Mutation**:
   - Modify only one logical seam at a time to satisfy the invariants. Never stack multiple untested edits across files.
 2. **Surgical Line Edits Over Whole-File Overwrites**:
-  - For modifying existing code, always use surgical line-replacement tools (`replace_file_content` / `multi_replace_file_content`).
-  - Reserve `write_to_file` strictly for new files to prevent accidental deletion of existing comments, types, or docstrings.
+  - For modifying existing code, always use surgical line-replacement tools (`edit_file` / `replace_file_content` / `multi_replace_file_content`).
+  - Reserve `write_file` (`write_to_file`) strictly for new files to prevent accidental deletion of existing comments, types, or docstrings.
   - Never pass `ArtifactMetadata` when modifying or writing project codebase files.
 3. **Preserve Documentation & Comments**:
   - Maintain existing comments, docstrings, and type annotations unless specifically obsolete.
@@ -205,8 +205,10 @@ When `/boostx` is paired with `/goal` for long-running autonomous execution:
 3. **Anti-Premature `GOAL_COMPLETE` Gate**:
   - Never emit `<!-- GOAL_COMPLETE -->` on the same turn a major code edit is written unless fresh Phase 4 verification has executed and passed *after* the final edit.
 
-### B. Composable `/researchx`, `/deep-researchx` & Opt-In `/obsidianx` Rules (Zero Default Overhead)
+### B. Composable `/planx`, `/researchx`, `/deep-researchx` & Opt-In `/obsidianx` Rules (Zero Default Overhead)
 * **Stay Local & Fast by Default**: Do **not** run external web/literature research or touch any Obsidian vault on standard debugging, refactoring, or UI tasks unless the corresponding skill is triggered.
+* **Approved Plan Bridge ([`/planx`](../planx/SKILL.md) → `/boostx`)**:
+  * When transitioning from an approved [`implementation_plan.md`](file:///implementation_plan.md) created via [`/planx`](../planx/SKILL.md), lock Section 4 (`Red → Green Verification Matrix`) and the user's selected inline grilling options directly into Phase 1 as the BoostX Goal Contract.
 * **When to Escalate to `/researchx` or `/deep-researchx`**:
   * Invoke [`/researchx`](../researchx/SKILL.md) for fast tactical primary-source lookups (checking an unfamiliar SDK signature, pinned version, or single physical constant). When paired (`/researchx /boostx` or `/researchx /boostx /goal`), lock the verified equation, SI unit bridge, or API signature directly into Phase 1 as the Red → Green verification gate.
   * Invoke [`/deep-researchx`](../deep-researchx/SKILL.md) when the user explicitly pairs `/deep-researchx` or `/deep-research`, OR when a task requires multi-agent precedent harvesting, blind adversarial fact-auditing, multi-system architecture benchmarking, or full mathematical/standard formulation with a 1D analytical benchmark.

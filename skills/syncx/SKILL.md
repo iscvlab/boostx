@@ -11,7 +11,7 @@ description: >
 
 Cross-document synchronization, conflict arbitration, and zero-stale audit for **whatever repository is open now**.
 
-Discover changes from **the active conversation**, then systematically scan and align **all markdown, HTML, and web documentation in the current workspace**. Portable across Antigravity IDE, Claude Code, Cursor, and multi-agent platforms. Windows, macOS, and Linux.
+Discover changes from **the active conversation**, then systematically scan and align **all markdown, HTML, and web documentation in the current workspace**. Portable across Antigravity IDE, `agy` CLI, Claude Code, Cursor, and multi-agent platforms across Windows, macOS, and Linux.
 
 Do not assume specific project filenames, layer counts, or local author paths.
 
@@ -44,11 +44,11 @@ Use these 5 canonical terms in public documentation and deliverables:
 | **IN PIPELINE** | Intended next; not released. |
 | **DRAFT** | Internal only. |
 
-Do not write LIVE, Published, or 1-click install without a verifiable receipt (URL, version table, or installer). `/publishx-audit` advises on these terms; this skill owns their formal definitions.
+Do not write LIVE, Published, or 1-click install without a verifiable receipt (URL, version table, or installer). [`/publishx-audit`](../publishx-audit/SKILL.md) advises on these terms; this skill owns their formal definitions.
 
 ### Formatting and Typography Rules
 * **No Em or En Dashes**: Use standard ASCII hyphens `-` in all user-facing lines and generated documentation.
-* **Strict Zero-LaTeX Math Policy**: In markdown docs, HTML, and chat responses, NEVER use LaTeX math delimiters (such as inline or block dollar math, \times, \rightarrow). ALWAYS use direct native Unicode symbols: `→`, `←`, `↔`, `•`, `✓`, `✨`, `²`, `³`, `°`, `×`, `÷`, `±`, `≈`, `≤`, `≥`.
+* **Strict Zero-LaTeX Math Policy**: In markdown docs, HTML, and chat responses, NEVER use LaTeX math delimiters (such as inline or block dollar math, `\times`, `\rightarrow`). ALWAYS use direct native Unicode symbols: `→`, `←`, `↔`, `•`, `✓`, `✨`, `²`, `³`, `°`, `×`, `÷`, `±`, `≈`, `≤`, `≥`.
 * **Diagrams and Visuals**: Fenced Mermaid blocks (` ```mermaid ... ``` `) for workflows; clean GFM tables with outer pipes (`| Col 1 | Col 2 |`). Zero ASCII box art in documentation.
 
 ---
@@ -84,15 +84,16 @@ From the active conversation and git status, explicitly record:
    * *Active SSOTs*: Architecture maps, READMEs, API tables, active links, and status badges must be 100% updated.
    * *Immutable Historical Records*: Changelog entries and historical logs that record past events preserve historical context while logging the new milestone.
 
-### Step 2: Dynamic Workspace Scan & Ghost Sweep
+### Step 2: Dynamic Workspace Scan, `/layax` Sidecar & Ghost Sweep
 
-Search markdown, HTML, and web documentation across the workspace (including hidden directories like `.agents/`, excluding `.git/`, `node_modules/`, and **any directory containing an `.obsidian/` subfolder**):
+Search markdown, HTML, and web documentation across the workspace (excluding `.git/`, `node_modules/`, and **any directory containing an `.obsidian/` subfolder**):
 
-1. **Target Asset Discovery & Opt-In Second Brain Boundary**:
+1. **Target Asset Discovery & Composable Boundaries**:
    * *Markdown Suites*: Root README, module docs, schemas, roadmaps, specifications, and portfolios.
    * *Interactive Web Artifacts*: Presentation slide decks, architecture viewers, dashboard portals, storyboards, and reports.
    * *Shadow Mirrors*: Identify whether modified documents are duplicated in distribution packages (e.g. `dist/docs/`, `package_name/docs_reference/`, or mirrored sub-workspaces).
-   * *Strict Opt-In `/syncx /obsidianx` Boundary*: By default, **never** scan or modify an Obsidian vault (`*/.obsidian/..`) during `/syncx`. Only when `/obsidianx` (or `/obsidian-vault`) is explicitly paired in the command (`/syncx /obsidianx`) should you resolve the active vault via [`/obsidianx`](../obsidianx/SKILL.md) and synchronize affected reusable atomic notes and `Hub - *.md` tables alongside repository docs.
+   * *Strict Opt-In [`/obsidianx`](../obsidianx/SKILL.md) Boundary (`/syncx /obsidianx`)*: By default, **never** scan or modify an Obsidian vault (`*/.obsidian/..`) during `/syncx`. Only when `/obsidianx` (or `/obsidian-vault`) is explicitly paired in the command (`/syncx /obsidianx`) should you resolve the active vault via [`/obsidianx`](../obsidianx/SKILL.md) and synchronize affected reusable atomic notes and `Hub - *.md` tables alongside repository docs.
+   * *Opt-In [`/layax`](../layax/SKILL.md) Semantic Contradiction Pre-Filter (`/syncx /layax`)*: When chained with `/layax` (or `/laya`), run the `noul` hypothesis scanner across candidate `.md` and `.html` paragraphs to detect semantic contradictions against the SSOT that keyword grep misses, then apply surgical fixes via `edit_file`.
 2. **Ghost Reference & Dead Link Sweep**:
    * If any file was renamed, merged, or deleted, grep the workspace for its old base name and relative path.
    * Update or remove dangling hyperlinks, navigation cards, and table references pointing to the deceased file.
@@ -118,7 +119,7 @@ Classify every discovered file into the 5-tier architecture:
 
 ### Step 4: Inner-to-Outer Synchronization
 
-Apply updates systematically from the inside out (Tier 1-2 → Tier 3 → Tier 4 → Tier 5):
+Apply updates systematically from the inside out (Tier 1-2 → Tier 3 → Tier 4 → Tier 5) using surgical `edit_file` (`replace_file_content`) replacements:
 
 1. **Inner Specs First**: Update code signatures, parameter tables, and module READMEs to anchor local truth.
 2. **Ground-Truth Receipt Check**: Before writing a technical metric into high-level docs, run a 1-line check against the actual artifact (e.g. SQLite query, checking `df.shape`, reading JSON/CSV headers, or inspecting code constants). Never propagate unverified claims.
@@ -128,7 +129,7 @@ Apply updates systematically from the inside out (Tier 1-2 → Tier 3 → Tier 4
    * *Index and Headings*: Update sequential slide headers (`SLIDE 01 / N`), step counters, and metadata badges.
    * *Embedded JavaScript State*: Synchronize control variables (e.g. `const totalSlides = N;`, thumbnail navigation arrays, HUD counters).
    * *Visual Design System*: Ensure newly added HTML elements inherit native CSS variables and design tokens rather than ad-hoc inline styles.
-5. **Distribution Mirror Parity**: When updating a canonical file, synchronize all identified mirror files byte-for-byte so distribution bundles never drift.
+5. **Distribution Mirror Parity**: When updating a canonical file, synchronize all identified mirror files byte-for-byte (verified via SHA-256 hash equality) so distribution bundles never drift.
 
 ### Step 5: Programmatic Verification & Sync Ledger
 
@@ -136,7 +137,15 @@ Verify completion programmatically before concluding:
 
 1. **Zero-Stale Grep Sweep**: Search the active relation set for deprecated terms. Expected result: **zero hits** (outside historical changelogs).
 2. **Hyperlink and Anchor Verification**: Verify all relative links (`../`) and HTML anchor IDs resolve properly.
-3. **Execute Project Auditor**: If the repository provides an auditor script (e.g. `python .agents/skills/syncx/scripts/audit_workspace_docs.py`), execute it and verify exit code 0.
+3. **Execute Universal Sync Verifier**: Run the bundled repo-agnostic auditor (which also delegates to a local `scripts/audit_docs.py` if present in the repo) and verify exit code `0`:
+   * **Windows (PowerShell)**:
+     ```powershell
+     python "$env:USERPROFILE\.gemini\config\skills\syncx\scripts\audit_workspace_docs.py" "<workspace_root>" --deprecated "<old_val_1>,<old_val_2>"
+     ```
+   * **macOS / Linux**:
+     ```bash
+     python ~/.gemini/config/skills/syncx/scripts/audit_workspace_docs.py "<workspace_root>" --deprecated "<old_val_1>,<old_val_2>"
+     ```
 4. **Render the Synchronization Ledger**: Present the final audit scorecard:
 
 | Tier | File Path | Action | Deprecated Value Purged | Ground-Truth Invariant Verified | Status |
@@ -165,6 +174,6 @@ Verify completion programmatically before concluding:
 - [ ] Ground-truth receipts verified against real code, data, or tests before writing doc claims.
 - [ ] 5-tier classification matrix followed (Tiers 1-2 → 3 → 4 → 5).
 - [ ] Interactive HTML artifacts synchronized (DOM structure, slide counters, JS variables, CSS tokens).
-- [ ] Distribution mirror targets synchronized byte-for-byte with primary SSOTs.
+- [ ] Distribution mirror targets synchronized byte-for-byte (SHA-256 verified) with primary SSOTs.
 - [ ] Zero-LaTeX Math Policy strictly verified (native Unicode characters only).
 - [ ] Synchronization Ledger displayed with file tiers, actions, and verification status.

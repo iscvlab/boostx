@@ -63,36 +63,11 @@ The skill operates in two distinct modes based on context:
 
 ## 3. The 4-Phase BoostX Skill Creation Lifecycle
 
-```
-┌────────────────────────────────────────────────────────┐
-│  Phase 1: THE RED INVARIANT GATE                       │
-│  • Define AI failure mode & hallucinations to cure     │
-│  • Draft 2 Trigger Probes (1 Positive, 1 Negative)     │
-│  • Decide Model-Invoked vs. User-Invoked               │
-└──────────────────────────┬─────────────────────────────┘
-                           │
-┌──────────────────────────▼─────────────────────────────┐
-│  Phase 2: ARCHITECTURAL VECTORS & PONYTAIL LADDER      │
-│  • Vector A: Rule in AGENTS.md (No skill needed?)      │
-│  • Vector B: Pure Instruction Skill (Zero scripts)     │
-│  • Vector C: Hybrid Skill (Instructions + stdlib CLI)  │
-│  • Invariant Formulation (Anti-Hardcoded Snapshot Rule)│
-└──────────────────────────┬─────────────────────────────┘
-                           │
-┌──────────────────────────▼─────────────────────────────┐
-│  Phase 3: DUAL-OS SURGICAL EXECUTION                   │
-│  • Write SKILL.md with front-loaded leading words      │
-│  • Progressive disclosure (push reference to .md)      │
-│  • POSIX paths (`/`), UTF-8 encoding, dual shell syntax│
-│  • Packaging hygiene (zero .pyc / __pycache__ debris)  │
-└──────────────────────────┬─────────────────────────────┘
-                           │
-┌──────────────────────────▼─────────────────────────────┐
-│  Phase 4: RUTHLESS 3-TIER VERIFICATION                 │
-│  • Tier 1: Static YAML Schema & Character Limit Lint   │
-│  • Tier 2: Integrity, Anti-Hardcode & Link Check       │
-│  • Tier 3: Automated Audit (`audit_engine --platform`) │
-└────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    P1["Phase 1: THE RED INVARIANT GATE<br>• Define AI failure mode & hallucinations to cure<br>• Draft 2 Trigger Probes (1 Positive, 1 Negative)<br>• Decide Model-Invoked vs. User-Invoked"] --> P2["Phase 2: ARCHITECTURAL VECTORS & PONYTAIL LADDER<br>• Vector A: Rule in AGENTS.md (No skill needed?)<br>• Vector B: Pure Instruction Skill (Zero scripts)<br>• Vector C: Hybrid Skill (Instructions + stdlib CLI)<br>• Invariant Formulation (Anti-Hardcoded Snapshot Rule)"]
+    P2 --> P3["Phase 3: DUAL-OS SURGICAL EXECUTION<br>• Write SKILL.md with front-loaded leading words<br>• Progressive disclosure (push reference to .md)<br>• POSIX paths (/), UTF-8 encoding, dual shell syntax<br>• Packaging hygiene (zero .pyc / __pycache__ debris)"]
+    P3 --> P4["Phase 4: RUTHLESS 3-TIER VERIFICATION<br>• Tier 1: Static YAML Schema & Character Limit Lint<br>• Tier 2: Integrity, Anti-Hardcode & Link Check<br>• Tier 3: Automated Audit (audit_engine --platform skill)"]
 ```
 
 ---
@@ -169,14 +144,14 @@ description: >
 * **POSIX Paths**: Use forward slashes (`/`) exclusively in markdown links and code paths.
 * **No Hardcoded Absolute Roots**: Never hardcode `C:\Users\...` or `/Users/...`. Derive paths relative to workspace or use home-relative `~/` or `%USERPROFILE%` / `%APPDATA%` paths.
 * **Strict Forward-Slash Links**: Zero backslashes (`\`) inside markdown links `[...](...)`. Backslashes break in web renderers, GitHub markdown, and Unix platforms.
-* **Cross-Platform Command Lines**: When providing terminal commands in `SKILL.md`, provide dual-OS syntax:
+* **Cross-Platform Command Lines**: When providing terminal commands in `SKILL.md`, provide dual-OS global syntax:
   - macOS/Linux: `python ~/.gemini/config/skills/...`
-  - Windows: `python "%USERPROFILE%\.gemini\config\skills\..."`
-  - Or workspace-relative: `python .agents/skills/...`
+  - Windows (PowerShell): `python "$env:USERPROFILE\.gemini\config\skills\..."`
 * **Packaging Hygiene**: Keep skill directories clean. Never commit or distribute `__pycache__` directories or `.pyc` bytecode files.
-* **UTF-8 Python Header Standard**: Every generated Python helper script or verification probe must start with the standard BoostX stream guard to prevent Windows terminal `cp1252` encoding crashes on symbols (`✓`, `→`, `✨`):
+* **UTF-8 & Bytecode Python Header Standard**: Every generated Python helper script or verification probe must start with `sys.dont_write_bytecode = True` and the standard BoostX stream guard to prevent `__pycache__` debris and Windows terminal `cp1252` encoding crashes on symbols (`✓`, `→`, `✨`):
   ```python
   import sys
+  sys.dont_write_bytecode = True
   if sys.stdout and hasattr(sys.stdout, "reconfigure"):
       sys.stdout.reconfigure(encoding="utf-8")
   ```
@@ -187,8 +162,9 @@ description: >
 
 A skill is **NOT finished** until it passes all three automated verification tiers:
 
-```
-[Tier 1: Static Linter] ──> [Tier 2: Integrity & Hardcode Audit] ──> [Tier 3: Automated Engine]
+```mermaid
+flowchart LR
+    T1["Tier 1: Static Linter"] --> T2["Tier 2: Integrity & Hardcode Audit"] --> T3["Tier 3: Automated Engine"]
 ```
 
 #### Tier 1: Static Frontmatter Linter
@@ -233,7 +209,7 @@ Must exit with **`VERDICT: PASS`** (0 blocking issues) before declaring completi
 ## 4. Post-Creation Summary Rubric
 
 When reporting the newly created skill to the user, provide:
-1. **Skill Name & Scope**: Global vs. Workspace Local.
+1. **Skill Name & Scope**: Global Customizations Root (`~/.gemini/config/skills/<name>/`).
 2. **Physical Location**: Clickable file link to `SKILL.md`.
 3. **Trigger Invariants**: The primary slash command and keywords that trigger it.
 4. **Verification Pass**: Confirmation that Tier 1, 2, and 3 checks passed cleanly via `audit_engine.py --platform skill`.
