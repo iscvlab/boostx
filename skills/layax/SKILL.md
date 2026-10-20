@@ -35,31 +35,50 @@ Operates on **Dual-Process Cognitive Architecture**:
 
 ## 2. Core Primitives Specification
 
-The `laya` library evaluates state against typed question schemas in a single forward pass without generating text:
+The `laya` library (`v0.3.10+`) evaluates state against typed question schemas in a single forward pass without generating text (`output_tokens: 0`). Every question definition MUST include `"type"` (`"choice"`, `"score"`, or `"noul"`) and `"instructions"`:
 
 ```python
-# Laya Typed Question Schema (Python package: `import laya`)
+import laya
+
+agent = laya.load("convaiinnovations/laya")  # or "convaiinnovations/laya-multilingual"
+
 questions = {
-    # 1. choice: Calibrated categorical distribution across caller-defined labels
+    # 1. choice: Calibrated categorical distribution across caller-defined labels (dict or list)
     "category": {
         "type": "choice",
+        "instructions": "Classify the primary environmental complaint category.",
         "criteria": {
             "odor": "กลิ่นเหม็น ขยะ สารเคมี กลิ่นไหม้",
             "leachate": "น้ำเสีย น้ำชะขยะ คลองเน่าเสีย",
             "noise": "มลพิษทางเสียง เครื่องจักร รถขยะ",
         },
     },
-    # 2. score: Ordinal rubric (returns expected score on defined scale)
-    "severity": {
+    # 2. score: Ordinal rubric (criteria is a list of level descriptions, index 0 first)
+    "completeness_score": {
         "type": "score",
-        "scale": [0, 4],
+        "instructions": "Rate the technical completeness and specificity of this documentation.",
+        "criteria": [
+            "Single-sentence stub lacking concrete versions or CLI scripts",
+            "Brief overview with minimal technical detail",
+            "Moderate specification with partial architecture details",
+            "Detailed specification covering core architecture and versions",
+            "Exhaustive production specification with exact versions, CLI engines, and invariants",
+        ],
     },
-    # 3. noul: Calibrated boolean truth/contradiction hypothesis P(true)
+    # 3. noul: Calibrated boolean truth/contradiction hypothesis P(true) in ans["noul"]
     "is_contradicting_ssot": {
         "type": "noul",
-        "hypothesis": "This statement contradicts the canonical project facts.",
+        "instructions": "Does this statement contradict the canonical project facts?",
+        "criteria": {
+            "false": "Consistent with canonical versions, CLI scripts, and architecture.",
+            "true": "References deprecated counts, wrong script names, or contradictory status.",
+        },
     },
 }
+
+# Single state or batched multi-state evaluation:
+res = agent.predict(state_text, questions)          # -> res["answers"][qid]
+batch_res = agent.predict_batch(state_list, questions)  # -> list of res dicts
 ```
 
 Built-in high-level integrations in `laya`:
