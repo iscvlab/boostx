@@ -27,7 +27,7 @@
 
 See README. Tag: `v3.0.0`.
 ```bash
-git clone --branch v3.0.0 https://github.com/napattan/boostx.git
+git clone --branch v3.0.0 https://github.com/iscvlab/boostx.git
 ```
 
 ## v2.0.0
@@ -56,7 +56,7 @@ git clone --branch v3.0.0 https://github.com/napattan/boostx.git
 
 See README. Tag: `v2.0.0`.
 ```bash
-git clone --branch v2.0.0 https://github.com/napattan/boostx.git
+git clone --branch v2.0.0 https://github.com/iscvlab/boostx.git
 ```
 
 ## v1.3.0
@@ -76,7 +76,7 @@ git clone --branch v2.0.0 https://github.com/napattan/boostx.git
 
 See README. Tag: `v1.3.0`.
 ```bash
-git clone --branch v1.3.0 https://github.com/napattan/boostx.git
+git clone --branch v1.3.0 https://github.com/iscvlab/boostx.git
 ```
 
 ## v1.2.0
@@ -92,7 +92,7 @@ git clone --branch v1.3.0 https://github.com/napattan/boostx.git
 
 See README. Tag: `v1.2.0`.
 ```bash
-git clone --branch v1.2.0 https://github.com/napattan/boostx.git
+git clone --branch v1.2.0 https://github.com/iscvlab/boostx.git
 ```
 
 ## v1.1.0
@@ -104,7 +104,7 @@ git clone --branch v1.2.0 https://github.com/napattan/boostx.git
 
 See README. Tag: `v1.1.0`.
 ```bash
-git clone --branch v1.1.0 https://github.com/napattan/boostx.git
+git clone --branch v1.1.0 https://github.com/iscvlab/boostx.git
 ```
 
 ## v1.0.0
@@ -136,5 +136,5 @@ First tagged public line of this skill suite.
 
 See README. Tag: `v1.0.0`.
 ```bash
-git clone --branch v1.0.0 https://github.com/napattan/boostx.git
+git clone --branch v1.0.0 https://github.com/iscvlab/boostx.git
 ```

@@ -1,7 +1,7 @@
 # BoostX: Composable Agent Skills Ecosystem
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v3.0.0-blue.svg)](https://github.com/napattan/boostx/releases/tag/v3.0.0)
+[![Version](https://img.shields.io/badge/version-v3.0.0-blue.svg)](https://github.com/iscvlab/boostx/releases/tag/v3.0.0)
 [![Skills](https://img.shields.io/badge/Suite-12_Composable_Skills-005FB8)](#-the-12-skill-suite)
 [![Platforms](https://img.shields.io/badge/Platforms-Claude_•_Grok_•_Gemini_•_Cursor_•_Codex-8A2BE2)](#-universal-installation)
 [![Dual-OS](https://img.shields.io/badge/Dual--OS-Windows_•_macOS_•_Linux-success)](#-portable-by-design)
@@ -10,7 +10,7 @@
 > **A unified, composable `-x` skill ecosystem and verification harness for AI coding agents.**  
 > Twelve portable `SKILL.md` protocols and five zero-dependency Python CLI engines that run identically across **Claude Code, Grok, Google Gemini / Antigravity, Cursor, and Codex** on **Windows, macOS, and Linux**.
 
-Sister toolkit: **[mcp-bridges](https://github.com/napattan/mcp-bridges)** (Model Context Protocol automation bridges for QGIS, Rhino 3D, Grasshopper, Adobe Illustrator, and Figma).
+Sister toolkit: **[mcp-bridges](https://github.com/iscvlab/mcp-bridges)** (Model Context Protocol automation bridges for QGIS, Rhino 3D, Grasshopper, Adobe Illustrator, and Figma).
 
 ---
 
@@ -242,14 +242,14 @@ Clone this repository, then place or link the `skills/` folders into **your host
 
 **Windows (PowerShell):**
 ```powershell
-git clone https://github.com/napattan/boostx.git
+git clone https://github.com/iscvlab/boostx.git
 cd boostx
 .\scripts\install.ps1 -All
 ```
 
 **macOS / Linux (Bash / Zsh):**
 ```bash
-git clone https://github.com/napattan/boostx.git
+git clone https://github.com/iscvlab/boostx.git
 cd boostx
 chmod +x scripts/install.sh
 ./scripts/install.sh --all
@@ -259,21 +259,21 @@ chmod +x scripts/install.sh
 
 ```bash
 # Claude Code
-git clone https://github.com/napattan/boostx.git ~/.claude/skills
+git clone https://github.com/iscvlab/boostx.git ~/.claude/skills
 
 # Grok
-git clone https://github.com/napattan/boostx.git ~/.grok/skills
+git clone https://github.com/iscvlab/boostx.git ~/.grok/skills
 
 # Google Gemini / Antigravity
-git clone https://github.com/napattan/boostx.git ~/.gemini/config/skills
+git clone https://github.com/iscvlab/boostx.git ~/.gemini/config/skills
 
 # Project-local (.agents/skills)
-git clone https://github.com/napattan/boostx.git .agents/skills
+git clone https://github.com/iscvlab/boostx.git .agents/skills
 ```
 
 To pin the `v3.0.0` release tag:
 ```bash
-git clone --branch v3.0.0 https://github.com/napattan/boostx.git
+git clone --branch v3.0.0 https://github.com/iscvlab/boostx.git
 ```
 
 ---
@@ -332,13 +332,13 @@ boostx/
 
 ## 8. Related Toolkits & Author
 
-- **[mcp-bridges](https://github.com/napattan/mcp-bridges)**: Model Context Protocol (MCP) automation bridges for **QGIS, Rhino 3D, Grasshopper, Adobe Illustrator, and Figma**.
+- **[mcp-bridges](https://github.com/iscvlab/mcp-bridges)**: Model Context Protocol (MCP) automation bridges for **QGIS, Rhino 3D, Grasshopper, Adobe Illustrator, and Figma**.
 - **[qgis-axonometric-transformer](https://plugins.qgis.org/plugins/axonometric_transformer/)**: Official QGIS plugin (Plugin ID: `6219`) for 1-click isometric, dimetric, and oblique axonometric map diagrams.
 
 **Napat Phasundhiae**  
 *Computational Design Technologist | Spatial Analytics • Urban & Environmental Simulation • Workflow Automation*
 
-- GitHub: [@napattan](https://github.com/napattan)
+- GitHub: [@napattan](https://github.com/napattan) · [ISCV | Isocurve Research Lab (@iscvlab)](https://github.com/iscvlab)
 - LinkedIn: [linkedin.com/in/napatphas](https://www.linkedin.com/in/napatphas/)
 
 ## License
