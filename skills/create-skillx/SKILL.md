@@ -20,7 +20,7 @@ This skill synthesizes three core frameworks:
 
 ## 1. Scope & Universal Globalization Policy
 
-Every agent skill authored via `/create-skillx` **MUST be created in the Global Customizations Root** so that it is instantly accessible across **every workspace** and synchronized across **every device** (Windows Desktop PC, ASUS Laptop, and macOS MacBook):
+Every agent skill authored via `/create-skillx` **MUST be created in the Global Customizations Root** so that it is instantly accessible across **every workspace** and synchronized across **every device** (Windows, macOS, and Linux workstations):
 
 | Target Path | Physical Cloud Storage | Behavior Across Workspaces & Devices |
 | :--- | :--- | :--- |
@@ -104,10 +104,10 @@ Run the Ponytail Senior Dev Filter to determine the simplest structure:
   * Only produce a script (`scripts/run.py`) if deterministic file parsing, mathematical transformations, or API rate-limiting are required.
   * If a script is required: use Python stdlib (`argparse`, `pathlib`, `json`, `urllib`) — avoid third-party dependencies unless strictly necessary.
 
-#### Core Architectural Invariant: Anti-Hardcoded Ephemeral Metrics
-* **Strict Rule**: Never hardcode transient, volatile dataset counts (e.g. "all [N] layers", "14,203 rows", "5,924 complaints") into general skill guardrails or instructions.
-* **Rationale**: Datasets grow, shrink, and evolve across project milestones. Hardcoding snapshot numbers causes instant documentation staleness, triggers false-positive synchronization diffs between machines, and obscures the universal architectural principle.
-* **Invariant Formulation Pattern**: Always formulate guardrails as **timeless behavioral protocols** paired with actionable alternative patterns:
+#### Core Architectural Invariant: Anti-Hardcoded Ephemeral Metrics & Zero-Persona Neutrality
+* **Strict Rule**: Never hardcode transient, volatile dataset counts (e.g. "all [N] layers", "14,203 rows", "5,924 complaints") or personal author/hardware inventories (e.g. specific laptop models, personal bilingual defaults, or private project names) into general skill guardrails or instructions.
+* **Rationale**: Datasets grow, shrink, and evolve across project milestones, and global open-source skills must run cleanly for any engineer in any domain. Hardcoding snapshot numbers or personal hardware/persona references causes instant documentation staleness, triggers false-positive synchronization diffs between machines, and obscures the universal architectural principle.
+* **Invariant Formulation Pattern**: Always formulate guardrails as **timeless, domain-adaptive behavioral protocols** paired with actionable alternative patterns:
   - *Anti-Pattern*: "Never query across all [N] layers."
   - *Invariant Standard*: "**Bounded Scope (Zero Full-Project Dumps)**: Never execute unbounded discovery calls across the canvas root (e.g. avoid unfiltered `get_layers()`, root `get_layer_tree()`, or dumping `mapLayers().values()`). Treat the layer tree as an indexed database: use `find_layer(name="...")` or scope-bound group probes."
 
@@ -180,7 +180,7 @@ flowchart LR
   * **Machine Paths**: Flag any line matching `(?i)([a-z]:[/\\]users[/\\]|/Users/|/home/)` (unless sanitized as `<User>` or `<username>`).
   * **Secrets & Tokens**: Flag any unredacted token matching `(?i)(api[_-]?key|secret|token)\s*[:=]\s*["'][a-zA-Z0-9_\-\.]{16,}["']`.
 * **Zero-Recursive-Nesting Invariant**: Verify no self-named child folder exists (`assert not (skill_dir / skill_dir.name).exists()`).
-* **Anti-Hardcoded Ephemeral Metrics**: Scan for `all \d+ layers` or transient dataset counts; replace with behavioral protocols.
+* **Anti-Hardcoded Ephemeral Metrics & Persona Sweep**: Scan for `all \d+ layers`, transient dataset counts, or hardcoded personal hardware/persona strings; replace with universal behavioral protocols.
 * **Markdown Link Integrity & Forward-Slash Check**:
   * Every relative link (`[file](...)`, `references/...`, `scripts/...`) must resolve to a real file on disk.
   * Zero backslashes inside markdown link parentheses (`assert not re.search(r'\[.*?\]\([^\)]*\\[^\)]*\)', text)`).

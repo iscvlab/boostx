@@ -155,9 +155,11 @@ Before writing any conclusion, design proposal, architectural recommendation, or
 3. **Context-Compressed Main Chat Digest (`≤ 150 Words`)**:
    * Never dump the full multi-page study into the chat window. Output a concise executive digest, the Wave 3 Verification Scorecard, and clickable `file://` links to the saved artifacts.
 
-### B. Composable Power Modes (`/deep-researchx` × `/layax` × `/planx` × `/boostx` × `/obsidianx` × `/goal`)
+### B. Composable Power Modes (`/deep-researchx` × `/layax` × `/planx` × `/boostx` × `/obsidianx` × `/ultrax` × `/goal`)
 * **Default Isolation Rule (Without `/obsidianx`)**:
   * When `/obsidianx` is **not** in the user's command, never read from or write to any Obsidian vault.
+* **Paired with [`/ultrax`](../ultrax/SKILL.md) (`/deep-researchx /ultrax` or `/deep-researchx /boostx /ultrax`)**:
+  * **High-Throughput Partitioned Swarm & Dual-Blind Audit**: Scale Wave 2 Harvester Scouts dynamically via [`/ultrax`](../ultrax/SKILL.md) (`1` Scout per `≤ 3` records/axes, up to `6` concurrent scouts per wave) and run **2 independent Blind Adversarial Auditors** (`verify_evidence.py` + Red-Team Falsifier + Domain/Unit Critic) in Wave 3.
 * **Paired with [`/layax`](../layax/SKILL.md) (`/deep-researchx /layax`)**:
   * **Wave 2.5 Fast Candidate Triage**: Between Wave 2 (Harvester Swarm) and Wave 3 (Blind Adversarial Auditor), use `/layax` (`score` + `noul`) to locally score harvested records for relevance and scope compliance in milliseconds, pruning out-of-bounds candidates before spawning expensive Auditor turns.
 * **Paired with [`/planx`](../planx/SKILL.md) (`/deep-researchx /planx`)**:

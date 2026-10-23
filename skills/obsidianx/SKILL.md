@@ -12,7 +12,7 @@ Operate an AI-first Obsidian Second Brain structured as a **Flat-Root 2-Hop Smal
 
 > [!IMPORTANT]
 > **Strict Opt-In Combinator Invariant**:
-> Other workspace skills (`/briefx`, `/planx`, `/syncx`, `/researchx`, `/deep-researchx`, `/boostx`, `/kickoffx`, `/goal`) **MUST NEVER** read from or write to the Obsidian vault unless `/obsidianx` (or legacy alias `/obsidian-vault`) is explicitly included in the user's command combination (e.g., `/researchx /boostx /obsidianx`).
+> Other workspace skills (`/briefx`, `/planx`, `/syncx`, `/researchx`, `/deep-researchx`, `/boostx`, `/ultrax`, `/kickoffx`, `/goal`) **MUST NEVER** read from or write to the Obsidian vault unless `/obsidianx` (or legacy alias `/obsidian-vault`) is explicitly included in the user's command combination (e.g., `/researchx /boostx /obsidianx`).
 
 ---
 
@@ -154,6 +154,7 @@ When `/obsidianx` is combined with other slash skills in the same prompt, execut
 | **`/boostx /obsidianx`** | In BoostX Phase 1, load governing physics formulas, SI unit bridges, or component contracts from `00 *Index*.md` → `Hub - *`. | In BoostX Phase 4, automatically ratchet any newly engineered reusable algorithm, solver contract, or architectural pattern into `VAULT_ROOT`. |
 | **`/researchx /boostx /obsidianx`** *(+ optional `/goal`)* | **Full-Stack Loop**: Vault Cache Check → `/researchx` Primary-Source Probe on delta → Lock 2D Contract & Analytical Toy Benchmark into `/boostx` Phase 1. | Execute BoostX Phases 1–4 → Ratchet reusable findings & component specs into `VAULT_ROOT` → Run Graph Integrity Gate (`BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`) before `<!-- GOAL_COMPLETE -->`. |
 | **`/syncx /obsidianx`** | Resolve `VAULT_ROOT` alongside the workspace relation set. | Synchronize both project repository documentation AND matching atomic notes / `Hub - *` tables in `VAULT_ROOT`. |
+| **`/obsidianx /ultrax`** *(or combined with `/deep-researchx` / `/boostx`)* | Resolve `VAULT_ROOT` → Parallel 2-Hop Scouts inspect candidate `Hub - *.md` constellations (`≤ 3` notes/agent). | Partition atomic note authoring across non-overlapping neighbor sets via [`/ultrax`](../ultrax/SKILL.md), synchronize parent `Hub - *.md` tables sequentially in the main thread, and run the Blind Graph Integrity Verifier (`BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`). |
 
 ---
 

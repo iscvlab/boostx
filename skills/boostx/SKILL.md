@@ -27,6 +27,8 @@ Depending on host runtime capabilities, select the appropriate execution engine:
     * **`DeepCoder` / `cavecrew-builder`**: Minimal diff implementation (`invoke_subagent`).
     * **`DeepInvestigator` / `cavecrew-investigator`**: Root cause analysis, invariant mapping, or scanning >4 unfamiliar files so raw file dumps do not bloat the main context window.
     * **`cavecrew-reviewer`**: Adversarial diff review prior to completion.
+* **Engine C: Opt-In [`/ultrax`](../ultrax/SKILL.md) Swarm & Blind Verification Multiplier (`/boostx /ultrax`)**:
+  * When `/ultrax` is included in the command, delegate execution topology to [`/ultrax`](../ultrax/SKILL.md): fan out `Best-of-3` candidate builders (or `N` partitioned batch builders with a Pre-Locked Shared Seam Header) and enforce the `Maker ≠ Checker` Blind Adversarial Critic + Red-Team Breaker before Phase 4 completion.
 
 ### B. Dynamic Complexity Tier Scaling
 Match ceremony to task scope in Step 0:
@@ -156,7 +158,7 @@ A BoostX task is **only complete when terminal execution logs provide concrete p
 
 ## 3. Universal Parity Protocol (Dual-OS + OneDrive Multi-PC + IDE/CLI)
 
-Whenever engineering across the multi-machine ecosystem (Windows Desktop PC, ASUS Laptop, macOS MacBook synced via OneDrive, across both **Antigravity IDE** and **Antigravity CLI `agy`**):
+Whenever engineering across a multi-machine ecosystem (Windows, macOS, and Linux workstations synced via cloud storage or Git, across both **Antigravity IDE** and **Antigravity CLI `agy`**):
 
 1. **Strict Relative & Dynamic Home Path Invariant (OneDrive Multi-PC Safe)**:
   - Never hardcode machine-specific user profile paths (`C:\Users\<User>\...` or `/Users/<username>/...`) in configuration files, plugin hooks, skills, scripts, or documentation—hardcoded usernames break other PCs as soon as OneDrive syncs.
@@ -205,10 +207,13 @@ When `/boostx` is paired with `/goal` for long-running autonomous execution:
 3. **Anti-Premature `GOAL_COMPLETE` Gate**:
   - Never emit `<!-- GOAL_COMPLETE -->` on the same turn a major code edit is written unless fresh Phase 4 verification has executed and passed *after* the final edit.
 
-### B. Composable `/planx`, `/researchx`, `/deep-researchx` & Opt-In `/obsidianx` Rules (Zero Default Overhead)
-* **Stay Local & Fast by Default**: Do **not** run external web/literature research or touch any Obsidian vault on standard debugging, refactoring, or UI tasks unless the corresponding skill is triggered.
+### B. Composable `/planx`, `/researchx`, `/deep-researchx`, `/ultrax` & Opt-In `/obsidianx` Rules (Zero Default Overhead)
+* **Stay Local & Fast by Default**: Do **not** run external web/literature research, spawn multi-agent swarms, or touch any Obsidian vault on standard debugging, refactoring, or UI tasks unless the corresponding skill is triggered.
 * **Approved Plan Bridge ([`/planx`](../planx/SKILL.md) → `/boostx`)**:
   * When transitioning from an approved [`implementation_plan.md`](file:///implementation_plan.md) created via [`/planx`](../planx/SKILL.md), lock Section 4 (`Red → Green Verification Matrix`) and the user's selected inline grilling options directly into Phase 1 as the BoostX Goal Contract.
+* **Opt-In [`/ultrax`](../ultrax/SKILL.md) Multiplier (`/boostx /ultrax` or `/boostx /ultrax /goal`)**:
+  * **Default (Without `/ultrax`)**: Execute inline or via standard single-task delegation (`Engine A` / `Engine B`).
+  * **With `/ultrax`**: Normalize any multi-skill command into the Canonical Stage DAG (`RETRIEVE → RESEARCH → PLAN → BUILD → AUDIT/SYNC → RATCHET → VERIFY`), route Phase 2–3 through `/ultrax`'s Dynamic `N × K` Topology Sizer (`Best-of-3` Tournament or `N+2` Partitioned Batch with Build-Lock Serialization), and enforce `Maker ≠ Checker` Blind Adversarial Verification in Phase 4.
 * **When to Escalate to `/researchx` or `/deep-researchx`**:
   * Invoke [`/researchx`](../researchx/SKILL.md) for fast tactical primary-source lookups (checking an unfamiliar SDK signature, pinned version, or single physical constant). When paired (`/researchx /boostx` or `/researchx /boostx /goal`), lock the verified equation, SI unit bridge, or API signature directly into Phase 1 as the Red → Green verification gate.
   * Invoke [`/deep-researchx`](../deep-researchx/SKILL.md) when the user explicitly pairs `/deep-researchx` or `/deep-research`, OR when a task requires multi-agent precedent harvesting, blind adversarial fact-auditing, multi-system architecture benchmarking, or full mathematical/standard formulation with a 1D analytical benchmark.

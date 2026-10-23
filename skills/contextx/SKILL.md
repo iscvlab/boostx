@@ -1,14 +1,14 @@
 ---
 name: contextx
 description: >
-  Inspect Antigravity conversation transcript to report current context compaction round, total steps, and memory degradation risk (/contextx, /context).
-  Use when the user asks what compaction round we are on, checks context health or window capacity, asks if a new chat is needed, or runs /contextx.
+  Inspect Antigravity conversation transcript and SQLite step logs to report current context compaction round, active window pressure, cross-platform token telemetry, and memory degradation risk (/contextx, /context).
+  Use when the user asks what compaction round we are on, checks context health, window capacity, or token usage (--tokens, --days N, --all-time), or runs /contextx.
   Do NOT use for doc sync (/syncx), creating kickoff prompts (/kickoffx), or session recaps (/handoff).
 ---
 
-# `/contextx` (Context & Compaction Diagnostic)
+# `/contextx` (Context, Compaction & Token Telemetry Diagnostic)
 
-Inspect the active Antigravity conversation transcript (`transcript.jsonl`), determine the exact **Context Compaction Round**, **Active Window Pressure (`steps_since_compaction`)**, total session steps, and evaluate the risk of memory drift and hallucination.
+Inspect the active Antigravity conversation transcript (`transcript.jsonl`) and SQLite step databases (`conversations/*.db`), determine the exact **Context Compaction Round**, **Active Window Pressure (`steps_since_compaction`)**, **Session & Cross-Platform Token Telemetry** (across Antigravity 2.0, Antigravity IDE, and Antigravity CLI), and evaluate the risk of memory drift and hallucination.
 
 Portable across Windows, macOS, and Linux. Zero external dependencies (Python standard library only).
 
@@ -48,7 +48,11 @@ Run the deterministic context analyzer ([`scripts/check_context.py`](scripts/che
   python3 ~/.gemini/config/skills/contextx/scripts/check_context.py
   ```
 
-*(Optional: pass `--conv-id <id_or_prefix>` if targeting a specific session, or `--json` for structured output. By default, `check_context.py` automatically filters out isolated subagent transcripts so it always inspects the active main user conversation).*
+*(Optional flags:
+- `--conv-id <id_or_prefix>`: Target a specific session UUID or prefix.
+- `--tokens` / `--days <N>` / `--all-time`: Aggregate cross-platform token telemetry (`input_tokens`, `cache_read_tokens`, `output_tokens`, `thinking_tokens`, and `subagents_spawned`) across Antigravity 2.0, Antigravity IDE, and Antigravity CLI, including a monthly breakdown table.
+- `--json`: Output structured JSON.
+By default, `check_context.py` automatically filters out isolated subagent transcripts so it always inspects the active main user conversation).*
 
 ### Step 2: Evaluate the 2D Health Rubric (Cumulative Round × Active Window Pressure)
 

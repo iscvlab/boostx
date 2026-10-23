@@ -13,7 +13,7 @@ Prepare a seamless, zero-loss transition from a compacted or ending conversation
 This skill performs a three-way bridge:
 1. **Doc Sync Verification**: Ensures decisions made in this session are committed to documentation before exiting.
 2. **Strategic Options Formulation**: Analyzes active roadmaps to offer 2–3 structured next-step paths.
-3. **Pristine Kickoff Prompt Generation**: Assembles a self-contained prompt block containing locked invariants, active file paths, and task-matched `-x` slash commands (`/briefx`, `/planx`, `/researchx`, `/deep-researchx`, `/layax`, `/obsidianx`, `/boostx`, `/goal`) for the new chat.
+3. **Pristine Kickoff Prompt Generation**: Assembles a self-contained prompt block containing locked invariants, active file paths, and task-matched `-x` slash commands (`/briefx`, `/planx`, `/researchx`, `/deep-researchx`, `/layax`, `/obsidianx`, `/boostx`, `/ultrax`, `/goal`) for the new chat.
 
 Portable across Antigravity IDE, `agy` CLI, Claude Code, Cursor, and multi-agent platforms across Windows, macOS, and Linux.
 
@@ -95,6 +95,7 @@ Select the exact `-x` slash command pipeline for the bottom of the Kickoff Promp
 | **Tactical API / Formula / DB Lookup → Implementation** | `/briefx "[Topic Name]" /researchx /boostx /goal` |
 | **Multi-File Doc Sync / Semantic Conflict Audit** | `/briefx "[Topic Name]" /syncx /layax` |
 | **Large Unpinned Corpus / Deep Research / Dataset Triage** | `/deep-researchx /layax "[Topic Name]" /boostx /goal` *(or `/briefx /layax`)* |
+| **High-Complexity Swarm / Best-of-3 Tournament / Multi-Agent Batch** | Append `/ultrax` (e.g., `/briefx "[Topic Name]" /boostx /ultrax /goal` or `/deep-researchx /boostx /ultrax /goal`) |
 | **Any Task Reading or Ratcheting Second Brain Knowledge** | Append `/obsidianx` (e.g., `/briefx "[Topic Name]" /boostx /obsidianx /goal`) |
 
 #### B. 5-Part Kickoff Prompt Architecture
@@ -105,8 +106,8 @@ Generate a self-contained, copy-pasteable prompt block formatted inside a fenced
 # Objective: [Concise Task Title]
 
 ## Role & Operating Protocol
-Operate as a Senior Computational Design Technologist / Lead Engineer.
-- Language Mode: [Bilingual (Thai + English) | English] (Maintain throughout this entire chat, zero language drift).
+Operate as a Principal [Domain / Systems] Architect & Lead Engineer.
+- Language Mode: [Primary Language or Bilingual Mode] (Maintain throughout this entire chat, zero language drift).
 - Chat Panel Cleanliness: Strictly NO Mermaid blocks or LaTeX math ($) inside the agent chat bubble (use clean GFM tables/bullets in chat). Mermaid diagrams are supported in .md files and artifacts only.
 - Formatting Standards: Native Unicode symbols only (→, •, ✓, ², etc.), GFM tables with outer boundary pipes.
 
@@ -116,8 +117,8 @@ Operate as a Senior Computational Design Technologist / Lead Engineer.
 
 ## Locked Invariants & Session Decisions (DO NOT RE-ARGUE OR DRIFT)
 1. [Core Decision 1 established in previous session, e.g. exact framework cardinality: 6 Acts / 4 Tiers]
-2. [Negative Invariant: e.g. Do not touch Q&A sections / Do not lock open deliberation items prematurely]
-3. [Design or Styling Protocol: e.g. pure white background, Swiss palette tokens]
+2. [Negative Invariant: e.g. Do not touch frozen sections / Do not lock open deliberation items prematurely]
+3. [Architectural, Styling, or Performance Invariant: e.g. design tokens, unit bridges, O(N) runtime bounds]
 
 ## Immediate Next Task
 [Detailed, actionable instructions for what the agent should accomplish first in this new session].

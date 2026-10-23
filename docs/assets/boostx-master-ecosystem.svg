@@ -115,24 +115,31 @@
 
 <!-- STAGE 3 NODES -->
 <g class="node" data-id="planx">
-  <rect x="662" y="82" width="244" height="138" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.85" />
-  <text x="784" y="108" text-anchor="middle" font-size="14" font-weight="700" fill="var(--_text)">/planx</text>
-  <text x="784" y="127" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--_arrow)">BoostX v2.0 Architecture Planner</text>
-  <text x="784" y="149" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• 2D Plan Contract &amp; Vector A/B/C</text>
-  <text x="784" y="167" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Inline Grilling Decision Matrix</text>
-  <text x="784" y="185" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Red → Green Verification Table</text>
-  <text x="784" y="205" text-anchor="middle" font-size="10.5" font-weight="500" fill="var(--_text-muted)">Alias: /plan</text>
+  <rect x="662" y="72" width="244" height="106" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.85" />
+  <text x="784" y="95" text-anchor="middle" font-size="14" font-weight="700" fill="var(--_text)">/planx</text>
+  <text x="784" y="113" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--_arrow)">BoostX v2.0 Architecture Planner</text>
+  <text x="784" y="132" text-anchor="middle" font-size="10.8" fill="var(--_text-sec)">• 2D Plan Contract &amp; Vector A/B/C</text>
+  <text x="784" y="149" text-anchor="middle" font-size="10.8" fill="var(--_text-sec)">• Inline Grilling &amp; Red → Green Table</text>
+  <text x="784" y="167" text-anchor="middle" font-size="10.2" font-weight="500" fill="var(--_text-muted)">Alias: /plan</text>
 </g>
 
 <g class="node" data-id="boostx">
-  <rect x="662" y="256" width="244" height="154" fill="var(--_node-fill)" stroke="var(--_arrow)" stroke-width="1.5" />
-  <text x="784" y="282" text-anchor="middle" font-size="14" font-weight="700" fill="var(--_text)">/boostx</text>
-  <text x="784" y="301" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--_arrow)">4-Phase Deep Engineering Solver</text>
-  <text x="784" y="323" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• 2D Task × Project Goal Contract</text>
-  <text x="784" y="341" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Tri-Track Red Gate &amp; Physics Triad</text>
-  <text x="784" y="359" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Ponytail × Deep Module Minimal Diff</text>
-  <text x="784" y="377" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Ruthless 3-Tier Verification</text>
-  <text x="784" y="397" text-anchor="middle" font-size="10.5" font-weight="600" fill="var(--_badge-text)">Composable with /goal &amp; /obsidianx</text>
+  <rect x="662" y="192" width="244" height="114" fill="var(--_node-fill)" stroke="var(--_arrow)" stroke-width="1.5" />
+  <text x="784" y="215" text-anchor="middle" font-size="14" font-weight="700" fill="var(--_text)">/boostx</text>
+  <text x="784" y="233" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--_arrow)">4-Phase Deep Engineering Solver</text>
+  <text x="784" y="252" text-anchor="middle" font-size="10.8" fill="var(--_text-sec)">• 2D Task × Project Goal Contract</text>
+  <text x="784" y="269" text-anchor="middle" font-size="10.8" fill="var(--_text-sec)">• Tri-Track Red Gate &amp; Physics Triad</text>
+  <text x="784" y="286" text-anchor="middle" font-size="10.8" fill="var(--_text-sec)">• Ponytail × Deep Module &amp; 3-Tier Verify</text>
+  <text x="784" y="300" text-anchor="middle" font-size="10" font-weight="600" fill="var(--_badge-text)">Composable with /ultrax, /goal &amp; /obsidianx</text>
+</g>
+
+<g class="node" data-id="ultrax">
+  <rect x="662" y="320" width="244" height="102" fill="var(--_node-fill)" stroke="var(--_arrow)" stroke-width="1.25" />
+  <text x="784" y="342" text-anchor="middle" font-size="14" font-weight="700" fill="var(--_text)">/ultrax</text>
+  <text x="784" y="360" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--_arrow)">Swarm &amp; Blind Verification Multiplier</text>
+  <text x="784" y="379" text-anchor="middle" font-size="10.8" fill="var(--_text-sec)">• Dynamic N×K Sizer (Best-of-3 / ≤3 Cap)</text>
+  <text x="784" y="396" text-anchor="middle" font-size="10.8" fill="var(--_text-sec)">• Maker ≠ Checker Blind Critics</text>
+  <text x="784" y="413" text-anchor="middle" font-size="10.2" font-weight="500" fill="var(--_text-muted)">Alias: /ultra • Stage DAG Normalizer</text>
 </g>
 
 <!-- STAGE 4 NODES -->
@@ -179,8 +186,8 @@
   <rect x="1280" y="74" width="240" height="138" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.85" />
   <text x="1400" y="98" text-anchor="middle" font-size="14" font-weight="700" fill="var(--_text)">/contextx</text>
   <text x="1400" y="116" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--_arrow)">Context &amp; Compaction Diagnostics</text>
-  <text x="1400" y="136" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Parses Live IDE Transcript JSONL</text>
-  <text x="1400" y="153" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Round &amp; Active Window Load (%)</text>
+  <text x="1400" y="136" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Transcript JSONL + SQLite Token DB</text>
+  <text x="1400" y="153" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Round, Window Load &amp; --all-time</text>
   <text x="1400" y="170" text-anchor="middle" font-size="11" fill="var(--_text-sec)">• Risk Scorecard (Healthy → Critical)</text>
   <rect x="1300" y="180" width="200" height="22" rx="3" fill="var(--_badge-fill)" stroke="var(--_inner-stroke)" stroke-width="0.75" />
   <text x="1400" y="195" text-anchor="middle" font-size="10" font-weight="600" fill="var(--_badge-text)">CLI: scripts/check_context.py</text>
@@ -241,15 +248,17 @@
 <!-- obsidianx -> deep-researchx -->
 <polyline points="286,333 352,333" fill="none" stroke="var(--_arrow)" stroke-width="1.25" marker-end="url(#arrowhead)" />
 <!-- researchx -> planx -->
-<polyline points="596,151 662,151" fill="none" stroke="var(--_arrow)" stroke-width="1.25" marker-end="url(#arrowhead)" />
+<polyline points="596,135 662,135" fill="none" stroke="var(--_arrow)" stroke-width="1.25" marker-end="url(#arrowhead)" />
 <!-- deep-researchx -> boostx -->
-<polyline points="596,333 662,333" fill="none" stroke="var(--_arrow)" stroke-width="1.25" marker-end="url(#arrowhead)" />
+<polyline points="596,268 662,268" fill="none" stroke="var(--_arrow)" stroke-width="1.25" marker-end="url(#arrowhead)" />
 <!-- researchx -> boostx (diagonal/orthogonal step) -->
-<polyline points="596,175 628,175 628,305 662,305" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrowhead-gray)" />
+<polyline points="596,175 628,175 628,245 662,245" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrowhead-gray)" />
 <!-- planx -> boostx -->
-<polyline points="784,220 784,256" fill="none" stroke="var(--_arrow)" stroke-width="1.25" marker-end="url(#arrowhead)" />
+<polyline points="784,178 784,192" fill="none" stroke="var(--_arrow)" stroke-width="1.25" marker-end="url(#arrowhead)" />
+<!-- ultrax -> boostx -->
+<polyline points="784,320 784,306" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrowhead-gray)" />
 <!-- boostx -> syncx -->
-<polyline points="906,315 938,315 938,143 972,143" fill="none" stroke="var(--_arrow)" stroke-width="1.25" marker-end="url(#arrowhead)" />
+<polyline points="906,250 938,250 938,143 972,143" fill="none" stroke="var(--_arrow)" stroke-width="1.25" marker-end="url(#arrowhead)" />
 <!-- create-skillx -> publishx-audit -->
 <polyline points="1094,334 1094,352" fill="none" stroke="var(--_arrow)" stroke-width="1.25" marker-end="url(#arrowhead)" />
 <!-- publishx-audit -> publishx-qgis -->

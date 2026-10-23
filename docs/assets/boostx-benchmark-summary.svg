@@ -1,0 +1,271 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 780" width="100%" height="100%">
+  <rect x="0" y="0" width="1280" height="780" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="155.0" y="26.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="12.5" font-weight="bold" fill="#1A202C" text-anchor="start">(a) System-Prompt YAML Budget &amp; Trigger Guards (N = 109)</text>
+  <text x="155.0" y="41.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="10.0" font-weight="normal" fill="#64748B" text-anchor="start">Character length distribution against 500-char host truncation limit</text>
+  <line x1="155.0" y1="323.0" x2="590.0" y2="323.0" stroke="#334155" stroke-width="1.2"/>
+  <line x1="155.0" y1="48.0" x2="155.0" y2="323.0" stroke="#334155" stroke-width="1.2"/>
+  <line x1="155.0" y1="323.0" x2="155.0" y2="328.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="155.0" y="341.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.5" font-weight="normal" fill="#334155" text-anchor="middle">0</text>
+  <line x1="224.6" y1="48.0" x2="224.6" y2="323.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="224.6" y1="323.0" x2="224.6" y2="328.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="224.6" y="341.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.5" font-weight="normal" fill="#334155" text-anchor="middle">200</text>
+  <line x1="294.2" y1="48.0" x2="294.2" y2="323.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="294.2" y1="323.0" x2="294.2" y2="328.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="294.2" y="341.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.5" font-weight="normal" fill="#334155" text-anchor="middle">400</text>
+  <line x1="329.0" y1="48.0" x2="329.0" y2="323.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="329.0" y1="323.0" x2="329.0" y2="328.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="329.0" y="341.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.5" font-weight="bold" fill="#922B21" text-anchor="middle">500</text>
+  <line x1="363.8" y1="48.0" x2="363.8" y2="323.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="363.8" y1="323.0" x2="363.8" y2="328.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="363.8" y="341.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.5" font-weight="normal" fill="#334155" text-anchor="middle">600</text>
+  <line x1="433.4" y1="48.0" x2="433.4" y2="323.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="433.4" y1="323.0" x2="433.4" y2="328.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="433.4" y="341.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.5" font-weight="normal" fill="#334155" text-anchor="middle">800</text>
+  <line x1="503.0" y1="48.0" x2="503.0" y2="323.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="503.0" y1="323.0" x2="503.0" y2="328.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="503.0" y="341.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.5" font-weight="normal" fill="#334155" text-anchor="middle">1000</text>
+  <text x="372.5" y="361.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="10.0" font-weight="normal" fill="#334155" text-anchor="middle">YAML Frontmatter Description Length (characters) • Box = IQR [P25–P75], Line = Median, ♦ = Mean</text>
+  <line x1="329.0" y1="48.0" x2="329.0" y2="323.0" stroke="#922B21" stroke-width="1.6" stroke-dasharray="5 3"/>
+  <text x="335.0" y="62.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.2" font-weight="bold" fill="#922B21" text-anchor="start">500-Char Budget Gate</text>
+  <text x="145.0" y="80.8" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="10.2" font-weight="bold" fill="#1A202C" text-anchor="end">BoostX v3.1.0 Suite</text>
+  <text x="145.0" y="94.8" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.0" font-weight="normal" fill="#64748B" text-anchor="end">(n = 14 skills)</text>
+  <line x1="271.6" y1="83.8" x2="285.6" y2="83.8" stroke="#1B4F72" stroke-width="1.3"/>
+  <line x1="300.7" y1="83.8" x2="322.4" y2="83.8" stroke="#1B4F72" stroke-width="1.3"/>
+  <line x1="271.6" y1="74.5" x2="271.6" y2="93.0" stroke="#1B4F72" stroke-width="1.3"/>
+  <line x1="322.4" y1="74.5" x2="322.4" y2="93.0" stroke="#1B4F72" stroke-width="1.3"/>
+  <rect x="285.6" y="72.8" width="15.1" height="22.0" fill="#D6EAF8" stroke="#1B4F72" stroke-width="1.4"/>
+  <line x1="289.7" y1="72.8" x2="289.7" y2="94.8" stroke="#1A202C" stroke-width="2.2"/>
+  <polygon points="294.0,79.2 298.6,83.8 294.0,88.3 289.4,83.8" fill="#FFFFFF" stroke="#1B4F72" stroke-width="1.5"/>
+  <circle cx="287.6" cy="79.0" r="2.6" fill="#1B4F72" stroke="none" stroke-width="1.0" opacity="0.75"/>
+  <circle cx="298.4" cy="81.3" r="2.6" fill="#1B4F72" stroke="none" stroke-width="1.0" opacity="0.75"/>
+  <circle cx="322.4" cy="83.8" r="2.6" fill="#1B4F72" stroke="none" stroke-width="1.0" opacity="0.75"/>
+  <circle cx="291.8" cy="86.2" r="2.6" fill="#1B4F72" stroke="none" stroke-width="1.0" opacity="0.75"/>
+  <circle cx="286.9" cy="88.5" r="2.6" fill="#1B4F72" stroke="none" stroke-width="1.0" opacity="0.75"/>
+  <circle cx="301.5" cy="79.0" r="2.6" fill="#1B4F72" stroke="none" stroke-width="1.0" opacity="0.75"/>
+  <circle cx="282.0" cy="81.3" r="2.6" fill="#1B4F72" stroke="none" stroke-width="1.0" opacity="0.75"/>
+  <circle cx="310.2" cy="83.8" r="2.6" fill="#1B4F72" stroke="none" stroke-width="1.0" opacity="0.75"/>
+  <circle cx="284.1" cy="86.2" r="2.6" fill="#1B4F72" stroke="none" stroke-width="1.0" opacity="0.75"/>
+  <circle cx="287.2" cy="88.5" r="2.6" fill="#1B4F72" stroke="none" stroke-width="1.0" opacity="0.75"/>
+  <circle cx="295.6" cy="79.0" r="2.6" fill="#1B4F72" stroke="none" stroke-width="1.0" opacity="0.75"/>
+  <circle cx="271.6" cy="81.3" r="2.6" fill="#1B4F72" stroke="none" stroke-width="1.0" opacity="0.75"/>
+  <circle cx="311.6" cy="83.8" r="2.6" fill="#1B4F72" stroke="none" stroke-width="1.0" opacity="0.75"/>
+  <circle cx="285.2" cy="86.2" r="2.6" fill="#1B4F72" stroke="none" stroke-width="1.0" opacity="0.75"/>
+  <text x="330.4" y="87.8" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="start">399±39 ch (Guard: 100.0%)</text>
+  <text x="145.0" y="149.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="10.2" font-weight="bold" fill="#1A202C" text-anchor="end">Official Cloud / Vendor</text>
+  <text x="145.0" y="163.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.0" font-weight="normal" fill="#64748B" text-anchor="end">(n = 31 skills)</text>
+  <line x1="225.6" y1="152.5" x2="256.6" y2="152.5" stroke="#B9770E" stroke-width="1.3"/>
+  <line x1="319.6" y1="152.5" x2="504.4" y2="152.5" stroke="#B9770E" stroke-width="1.3"/>
+  <line x1="225.6" y1="143.3" x2="225.6" y2="161.7" stroke="#B9770E" stroke-width="1.3"/>
+  <line x1="504.4" y1="143.3" x2="504.4" y2="161.7" stroke="#B9770E" stroke-width="1.3"/>
+  <rect x="256.6" y="141.5" width="63.0" height="22.0" fill="#FCF3CF" stroke="#B9770E" stroke-width="1.4"/>
+  <line x1="284.8" y1="141.5" x2="284.8" y2="163.5" stroke="#1A202C" stroke-width="2.2"/>
+  <polygon points="304.2,147.9 308.8,152.5 304.2,157.1 299.6,152.5" fill="#FFFFFF" stroke="#B9770E" stroke-width="1.5"/>
+  <text x="512.4" y="156.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#B9770E" text-anchor="start">429±206 ch (Guard: 25.8%)</text>
+  <text x="145.0" y="218.2" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="10.2" font-weight="bold" fill="#1A202C" text-anchor="end">All Installed Host Pool</text>
+  <text x="145.0" y="232.2" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.0" font-weight="normal" fill="#64748B" text-anchor="end">(N = 110 skills)</text>
+  <line x1="172.7" y1="221.2" x2="223.8" y2="221.2" stroke="#5B2C6F" stroke-width="1.3"/>
+  <line x1="294.2" y1="221.2" x2="504.4" y2="221.2" stroke="#5B2C6F" stroke-width="1.3"/>
+  <line x1="172.7" y1="212.0" x2="172.7" y2="230.5" stroke="#5B2C6F" stroke-width="1.3"/>
+  <line x1="504.4" y1="212.0" x2="504.4" y2="230.5" stroke="#5B2C6F" stroke-width="1.3"/>
+  <rect x="223.8" y="210.2" width="70.4" height="22.0" fill="#EBDEF0" stroke="#5B2C6F" stroke-width="1.4"/>
+  <line x1="271.2" y1="210.2" x2="271.2" y2="232.2" stroke="#1A202C" stroke-width="2.2"/>
+  <polygon points="268.1,216.7 272.7,221.2 268.1,225.8 263.5,221.2" fill="#FFFFFF" stroke="#5B2C6F" stroke-width="1.5"/>
+  <text x="512.4" y="225.2" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#5B2C6F" text-anchor="start">325±181 ch (Guard: 30.0%)</text>
+  <text x="145.0" y="287.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="10.2" font-weight="bold" fill="#1A202C" text-anchor="end">Other Domain Skills</text>
+  <text x="145.0" y="301.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.0" font-weight="normal" fill="#64748B" text-anchor="end">(n = 65 skills)</text>
+  <line x1="172.7" y1="290.0" x2="206.9" y2="290.0" stroke="#4A5568" stroke-width="1.3"/>
+  <line x1="280.3" y1="290.0" x2="442.1" y2="290.0" stroke="#4A5568" stroke-width="1.3"/>
+  <line x1="172.7" y1="280.8" x2="172.7" y2="299.2" stroke="#4A5568" stroke-width="1.3"/>
+  <line x1="442.1" y1="280.8" x2="442.1" y2="299.2" stroke="#4A5568" stroke-width="1.3"/>
+  <rect x="206.9" y="279.0" width="73.4" height="22.0" fill="#E2E8F0" stroke="#4A5568" stroke-width="1.4"/>
+  <line x1="230.2" y1="279.0" x2="230.2" y2="301.0" stroke="#1A202C" stroke-width="2.2"/>
+  <polygon points="245.3,285.4 249.9,290.0 245.3,294.6 240.7,290.0" fill="#FFFFFF" stroke="#4A5568" stroke-width="1.5"/>
+  <text x="450.1" y="294.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#4A5568" text-anchor="start">260±158 ch (Guard: 16.9%)</text>
+  <text x="725.0" y="26.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="12.5" font-weight="bold" fill="#1A202C" text-anchor="start">(b) Startup Context Compression &amp; I/O Latency (n = 30 Trials)</text>
+  <text x="725.0" y="41.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="10.0" font-weight="normal" fill="#64748B" text-anchor="start">Log₁₀ tokens loaded (left) vs. disk read latency Med + IQR/P95 (right)</text>
+  <line x1="725.0" y1="323.0" x2="1215.0" y2="323.0" stroke="#334155" stroke-width="1.2"/>
+  <line x1="725.0" y1="48.0" x2="725.0" y2="323.0" stroke="#334155" stroke-width="1.2"/>
+  <line x1="1215.0" y1="48.0" x2="1215.0" y2="323.0" stroke="#334155" stroke-width="1.2"/>
+  <line x1="725.0" y1="275.6" x2="1215.0" y2="275.6" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="721.0" y1="275.6" x2="725.0" y2="275.6" stroke="#1B4F72" stroke-width="1.0"/>
+  <text x="718.0" y="279.1" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.5" font-weight="bold" fill="#1B4F72" text-anchor="end">10⁴</text>
+  <line x1="725.0" y1="180.8" x2="1215.0" y2="180.8" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="721.0" y1="180.8" x2="725.0" y2="180.8" stroke="#1B4F72" stroke-width="1.0"/>
+  <text x="718.0" y="184.3" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.5" font-weight="bold" fill="#1B4F72" text-anchor="end">10⁵</text>
+  <line x1="725.0" y1="85.9" x2="1215.0" y2="85.9" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="721.0" y1="85.9" x2="725.0" y2="85.9" stroke="#1B4F72" stroke-width="1.0"/>
+  <text x="718.0" y="89.4" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.5" font-weight="bold" fill="#1B4F72" text-anchor="end">10⁶</text>
+  <line x1="1215.0" y1="301.1" x2="1219.0" y2="301.1" stroke="#117864" stroke-width="1.0"/>
+  <text x="1222.0" y="304.6" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#117864" text-anchor="start">0.5</text>
+  <line x1="1215.0" y1="268.0" x2="1219.0" y2="268.0" stroke="#117864" stroke-width="1.0"/>
+  <text x="1222.0" y="271.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#117864" text-anchor="start">1.0</text>
+  <line x1="1215.0" y1="191.1" x2="1219.0" y2="191.1" stroke="#117864" stroke-width="1.0"/>
+  <text x="1222.0" y="194.6" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#117864" text-anchor="start">5.0</text>
+  <line x1="1215.0" y1="158.0" x2="1219.0" y2="158.0" stroke="#117864" stroke-width="1.0"/>
+  <text x="1222.0" y="161.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#117864" text-anchor="start">10</text>
+  <line x1="1215.0" y1="81.1" x2="1219.0" y2="81.1" stroke="#117864" stroke-width="1.0"/>
+  <text x="1222.0" y="84.6" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#117864" text-anchor="start">50</text>
+  <text x="687.0" y="185.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1B4F72" text-anchor="middle" transform="rotate(-90.0 687.0 185.5)">Context Tokens (log₁₀)</text>
+  <text x="1253.0" y="185.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#117864" text-anchor="middle" transform="rotate(90.0 1253.0 185.5)">Disk Read Latency (ms, log₁₀)</text>
+  <rect x="765.7" y="73.1" width="38.0" height="249.9" fill="#D6EAF8" stroke="#1B4F72" stroke-width="1.4"/>
+  <text x="784.7" y="68.1" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#1B4F72" text-anchor="middle">1,364.4k</text>
+  <rect x="809.7" y="86.8" width="38.0" height="236.2" fill="#D1F2EB" stroke="#117864" stroke-width="1.4"/>
+  <line x1="828.7" y1="88.5" x2="828.7" y2="83.4" stroke="#1A202C" stroke-width="1.4"/>
+  <line x1="823.7" y1="83.4" x2="833.7" y2="83.4" stroke="#1A202C" stroke-width="1.4"/>
+  <line x1="823.7" y1="88.5" x2="833.7" y2="88.5" stroke="#1A202C" stroke-width="1.4"/>
+  <text x="828.7" y="77.4" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#117864" text-anchor="middle">44.35 ms</text>
+  <text x="806.7" y="339.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.6" font-weight="bold" fill="#1A202C" text-anchor="middle">1. Unbounded Crawl</text>
+  <text x="806.7" y="352.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.5" font-weight="normal" fill="#64748B" text-anchor="middle">(710 files: Repo+Vault)</text>
+  <rect x="929.0" y="247.7" width="38.0" height="75.3" fill="#D6EAF8" stroke="#1B4F72" stroke-width="1.4"/>
+  <text x="948.0" y="233.7" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#1B4F72" text-anchor="middle">19.7k</text>
+  <text x="948.0" y="244.7" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.0" font-weight="bold" fill="#1B4F72" text-anchor="middle">(-98.24%)</text>
+  <rect x="973.0" y="285.0" width="38.0" height="38.0" fill="#D1F2EB" stroke="#117864" stroke-width="1.4"/>
+  <line x1="992.0" y1="289.3" x2="992.0" y2="266.1" stroke="#1A202C" stroke-width="1.4"/>
+  <line x1="987.0" y1="266.1" x2="997.0" y2="266.1" stroke="#1A202C" stroke-width="1.4"/>
+  <line x1="987.0" y1="289.3" x2="997.0" y2="289.3" stroke="#1A202C" stroke-width="1.4"/>
+  <text x="992.0" y="260.1" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#117864" text-anchor="middle">0.70 ms</text>
+  <text x="970.0" y="339.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.6" font-weight="bold" fill="#1A202C" text-anchor="middle">2. /briefx Repo-Only</text>
+  <text x="970.0" y="352.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.5" font-weight="normal" fill="#64748B" text-anchor="middle">(Cap 8: 8 files)</text>
+  <rect x="1092.3" y="241.3" width="38.0" height="81.7" fill="#D6EAF8" stroke="#1B4F72" stroke-width="1.4"/>
+  <text x="1111.3" y="227.3" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#1B4F72" text-anchor="middle">23.0k</text>
+  <text x="1111.3" y="238.3" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.0" font-weight="bold" fill="#1B4F72" text-anchor="middle">(-97.94%)</text>
+  <rect x="1136.3" y="284.4" width="38.0" height="38.6" fill="#D1F2EB" stroke="#117864" stroke-width="1.4"/>
+  <line x1="1155.3" y1="287.1" x2="1155.3" y2="261.7" stroke="#1A202C" stroke-width="1.4"/>
+  <line x1="1150.3" y1="261.7" x2="1160.3" y2="261.7" stroke="#1A202C" stroke-width="1.4"/>
+  <line x1="1150.3" y1="287.1" x2="1160.3" y2="287.1" stroke="#1A202C" stroke-width="1.4"/>
+  <text x="1155.3" y="255.7" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#117864" text-anchor="middle">0.71 ms</text>
+  <text x="1133.3" y="339.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.6" font-weight="bold" fill="#1A202C" text-anchor="middle">3. /briefx + /obsidianx</text>
+  <text x="1133.3" y="352.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.5" font-weight="normal" fill="#64748B" text-anchor="middle">(Cap 8 + 2-Hop: 12 files)</text>
+  <text x="155.0" y="408.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="12.5" font-weight="bold" fill="#1A202C" text-anchor="start">(c) Composable Workflow Ablation (Level 0 → Level 3)</text>
+  <text x="155.0" y="423.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="10.0" font-weight="normal" fill="#64748B" text-anchor="start">Deterministic defect recall (25 seeded) vs. mean trajectory steps</text>
+  <line x1="155.0" y1="705.0" x2="590.0" y2="705.0" stroke="#334155" stroke-width="1.2"/>
+  <line x1="155.0" y1="430.0" x2="155.0" y2="705.0" stroke="#334155" stroke-width="1.2"/>
+  <line x1="590.0" y1="430.0" x2="590.0" y2="705.0" stroke="#334155" stroke-width="1.2"/>
+  <line x1="151.0" y1="705.0" x2="155.0" y2="705.0" stroke="#1B4F72" stroke-width="1.0"/>
+  <text x="148.0" y="708.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="end">0%</text>
+  <line x1="155.0" y1="657.2" x2="590.0" y2="657.2" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="151.0" y1="657.2" x2="155.0" y2="657.2" stroke="#1B4F72" stroke-width="1.0"/>
+  <text x="148.0" y="660.7" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="end">20%</text>
+  <line x1="155.0" y1="609.3" x2="590.0" y2="609.3" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="151.0" y1="609.3" x2="155.0" y2="609.3" stroke="#1B4F72" stroke-width="1.0"/>
+  <text x="148.0" y="612.8" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="end">40%</text>
+  <line x1="155.0" y1="561.5" x2="590.0" y2="561.5" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="151.0" y1="561.5" x2="155.0" y2="561.5" stroke="#1B4F72" stroke-width="1.0"/>
+  <text x="148.0" y="565.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="end">60%</text>
+  <line x1="155.0" y1="513.7" x2="590.0" y2="513.7" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="151.0" y1="513.7" x2="155.0" y2="513.7" stroke="#1B4F72" stroke-width="1.0"/>
+  <text x="148.0" y="517.2" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="end">80%</text>
+  <line x1="155.0" y1="465.9" x2="590.0" y2="465.9" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="151.0" y1="465.9" x2="155.0" y2="465.9" stroke="#1B4F72" stroke-width="1.0"/>
+  <text x="148.0" y="469.4" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="end">100%</text>
+  <line x1="590.0" y1="705.0" x2="594.0" y2="705.0" stroke="#117864" stroke-width="1.0"/>
+  <text x="597.0" y="708.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#117864" text-anchor="start">10¹</text>
+  <line x1="590.0" y1="608.9" x2="594.0" y2="608.9" stroke="#117864" stroke-width="1.0"/>
+  <text x="597.0" y="612.4" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#117864" text-anchor="start">50</text>
+  <line x1="590.0" y1="567.5" x2="594.0" y2="567.5" stroke="#117864" stroke-width="1.0"/>
+  <text x="597.0" y="571.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#117864" text-anchor="start">10²</text>
+  <line x1="590.0" y1="471.4" x2="594.0" y2="471.4" stroke="#117864" stroke-width="1.0"/>
+  <text x="597.0" y="474.9" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#117864" text-anchor="start">500</text>
+  <text x="115.0" y="567.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1B4F72" text-anchor="middle" transform="rotate(-90.0 115.0 567.5)">Defect Recall (%)</text>
+  <text x="630.0" y="567.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#117864" text-anchor="middle" transform="rotate(90.0 630.0 567.5)">Trajectory Depth (Steps, log₁₀)</text>
+  <line x1="209.4" y1="705.0" x2="318.1" y2="609.3" stroke="#1B4F72" stroke-width="2.4"/>
+  <line x1="209.4" y1="663.2" x2="318.1" y2="618.9" stroke="#117864" stroke-width="2.2" stroke-dasharray="6 4"/>
+  <line x1="318.1" y1="609.3" x2="426.9" y2="513.7" stroke="#1B4F72" stroke-width="2.4"/>
+  <line x1="318.1" y1="618.9" x2="426.9" y2="597.6" stroke="#117864" stroke-width="2.2" stroke-dasharray="6 4"/>
+  <line x1="426.9" y1="513.7" x2="535.6" y2="465.9" stroke="#1B4F72" stroke-width="2.4"/>
+  <line x1="426.9" y1="597.6" x2="535.6" y2="482.2" stroke="#117864" stroke-width="2.2" stroke-dasharray="6 4"/>
+  <rect x="204.9" y="700.5" width="9.0" height="9.0" fill="#1B4F72" stroke="#FFFFFF" stroke-width="1.5"/>
+  <circle cx="209.4" cy="663.2" r="5.0" fill="#117864" stroke="#FFFFFF" stroke-width="1.5"/>
+  <text x="209.4" y="695.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="middle">0%</text>
+  <text x="217.4" y="653.2" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#117864" text-anchor="middle">20.1 st</text>
+  <text x="209.4" y="721.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="middle">Level 0</text>
+  <text x="209.4" y="734.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.4" font-weight="normal" fill="#64748B" text-anchor="middle">Raw Prompt (0 Gates)</text>
+  <rect x="313.6" y="604.8" width="9.0" height="9.0" fill="#1B4F72" stroke="#FFFFFF" stroke-width="1.5"/>
+  <circle cx="318.1" cy="618.9" r="5.0" fill="#117864" stroke="#FFFFFF" stroke-width="1.5"/>
+  <text x="318.1" y="599.3" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="middle">40%</text>
+  <text x="318.1" y="636.9" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#117864" text-anchor="middle">42.3 st</text>
+  <text x="318.1" y="721.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="middle">Level 1</text>
+  <text x="318.1" y="734.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.4" font-weight="normal" fill="#64748B" text-anchor="middle">/boostx (2 Gates)</text>
+  <rect x="422.4" y="509.2" width="9.0" height="9.0" fill="#1B4F72" stroke="#FFFFFF" stroke-width="1.5"/>
+  <circle cx="426.9" cy="597.6" r="5.0" fill="#117864" stroke="#FFFFFF" stroke-width="1.5"/>
+  <text x="426.9" y="503.7" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="middle">80%</text>
+  <text x="426.9" y="615.6" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#117864" text-anchor="middle">60.4 st</text>
+  <text x="426.9" y="721.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="middle">Level 2</text>
+  <text x="426.9" y="734.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.4" font-weight="normal" fill="#64748B" text-anchor="middle">2-Hop Chain (4 Gates)</text>
+  <rect x="531.1" y="461.4" width="9.0" height="9.0" fill="#1B4F72" stroke="#FFFFFF" stroke-width="1.5"/>
+  <circle cx="535.6" cy="482.2" r="5.0" fill="#117864" stroke="#FFFFFF" stroke-width="1.5"/>
+  <text x="535.6" y="455.9" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="middle">100%</text>
+  <text x="535.6" y="500.2" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#117864" text-anchor="middle">417.5 st</text>
+  <text x="535.6" y="721.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="middle">Level 3</text>
+  <text x="535.6" y="734.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.4" font-weight="normal" fill="#64748B" text-anchor="middle">Full 5-Stage (7 Gates)</text>
+  <rect x="167.0" y="440.0" width="215.0" height="36.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="0.9" rx="3.0"/>
+  <line x1="175.0" y1="452.0" x2="193.0" y2="452.0" stroke="#1B4F72" stroke-width="2.4"/>
+  <rect x="181.0" y="448.5" width="7.0" height="7.0" fill="#1B4F72" stroke="none" stroke-width="1.0"/>
+  <text x="199.0" y="455.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="8.8" font-weight="normal" fill="#1A202C" text-anchor="start">Seeded Defect Recall (%)</text>
+  <line x1="175.0" y1="466.0" x2="193.0" y2="466.0" stroke="#117864" stroke-width="2.0" stroke-dasharray="4 2"/>
+  <circle cx="184.0" cy="466.0" r="3.5" fill="#117864" stroke="none" stroke-width="1.0"/>
+  <text x="199.0" y="469.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="8.8" font-weight="normal" fill="#1A202C" text-anchor="start">Mean Trajectory Depth (Steps)</text>
+  <text x="745.0" y="408.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="12.5" font-weight="bold" fill="#1A202C" text-anchor="start">(d) Session Token Distributions &amp; Subscription Sizing (N = 65)</text>
+  <text x="745.0" y="423.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="10.0" font-weight="normal" fill="#64748B" text-anchor="start">Cumulative session throughput (IQR, P90 &amp; Mean ♦) vs. plan capacity</text>
+  <line x1="745.0" y1="705.0" x2="1235.0" y2="705.0" stroke="#334155" stroke-width="1.2"/>
+  <line x1="745.0" y1="430.0" x2="745.0" y2="705.0" stroke="#334155" stroke-width="1.2"/>
+  <rect x="745.0" y="430.0" width="43.2" height="275.0" fill="#F1F5F9" stroke="none" stroke-width="1.0" opacity="0.75"/>
+  <rect x="788.2" y="430.0" width="144.1" height="275.0" fill="#EBF8FF" stroke="none" stroke-width="1.0" opacity="0.65"/>
+  <rect x="932.4" y="430.0" width="302.6" height="275.0" fill="#E6FFFA" stroke="none" stroke-width="1.0" opacity="0.65"/>
+  <line x1="788.2" y1="430.0" x2="788.2" y2="705.0" stroke="#4A5568" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <line x1="932.4" y1="430.0" x2="932.4" y2="705.0" stroke="#1B4F72" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="766.6" y="444.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="8.6" font-weight="bold" fill="#4A5568" text-anchor="middle">1× Pro</text>
+  <text x="860.3" y="444.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="8.8" font-weight="bold" fill="#1B4F72" text-anchor="middle">5× Max Tier (Daily Sprints)</text>
+  <text x="1083.7" y="444.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="8.8" font-weight="bold" fill="#117864" text-anchor="middle">20× Ultra Tier (400+ Step Marathons)</text>
+  <line x1="745.0" y1="705.0" x2="745.0" y2="710.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="745.0" y="723.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">0M</text>
+  <line x1="817.1" y1="452.0" x2="817.1" y2="705.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="817.1" y1="705.0" x2="817.1" y2="710.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="817.1" y="723.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">10M</text>
+  <line x1="889.1" y1="452.0" x2="889.1" y2="705.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="889.1" y1="705.0" x2="889.1" y2="710.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="889.1" y="723.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">20M</text>
+  <line x1="961.2" y1="452.0" x2="961.2" y2="705.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="961.2" y1="705.0" x2="961.2" y2="710.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="961.2" y="723.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">30M</text>
+  <line x1="1033.2" y1="452.0" x2="1033.2" y2="705.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="1033.2" y1="705.0" x2="1033.2" y2="710.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="1033.2" y="723.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">40M</text>
+  <line x1="1105.3" y1="452.0" x2="1105.3" y2="705.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="1105.3" y1="705.0" x2="1105.3" y2="710.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="1105.3" y="723.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">50M</text>
+  <line x1="1177.4" y1="452.0" x2="1177.4" y2="705.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="1177.4" y1="705.0" x2="1177.4" y2="710.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="1177.4" y="723.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">60M</text>
+  <text x="990.0" y="743.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="normal" fill="#334155" text-anchor="middle">Cumulative Session Token Throughput (Millions of Tokens, N = 65 Sessions • Whisker = P90)</text>
+  <text x="735.0" y="493.8" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="end">Chained Multi-Skill</text>
+  <text x="735.0" y="506.8" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.6" font-weight="normal" fill="#64748B" text-anchor="end">(BoostX, n = 33)</text>
+  <line x1="748.0" y1="495.8" x2="810.7" y2="495.8" stroke="#1B4F72" stroke-width="1.3"/>
+  <line x1="960.8" y1="495.8" x2="1105.8" y2="495.8" stroke="#1B4F72" stroke-width="1.3"/>
+  <line x1="748.0" y1="486.6" x2="748.0" y2="505.1" stroke="#1B4F72" stroke-width="1.3"/>
+  <line x1="1105.8" y1="486.6" x2="1105.8" y2="505.1" stroke="#1B4F72" stroke-width="1.3"/>
+  <rect x="810.7" y="484.8" width="150.1" height="22.0" fill="#D6EAF8" stroke="#1B4F72" stroke-width="1.4"/>
+  <line x1="865.3" y1="484.8" x2="865.3" y2="506.8" stroke="#1A202C" stroke-width="2.2"/>
+  <polygon points="908.3,491.2 912.9,495.8 908.3,500.4 903.7,495.8" fill="#FFFFFF" stroke="#1B4F72" stroke-width="1.5"/>
+  <text x="938.1" y="479.8" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.6" font-weight="bold" fill="#1B4F72" text-anchor="start">Mean 22.7M (Med 16.7M, P90 50.1M)</text>
+  <text x="735.0" y="577.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="end">Single-Skill Session</text>
+  <text x="735.0" y="590.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.6" font-weight="normal" fill="#64748B" text-anchor="end">(BoostX, n = 4)</text>
+  <line x1="750.4" y1="579.5" x2="794.3" y2="579.5" stroke="#5B2C6F" stroke-width="1.3"/>
+  <line x1="972.1" y1="579.5" x2="1023.1" y2="579.5" stroke="#5B2C6F" stroke-width="1.3"/>
+  <line x1="750.4" y1="570.3" x2="750.4" y2="588.7" stroke="#5B2C6F" stroke-width="1.3"/>
+  <line x1="1023.1" y1="570.3" x2="1023.1" y2="588.7" stroke="#5B2C6F" stroke-width="1.3"/>
+  <rect x="794.3" y="568.5" width="177.8" height="22.0" fill="#EBDEF0" stroke="#5B2C6F" stroke-width="1.4"/>
+  <line x1="876.4" y1="568.5" x2="876.4" y2="590.5" stroke="#1A202C" stroke-width="2.2"/>
+  <polygon points="890.0,574.9 894.6,579.5 890.0,584.1 885.4,579.5" fill="#FFFFFF" stroke="#5B2C6F" stroke-width="1.5"/>
+  <text x="1030.1" y="583.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#5B2C6F" text-anchor="start">Mean 20.1M (Med 18.2M, P90 38.6M)</text>
+  <text x="735.0" y="661.2" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="end">Standard Session</text>
+  <text x="735.0" y="674.2" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.6" font-weight="normal" fill="#64748B" text-anchor="end">(No -x, n = 28)</text>
+  <line x1="745.4" y1="663.2" x2="747.3" y2="663.2" stroke="#4A5568" stroke-width="1.3"/>
+  <line x1="754.7" y1="663.2" x2="766.3" y2="663.2" stroke="#4A5568" stroke-width="1.3"/>
+  <line x1="745.4" y1="653.9" x2="745.4" y2="672.4" stroke="#4A5568" stroke-width="1.3"/>
+  <line x1="766.3" y1="653.9" x2="766.3" y2="672.4" stroke="#4A5568" stroke-width="1.3"/>
+  <rect x="747.3" y="652.2" width="7.4" height="22.0" fill="#E2E8F0" stroke="#4A5568" stroke-width="1.4"/>
+  <line x1="749.8" y1="652.2" x2="749.8" y2="674.2" stroke="#1A202C" stroke-width="2.2"/>
+  <polygon points="755.9,658.6 760.5,663.2 755.9,667.8 751.3,663.2" fill="#FFFFFF" stroke="#4A5568" stroke-width="1.5"/>
+  <text x="773.3" y="667.2" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#4A5568" text-anchor="start">Mean 1.5M (Med 0.7M, P90 3.0M)</text>
+</svg>

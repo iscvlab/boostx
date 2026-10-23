@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1260 400" width="100%" height="100%">
+  <rect x="0" y="0" width="1260" height="400" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="95.0" y="26.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="12.5" font-weight="bold" fill="#1A202C" text-anchor="start">(a) Per-Turn Token Component Quantiles (N = 576 Prompt Turns)</text>
+  <text x="95.0" y="41.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="10.0" font-weight="normal" fill="#64748B" text-anchor="start">Bar = Mean, Circle = Median (P50), Whiskers = IQR [P25–P75] on log₁₀ scale</text>
+  <line x1="95.0" y1="333.0" x2="600.0" y2="333.0" stroke="#334155" stroke-width="1.2"/>
+  <line x1="95.0" y1="48.0" x2="95.0" y2="333.0" stroke="#334155" stroke-width="1.2"/>
+  <line x1="91.0" y1="333.0" x2="95.0" y2="333.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="88.0" y="336.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="end">10²</text>
+  <line x1="95.0" y1="276.0" x2="600.0" y2="276.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="91.0" y1="276.0" x2="95.0" y2="276.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="88.0" y="279.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="end">10³</text>
+  <line x1="95.0" y1="219.0" x2="600.0" y2="219.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="91.0" y1="219.0" x2="95.0" y2="219.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="88.0" y="222.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="end">10⁴</text>
+  <line x1="95.0" y1="162.0" x2="600.0" y2="162.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="91.0" y1="162.0" x2="95.0" y2="162.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="88.0" y="165.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="end">10⁵</text>
+  <line x1="95.0" y1="105.0" x2="600.0" y2="105.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="91.0" y1="105.0" x2="95.0" y2="105.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="88.0" y="108.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="end">10⁶</text>
+  <line x1="95.0" y1="48.0" x2="600.0" y2="48.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="91.0" y1="48.0" x2="95.0" y2="48.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="88.0" y="51.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="end">10⁷</text>
+  <text x="53.0" y="190.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="normal" fill="#334155" text-anchor="middle" transform="rotate(-90.0 53.0 190.5)">Tokens per Prompt Turn (log₁₀ scale)</text>
+  <rect x="116.1" y="215.2" width="26.0" height="117.8" fill="#E2E8F0" stroke="#4A5568" stroke-width="1.2"/>
+  <line x1="129.1" y1="328.5" x2="129.1" y2="215.8" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="125.6" y1="215.8" x2="132.6" y2="215.8" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="125.6" y1="328.5" x2="132.6" y2="328.5" stroke="#1A202C" stroke-width="1.2"/>
+  <circle cx="129.1" cy="266.8" r="2.8" fill="#4A5568" stroke="#FFFFFF" stroke-width="0.9"/>
+  <rect x="145.1" y="189.1" width="26.0" height="143.9" fill="#EBDEF0" stroke="#5B2C6F" stroke-width="1.2"/>
+  <line x1="158.1" y1="247.3" x2="158.1" y2="193.6" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="154.6" y1="193.6" x2="161.6" y2="193.6" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="154.6" y1="247.3" x2="161.6" y2="247.3" stroke="#1A202C" stroke-width="1.2"/>
+  <circle cx="158.1" cy="222.8" r="2.8" fill="#5B2C6F" stroke="#FFFFFF" stroke-width="0.9"/>
+  <rect x="174.1" y="170.7" width="26.0" height="162.3" fill="#D6EAF8" stroke="#1B4F72" stroke-width="1.2"/>
+  <line x1="187.1" y1="213.9" x2="187.1" y2="159.3" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="183.6" y1="159.3" x2="190.6" y2="159.3" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="183.6" y1="213.9" x2="190.6" y2="213.9" stroke="#1A202C" stroke-width="1.2"/>
+  <circle cx="187.1" cy="181.2" r="2.8" fill="#1B4F72" stroke="#FFFFFF" stroke-width="0.9"/>
+  <text x="189.1" y="154.3" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.0" font-weight="bold" fill="#1B4F72" text-anchor="middle">70k</text>
+  <text x="158.1" y="349.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.6" font-weight="bold" fill="#1A202C" text-anchor="middle">Uncached Input</text>
+  <text x="158.1" y="362.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.5" font-weight="normal" fill="#64748B" text-anchor="middle">(NewIn)</text>
+  <rect x="242.4" y="227.0" width="26.0" height="106.0" fill="#E2E8F0" stroke="#4A5568" stroke-width="1.2"/>
+  <line x1="255.4" y1="281.8" x2="255.4" y2="225.6" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="251.9" y1="225.6" x2="258.9" y2="225.6" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="251.9" y1="281.8" x2="258.9" y2="281.8" stroke="#1A202C" stroke-width="1.2"/>
+  <circle cx="255.4" cy="259.3" r="2.8" fill="#4A5568" stroke="#FFFFFF" stroke-width="0.9"/>
+  <rect x="271.4" y="203.2" width="26.0" height="129.8" fill="#EBDEF0" stroke="#5B2C6F" stroke-width="1.2"/>
+  <line x1="284.4" y1="262.3" x2="284.4" y2="218.4" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="280.9" y1="218.4" x2="287.9" y2="218.4" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="280.9" y1="262.3" x2="287.9" y2="262.3" stroke="#1A202C" stroke-width="1.2"/>
+  <circle cx="284.4" cy="238.6" r="2.8" fill="#5B2C6F" stroke="#FFFFFF" stroke-width="0.9"/>
+  <rect x="300.4" y="196.5" width="26.0" height="136.5" fill="#D6EAF8" stroke="#1B4F72" stroke-width="1.2"/>
+  <line x1="313.4" y1="242.2" x2="313.4" y2="186.9" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="309.9" y1="186.9" x2="316.9" y2="186.9" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="309.9" y1="242.2" x2="316.9" y2="242.2" stroke="#1A202C" stroke-width="1.2"/>
+  <circle cx="313.4" cy="216.3" r="2.8" fill="#1B4F72" stroke="#FFFFFF" stroke-width="0.9"/>
+  <text x="315.4" y="181.9" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.0" font-weight="bold" fill="#1B4F72" text-anchor="middle">25k</text>
+  <text x="284.4" y="349.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.6" font-weight="bold" fill="#1A202C" text-anchor="middle">Model Output</text>
+  <text x="284.4" y="362.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.5" font-weight="normal" fill="#64748B" text-anchor="middle">(Completion)</text>
+  <rect x="368.6" y="269.2" width="26.0" height="63.8" fill="#E2E8F0" stroke="#4A5568" stroke-width="1.2"/>
+  <line x1="381.6" y1="306.4" x2="381.6" y2="265.9" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="378.1" y1="265.9" x2="385.1" y2="265.9" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="378.1" y1="306.4" x2="385.1" y2="306.4" stroke="#1A202C" stroke-width="1.2"/>
+  <circle cx="381.6" cy="285.0" r="2.8" fill="#4A5568" stroke="#FFFFFF" stroke-width="0.9"/>
+  <rect x="397.6" y="253.5" width="26.0" height="79.5" fill="#EBDEF0" stroke="#5B2C6F" stroke-width="1.2"/>
+  <line x1="410.6" y1="304.0" x2="410.6" y2="249.7" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="407.1" y1="249.7" x2="414.1" y2="249.7" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="407.1" y1="304.0" x2="414.1" y2="304.0" stroke="#1A202C" stroke-width="1.2"/>
+  <circle cx="410.6" cy="273.9" r="2.8" fill="#5B2C6F" stroke="#FFFFFF" stroke-width="0.9"/>
+  <rect x="426.6" y="244.2" width="26.0" height="88.8" fill="#D6EAF8" stroke="#1B4F72" stroke-width="1.2"/>
+  <line x1="439.6" y1="276.6" x2="439.6" y2="237.5" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="436.1" y1="237.5" x2="443.1" y2="237.5" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="436.1" y1="276.6" x2="443.1" y2="276.6" stroke="#1A202C" stroke-width="1.2"/>
+  <circle cx="439.6" cy="259.0" r="2.8" fill="#1B4F72" stroke="#FFFFFF" stroke-width="0.9"/>
+  <text x="441.6" y="232.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.0" font-weight="bold" fill="#1B4F72" text-anchor="middle">4k</text>
+  <text x="410.6" y="349.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.6" font-weight="bold" fill="#1A202C" text-anchor="middle">Internal Thinking</text>
+  <text x="410.6" y="362.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.5" font-weight="normal" fill="#64748B" text-anchor="middle">(Reasoning)</text>
+  <rect x="494.9" y="103.8" width="26.0" height="229.2" fill="#E2E8F0" stroke="#4A5568" stroke-width="1.2"/>
+  <line x1="507.9" y1="157.5" x2="507.9" y2="101.3" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="504.4" y1="101.3" x2="511.4" y2="101.3" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="504.4" y1="157.5" x2="511.4" y2="157.5" stroke="#1A202C" stroke-width="1.2"/>
+  <circle cx="507.9" cy="132.5" r="2.8" fill="#4A5568" stroke="#FFFFFF" stroke-width="0.9"/>
+  <rect x="523.9" y="81.5" width="26.0" height="251.5" fill="#EBDEF0" stroke="#5B2C6F" stroke-width="1.2"/>
+  <line x1="536.9" y1="130.6" x2="536.9" y2="85.6" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="533.4" y1="85.6" x2="540.4" y2="85.6" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="533.4" y1="130.6" x2="540.4" y2="130.6" stroke="#1A202C" stroke-width="1.2"/>
+  <circle cx="536.9" cy="115.8" r="2.8" fill="#5B2C6F" stroke="#FFFFFF" stroke-width="0.9"/>
+  <rect x="552.9" y="78.8" width="26.0" height="254.2" fill="#D6EAF8" stroke="#1B4F72" stroke-width="1.2"/>
+  <line x1="565.9" y1="128.9" x2="565.9" y2="69.7" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="562.4" y1="69.7" x2="569.4" y2="69.7" stroke="#1A202C" stroke-width="1.2"/>
+  <line x1="562.4" y1="128.9" x2="569.4" y2="128.9" stroke="#1A202C" stroke-width="1.2"/>
+  <circle cx="565.9" cy="96.6" r="2.8" fill="#1B4F72" stroke="#FFFFFF" stroke-width="0.9"/>
+  <text x="567.9" y="64.7" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.0" font-weight="bold" fill="#1B4F72" text-anchor="middle">2.88M</text>
+  <text x="536.9" y="349.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.6" font-weight="bold" fill="#1A202C" text-anchor="middle">KV-Cache Replay</text>
+  <text x="536.9" y="362.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.5" font-weight="normal" fill="#64748B" text-anchor="middle">(Context Reuse)</text>
+  <rect x="105.0" y="54.0" width="315.0" height="24.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="0.9" rx="3.0"/>
+  <rect x="113.0" y="61.0" width="10.0" height="10.0" fill="#E2E8F0" stroke="#4A5568" stroke-width="1.2"/>
+  <text x="127.0" y="69.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="8.2" font-weight="normal" fill="#1A202C" text-anchor="start">Standard (n=450)</text>
+  <rect x="217.0" y="61.0" width="10.0" height="10.0" fill="#EBDEF0" stroke="#5B2C6F" stroke-width="1.2"/>
+  <text x="231.0" y="69.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="8.2" font-weight="normal" fill="#1A202C" text-anchor="start">Single -x (n=58)</text>
+  <rect x="321.0" y="61.0" width="10.0" height="10.0" fill="#D6EAF8" stroke="#1B4F72" stroke-width="1.2"/>
+  <text x="335.0" y="69.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="8.2" font-weight="normal" fill="#1A202C" text-anchor="start">Chained 2+ -x (n=68)</text>
+  <text x="745.0" y="26.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="12.5" font-weight="bold" fill="#1A202C" text-anchor="start">(b) Full-Session Token Throughput &amp; Tier Sizing (N = 65 Sessions)</text>
+  <text x="745.0" y="41.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="10.0" font-weight="normal" fill="#64748B" text-anchor="start">Cumulative session tokens (IQR, P90 &amp; Mean ♦) mapped to subscription tiers</text>
+  <line x1="745.0" y1="333.0" x2="1230.0" y2="333.0" stroke="#334155" stroke-width="1.2"/>
+  <line x1="745.0" y1="48.0" x2="745.0" y2="333.0" stroke="#334155" stroke-width="1.2"/>
+  <rect x="745.0" y="48.0" width="42.8" height="285.0" fill="#F1F5F9" stroke="none" stroke-width="1.0" opacity="0.75"/>
+  <rect x="787.8" y="48.0" width="142.6" height="285.0" fill="#EBF8FF" stroke="none" stroke-width="1.0" opacity="0.65"/>
+  <rect x="930.4" y="48.0" width="299.6" height="285.0" fill="#E6FFFA" stroke="none" stroke-width="1.0" opacity="0.65"/>
+  <line x1="787.8" y1="48.0" x2="787.8" y2="333.0" stroke="#4A5568" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <line x1="930.4" y1="48.0" x2="930.4" y2="333.0" stroke="#1B4F72" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="766.4" y="62.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="8.6" font-weight="bold" fill="#4A5568" text-anchor="middle">1× Pro</text>
+  <text x="859.1" y="62.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="8.8" font-weight="bold" fill="#1B4F72" text-anchor="middle">5× Max Tier (Daily Sprints)</text>
+  <text x="1080.2" y="62.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="8.8" font-weight="bold" fill="#117864" text-anchor="middle">20× Ultra Tier (400+ Step Marathons)</text>
+  <line x1="745.0" y1="333.0" x2="745.0" y2="338.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="745.0" y="351.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">0M</text>
+  <line x1="816.3" y1="70.0" x2="816.3" y2="333.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="816.3" y1="333.0" x2="816.3" y2="338.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="816.3" y="351.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">10M</text>
+  <line x1="887.6" y1="70.0" x2="887.6" y2="333.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="887.6" y1="333.0" x2="887.6" y2="338.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="887.6" y="351.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">20M</text>
+  <line x1="959.0" y1="70.0" x2="959.0" y2="333.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="959.0" y1="333.0" x2="959.0" y2="338.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="959.0" y="351.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">30M</text>
+  <line x1="1030.3" y1="70.0" x2="1030.3" y2="333.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="1030.3" y1="333.0" x2="1030.3" y2="338.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="1030.3" y="351.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">40M</text>
+  <line x1="1101.6" y1="70.0" x2="1101.6" y2="333.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="1101.6" y1="333.0" x2="1101.6" y2="338.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="1101.6" y="351.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">50M</text>
+  <line x1="1172.9" y1="70.0" x2="1172.9" y2="333.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="1172.9" y1="333.0" x2="1172.9" y2="338.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="1172.9" y="351.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">60M</text>
+  <text x="987.5" y="371.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="normal" fill="#334155" text-anchor="middle">Cumulative Session Token Throughput (Millions of Tokens, N = 65 Sessions • Whisker = P90)</text>
+  <text x="735.0" y="113.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="end">Chained Multi-Skill</text>
+  <text x="735.0" y="126.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.6" font-weight="normal" fill="#64748B" text-anchor="end">(BoostX, n = 33)</text>
+  <line x1="748.0" y1="115.5" x2="810.1" y2="115.5" stroke="#1B4F72" stroke-width="1.3"/>
+  <line x1="958.6" y1="115.5" x2="1102.1" y2="115.5" stroke="#1B4F72" stroke-width="1.3"/>
+  <line x1="748.0" y1="106.3" x2="748.0" y2="124.7" stroke="#1B4F72" stroke-width="1.3"/>
+  <line x1="1102.1" y1="106.3" x2="1102.1" y2="124.7" stroke="#1B4F72" stroke-width="1.3"/>
+  <rect x="810.1" y="104.5" width="148.5" height="22.0" fill="#D6EAF8" stroke="#1B4F72" stroke-width="1.4"/>
+  <line x1="864.0" y1="104.5" x2="864.0" y2="126.5" stroke="#1A202C" stroke-width="2.2"/>
+  <polygon points="906.7,110.9 911.3,115.5 906.7,120.1 902.1,115.5" fill="#FFFFFF" stroke="#1B4F72" stroke-width="1.5"/>
+  <text x="936.1" y="99.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.6" font-weight="bold" fill="#1B4F72" text-anchor="start">Mean 22.7M (Med 16.7M, P90 50.1M)</text>
+  <text x="735.0" y="200.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="end">Single-Skill Session</text>
+  <text x="735.0" y="213.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.6" font-weight="normal" fill="#64748B" text-anchor="end">(BoostX, n = 4)</text>
+  <line x1="750.3" y1="202.5" x2="793.8" y2="202.5" stroke="#5B2C6F" stroke-width="1.3"/>
+  <line x1="969.8" y1="202.5" x2="1020.2" y2="202.5" stroke="#5B2C6F" stroke-width="1.3"/>
+  <line x1="750.3" y1="193.3" x2="750.3" y2="211.7" stroke="#5B2C6F" stroke-width="1.3"/>
+  <line x1="1020.2" y1="193.3" x2="1020.2" y2="211.7" stroke="#5B2C6F" stroke-width="1.3"/>
+  <rect x="793.8" y="191.5" width="176.0" height="22.0" fill="#EBDEF0" stroke="#5B2C6F" stroke-width="1.4"/>
+  <line x1="875.0" y1="191.5" x2="875.0" y2="213.5" stroke="#1A202C" stroke-width="2.2"/>
+  <polygon points="888.6,197.9 893.2,202.5 888.6,207.1 884.0,202.5" fill="#FFFFFF" stroke="#5B2C6F" stroke-width="1.5"/>
+  <text x="1027.2" y="206.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#5B2C6F" text-anchor="start">Mean 20.1M (Med 18.2M, P90 38.6M)</text>
+  <text x="735.0" y="287.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="end">Standard Session</text>
+  <text x="735.0" y="300.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.6" font-weight="normal" fill="#64748B" text-anchor="end">(No -x, n = 28)</text>
+  <line x1="745.4" y1="289.5" x2="747.3" y2="289.5" stroke="#4A5568" stroke-width="1.3"/>
+  <line x1="754.6" y1="289.5" x2="766.1" y2="289.5" stroke="#4A5568" stroke-width="1.3"/>
+  <line x1="745.4" y1="280.3" x2="745.4" y2="298.7" stroke="#4A5568" stroke-width="1.3"/>
+  <line x1="766.1" y1="280.3" x2="766.1" y2="298.7" stroke="#4A5568" stroke-width="1.3"/>
+  <rect x="747.3" y="278.5" width="7.3" height="22.0" fill="#E2E8F0" stroke="#4A5568" stroke-width="1.4"/>
+  <line x1="749.7" y1="278.5" x2="749.7" y2="300.5" stroke="#1A202C" stroke-width="2.2"/>
+  <polygon points="755.8,284.9 760.4,289.5 755.8,294.1 751.2,289.5" fill="#FFFFFF" stroke="#4A5568" stroke-width="1.5"/>
+  <text x="773.1" y="293.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#4A5568" text-anchor="start">Mean 1.5M (Med 0.7M, P90 3.0M)</text>
+</svg>

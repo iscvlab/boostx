@@ -591,8 +591,9 @@ def audit_skill_invariants(target: Path, result: AuditResult):
             str(skill_md),
         )
 
-    # 4. Anti-Hardcoded Ephemeral Metrics Scanner
+    # 4. Anti-Hardcoded Ephemeral Metrics & Persona Neutrality Scanner
     ephemeral_pat = re.compile(r"(?i)\b(all\s+\d+\s+layers|\b\d+\s+layers\b)")
+    persona_pat = re.compile(r"(?i)\b(asus\s+laptop|windows\s+desktop\s+pc)\b")
     for i, line in enumerate(lines, 1):
         m = ephemeral_pat.search(line)
         if m:
@@ -600,6 +601,14 @@ def audit_skill_invariants(target: Path, result: AuditResult):
                 f"Potential hardcoded ephemeral snapshot metric detected: `{m.group(0)}`. "
                 "Formulate guardrails as invariant behavioral protocols (e.g. 'Zero Full-Project Dumps', "
                 "'Bounded Scope', 'Targeted Indexing') instead of volatile dataset counts.",
+                str(skill_md),
+                i,
+            )
+        m_pers = persona_pat.search(line)
+        if m_pers:
+            result.add_warning(
+                f"Potential hardcoded personal hardware/persona string detected: `{m_pers.group(0)}`. "
+                "Use universal workstation terminology (e.g. 'Windows, macOS, and Linux workstations').",
                 str(skill_md),
                 i,
             )

@@ -61,6 +61,8 @@ Search `*.md` in the current workspace, including hidden skill or configuration 
   * **Opt-In (`/briefx /obsidianx`)**: When `/obsidianx` (or `/obsidian-vault`) is explicitly included in the command, keep the 8-file discovery cap strictly for project repository SSOTs, and perform an additional bounded 2-Hop read via [`/obsidianx`](../obsidianx/SKILL.md) (`00 *Index*.md` → target `Hub - *.md` → 1–2 atomic notes) to include reusable domain formulas, precedents, or component specs in the Briefing Table.
 * **Opt-In [`/layax`](../layax/SKILL.md) Sidecar Rule (`/briefx /layax`)**:
   * When invoked alongside `/layax` (or `/laya`) in a large, unpinned documentation corpus (`> 8` candidate files or `> 500`-line specs), use [`/layax`](../layax/SKILL.md) (`shortlist_choice` / `score`) to semantically rank heading sections before executing Pass B reads.
+* **Opt-In [`/ultrax`](../ultrax/SKILL.md) Parallel Scout Rule (`/briefx /ultrax`)**:
+  * When invoked alongside `/ultrax` across a multi-root workspace or large specification corpus, fan out 2–3 parallel Read-Only Scouts to inspect candidate SSOT documents and return `≤ 150-word` Briefing Table rows without bloating the main thread's context window.
 * **Discovery & Reading Tools**: Use native file-reading (`read_file` / `view_file`) and platform search (`rg --hidden`, `grep`, or PowerShell `Select-String`).
 
 #### Authority Hierarchy (Cap at 8 Files)

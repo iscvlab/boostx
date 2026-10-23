@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1260 400" width="100%" height="100%">
+  <rect x="0" y="0" width="1260" height="400" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="165.0" y="26.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="12.5" font-weight="bold" fill="#1A202C" text-anchor="start">(a) 25-Defect Red-Team Injection Recall (n = 20 Trials)</text>
+  <text x="165.0" y="41.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="10.0" font-weight="normal" fill="#64748B" text-anchor="start">5 seeded defects per category across 7 zero-dependency Python CLI gates • Suite Latency: Med 6.94 ms (P95 8.45 ms)</text>
+  <line x1="165.0" y1="333.0" x2="605.0" y2="333.0" stroke="#334155" stroke-width="1.2"/>
+  <line x1="165.0" y1="48.0" x2="165.0" y2="333.0" stroke="#334155" stroke-width="1.2"/>
+  <line x1="165.0" y1="333.0" x2="165.0" y2="338.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="165.0" y="351.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">0 / 5</text>
+  <line x1="236.0" y1="48.0" x2="236.0" y2="333.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="236.0" y1="333.0" x2="236.0" y2="338.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="236.0" y="351.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">1 / 5</text>
+  <line x1="306.9" y1="48.0" x2="306.9" y2="333.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="306.9" y1="333.0" x2="306.9" y2="338.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="306.9" y="351.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">2 / 5</text>
+  <line x1="377.9" y1="48.0" x2="377.9" y2="333.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="377.9" y1="333.0" x2="377.9" y2="338.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="377.9" y="351.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">3 / 5</text>
+  <line x1="448.9" y1="48.0" x2="448.9" y2="333.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="448.9" y1="333.0" x2="448.9" y2="338.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="448.9" y="351.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">4 / 5</text>
+  <line x1="519.8" y1="48.0" x2="519.8" y2="333.0" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="519.8" y1="333.0" x2="519.8" y2="338.0" stroke="#334155" stroke-width="1.0"/>
+  <text x="519.8" y="351.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="normal" fill="#334155" text-anchor="middle">5 / 5</text>
+  <text x="385.0" y="371.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="normal" fill="#334155" text-anchor="middle">Seeded Defects Deterministically Caught per Category (25 Total Seeded • 0 False Positives)</text>
+  <text x="155.0" y="74.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="end">1. Security &amp; Secrets</text>
+  <text x="155.0" y="87.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.6" font-weight="normal" fill="#64748B" text-anchor="end">audit_engine.py</text>
+  <rect x="165.0" y="63.5" width="354.8" height="14.0" fill="#1B4F72" stroke="#1A202C" stroke-width="1.0"/>
+  <text x="527.8" y="74.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#1B4F72" text-anchor="start">5/5 (100% CLI Catch)</text>
+  <rect x="165.0" y="79.5" width="4.0" height="10.0" fill="#FADBD8" stroke="#922B21" stroke-width="1.0"/>
+  <text x="175.0" y="88.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.2" font-weight="normal" fill="#922B21" text-anchor="start">0/5 Prompt-Only Baseline (No Pre-LLM CLI Gate)</text>
+  <text x="155.0" y="131.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="end">2. Qt6 / QGIS 4 AST</text>
+  <text x="155.0" y="144.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.6" font-weight="normal" fill="#64748B" text-anchor="end">check_qt6.py + INI</text>
+  <rect x="165.0" y="120.5" width="354.8" height="14.0" fill="#1B4F72" stroke="#1A202C" stroke-width="1.0"/>
+  <text x="527.8" y="131.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#1B4F72" text-anchor="start">5/5 (100% CLI Catch)</text>
+  <rect x="165.0" y="136.5" width="4.0" height="10.0" fill="#FADBD8" stroke="#922B21" stroke-width="1.0"/>
+  <text x="175.0" y="145.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.2" font-weight="normal" fill="#922B21" text-anchor="start">0/5 Prompt-Only Baseline (No Pre-LLM CLI Gate)</text>
+  <text x="155.0" y="188.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="end">3. Research Citations</text>
+  <text x="155.0" y="201.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.6" font-weight="normal" fill="#64748B" text-anchor="end">verify_evidence.py</text>
+  <rect x="165.0" y="177.5" width="354.8" height="14.0" fill="#1B4F72" stroke="#1A202C" stroke-width="1.0"/>
+  <text x="527.8" y="188.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#1B4F72" text-anchor="start">5/5 (100% CLI Catch)</text>
+  <rect x="165.0" y="193.5" width="4.0" height="10.0" fill="#FADBD8" stroke="#922B21" stroke-width="1.0"/>
+  <text x="175.0" y="202.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.2" font-weight="normal" fill="#922B21" text-anchor="start">0/5 Prompt-Only Baseline (No Pre-LLM CLI Gate)</text>
+  <text x="155.0" y="245.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="end">4. Doc Sync &amp; Mirrors</text>
+  <text x="155.0" y="258.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.6" font-weight="normal" fill="#64748B" text-anchor="end">audit_workspace_docs.py</text>
+  <rect x="165.0" y="234.5" width="354.8" height="14.0" fill="#1B4F72" stroke="#1A202C" stroke-width="1.0"/>
+  <text x="527.8" y="245.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#1B4F72" text-anchor="start">5/5 (100% CLI Catch)</text>
+  <rect x="165.0" y="250.5" width="4.0" height="10.0" fill="#FADBD8" stroke="#922B21" stroke-width="1.0"/>
+  <text x="175.0" y="259.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.2" font-weight="normal" fill="#922B21" text-anchor="start">0/5 Prompt-Only Baseline (No Pre-LLM CLI Gate)</text>
+  <text x="155.0" y="302.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="end">5. Skill Budget &amp; Hygiene</text>
+  <text x="155.0" y="315.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.6" font-weight="normal" fill="#64748B" text-anchor="end">audit_engine.py --skill</text>
+  <rect x="165.0" y="291.5" width="354.8" height="14.0" fill="#1B4F72" stroke="#1A202C" stroke-width="1.0"/>
+  <text x="527.8" y="302.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#1B4F72" text-anchor="start">5/5 (100% CLI Catch)</text>
+  <rect x="165.0" y="307.5" width="4.0" height="10.0" fill="#FADBD8" stroke="#922B21" stroke-width="1.0"/>
+  <text x="175.0" y="316.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.2" font-weight="normal" fill="#922B21" text-anchor="start">0/5 Prompt-Only Baseline (No Pre-LLM CLI Gate)</text>
+  <text x="725.0" y="26.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="12.5" font-weight="bold" fill="#1A202C" text-anchor="start">(b) Composable Workflow Ablation (Level 0 → Level 3)</text>
+  <text x="725.0" y="41.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="10.0" font-weight="normal" fill="#64748B" text-anchor="start">Verification recall (%) vs. trajectory depth (steps) across skill chains</text>
+  <line x1="725.0" y1="333.0" x2="1195.0" y2="333.0" stroke="#334155" stroke-width="1.2"/>
+  <line x1="725.0" y1="48.0" x2="725.0" y2="333.0" stroke="#334155" stroke-width="1.2"/>
+  <line x1="1195.0" y1="48.0" x2="1195.0" y2="333.0" stroke="#334155" stroke-width="1.2"/>
+  <line x1="721.0" y1="333.0" x2="725.0" y2="333.0" stroke="#1B4F72" stroke-width="1.0"/>
+  <text x="718.0" y="336.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="end">0%</text>
+  <line x1="725.0" y1="283.4" x2="1195.0" y2="283.4" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="721.0" y1="283.4" x2="725.0" y2="283.4" stroke="#1B4F72" stroke-width="1.0"/>
+  <text x="718.0" y="286.9" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="end">20%</text>
+  <line x1="725.0" y1="233.9" x2="1195.0" y2="233.9" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="721.0" y1="233.9" x2="725.0" y2="233.9" stroke="#1B4F72" stroke-width="1.0"/>
+  <text x="718.0" y="237.4" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="end">40%</text>
+  <line x1="725.0" y1="184.3" x2="1195.0" y2="184.3" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="721.0" y1="184.3" x2="725.0" y2="184.3" stroke="#1B4F72" stroke-width="1.0"/>
+  <text x="718.0" y="187.8" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="end">60%</text>
+  <line x1="725.0" y1="134.7" x2="1195.0" y2="134.7" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="721.0" y1="134.7" x2="725.0" y2="134.7" stroke="#1B4F72" stroke-width="1.0"/>
+  <text x="718.0" y="138.2" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="end">80%</text>
+  <line x1="725.0" y1="85.2" x2="1195.0" y2="85.2" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <line x1="721.0" y1="85.2" x2="725.0" y2="85.2" stroke="#1B4F72" stroke-width="1.0"/>
+  <text x="718.0" y="88.7" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="end">100%</text>
+  <line x1="1195.0" y1="333.0" x2="1199.0" y2="333.0" stroke="#117864" stroke-width="1.0"/>
+  <text x="1202.0" y="336.5" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#117864" text-anchor="start">10¹</text>
+  <line x1="1195.0" y1="233.4" x2="1199.0" y2="233.4" stroke="#117864" stroke-width="1.0"/>
+  <text x="1202.0" y="236.9" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#117864" text-anchor="start">50</text>
+  <line x1="1195.0" y1="190.5" x2="1199.0" y2="190.5" stroke="#117864" stroke-width="1.0"/>
+  <text x="1202.0" y="194.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#117864" text-anchor="start">10²</text>
+  <line x1="1195.0" y1="90.9" x2="1199.0" y2="90.9" stroke="#117864" stroke-width="1.0"/>
+  <text x="1202.0" y="94.4" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#117864" text-anchor="start">500</text>
+  <text x="685.0" y="190.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1B4F72" text-anchor="middle" transform="rotate(-90.0 685.0 190.5)">Defect Recall (%)</text>
+  <text x="1235.0" y="190.5" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#117864" text-anchor="middle" transform="rotate(90.0 1235.0 190.5)">Trajectory Depth (Steps, log₁₀)</text>
+  <line x1="783.8" y1="333.0" x2="901.2" y2="233.9" stroke="#1B4F72" stroke-width="2.4"/>
+  <line x1="783.8" y1="289.7" x2="901.2" y2="243.7" stroke="#117864" stroke-width="2.2" stroke-dasharray="6 4"/>
+  <line x1="901.2" y1="233.9" x2="1018.8" y2="134.7" stroke="#1B4F72" stroke-width="2.4"/>
+  <line x1="901.2" y1="243.7" x2="1018.8" y2="221.7" stroke="#117864" stroke-width="2.2" stroke-dasharray="6 4"/>
+  <line x1="1018.8" y1="134.7" x2="1136.2" y2="85.2" stroke="#1B4F72" stroke-width="2.4"/>
+  <line x1="1018.8" y1="221.7" x2="1136.2" y2="102.1" stroke="#117864" stroke-width="2.2" stroke-dasharray="6 4"/>
+  <rect x="779.2" y="328.5" width="9.0" height="9.0" fill="#1B4F72" stroke="#FFFFFF" stroke-width="1.5"/>
+  <circle cx="783.8" cy="289.7" r="5.0" fill="#117864" stroke="#FFFFFF" stroke-width="1.5"/>
+  <text x="783.8" y="323.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="middle">0%</text>
+  <text x="791.8" y="279.7" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#117864" text-anchor="middle">20.1 st</text>
+  <text x="783.8" y="349.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="middle">Level 0</text>
+  <text x="783.8" y="362.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.4" font-weight="normal" fill="#64748B" text-anchor="middle">Raw Prompt (0 Gates)</text>
+  <rect x="896.8" y="229.4" width="9.0" height="9.0" fill="#1B4F72" stroke="#FFFFFF" stroke-width="1.5"/>
+  <circle cx="901.2" cy="243.7" r="5.0" fill="#117864" stroke="#FFFFFF" stroke-width="1.5"/>
+  <text x="901.2" y="223.9" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="middle">40%</text>
+  <text x="901.2" y="261.7" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#117864" text-anchor="middle">42.3 st</text>
+  <text x="901.2" y="349.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="middle">Level 1</text>
+  <text x="901.2" y="362.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.4" font-weight="normal" fill="#64748B" text-anchor="middle">/boostx (2 Gates)</text>
+  <rect x="1014.2" y="130.2" width="9.0" height="9.0" fill="#1B4F72" stroke="#FFFFFF" stroke-width="1.5"/>
+  <circle cx="1018.8" cy="221.7" r="5.0" fill="#117864" stroke="#FFFFFF" stroke-width="1.5"/>
+  <text x="1018.8" y="124.7" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="middle">80%</text>
+  <text x="1018.8" y="239.7" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#117864" text-anchor="middle">60.4 st</text>
+  <text x="1018.8" y="349.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="middle">Level 2</text>
+  <text x="1018.8" y="362.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.4" font-weight="normal" fill="#64748B" text-anchor="middle">2-Hop Chain (4 Gates)</text>
+  <rect x="1131.8" y="80.7" width="9.0" height="9.0" fill="#1B4F72" stroke="#FFFFFF" stroke-width="1.5"/>
+  <circle cx="1136.2" cy="102.1" r="5.0" fill="#117864" stroke="#FFFFFF" stroke-width="1.5"/>
+  <text x="1136.2" y="75.2" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="9.2" font-weight="bold" fill="#1B4F72" text-anchor="middle">100%</text>
+  <text x="1136.2" y="120.1" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.8" font-weight="bold" fill="#117864" text-anchor="middle">417.5 st</text>
+  <text x="1136.2" y="349.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="9.8" font-weight="bold" fill="#1A202C" text-anchor="middle">Level 3</text>
+  <text x="1136.2" y="362.0" font-family="'DejaVu Sans Mono', 'Consolas', monospace" font-size="8.4" font-weight="normal" fill="#64748B" text-anchor="middle">Full 5-Stage (7 Gates)</text>
+  <rect x="737.0" y="58.0" width="215.0" height="36.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="0.9" rx="3.0"/>
+  <line x1="745.0" y1="70.0" x2="763.0" y2="70.0" stroke="#1B4F72" stroke-width="2.4"/>
+  <rect x="751.0" y="66.5" width="7.0" height="7.0" fill="#1B4F72" stroke="none" stroke-width="1.0"/>
+  <text x="769.0" y="73.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="8.8" font-weight="normal" fill="#1A202C" text-anchor="start">Seeded Defect Recall (%)</text>
+  <line x1="745.0" y1="84.0" x2="763.0" y2="84.0" stroke="#117864" stroke-width="2.0" stroke-dasharray="4 2"/>
+  <circle cx="754.0" cy="84.0" r="3.5" fill="#117864" stroke="none" stroke-width="1.0"/>
+  <text x="769.0" y="87.0" font-family="'DejaVu Sans', 'Arial', 'Helvetica', sans-serif" font-size="8.8" font-weight="normal" fill="#1A202C" text-anchor="start">Mean Trajectory Depth (Steps)</text>
+</svg>

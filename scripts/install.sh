@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# BoostX Composable Agent Skills (v3.0.0) - Universal Installer (macOS & Linux)
-# Links the 13-skill BoostX suite into Claude Code (~/.claude/skills), Grok (~/.grok/skills), and Gemini/Antigravity (~/.gemini/config/skills)
+# BoostX Composable Agent Skills (v3.1.0) - Universal Installer (macOS & Linux)
+# Links the 14-skill BoostX suite into Claude Code (~/.claude/skills), Grok (~/.grok/skills), and Gemini/Antigravity (~/.gemini/config/skills)
 
 set -e
 
@@ -8,7 +8,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SKILLS_SRC="$SCRIPT_DIR/skills"
 
 echo "============================================================"
-echo "  ⚡ BoostX Agent Skills (v3.0.0) - Universal Installer"
+echo "  ⚡ BoostX Agent Skills (v3.1.0) - Universal Installer"
 echo "============================================================"
 echo "Source: $SKILLS_SRC"
 
@@ -61,5 +61,5 @@ fi
 
 echo ""
 echo "============================================================"
-echo "  ✓ BoostX v3.0.0 Installation Complete! All 13 skills ready."
+echo "  ✓ BoostX v3.1.0 Installation Complete! All 14 skills ready."
 echo "============================================================"

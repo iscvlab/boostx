@@ -129,6 +129,8 @@ Structure every saved Markdown file so both humans and downstream [`/briefx`](..
   * When `/obsidianx` is **not** in the user's command (e.g., `/researchx` or `/researchx /boostx /goal`), **never** read from or write to any Obsidian vault.
 * **Paired with [`/layax`](../layax/SKILL.md) (`/researchx /layax`)**:
   * Use `/layax` (`score` / `shortlist_choice`) to locally shortlist candidate docs or API sections before reading full specifications.
+* **Paired with [`/ultrax`](../ultrax/SKILL.md) (`/researchx /ultrax`)**:
+  * Force **Tier 3 Parallel Multi-Angle Swarm** (`2–4` concurrent primary-source scouts) plus a dedicated **Blind Adversarial Verifier** subagent (`Maker ≠ Checker`) that independently audits every cited signature, version, and formula before synthesis.
 * **Paired with [`/planx`](../planx/SKILL.md) (`/researchx /planx`)**:
   * Pass verified primary-source API signatures and constraints directly into `/planx` Phase 1 to construct `implementation_plan.md`.
 * **Paired with [`/boostx`](../boostx/SKILL.md) (`/researchx /boostx` or `/researchx /boostx /goal`)**:

@@ -60,6 +60,8 @@ graph TD
   * **Opt-In (`/planx /obsidianx` or `/briefx /planx /obsidianx`)**: Resolve `VAULT_ROOT` dynamically (`00 *Index*.md` → `Hub - *.md`) to pull reusable governing equations, SI unit bridges, or component contracts into the plan.
 * **Opt-In [`/layax`](../layax/SKILL.md) Sidecar (`/planx /layax`)**:
   * When planning across a large, unpinned documentation corpus, use `/layax` (`shortlist_choice` / `score`) to shortlist relevant specification sections with zero context bloat.
+* **Opt-In [`/ultrax`](../ultrax/SKILL.md) Multi-Architect Scout Mode (`/planx /ultrax`)**:
+  * When `/ultrax` is included in the command, spawn **3 parallel Architect Scouts** (Vector A: Simplification/Stdlib, Vector B: Surgical Local Seam, Vector C: Deep Module Interface) to stress-test trade-offs and edge cases before synthesizing their findings into `implementation_plan.md`.
 
 #### 2. Synthesize the 2D Plan Contract (`Task Archetype × Project Archetype`)
 Cross the active **Task Intent** (`BUILD / FEATURE`, `REFACTOR / SIMPLIFY`, `SIMULATE / SOLVER`, `OPTIMIZE / SCALE`, `SHIP / RELEASE`) with the **Project Domain Harness** (`CAD / Rhino / Grasshopper`, `GIS / QGIS`, `Web UI / Figma / Diagrams`, `Data / GCP / ML`, `Agent Skills / CLI / Configs`):

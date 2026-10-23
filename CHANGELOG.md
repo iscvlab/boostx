@@ -1,5 +1,30 @@
 # Changelog
 
+## v3.1.0
+
+- **`/ultrax` (`13 → 14 Composable Skills`) — Dynamic Topology-Matched Multi-Agent Swarm & Blind Verification Multiplier**:
+  - **Order-Independent Canonical Stage DAG**: Normalizes any slash-command combination regardless of typing order into `Stage 0: RETRIEVE (/briefx, /obsidianx, /layax) → Stage 1: RESEARCH (/researchx, /deep-researchx) → Stage 2: PLAN (/planx) → Stage 3: BUILD (/boostx) → Stage 4: AUDIT & SYNC (/syncx, /publishx-audit) → Stage 5: RATCHET (/obsidianx) → Stage 6: VERIFY (/goal)`.
+  - **Dynamic `N × K` Topology Sizer (Zero Fixed-Count Bloat)**:
+    - **Complexity Floor (`2-Agent Fast Pair`)**: Automatically bypasses swarm fan-out on localized 1-file tasks (`1 Maker + 1 Blind Verifier`).
+    - **Archetype 1 (`3 + 2` Best-of-3 Tournament)**: Spawns 3 orthogonal Makers (`Vector A: Stdlib/Minimal`, `Vector B: Performance/Algorithmic`, `Vector C: Deep Module/UX`) + 2 Blind Verifiers (`Adversarial Spec Critic` + `Red-Team Edge-Case Breaker`). Supports Objective Auto-Promote vs. Aesthetic Visual QA Side-by-Side (`_vA`/`_vB`/`_vC`) modes.
+    - **Archetype 2 (`N + 2` Partitioned Batch Swarm)**: Enforces a strict `≤ 3` items/files per subagent cap (`N = ceil(M / 3)`, max `6` concurrent per wave) and locks a **Pre-Locked Shared Seam Header** in the main thread before fan-out to prevent cross-partition interface drift.
+    - **Archetype 3 (`Multi-Wave DAG`)**: Chains Scout Wave → Builder Wave → Blind Audit Wave for full-stack cross-layer features.
+  - **Universal 5-Domain Adaptation, Multi-Host Dispatch & Build-Lock Serialization**:
+    - Adapts seamlessly across Software/Web/Cloud, Data/ML/SQL, CAD/GIS/Physics, Presentation/UI/Docs, and General Research/Strategy across Antigravity (`invoke_subagent`), Claude Code (`Task`), and Sequential Personas.
+    - Enforces **Wave 1 Isolation** (write-only to partitioned paths or `Workspace="share"`/`"branch"`, zero concurrent `dotnet build`/`pytest`/`cargo` lock contention) followed by **Wave 2 Serialized Build & Red-Team Verification** and **`≤ 150-Word` Caveman Receipt** returns.
+- **`/contextx` Cross-Platform Token Telemetry Upgrade (`scripts/check_context.py`)**:
+  - Added pure-stdlib Protobuf wire decoding for SQLite `conversations/<id>.db` step metadata alongside `transcript.jsonl` parsing, surfacing active-session token counts (`input_tokens`, `cache_read_tokens`, `output_tokens`, `thinking_tokens`, `cache_hit_pct`) and cross-platform aggregation flags (`--tokens`, `--days <N>`, `--all-time`) across Antigravity 2.0, Antigravity IDE, and Antigravity CLI.
+- **Zero-Persona Neutrality & Bidirectional Ecosystem Wiring**:
+  - Added opt-in `/ultrax` composable hooks across `/boostx`, `/planx`, `/briefx`, `/researchx`, `/deep-researchx`, `/syncx`, `/obsidianx`, and `/kickoffx`.
+  - Sanitized personal hardware/persona references across `/boostx`, `/create-skillx`, and `/kickoffx`, and added automated persona-neutrality checks to `/create-skillx` and `publishx-audit/scripts/audit_engine.py`.
+
+### Install
+
+See README. Tag: `v3.1.0`.
+```bash
+git clone --branch v3.1.0 https://github.com/iscvlab/boostx.git
+```
+
 ## v3.0.0
 
 - **Unified BoostX (`-x`) Composable Ecosystem & 13-Skill Suite Expansion**:

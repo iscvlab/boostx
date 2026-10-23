@@ -1,14 +1,14 @@
 # BoostX: Composable Agent Skills Ecosystem
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v3.0.0-blue.svg)](https://github.com/iscvlab/boostx/releases/tag/v3.0.0)
-[![Skills](https://img.shields.io/badge/Suite-13_Composable_Skills-005FB8)](#-the-13-skill-suite)
+[![Version](https://img.shields.io/badge/version-v3.1.0-blue.svg)](https://github.com/iscvlab/boostx/releases/tag/v3.1.0)
+[![Skills](https://img.shields.io/badge/Suite-14_Composable_Skills-005FB8)](#-the-14-skill-suite)
 [![Platforms](https://img.shields.io/badge/Platforms-Claude_•_Grok_•_Gemini_•_Cursor_•_Codex-8A2BE2)](#-universal-installation)
 [![Dual-OS](https://img.shields.io/badge/Dual--OS-Windows_•_macOS_•_Linux-success)](#-portable-by-design)
 [![Verification](https://img.shields.io/badge/Protocol-BoostX_Verified_✓-emerald)](#-bundled-zero-dependency-cli-engines)
 
 > **A unified, composable `-x` skill ecosystem and verification harness for AI coding agents.**  
-> Thirteen portable `SKILL.md` protocols and seven zero-dependency Python CLI engines that run identically across **Claude Code, Grok, Google Gemini / Antigravity, Cursor, and Codex** on **Windows, macOS, and Linux**.
+> Fourteen portable `SKILL.md` protocols and seven zero-dependency Python CLI engines that run identically across **Claude Code, Grok, Google Gemini / Antigravity, Cursor, and Codex** on **Windows, macOS, and Linux**.
 
 Sister toolkit: **[mcp-bridges](https://github.com/iscvlab/mcp-bridges)** (Model Context Protocol automation bridges for QGIS, Rhino 3D, Grasshopper, Adobe Illustrator, and Figma).
 
@@ -16,7 +16,7 @@ Sister toolkit: **[mcp-bridges](https://github.com/iscvlab/mcp-bridges)** (Model
 
 ## 1. Master Ecosystem Architecture
 
-BoostX organizes software engineering, scientific research, spatial/physics simulation, and documentation governance into **five deterministic lifecycle stages** plus a **cross-stage System 1 semantic sidecar** across **13 composable `-x` skills**:
+BoostX organizes software engineering, scientific research, spatial/physics simulation, and documentation governance into **five deterministic lifecycle stages** plus **cross-stage System 1 semantic & multi-agent swarm multipliers** across **14 composable `-x` skills**:
 
 <p align="center">
   <img src="docs/assets/boostx-master-ecosystem.svg" alt="BoostX Master 5-Stage Ecosystem Architecture" width="100%" />
@@ -38,6 +38,7 @@ graph LR
     subgraph S3["Stage 3: Plan & Execute"]
         PLX["/planx<br>BoostX v2.0 Architecture Planner"]
         BSX["/boostx<br>4-Phase Deep Solver"]
+        ULX["/ultrax<br>Swarm & Blind Verification Multiplier"]
     end
     subgraph S4["Stage 4: Sync & Release Gates"]
         SX["/syncx<br>5-Tier Doc Synchronizer"]
@@ -57,6 +58,10 @@ graph LR
     RX -.-> BSX
     DRX --> BSX
     PLX --> BSX
+    ULX -.-> DRX
+    ULX -.-> PLX
+    ULX -.-> BSX
+    ULX -.-> SX
     BSX --> SX
     CSX --> PAX
     PAX --> PQX
@@ -78,7 +83,7 @@ Every skill in BoostX is designed to work either **standalone** or **chained lef
 
 ```text
 [Stage 1: Context]  →  [Stage 2: Research]  →  [Stage 3: Plan / Execute]  →  [Stage 4: Sync]  +  [Modifiers / Sidecars]
-     /briefx        →      /researchx       →     /planx  or  /boostx     →      /syncx       +  /obsidianx /layax /goal
+     /briefx        →      /researchx       →     /planx  or  /boostx     →      /syncx       +  /obsidianx /layax /ultrax /goal
 ```
 
 ### Strict Opt-In Second Brain Isolation (`/obsidianx`)
@@ -114,6 +119,7 @@ flowchart TD
 | `/researchx /boostx <task>` | Primary-source SDK/DB/AST probe → lock 2D Goal Contract → Red-Green-Verify build | Implementing a technical feature or solver that depends on exact API/physics specs |
 | `/researchx /boostx /obsidianx` | Vault 2-Hop cache check → probe missing delta → BoostX 4-phase build → Auto-Ratchet new specs into Vault | Compounding reusable engineering or scientific knowledge while shipping production code |
 | `/deep-researchx /boostx /goal` | 5-wave multi-agent harvest + `verify_evidence.py` audit → full-stack implementation until 100% milestone completion | Long-running, multi-milestone research-to-production engineering sprints |
+| `/boostx /ultrax <task>` | Dynamic `N × K` topology sizer (`Best-of-3` Tournament or `N+2` Partitioned Batch with Pre-Locked Shared Seam Header) + `Maker ≠ Checker` Blind Adversarial Critic & Red-Team Breaker | High-stakes algorithms, multi-module sprints, or parallel UI/diagram candidate tournaments on `5×`/`20×` tiers |
 | `/planx <task>` | 2D Plan Contract → Ponytail × Deep Module Vector A/B/C → `implementation_plan.md` with Inline Grilling Matrix & Red → Green table → halt for approval | Stress-testing architectural decisions and edge cases before writing a single line of code |
 | `/syncx /layax` | Fast System 1 `noul` semantic contradiction triage + `audit_workspace_docs.py` + 5-tier inner-to-outer doc sync | Catching semantic contradictions across markdown/HTML docs alongside deterministic regex/link audits |
 | `/syncx /obsidianx` | 5-tier inner-to-outer repo doc sync + update matching atomic notes and Hub tables in the Obsidian vault | Keeping both repository documentation and long-term knowledge graphs 100% synchronized |
@@ -122,13 +128,13 @@ flowchart TD
 
 ---
 
-## 3. The 13-Skill Suite
+## 3. The 14-Skill Suite
 
 ```text
 boostx/skills/
 ├── /boostx           2D Task × Project goal synthesis, Physics Triad & 4-phase red-green solver
 ├── /briefx           4-tier authority hierarchy, two-pass structural reading & invariant loading
-├── /contextx         transcript compaction diagnostics, step metrics & memory drift risk scorecard
+├── /contextx         transcript compaction diagnostics, cross-platform token telemetry & drift scorecard
 ├── /create-skillx    author, distill & globalize portable SKILL.md files with ≤ 350-char budget guard
 ├── /deep-researchx   5-wave multi-agent deep research, blind adversarial audit & 100%-proof engine
 ├── /kickoffx         end-of-session sync check, task-smart command selector & handover prompt
@@ -138,7 +144,8 @@ boostx/skills/
 ├── /publishx-audit   6-pillar secret, Python AST, Flake8, platform & skill globalization audit gate
 ├── /publishx-qgis    QGIS 4 / Qt6 scoped enum AST checker & deterministic single-root zip packager
 ├── /researchx        tactical primary-source research, local SDK/DB/binary probe & architecture study
-└── /syncx            5-tier cross-document sync, SHA-256 mirror auditor & zero-stale ledger
+├── /syncx            5-tier cross-document sync, SHA-256 mirror auditor & zero-stale ledger
+└── /ultrax           dynamic topology-matched multi-agent swarm & Maker ≠ Checker blind verification multiplier
 ```
 
 ### Stage 1: Context, Triage & Memory
@@ -162,6 +169,7 @@ boostx/skills/
 |:---|:---|:---|:---|
 | **PlanX** | `/planx` (`/plan`) | **BoostX v2.0 Architectural Planner**. Locks a **2D Plan Contract (`Scope × Risk`)**, runs blast-radius & invariant discovery, evaluates **Ponytail × Deep Module Vectors A/B/C** (`Vector A (Recommended): Zero-New-File / Stdlib Seam`), embeds an **Inline Grilling Decision Matrix** (`DEC-01..N`) and **Red → Green Verification Matrix** inside `implementation_plan.md` with zero chat Q&A spam, and halts for user approval. | Jumping straight into code on underspecified requirements, noisy chat Q&A walls, or over-engineered multi-file abstractions. |
 | **BoostX** | `/boostx` | Flagship **4-Phase Engineering & Simulation Solver**: (1) **2D `Task × Project` Goal Contract** & **Tri-Track Signal Gate** (Track A bug repro, Track B greenfield probe, Track C **Simulation Physics Triad**: SI unit bridge, CFL stability cap, zero-load identity check), (2) **Ponytail × Deep Module Ladder** (`YAGNI → Reuse → Stdlib → Deep Seam → Shortest Diff`), (3) **Universal Parity** (Dual-OS + OneDrive + IDE/CLI), (4) **3-Tier Verification** (Before proof, After/Mutation proof, Bloat & Anti-Hardcode sweep). | Speculative blind fixes, shallow pass-through wrapper bloat, numerical `NaN`/`Inf` blowups in CAD/CFD solvers, and machine-bound paths. |
+| **UltraX** | `/ultrax` (`/ultra`) | **Dynamic Topology-Matched Multi-Agent Swarm & Blind Verification Multiplier**. Normalizes any multi-skill combo into the **Canonical Stage DAG** (`RETRIEVE → RESEARCH → PLAN → BUILD → AUDIT/SYNC → RATCHET → VERIFY`), routes through the **Dynamic `N × K` Topology Sizer** (`Archetype 1: 3+2 Best-of-3 Tournament`, `Archetype 2: N+2 Partitioned Batch` with `≤ 3` items/agent cap & **Pre-Locked Shared Seam Header**, `Archetype 3: Multi-Wave DAG`), enforces **Build-Lock Serialization**, **`Maker ≠ Checker` Zero-Trust Critic + Red-Team Breaker**, and **`≤ 150-Word` Caveman Receipt** returns. | Fixed-count subagent waste on trivial tasks, multi-agent file-write race conditions, cross-partition interface drift, and self-grading confirmation bias. |
 
 ### Stage 4: Synchronization & Release Gates
 
@@ -176,7 +184,7 @@ boostx/skills/
 
 | Skill | Command (Legacy Aliases) | Core Architecture & Protocol | Failure Modes Prevented |
 |:---|:---|:---|:---|
-| **ContextX** | `/contextx` (`/context`) | Runs `scripts/check_context.py` against the active IDE conversation transcript (`transcript.jsonl`), filtering out isolated subagent logs and evaluating a **2D Health Rubric (`Compaction Round × Active Window Pressure %`)** across strict `CHECKPOINT` boundaries (`🟢 HEALTHY`, `🟡 NOMINAL`, `🟠 CAUTION`, `🔴 CRITICAL`). | Continuing complex edits after multi-pass compactions, subagent transcript hijacking, or false-positive checkpoint counts from tool outputs. |
+| **ContextX** | `/contextx` (`/context`) | Runs `scripts/check_context.py` against the active IDE conversation transcript (`transcript.jsonl`) and SQLite step logs (`conversations/*.db`), filtering out isolated subagent logs, reporting **Session & Cross-Platform Token Telemetry** (`--tokens`, `--days N`, `--all-time` across Antigravity 2.0, IDE, and CLI), and evaluating a **2D Health Rubric (`Compaction Round × Active Window Pressure %`)** across strict `CHECKPOINT` boundaries (`🟢 HEALTHY`, `🟡 NOMINAL`, `🟠 CAUTION`, `🔴 CRITICAL`). | Continuing complex edits after multi-pass compactions, subagent transcript hijacking, or invisible cross-platform token usage. |
 | **KickoffX** | `/kickoffx` (`/kickoff`) | End-of-session handover protocol. Runs a pre-handover `/syncx` verification check, presents a structured **Next-Step Options Table** (`Option A Recommended`, `Option B`, `Option C`), applies the **Task-Smart Recommended Command Selector** (auto-routing `/layax` only for large-corpus/audit tasks), and generates a **self-contained copy-pasteable Kickoff Prompt**. | Starting a fresh conversation with vague context, losing mid-session decisions, or leaving unsynchronized documentation behind. |
 
 ---
@@ -209,6 +217,32 @@ Both `/syncx` and `/publishx-audit` enforce five canonical status terms across a
 - **IN PIPELINE**: Scheduled next in the active engineering roadmap.
 - **DRAFT**: Internal working specification.
 
+### 4.4 Empirical Benchmark & Token Economics ([`benchmarks/BENCHMARK_REPORT.md`](benchmarks/BENCHMARK_REPORT.md))
+
+Reproducible multi-trial measurements (`3` warm-ups + `20–30` timed iterations via [`benchmarks/run_boostx_benchmark.py`](benchmarks/run_boostx_benchmark.py)) across `110` installed skills, `778` repository/vault markdown files (`583`-node Obsidian Second Brain), `25` seeded red-team defects, and `80` real IDE sessions (`623` prompt turns):
+
+| Benchmark Dimension | Unstructured / Prompt-Only Baseline | `BoostX v3.1.0` Composable Suite | Empirical Delta & Receipt |
+|:---|:---|:---|:---|
+| **1. System-Prompt Discovery Guard** | `74.2%` `≤ 500`-char pass • `25.8%` dual triggers *(Official Cloud/Vendor cohort, `N=31`)* | **`399.4 ± 39.2` chars** (`100%` `≤ 500`-char pass • `100%` `Use when` + `Do NOT use` guards across all `14` skills) | **`0%` Sibling Skill Truncation** |
+| **2. Briefing & Vault Context Compression** | `778` files (`1,364,405` tokens in Median `44.35 ms`) | **`/briefx` (`Cap 8`) + `/obsidianx` (`2-Hop = 4` files) = `22,982` tokens** in **`0.71 ms`** | **`-98.32%` Context Noise (`59.4×` Compression)** |
+| **3. System 1 `/layax` Section Triage** | Full-corpus read (`86,092` tokens across `21` specs / `429` chunks) | **Top-5 `#L<start>-L<end>` sections (`1,344` tokens) in Median `10.81 ms`** (`39,686` chunks/sec) | **`-98.44%` Pass-B Reading Tokens** |
+| **4. 25-Defect Red-Team Catch Rate** | `0 / 25` (`0.0%` deterministic pre-LLM enforcement) | **`25 / 25` (`100.0%` Recall • `100.0%` Precision • `0` False Positives)** in **Median `6.94 ms`** | **7 Stdlib CLI Gates (`3,403` LOC)** |
+| **5. Real Turn & Session Token Depth** | `20.1` steps/turn (`11.7k` new input • `7.2k` output • `1.01M` total/turn) | **`60.4` steps/turn (`3.00×`)** • **`70.3k` new input (`6.03×`)** • **`24.8k` output (`3.43×`)** • **`22.67M` tok/session (`14.93×`)** | **Recommended: `5×` Max (Sprints) / `20×` Ultra (Swarms & Marathons)** |
+
+> **Transparency on Token Consumption**: BoostX reduces low-value file-scanning noise by **`98.32%`**, then deliberately invests that freed context capacity into **`3.00×` more verification steps** and **`6.03×` more primary-source & CLI telemetry inputs** per chained turn. While single-skill runs work comfortably on `1×` Pro plans, daily chained workflows (`/briefx /researchx /boostx /syncx /obsidianx`) are best paired with **`5×` High-Throughput tiers** (Claude Max `5×`, Gemini `5×`), and `400+`-step autonomous `/goal` marathons or `/ultrax` / `/deep-researchx` multi-agent swarms are engineered for **`20×` Ultra tiers** (Gemini Ultra `20×`, Claude Max `20×`).
+
+<p align="center">
+  <img src="docs/assets/boostx-benchmark-summary.svg" alt="BoostX v3.1.0 Empirical Evaluation Summary (2x2 Multi-Panel Academic Figure)" width="100%">
+</p>
+
+| Academic Evaluation Figure | Empirical Scope & Statistical Protocol |
+|:---|:---|
+| [`docs/assets/boostx-benchmark-summary.svg`](docs/assets/boostx-benchmark-summary.svg) | **Composite Summary (Panels a–d)** — System-prompt character distributions (`N=110`), log-scale context compression (`n=30`), composable workflow ablation (`Level 0 → Level 3`), and session token throughput (`N=80`). |
+| [`docs/assets/fig1_discovery_distribution.svg`](docs/assets/fig1_discovery_distribution.svg) | **Figure 1 (Experiment 1)** — YAML frontmatter character boxplots (`Min / IQR / Max / Median / Mean ♦`) and `≤ 500`-char budget pass vs. explicit dual trigger guard compliance (`100.0%` vs. `25.8%` vendor baseline). |
+| [`docs/assets/fig2_compression_latency.svg`](docs/assets/fig2_compression_latency.svg) | **Figure 2 (Experiments 2 & 3)** — Log₁₀ context token volume & disk read latency (`0.71 ms`, `-98.32%` noise) alongside `/layax` System 1 section shortlisting (`-98.44%` tokens, Median `10.81 ms` across `n=30` trials). |
+| [`docs/assets/fig3_ablation_redteam.svg`](docs/assets/fig3_ablation_redteam.svg) | **Figure 3 (Experiments 4 & 5)** — `25`-defect red-team injection recall (`25/25 = 100.0%`, `0` false positives, Median `6.94 ms`) and progressive workflow ablation across `0 → 7` deterministic CLI gates. |
+| [`docs/assets/fig4_token_distributions.svg`](docs/assets/fig4_token_distributions.svg) | **Figure 4 (Experiment 6)** — Per-turn token component quantiles (`N=623` turns on log₁₀ scale) and cumulative session throughput (`N=80` sessions) mapped to `1×` Pro, `5×` Max, and `20×` Ultra subscription tiers. |
+
 ---
 
 ## 5. Bundled Zero-Dependency CLI Engines
@@ -232,8 +266,10 @@ python skills/publishx-qgis/scripts/check_qt6.py <plugin_dir>
 # 5. Deterministic single-root QGIS plugin release packager (/publishx-qgis)
 python skills/publishx-qgis/scripts/package_qgis.py <plugin_dir> --bump patch
 
-# 6. IDE conversation transcript compaction & context health diagnostic (/contextx)
+# 6. IDE conversation transcript compaction, context health & cross-platform token telemetry (/contextx)
 python skills/contextx/scripts/check_context.py
+python skills/contextx/scripts/check_context.py --days 30
+python skills/contextx/scripts/check_context.py --all-time
 
 # 7. System 1 heading-aware chunker, section shortlister & contradiction triage (/layax)
 python skills/layax/scripts/laya_triage.py <target_dir_or_file> --mode shortlist --query "<topic>"
@@ -287,9 +323,9 @@ mkdir -p ~/.gemini/config/skills && cp -r boostx/skills/* ~/.gemini/config/skill
 mkdir -p .agents/skills && cp -r boostx/skills/* .agents/skills/
 ```
 
-To pin the `v3.0.0` release tag:
+To pin the `v3.1.0` release tag:
 ```bash
-git clone --branch v3.0.0 https://github.com/iscvlab/boostx.git
+git clone --branch v3.1.0 https://github.com/iscvlab/boostx.git
 ```
 
 ---
@@ -302,10 +338,20 @@ boostx/
 ├── CHANGELOG.md
 ├── LICENSE
 ├── .flake8
+├── benchmarks/
+│   ├── run_boostx_benchmark.py
+│   ├── generate_figures.py
+│   ├── BENCHMARK_REPORT.md
+│   └── BENCHMARK_RESULTS.json
 ├── docs/
 │   └── assets/
 │       ├── boostx-master-ecosystem.svg
-│       └── boostx-composable-routing.svg
+│       ├── boostx-composable-routing.svg
+│       ├── boostx-benchmark-summary.svg
+│       ├── fig1_discovery_distribution.svg
+│       ├── fig2_compression_latency.svg
+│       ├── fig3_ablation_redteam.svg
+│       └── fig4_token_distributions.svg
 ├── scripts/
 │   ├── install.ps1
 │   └── install.sh
@@ -341,12 +387,14 @@ boostx/
     │       └── package_qgis.py
     ├── researchx/
     │   └── SKILL.md
-    └── syncx/
-        ├── LICENSE
-        ├── SKILL.md
-        └── scripts/
-            ├── README.md
-            └── audit_workspace_docs.py
+    ├── syncx/
+    │   ├── LICENSE
+    │   ├── SKILL.md
+    │   └── scripts/
+    │       ├── README.md
+    │       └── audit_workspace_docs.py
+    └── ultrax/
+        └── SKILL.md
 ```
 
 ---
