@@ -56,6 +56,7 @@ Follow every technical claim back to the source that owns it. Rank evidence stri
    * Canonical upstream repository source files (`file:line`), unit tests (which prove actual expected inputs/outputs), release notes, and maintainer issue threads.
 4. **Tier 4 — Engineering Standards & Peer-Reviewed Literature**:
    * Published standards (ISO, EN, ASHRAE, IEEE, ASTM, CIRIA, Eurocode) and peer-reviewed papers for physical constants and numerical algorithms.
+   * **Automatic [`/xocr`](../xocr/SKILL.md) PDF & Image Table Ingestion Rule**: Whenever a primary source (local or downloaded) is a `.pdf` or raster image table (`.png`, `.jpg`, `.webp`, `.tif`), automatically execute [`../xocr/scripts/ocr_runner.py`](../xocr/scripts/ocr_runner.py) (using `--pages` for targeted page slicing) and harvest from `extracted_document.md`, `table_p*.csv`, and `ocr_manifest.json` (`garble_ratio == 0.0`) instead of raw `read_file` or ad-hoc `pypdf` snippets (which drop LaTeX `booktabs` borderless tables and Thai PUA/Sara-Am glyphs).
 
 > [!IMPORTANT]
 > **Zero Secondary-Slop Rule**:
@@ -135,7 +136,7 @@ Output the 4-line contract before probing or spawning scouts:
 For Tier 3 investigations, decompose across **parallel Harvester Subagents sized by Cognitive-Density Sharding** ([`/xultra`](../xultra/SKILL.md) Law 3 — 1 dedicated Harvester Scout per heavy category, candidate architecture, or deep-scrape bucket; clustered scouts for lightweight lookups) via parallel `invoke_subagent` calls in the same turn:
 
 1. **Deep-Link Content Scraping Mandatory**:
-   * Harvesters must **never** trust search-snippet blurbs alone. For every candidate fact or case study, the Harvester must fetch the actual page or file text (`read_file`, `read_url_content`, `search_web`, or Python `urllib`) to extract verbatim evidence.
+   * Harvesters must **never** trust search-snippet blurbs alone. For every candidate fact or case study, the Harvester must fetch the actual page or file text (`read_file`, `read_url_content`, `search_web`, Python `urllib`, or [`../xocr/scripts/ocr_runner.py`](../xocr/scripts/ocr_runner.py) for `.pdf`/image sources) to extract verbatim evidence.
    * **Ban on Root-Domain Lazy Links**: Never cite a bare homepage (`https://example.org/`) as proof. Every citation must be a specific deep link (`https://example.org/projects/specific-project-slug`) or exact local `file:///path#L10-L20`.
 2. **Structured Evidence Dossier Return**:
    * Each Harvester returns a structured dossier containing:

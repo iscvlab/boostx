@@ -2,8 +2,8 @@
 
 ## v3.2.0
 
-- **Prefix `/x*` Namespace Migration (`14 → 13 Composable Skills`) — Instant `/x` Autocomplete Discovery**:
-  - **Standardized `x...` Prefix Namespace**: Migrated every skill in the BoostX ecosystem from the `-x` suffix to the `x-` prefix so typing `/x` in any IDE/CLI slash-command menu immediately surfaces all 13 BoostX skills in a single contiguous block without memorizing base names:
+- **Prefix `/x*` Namespace Migration & `/xocr` Hybrid PDF/Table Engine (`14 Composable Skills` & `8 Bundled CLI Engines`) — Instant `/x` Autocomplete Discovery**:
+  - **Standardized `x...` Prefix Namespace**: Migrated every skill in the BoostX ecosystem to the `x-` prefix so typing `/x` in any IDE/CLI slash-command menu immediately surfaces all 14 BoostX skills in a single contiguous block without memorizing base names:
     - `/boostx` → **`/xboost`**
     - `/briefx` → **`/xbrief`**
     - `/contextx` → **`/xcontext`**
@@ -12,14 +12,16 @@
     - `/kickoffx` → **`/xkickoff`**
     - `/layax` → **`/xlaya`**
     - `/obsidianx` → **`/xobsidian`**
+    - `/unlimited-ocr` + `/ocrx` + `/ocr` → **`/xocr`** *(NEW in public suite)*
     - `/planx` → **`/xplan`**
     - `/publishx-audit` → **`/xpublish-audit`**
     - `/publishx-qgis` → **`/xpublish-qgis`**
     - `/syncx` → **`/xsync`**
     - `/ultrax` → **`/xultra`**
-  - **Backward-Compatible Trigger Aliases**: All 13 `SKILL.md` YAML frontmatter descriptions preserve legacy `-x` (`/*x`) and unprefixed triggers while maintaining **`100%` compliance** within the `≤ 400`-char `audit_engine.py --platform skill` context budget guard.
+  - **`/xocr` High-Speed Hybrid PDF & Table Engine (`skills/xocr/scripts/ocr_runner.py`)**: Combines single-pass C++ `PyMuPDF` (`fitz`) coordinate-sorted text (`sort=True`), a Two-Stage Grid + LaTeX `booktabs` table extractor (`page.find_tables()` with horizontal-rule grouping, extracting `6/6` tables from `Unlimited-OCR.pdf` in `2.48 s`), Thai PUA (`U+F700..U+F71A`) & toned decomposed Sara-Am (`\u0e4d([\u0e48-\u0e4b]?)\u0e32` → `\1\u0e33`) glyph normalization, a per-page garble & image-coverage router, and a 4-tier OCR backend ladder (`SGLang :10000` → HuggingFace `baidu/Unlimited-OCR` CUDA VLM with `no_repeat_ngram_size=35` → process-cached `EasyOCR` → `pytesseract`), with automatic PDF/image routing wired into `/xdeep-research`, `/xbrief`, `/xboost`, `/xobsidian`, and `/xultra`.
+  - **Backward-Compatible Trigger Aliases**: All 14 `SKILL.md` YAML frontmatter descriptions preserve legacy `-x` (`/*x`) and unprefixed triggers while maintaining **`100%` compliance** within the `≤ 400`-char `audit_engine.py --platform skill` context budget guard.
 - **Elastic Cognitive Swarm (`N × K × T` Topology & 4-Law First-Principles Sizing Framework)**:
-  - **4-Law Swarm Sizing Calculus**: Upgraded `/xultra` and integrated first-principles swarm sizing across all 13 skills—replacing arbitrary headcount quotas (`3+2`, `4–12 agents`, `≤ 3 items/agent`, `2–4 scouts`) with:
+  - **4-Law Swarm Sizing Calculus**: Upgraded `/xultra` and integrated first-principles swarm sizing across all 14 skills—replacing arbitrary headcount quotas (`3+2`, `4–12 agents`, `≤ 3 items/agent`, `2–4 scouts`) with:
     1. **Law 1 (Code-Over-Swarm Split)**: Offloads deterministic sweeps (`laya_triage.py`, `audit_engine.py`, `verify_evidence.py`, regex/SQLite/AST probes) to zero-token CLI scripts before spawning System 2 subagents.
     2. **Law 2 (True Orthogonality Sizing — `K` Vectors)**: Spawns `K ≥ 2` competing builders on coupled problems (`N = 1`) strictly for genuinely orthogonal algorithms, module seams, or visual paradigms.
     3. **Law 3 (Cognitive-Density Partitioning — `N` Shards)**: Sizes parallel fleets by per-shard working-set weight (1 dedicated subagent per heavy module, case study, or interactive HTML deck; domain-clustered subagents for lightweight items) bound by a **Pre-Locked Shared Seam Header** (and a **Pre-Assigned Bridge Matrix** for `/xobsidian /xultra`).

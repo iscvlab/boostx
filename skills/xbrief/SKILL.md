@@ -30,6 +30,7 @@ Red failure modes to prevent:
 | Pre-flight security checks or QGIS plugin packaging | [`/xpublish-audit`](../xpublish-audit/SKILL.md), [`/xpublish-qgis`](../xpublish-qgis/SKILL.md) |
 | Check conversation context compaction health | [`/xcontext`](../xcontext/SKILL.md) |
 | Author or distill a global agent skill | [`/xcreate-skill`](../xcreate-skill/SKILL.md) |
+| Extract text and CSV tables from standalone PDFs or scanned images | [`/xocr`](../xocr/SKILL.md) |
 | Write an end-of-session kickoff handoff prompt | [`/xkickoff`](../xkickoff/SKILL.md) |
 
 If the task is exclusively one of these standalone workflows without needing a workspace doc briefing first, delegate to that skill and halt.
@@ -63,7 +64,7 @@ Search `*.md` in the current workspace, including hidden skill or configuration 
   * When invoked alongside `/xlaya` (or `/layax`, `/laya`) in a multi-file unpinned documentation corpus or long specification, use [`/xlaya`](../xlaya/SKILL.md) (`shortlist_choice` / `score`) to semantically rank heading sections before executing Pass B reads.
 * **Opt-In [`/xultra`](../xultra/SKILL.md) Elastic Subsystem Scout Rule (`/xbrief /xultra`)**:
   * When invoked alongside `/xultra` across a multi-root workspace or large specification corpus, fan out **Elastic Read-Only Subsystem Scouts** (1 scout per subsystem root or spec cluster, each applying the per-window 8-file Pass-B reading bound) to return **Telegraphic Briefing Table Rows** without bloating the main thread's context window.
-* **Discovery & Reading Tools**: Use native file-reading (`read_file` / `view_file`) and platform search (`rg --hidden`, `grep`, or PowerShell `Select-String`).
+* **Discovery & Reading Tools**: Use native file-reading (`read_file` / `view_file`) and platform search (`rg --hidden`, `grep`, or PowerShell `Select-String`). When a user-pinned or canonical workspace specification exists only as a `.pdf` or raster image with no extracted `.md` equivalent yet, automatically invoke [`/xocr`](../xocr/SKILL.md) ([`../xocr/scripts/ocr_runner.py`](../xocr/scripts/ocr_runner.py), using `--pages` for targeted Pass A/B slicing) to extract `extracted_document.md` and `table_p*.csv`.
 
 #### Authority Hierarchy (Cap at 8 Files per Context Window)
 

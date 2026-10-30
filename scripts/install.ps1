@@ -1,5 +1,5 @@
 # BoostX Composable Agent Skills Installer (Windows PowerShell)
-# Copies the 13-skill BoostX (/x*) suite into host skill roots that exist on this machine.
+# Copies the 14-skill BoostX (/x*) suite into host skill roots that exist on this machine.
 
 param(
     [switch]$Antigravity,
@@ -16,9 +16,9 @@ $SkillsSrc = Join-Path $ScriptDir "skills"
 
 $LegacyDirs = @(
     "boostx", "briefx", "contextx", "create-skillx", "deep-researchx",
-    "kickoffx", "layax", "obsidianx", "planx", "publishx-audit",
-    "publishx-qgis", "researchx", "syncx", "ultrax",
-    "brief", "create-skill", "deep-research", "publish-audit", "publish-qgis", "update-doc"
+    "kickoffx", "layax", "obsidianx", "ocrx", "planx", "publishx-audit",
+    "publishx-qgis", "researchx", "syncx", "ultrax", "unlimited-ocr",
+    "brief", "create-skill", "deep-research", "ocr", "publish-audit", "publish-qgis", "update-doc"
 )
 
 Write-Host "============================================================" -ForegroundColor Cyan
@@ -86,5 +86,5 @@ if (-not [string]::IsNullOrEmpty($Workspace) -and (Test-Path $Workspace)) {
 }
 
 Write-Host "`n============================================================" -ForegroundColor Cyan
-Write-Host "  ✓ BoostX v3.2.0 Installation Complete! All 13 /x* skills ready." -ForegroundColor Green
+Write-Host "  ✓ BoostX v3.2.0 Installation Complete! All 14 /x* skills ready." -ForegroundColor Green
 Write-Host "============================================================" -ForegroundColor Cyan
