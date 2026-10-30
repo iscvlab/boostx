@@ -105,8 +105,14 @@ Before spawning subagents, output the 4-line **XUltra Swarm Contract**:
 | **Single-Agent Fallback** | **Sequential Multi-Persona Tournament** | Bounded Pass A → B reads | Writes `_vA.._vK` to disk → switches to **Blind Critic Persona** | Disjoint files + mandatory deterministic CLI verification |
 
 > [!IMPORTANT]
-> **Build-Lock & Git-Index Serialization Gate (Zero Race Conditions)**:
-> When running with shared disk state (`Workspace="inherit"`), parallel Builder subagents **MUST NEVER** execute package installers (`npm install`, `pip`, `cargo`), global repo compilers (`dotnet build`, `tsc`), or `git` index mutations concurrently. Builders write their disjoint files only; **Wave 2 (the Verification Critic)** executes the unified build/test runner once all file writes finish.
+> **Build-Lock, Git-Index & Live Desktop MCP Serialization Gate (Anti-"Multiple-Mouses" Invariant)**:
+> 1. **Build & Git Locks**: When running with shared disk state (`Workspace="inherit"`), parallel Builder subagents **MUST NEVER** execute package installers (`npm install`, `pip`, `cargo`), global repo compilers (`dotnet build`, `tsc`), or `git` index mutations concurrently. Builders write their disjoint files only; **Wave 2 (the Verification Critic)** executes the unified build/test runner once all file writes finish.
+> 2. **Live Desktop GUI MCP Servers (`/rhino`, `/grasshopper`, `/qgis`, `/illustrator`, `/figma`)**: Desktop CAD/GIS/Design runtimes operate on a **single-threaded UI & document loop**. Parallel Wave 1 subagents **MUST NEVER** concurrently mutate shared singleton GUI state (`set_selection`, `run_command`, `set_camera`, `g1_solve_graph`, `QgsLayerTreeRegistryBridge`, or `app.activeDocument`). Instead, enforce **Parallel Brains → Isolated Slots, Disjoint Layers, or Serialized Apply**:
+>    * **Rhino (`/rhino`)**: Either route each worker to an isolated instance via `spawn_slot` (`slot=slot_k`), or write headless `__rhino_doc__.Objects.Add*(geom, attr)` scripts targeting disjoint sub-layers (`<Parent>::<Shard_ID>`) on disk and execute/render sequentially in Wave 2.
+>    * **Grasshopper (`/grasshopper`)**: Author C#/Python components or declarative graph JSONs across non-overlapping canvas `Y`-bands with `solve=false` (`replace=false` on multi-wire inputs), followed by **one** serialized `g1_solve_graph` barrier in Wave 2.
+>    * **QGIS (`/qgis`)**: Generate disjoint `.gpkg`/`.geojson` and `.qml` style files offline in Wave 1 (or route to distinct `instance` IDs); execute `layerTreeRegistryBridge().setEnabled(False)` insertion and `apply_style_qml` sequentially in Wave 2 to prevent C++ `SIGSEGV`.
+>    * **Illustrator (`/illustrator`)**: Generate disjoint artboard SVGs or z-ordered manifests per slide/sublayer in Wave 1; execute COM/ExtendScript mutations, ascending Z-order grouping, and pre/post item-count checks sequentially in Wave 2.
+>    * **Figma (`/figma`)**: Share a **single** local HTTP server daemon (`port 8765`) serving disjoint `<stem>_vA.._vK.html` variants for side-by-side `html.to.design` push or shard `get_figma_data` pulls by `nodeId`.
 
 ---
 
@@ -151,6 +157,7 @@ Never truncate required primary-source evidence to fit an arbitrary word cap, an
 | **[`/xobsidian`](../xobsidian/SKILL.md) `/xultra`** *(Strict Opt-In)* | Locks a **Pre-Assigned Bridge Matrix** in the Shared Seam Header (guaranteeing unique `[[wikilink]]` neighbor sets), then fans out rolling Vault Builder waves across `VAULT_ROOT`. | Graph Topology Auditor synchronizing `Hub - *.md` tables and running the Graph Integrity Gate (`BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`). |
 | **[`/xlaya`](../xlaya/SKILL.md) `/xultra`** | Runs Law 1 `laya_triage.py` (`shortlist`, `contradiction`, or `rubric`) in milliseconds (`0` output tokens) to prune low-signal chunks before spawning System 2 subagents. | Dispatches System 2 Builder/Critic shards strictly on the high-signal `#L<start>-L<end>` ranges flagged by System 1. |
 | **[`/xcreate-skill`](../xcreate-skill/SKILL.md) `/xultra`** & **[`/xpublish-audit`](../xpublish-audit/SKILL.md) `/xultra`** | Runs Law 1 `audit_engine.py` + 3-Bucket numeric regex scan, then shards skill/package audits across specialized Audit Scouts (`Secret/Path`, `AST/Portability`, `3-Bucket Quota & Claim Receipt`). | Independent Blind Release Gatekeeper verifying `0` blocking issues, `0` Bucket 3 magic quotas, and `0` unverified `LIVE` claims. |
+| **`/rhino` / `/grasshopper` / `/qgis` / `/illustrator` / `/figma` + `/xultra`** | **Parallel Brains, Single Mouse**: Wave 1 shards author disjoint `RhinoCommon`/`.gh`/`.gpkg`+`.qml`/`.svg`/`_vA.._vK.html` payloads on disk (or isolated `spawn_slot` / `instance` processes) with `solve=false` and zero shared UI selection calls. | Serialized Wave 2 MCP Integrator & Blind Critic commits layers/graphs sequentially, runs `get_context` / 1-line QA / `RuntimeMessages`, and captures `get_viewport_image` / canvas screenshots. |
 
 ---
 

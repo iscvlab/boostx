@@ -593,9 +593,12 @@ def audit_skill_invariants(target: Path, result: AuditResult):
             str(skill_md),
         )
 
-    # 4. Anti-Hardcoded Ephemeral Metrics, Bucket 3 Quotas & Persona Neutrality Scanner
-    ephemeral_pat = re.compile(r"(?i)\b(all\s+\d+\s+layers|\b\d+\s+layers\b)")
-    persona_pat = re.compile(r"(?i)\b(asus\s+laptop|windows\s+desktop\s+pc)\b")
+    # 4. Anti-Hardcoded Ephemeral Metrics, Bucket 3 Quotas & Persona/Project Neutrality Scanner
+    ephemeral_pat = re.compile(r"(?i)\b(all\s+\d+\s+layers|\b\d+\s+layers\b|LDD\s+11,028)")
+    persona_pat = re.compile(
+        r"(?i)\b(asus\s+laptop|home\s+pc|windows\s+desktop\s+pc|on\s+nut|01_on_nut|"
+        r"161-rai|khlong\s+prawet|traffy|ON_v[0-9]|thesis_architecture\.html|slide_style_showcase_v2\.html)\b"
+    )
     bucket3_pat = re.compile(
         r"(?i)(≤\s*150[- ]words?|150[- ]word\s+caveman|≤\s*12\s+lines|"
         r"\b4[-–]12`?\s+agents\b|\b4[-–]5`?\s+agents\b|\bup\s+to\s+`?6`?\s+concurrent\s+scouts\b|"
@@ -614,8 +617,8 @@ def audit_skill_invariants(target: Path, result: AuditResult):
         m_pers = persona_pat.search(line)
         if m_pers:
             result.add_warning(
-                f"Potential hardcoded personal hardware/persona string detected: `{m_pers.group(0)}`. "
-                "Use universal workstation terminology (e.g. 'Windows, macOS, and Linux workstations').",
+                f"Potential hardcoded personal hardware/project/thesis string detected: `{m_pers.group(0)}`. "
+                "Use universal, project-agnostic terminology.",
                 str(skill_md),
                 i,
             )
@@ -636,8 +639,11 @@ def audit_skill_invariants(target: Path, result: AuditResult):
         except Exception:
             continue
 
-        # Strip fenced code blocks and inline code spans to avoid false positives on syntax examples
+        # Strip fenced code blocks and inline code spans that wrap an entire [text](url) example,
+        # while unwrapping backticks inside link labels like [`file.py`](path/to/file.py)
         clean_md = re.sub(r"```[\s\S]*?```", "", md_text)
+        clean_md = re.sub(r"``[^\n]+?``", "", clean_md)
+        clean_md = re.sub(r"\[`([^`\n]+)`\]\(", r"[\1](", clean_md)
         clean_md = re.sub(r"`[^`\n]+`", "", clean_md)
 
         for m in re.finditer(r"\[([^\]]+)\]\(([^)]+)\)", clean_md):

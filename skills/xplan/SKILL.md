@@ -9,7 +9,7 @@ description: >
 
 # Antigravity Architectural & Implementation Planner (`/xplan`)
 
-When `/xplan` (or legacy aliases `/planx`, `/plan`) is invoked, enter the **Antigravity XPlan Protocol**. XPlan constructs a rigorous, decision-complete [`implementation_plan.md`](file:///implementation_plan.md) artifact combining **inline structured grilling**, **Ponytail × Deep Module seam evaluation**, **Mermaid architecture diagrams**, and a **falsifiable Red → Green verification matrix**—with **zero chat-window interrogation**.
+When `/xplan` (or legacy aliases `/planx`, `/plan`) is invoked, enter the **Antigravity XPlan Protocol**. XPlan constructs a rigorous, decision-complete `implementation_plan.md` artifact combining **inline structured grilling**, **Ponytail × Deep Module seam evaluation**, **Mermaid architecture diagrams**, and a **falsifiable Red → Green verification matrix**—with **zero chat-window interrogation**.
 
 Portable across Antigravity IDE, `agy` CLI, Claude Code, and multi-agent environments across Windows, macOS, and Linux.
 
@@ -159,7 +159,7 @@ flowchart LR
    * Always pass `ArtifactMetadata` with `RequestFeedback = true` and `UserFacing = true`.
 2. **Concise Chat Handoff (Zero Redundant Wall-of-Text)**:
    * Do **not** re-summarize or paste the plan contents into the chat response.
-   * Point the user to [`implementation_plan.md`](file:///implementation_plan.md), list only the **Decision IDs** (e.g., `Decision 1`, `Decision 2`) that need their selection, and note:
+   * Point the user to the generated `implementation_plan.md` artifact (`[implementation_plan.md](file:///<appDataDir>/brain/<conversation-id>/implementation_plan.md)`), list only the **Decision IDs** (e.g., `Decision 1`, `Decision 2`) that need their selection, and note:
      *"Reply with your option choices (e.g. `1A, 2A`) or click **Proceed** to execute via `/xboost`."*
 3. **Automatic `/xplan` → [`/xboost`](../xboost/SKILL.md) Bridge**:
    * Once the user approves the plan or selects their options, immediately lock Section 4 (`Red → Green Verification Matrix`) as the **XBoost Phase 1 Goal Contract** and execute the surgical implementation.

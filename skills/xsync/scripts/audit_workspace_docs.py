@@ -51,6 +51,8 @@ def strip_code_regions(text: str, suffix: str) -> str:
     cleaned = text
     if suffix == ".md":
         cleaned = re.sub(r"```[\s\S]*?```", "", cleaned)
+        cleaned = re.sub(r"``[^\n]+?``", "", cleaned)
+        cleaned = re.sub(r"\[`([^`\n]+)`\]\(", r"[\1](", cleaned)
         cleaned = re.sub(r"`[^`\n]+`", "", cleaned)
     elif suffix == ".html":
         cleaned = re.sub(r"<script\b[^>]*>[\s\S]*?</script>", "", cleaned, flags=re.IGNORECASE)

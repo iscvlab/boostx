@@ -5,6 +5,7 @@ param(
     [switch]$Antigravity,
     [switch]$Claude,
     [switch]$Grok,
+    [switch]$Agents,
     [switch]$All,
     [string]$Workspace = ""
 )
@@ -42,36 +43,38 @@ function Install-Skills([string]$TargetDir, [string]$PlatformName) {
     Get-ChildItem -Directory $SkillsSrc | ForEach-Object {
         $skillName = $_.Name
         $dest = Join-Path $TargetDir $skillName
-        
+
         if (Test-Path $dest) {
             Remove-Item $dest -Recurse -Force
         }
-        
+
         # Copy as real directory to prevent nested junction recursion limits
         Copy-Item $_.FullName $dest -Recurse -Force
         Write-Host "  ✓ Installed /$skillName" -ForegroundColor Green
     }
 }
 
-# Auto-detect or use flags
-$installAll = $All.IsPresent -or (
-    -not $Antigravity.IsPresent -and -not $Claude.IsPresent -and -not $Grok.IsPresent -and [string]::IsNullOrEmpty($Workspace)
-)
+$noHostFlag = -not $Antigravity.IsPresent -and -not $Claude.IsPresent -and -not $Grok.IsPresent -and -not $Agents.IsPresent -and [string]::IsNullOrEmpty($Workspace)
 
 $geminiDir = Join-Path $env:USERPROFILE ".gemini\config\skills"
-if ($installAll -or $Antigravity.IsPresent -or (Test-Path (Join-Path $env:USERPROFILE ".gemini"))) {
+if ($Antigravity.IsPresent -or $All.IsPresent -or ($noHostFlag -and (Test-Path (Join-Path $env:USERPROFILE ".gemini")))) {
     Install-Skills $geminiDir "Gemini / Antigravity"
 }
 
 $claudeDir = Join-Path $env:USERPROFILE ".claude\skills"
-if ($installAll -or $Claude.IsPresent -or (Test-Path (Join-Path $env:USERPROFILE ".claude"))) {
+if ($Claude.IsPresent -or $All.IsPresent -or ($noHostFlag -and (Test-Path (Join-Path $env:USERPROFILE ".claude")))) {
     Install-Skills $claudeDir "Claude Code"
 }
 
 $grokHome = if ($env:GROK_HOME) { $env:GROK_HOME } else { Join-Path $env:USERPROFILE ".grok" }
 $grokDir = Join-Path $grokHome "skills"
-if ($installAll -or $Grok.IsPresent -or (Test-Path $grokHome)) {
+if ($Grok.IsPresent -or $All.IsPresent -or ($noHostFlag -and (Test-Path $grokHome))) {
     Install-Skills $grokDir "Grok"
+}
+
+$agentsDir = Join-Path $env:USERPROFILE ".agents\skills"
+if ($Agents.IsPresent -or $All.IsPresent -or ($noHostFlag -and (Test-Path (Join-Path $env:USERPROFILE ".agents")))) {
+    Install-Skills $agentsDir "Cursor / Codex / Windsurf (.agents)"
 }
 
 if (-not [string]::IsNullOrEmpty($Workspace) -and (Test-Path $Workspace)) {
