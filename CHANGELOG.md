@@ -1,5 +1,37 @@
 # Changelog
 
+## v3.2.0
+
+- **Prefix `/x*` Namespace Migration (`14 → 13 Composable Skills`) — Instant `/x` Autocomplete Discovery**:
+  - **Standardized `x...` Prefix Namespace**: Migrated every skill in the BoostX ecosystem from the `-x` suffix to the `x-` prefix so typing `/x` in any IDE/CLI slash-command menu immediately surfaces all 13 BoostX skills in a single contiguous block without memorizing base names:
+    - `/boostx` → **`/xboost`**
+    - `/briefx` → **`/xbrief`**
+    - `/contextx` → **`/xcontext`**
+    - `/create-skillx` → **`/xcreate-skill`**
+    - `/deep-researchx` + `/researchx` → **`/xdeep-research`**
+    - `/kickoffx` → **`/xkickoff`**
+    - `/layax` → **`/xlaya`**
+    - `/obsidianx` → **`/xobsidian`**
+    - `/planx` → **`/xplan`**
+    - `/publishx-audit` → **`/xpublish-audit`**
+    - `/publishx-qgis` → **`/xpublish-qgis`**
+    - `/syncx` → **`/xsync`**
+    - `/ultrax` → **`/xultra`**
+  - **Backward-Compatible Trigger Aliases**: All 13 `SKILL.md` YAML frontmatter descriptions preserve legacy `-x` (`/*x`) and unprefixed triggers while maintaining **`100%` compliance (`393.08 ± 8.18 chars`)** within the `≤ 400`-char `audit_engine.py --platform skill` context budget guard.
+- **Unified `/xdeep-research` (Retiring Standalone `researchx`)**:
+  - Merged `researchx`'s **3-Tier Adaptive Scope Routing** (`Tier 1: Fast Inline Probe ≤ 2 sources`, `Tier 2: Single Isolated Scout`, `Tier 3: 5-Wave Adversarial Swarm`), **4-Tier Primary-Source Authority Ladder** (local pinned manifests, SQLite/AST/CLI probes first), and **Capability-Aware Subagent Write-Permission Contract** directly into **`/xdeep-research`** (and `/xboost` Track B).
+  - Eliminated routing ambiguity between tactical lookups and multi-agent proof synthesis while keeping fast `≤ 2`-source lookups in the main thread with zero subagent spawn overhead.
+- **Automated Legacy Directory Cleanup & Empirical Re-Benchmarking**:
+  - Updated `scripts/install.ps1` and `scripts/install.sh` to automatically purge deprecated `*x` and pre-`v3.0` folders from `~/.gemini/config/skills`, `~/.claude/skills`, and `~/.grok/skills` during upgrades.
+  - Re-ran the full multi-trial benchmark harness (`benchmarks/run_boostx_benchmark.py` and `benchmarks/generate_figures.py`) across `109` installed skills, `752` markdown files, `25` red-team defects (`100%` catch rate in `6.45 ms`), and `214` real IDE sessions (`987` prompt turns).
+
+### Install
+
+See README. Tag: `v3.2.0`.
+```bash
+git clone --branch v3.2.0 https://github.com/iscvlab/boostx.git
+```
+
 ## v3.1.0
 
 - **`/ultrax` (`13 → 14 Composable Skills`) — Dynamic Topology-Matched Multi-Agent Swarm & Blind Verification Multiplier**:

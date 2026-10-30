@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-Deterministic Zero-Dependency Academic SVG Figure Generator for BoostX (v3.1.0).
+Deterministic Zero-Dependency Academic SVG Figure Generator for BoostX (v3.2.0).
 
 Uses ONLY the Python 3.8+ standard library (`json`, `math`, `pathlib`, `xml.sax.saxutils`)
 to generate publication-grade vector SVG figures (IEEE / ACM / Edward Tufte minimalist style)
 directly from `benchmarks/BENCHMARK_RESULTS.json`:
   - docs/assets/boostx-benchmark-summary.svg      (2x2 composite figure for README.md Section 4.4)
-  - docs/assets/fig1_discovery_distribution.svg   (Experiment 1: N=109 skill discovery & trigger guards)
-  - docs/assets/fig2_compression_latency.svg      (Experiments 2 & 3: Context compression & /layax latency)
+  - docs/assets/fig1_discovery_distribution.svg   (Experiment 1: skill discovery & trigger guards)
+  - docs/assets/fig2_compression_latency.svg      (Experiments 2 & 3: Context compression & /xlaya latency)
   - docs/assets/fig3_ablation_redteam.svg         (Experiments 4 & 5: 25-defect red-team & ablation curve)
-  - docs/assets/fig4_token_distributions.svg      (Experiment 6: N=65 sessions / 576 turns token quantiles)
+  - docs/assets/fig4_token_distributions.svg      (Experiment 6: session & turn token quantiles)
 """
 
 import argparse
@@ -277,7 +277,7 @@ def draw_discovery_boxplot_panel(
     n_all = exp1["all_installed"]["count"]
     n_dom = exp1["community_and_domain"]["count"]
     cohorts = [
-        ("BoostX v3.1.0 Suite", f"(n = {n_bx} skills)", exp1["boostx_13"], PAL["navy"], PAL["navy_fill"]),
+        ("BoostX v3.2.0 Suite", f"(n = {n_bx} skills)", exp1["boostx_13"], PAL["navy"], PAL["navy_fill"]),
         (
             "Official Cloud / Vendor", f"(n = {n_oev} skills)",
             exp1["official_enterprise"], PAL["ochre"], PAL["ochre_fill"],
@@ -335,7 +335,7 @@ def draw_discovery_compliance_bars_panel(
     dom_s = exp1["community_and_domain"]
     groups = [
         (
-            "BoostX v3.1.0", f"(n={b13['count']})",
+            "BoostX v3.2.0", f"(n={b13['count']})",
             b13["budget_500_compliance_pct"], b13["dual_trigger_guard_pct"], f"{b13['count']}/{b13['count']}",
         ),
         (
@@ -344,7 +344,7 @@ def draw_discovery_compliance_bars_panel(
         ),
         (
             "All Installed", f"(N={all_s['count']})",
-            all_s["budget_500_compliance_pct"], all_s["dual_trigger_guard_pct"], f"33/{all_s['count']}",
+            all_s["budget_500_compliance_pct"], all_s["dual_trigger_guard_pct"], f"32/{all_s['count']}",
         ),
         (
             "Other Domain", f"(n={dom_s['count']})",
@@ -435,9 +435,24 @@ def draw_compression_log_panel(
     )
 
     regimes = [
-        ("1. Unbounded Crawl", "(710 files: Repo+Vault)", exp2["unbounded_crawl"], ""),
-        ("2. /briefx Repo-Only", "(Cap 8: 8 files)", exp2["briefx_repo_only"], "-98.24%"),
-        ("3. /briefx + /obsidianx", "(Cap 8 + 2-Hop: 12 files)", exp2["briefx_obsidianx_2hop"], "-97.94%"),
+        (
+            "1. Unbounded Crawl",
+            f"({exp2['unbounded_crawl']['files_read']} files: Repo+Vault)",
+            exp2["unbounded_crawl"],
+            "",
+        ),
+        (
+            "2. /xbrief Repo-Only",
+            "(Cap 8: 8 files)",
+            exp2["briefx_repo_only"],
+            f"-{exp2['briefx_repo_only']['token_reduction_pct']}%",
+        ),
+        (
+            "3. /xbrief + /xobsidian",
+            "(Cap 8 + 2-Hop: 12 files)",
+            exp2["briefx_obsidianx_2hop"],
+            f"-{exp2['briefx_obsidianx_2hop']['token_reduction_pct']}%",
+        ),
     ]
 
     col_w = w / 3.0
@@ -511,12 +526,14 @@ def draw_layax_triage_panel(
 
     items = [
         (
-            "Full Unchunked Corpus (20 Specs / 390 Chunks)",
-            exp3["full_corpus_tokens"], PAL["slate"], PAL["slate_fill"], "78,533 tok (100%)",
+            f"Full Unchunked Corpus ({exp3['files_chunked']} Specs / {exp3['total_chunks_evaluated']} Chunks)",
+            exp3["full_corpus_tokens"], PAL["slate"], PAL["slate_fill"],
+            f"{exp3['full_corpus_tokens']:,} tok (100%)",
         ),
         (
-            "/layax Top-5 Shortlisted Sections (Pass-B Read)",
-            exp3["top5_shortlisted_tokens"], PAL["navy"], PAL["navy_fill"], "1,344 tok (-98.29%)",
+            "/xlaya Top-5 Shortlisted Sections (Pass-B Read)",
+            exp3["top5_shortlisted_tokens"], PAL["navy"], PAL["navy_fill"],
+            f"{exp3['top5_shortlisted_tokens']:,} tok (-{exp3['pass_b_token_reduction_pct']}%)",
         ),
     ]
     for idx, (lbl, tv, col, fill_c, val_s) in enumerate(items):
@@ -532,7 +549,8 @@ def draw_layax_triage_panel(
     svg.text(
         x0 + 2,
         sub_y - 20,
-        "Single-Pass Section Ranking Latency Distribution (n = 30 Timed Trials, 390 Chunks → 44,725 chunks/sec):",
+        f"Single-Pass Section Ranking Latency Distribution (n = {exp3['trials']} Timed Trials, "
+        f"{exp3['total_chunks_evaluated']} Chunks → {exp3['throughput_chunks_per_sec']:,.0f} chunks/sec):",
         size=9.6,
         weight="bold",
         fill=PAL["ink"],
@@ -678,7 +696,7 @@ def draw_ablation_curve_panel(
 
     levels = [
         ("Level 0", "Raw Prompt (0 Gates)", exp5[0]["seeded_defect_catch_pct"], exp5[0]["avg_steps_per_turn"]),
-        ("Level 1", "/boostx (2 Gates)", exp5[1]["seeded_defect_catch_pct"], exp5[1]["avg_steps_per_turn"]),
+        ("Level 1", "/xboost (2 Gates)", exp5[1]["seeded_defect_catch_pct"], exp5[1]["avg_steps_per_turn"]),
         ("Level 2", "2-Hop Chain (4 Gates)", exp5[2]["seeded_defect_catch_pct"], exp5[2]["avg_steps_per_turn"]),
         ("Level 3", "Full 5-Stage (7 Gates)", exp5[3]["seeded_defect_catch_pct"], exp5[3]["avg_steps_per_session"]),
     ]
@@ -760,9 +778,15 @@ def draw_per_turn_tokens_panel(
         ("KV-Cache Replay", "(Context Reuse)", "kv_cache_read_tokens"),
     ]
     modes = [
-        ("Standard (n=450)", pt["standard_no_skill"], PAL["slate"], PAL["slate_fill"]),
-        ("Single -x (n=58)", pt["single_boostx_skill"], PAL["violet"], PAL["violet_fill"]),
-        ("Chained 2+ -x (n=68)", pt["chained_multi_skill"], PAL["navy"], PAL["navy_fill"]),
+        (f"Standard (n={pt['standard_no_skill']['count']})", pt["standard_no_skill"], PAL["slate"], PAL["slate_fill"]),
+        (
+            f"Single /x* (n={pt['single_boostx_skill']['count']})",
+            pt["single_boostx_skill"], PAL["violet"], PAL["violet_fill"],
+        ),
+        (
+            f"Chained 2+ /x* (n={pt['chained_multi_skill']['count']})",
+            pt["chained_multi_skill"], PAL["navy"], PAL["navy_fill"],
+        ),
     ]
 
     col_w = w / len(components)
@@ -866,15 +890,15 @@ def draw_session_tiers_panel(
     ps = exp6["per_session"]
     cohorts = [
         (
-            "Chained Multi-Skill", "(BoostX, n = 33)",
+            "Chained Multi-Skill", f"(BoostX, n = {ps['chained_multi_skill']['count']})",
             ps["chained_multi_skill"]["total_processed_tokens"], PAL["navy"], PAL["navy_fill"],
         ),
         (
-            "Single-Skill Session", "(BoostX, n = 4)",
+            "Single-Skill Session", f"(BoostX, n = {ps['single_boostx_skill']['count']})",
             ps["single_boostx_skill"]["total_processed_tokens"], PAL["violet"], PAL["violet_fill"],
         ),
         (
-            "Standard Session", "(No -x, n = 28)",
+            "Standard Session", f"(No /x*, n = {ps['standard_no_skill']['count']})",
             ps["standard_no_skill"]["total_processed_tokens"], PAL["slate"], PAL["slate_fill"],
         ),
     ]
@@ -902,11 +926,17 @@ def build_all_figures(data: Dict[str, Any]) -> Dict[str, Path]:
     ASSETS_DIR.mkdir(parents=True, exist_ok=True)
     outputs: Dict[str, Path] = {}
 
+    n_skills = data["exp1_skill_discovery"]["total_installed_skills_scanned"]
+    n_sess = data["exp6_token_economics"]["total_sessions_analyzed"]
+    n_turns = data["exp6_token_economics"]["total_turns_analyzed"]
+    n_chunks = data["exp3_layax_triage"]["total_chunks_evaluated"]
+    p_red = data["exp3_layax_triage"]["pass_b_token_reduction_pct"]
+
     # 1. Composite 2x2 Summary Figure for README.md (1280 x 780)
     c_sum = SvgCanvas(1280, 780)
     draw_discovery_boxplot_panel(
         c_sum, 155, 48, 435, 275, data["exp1_skill_discovery"],
-        "(a) System-Prompt YAML Budget & Trigger Guards (N = 109)",
+        f"(a) System-Prompt YAML Budget & Trigger Guards (N = {n_skills})",
         "Character length distribution against 500-char host truncation limit",
     )
     draw_compression_log_panel(
@@ -921,7 +951,7 @@ def build_all_figures(data: Dict[str, Any]) -> Dict[str, Path]:
     )
     draw_session_tiers_panel(
         c_sum, 745, 430, 490, 275, data["exp6_token_economics"],
-        "(d) Session Token Distributions & Subscription Sizing (N = 65)",
+        f"(d) Session Token Distributions & Subscription Sizing (N = {n_sess})",
         "Cumulative session throughput (IQR, P90 & Mean ♦) vs. plan capacity",
     )
     p_sum = ASSETS_DIR / "boostx-benchmark-summary.svg"
@@ -932,7 +962,7 @@ def build_all_figures(data: Dict[str, Any]) -> Dict[str, Path]:
     c_f1 = SvgCanvas(1260, 400)
     draw_discovery_boxplot_panel(
         c_f1, 155, 48, 445, 285, data["exp1_skill_discovery"],
-        "(a) YAML Frontmatter Character Distribution (N = 109 Skills)",
+        f"(a) YAML Frontmatter Character Distribution (N = {n_skills} Skills)",
         "Min / P25–P75 IQR / Max whiskers, Median line, and Mean ♦ marker",
     )
     draw_discovery_compliance_bars_panel(
@@ -944,17 +974,17 @@ def build_all_figures(data: Dict[str, Any]) -> Dict[str, Path]:
     p_f1.write_text(c_f1.render(), encoding="utf-8")
     outputs["fig1_discovery_distribution"] = p_f1
 
-    # 3. Fig 2: Context Compression & /layax Triage Latency (1260 x 400)
+    # 3. Fig 2: Context Compression & /xlaya Triage Latency (1260 x 400)
     c_f2 = SvgCanvas(1260, 400)
     draw_compression_log_panel(
         c_f2, 95, 48, 495, 285, data["exp2_context_compression"],
         "(a) Startup Context Volume & Disk I/O Latency (n = 30 Trials)",
-        "3 warm-ups + 30 timed passes across 710 repository & vault markdown files",
+        "3 warm-ups + 30 timed passes across repository & vault markdown files",
     )
     draw_layax_triage_panel(
         c_f2, 695, 48, 535, 285, data["exp3_layax_triage"],
-        "(b) /layax System 1 Section Shortlisting (390 Chunks, n = 30 Trials)",
-        "Pass-B reading token compression (-98.29%) and trial latency quantiles",
+        f"(b) /xlaya System 1 Section Shortlisting ({n_chunks} Chunks, n = 30 Trials)",
+        f"Pass-B reading token compression (-{p_red}%) and trial latency quantiles",
     )
     p_f2 = ASSETS_DIR / "fig2_compression_latency.svg"
     p_f2.write_text(c_f2.render(), encoding="utf-8")
@@ -980,12 +1010,12 @@ def build_all_figures(data: Dict[str, Any]) -> Dict[str, Path]:
     c_f4 = SvgCanvas(1260, 400)
     draw_per_turn_tokens_panel(
         c_f4, 95, 48, 505, 285, data["exp6_token_economics"],
-        "(a) Per-Turn Token Component Quantiles (N = 576 Prompt Turns)",
+        f"(a) Per-Turn Token Component Quantiles (N = {n_turns} Prompt Turns)",
         "Bar = Mean, Circle = Median (P50), Whiskers = IQR [P25–P75] on log₁₀ scale",
     )
     draw_session_tiers_panel(
         c_f4, 745, 48, 485, 285, data["exp6_token_economics"],
-        "(b) Full-Session Token Throughput & Tier Sizing (N = 65 Sessions)",
+        f"(b) Full-Session Token Throughput & Tier Sizing (N = {n_sess} Sessions)",
         "Cumulative session tokens (IQR, P90 & Mean ♦) mapped to subscription tiers",
     )
     p_f4 = ASSETS_DIR / "fig4_token_distributions.svg"

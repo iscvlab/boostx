@@ -1,5 +1,5 @@
 # BoostX Composable Agent Skills Installer (Windows PowerShell)
-# Copies the 14-skill BoostX suite into host skill roots that exist on this machine.
+# Copies the 13-skill BoostX (/x*) suite into host skill roots that exist on this machine.
 
 param(
     [switch]$Antigravity,
@@ -13,8 +13,15 @@ $ErrorActionPreference = "Stop"
 $ScriptDir = Split-Path -Parent $PSScriptRoot
 $SkillsSrc = Join-Path $ScriptDir "skills"
 
+$LegacyDirs = @(
+    "boostx", "briefx", "contextx", "create-skillx", "deep-researchx",
+    "kickoffx", "layax", "obsidianx", "planx", "publishx-audit",
+    "publishx-qgis", "researchx", "syncx", "ultrax",
+    "brief", "create-skill", "deep-research", "publish-audit", "publish-qgis", "update-doc"
+)
+
 Write-Host "============================================================" -ForegroundColor Cyan
-Write-Host "  ⚡ BoostX Agent Skills (v3.1.0) - Windows Installer" -ForegroundColor Cyan
+Write-Host "  ⚡ BoostX Agent Skills (v3.2.0) - Windows Installer" -ForegroundColor Cyan
 Write-Host "============================================================" -ForegroundColor Cyan
 Write-Host "Source: $SkillsSrc"
 
@@ -23,6 +30,14 @@ function Install-Skills([string]$TargetDir, [string]$PlatformName) {
         New-Item -ItemType Directory -Path $TargetDir -Force | Out-Null
     }
     Write-Host "`nInstalling into $PlatformName ($TargetDir)..." -ForegroundColor Yellow
+
+    foreach ($oldName in $LegacyDirs) {
+        $oldPath = Join-Path $TargetDir $oldName
+        if (Test-Path $oldPath) {
+            Remove-Item $oldPath -Recurse -Force
+            Write-Host "  - Removed legacy /$oldName" -ForegroundColor DarkGray
+        }
+    }
 
     Get-ChildItem -Directory $SkillsSrc | ForEach-Object {
         $skillName = $_.Name
@@ -68,5 +83,5 @@ if (-not [string]::IsNullOrEmpty($Workspace) -and (Test-Path $Workspace)) {
 }
 
 Write-Host "`n============================================================" -ForegroundColor Cyan
-Write-Host "  ✓ BoostX v3.1.0 Installation Complete! All 14 skills ready." -ForegroundColor Green
+Write-Host "  ✓ BoostX v3.2.0 Installation Complete! All 13 /x* skills ready." -ForegroundColor Green
 Write-Host "============================================================" -ForegroundColor Cyan

@@ -1,14 +1,21 @@
 #!/usr/bin/env bash
-# BoostX Composable Agent Skills (v3.1.0) - Universal Installer (macOS & Linux)
-# Links the 14-skill BoostX suite into Claude Code (~/.claude/skills), Grok (~/.grok/skills), and Gemini/Antigravity (~/.gemini/config/skills)
+# BoostX Composable Agent Skills (v3.2.0) - Universal Installer (macOS & Linux)
+# Links the 13-skill BoostX (/x*) suite into Claude Code (~/.claude/skills), Grok (~/.grok/skills), and Gemini/Antigravity (~/.gemini/config/skills)
 
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SKILLS_SRC="$SCRIPT_DIR/skills"
 
+LEGACY_DIRS=(
+    "boostx" "briefx" "contextx" "create-skillx" "deep-researchx"
+    "kickoffx" "layax" "obsidianx" "planx" "publishx-audit"
+    "publishx-qgis" "researchx" "syncx" "ultrax"
+    "brief" "create-skill" "deep-research" "publish-audit" "publish-qgis" "update-doc"
+)
+
 echo "============================================================"
-echo "  ⚡ BoostX Agent Skills (v3.1.0) - Universal Installer"
+echo "  ⚡ BoostX Agent Skills (v3.2.0) - Universal Installer"
 echo "============================================================"
 echo "Source: $SKILLS_SRC"
 
@@ -20,6 +27,14 @@ install_to() {
     echo ""
     echo "Installing into $name ($target_dir)..."
     
+    for old_name in "${LEGACY_DIRS[@]}"; do
+        local old_dest="$target_dir/$old_name"
+        if [ -L "$old_dest" ] || [ -d "$old_dest" ]; then
+            rm -rf "$old_dest"
+            echo "  - Removed legacy /$old_name"
+        fi
+    done
+
     for skill in "$SKILLS_SRC"/*; do
         if [ -d "$skill" ]; then
             local skill_name
@@ -61,5 +76,5 @@ fi
 
 echo ""
 echo "============================================================"
-echo "  ✓ BoostX v3.1.0 Installation Complete! All 14 skills ready."
+echo "  ✓ BoostX v3.2.0 Installation Complete! All 13 /x* skills ready."
 echo "============================================================"

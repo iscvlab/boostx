@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-BoostX v3.1.0 — Reproducible Multi-Trial Empirical Benchmark Suite.
+BoostX v3.2.0 — Reproducible Multi-Trial Empirical Benchmark Suite.
 Executes 6 falsifiable experiments across real installed skills, multi-workspace
 corpora, 25 seeded red-team defects, and historical IDE conversation transcripts:
-  Exp 1: Skill Frontmatter & Context Budget Audit (BoostX 14 vs Official Cloud/Vendor Skills)
+  Exp 1: Skill Frontmatter & Context Budget Audit (BoostX 13 vs Official Cloud/Vendor Skills)
   Exp 2: Context Compression & 2-Hop Vault Isolation (3 Warm-ups + 30 Timed Trials)
-  Exp 3: System 1 Section Triage & Contradiction Speed (/layax, 3 Warm-ups + 30 Timed Trials)
+  Exp 3: System 1 Section Triage & Contradiction Speed (/xlaya, 3 Warm-ups + 30 Timed Trials)
   Exp 4: 25-Defect Red-Team Catch Rate & CLI Gate Latency (3 Warm-ups + 20 Timed Trials)
   Exp 5: Composable Workflow Ablation Matrix (Level 1 Single -> Level 4 Full Chain)
   Exp 6: Real Session Token Economics (Inputs + KV-Cache Read + Thinking + Output + Tier Sizing)
@@ -32,20 +32,19 @@ REPO_ROOT = SCRIPT_DIR.parent
 SKILLS_DIR = REPO_ROOT / "skills"
 
 BOOSTX_13_NAMES = [
-    "boostx",
-    "briefx",
-    "contextx",
-    "create-skillx",
-    "deep-researchx",
-    "kickoffx",
-    "layax",
-    "obsidianx",
-    "planx",
-    "publishx-audit",
-    "publishx-qgis",
-    "researchx",
-    "syncx",
-    "ultrax",
+    "xboost",
+    "xbrief",
+    "xcontext",
+    "xcreate-skill",
+    "xdeep-research",
+    "xkickoff",
+    "xlaya",
+    "xobsidian",
+    "xplan",
+    "xpublish-audit",
+    "xpublish-qgis",
+    "xsync",
+    "xultra",
 ]
 
 OFFICIAL_ENTERPRISE_NAMES = [
@@ -220,7 +219,7 @@ def run_exp1_skill_discovery_audit() -> Dict[str, Any]:
 
     return {
         "total_installed_skills_scanned": len(all_parsed),
-        "boostx_13": summarize_group("BoostX v3.1.0 Suite (14 Composable -x Skills)", bx_parsed),
+        "boostx_13": summarize_group("BoostX v3.2.0 Suite (13 Composable /x* Skills)", bx_parsed),
         "official_enterprise": summarize_group(
             f"Official Cloud & Enterprise Vendor Skills (N={len(ent_parsed)})", ent_parsed
         ),
@@ -233,8 +232,10 @@ def run_exp1_skill_discovery_audit() -> Dict[str, Any]:
 
 
 def run_exp2_context_compression_benchmark(warmup: int = 3, trials: int = 30) -> Dict[str, Any]:
-    """Experiment 2: Measure Unbounded Repo+Vault Crawl vs /briefx Cap-8 vs /briefx + /obsidianx 2-Hop."""
-    parent_workspace = REPO_ROOT.parent.parent
+    """Experiment 2: Measure Unbounded Repo+Vault Crawl vs /xbrief Cap-8 vs /xbrief + /xobsidian 2-Hop."""
+    parent_workspace = (
+        REPO_ROOT.parent if (REPO_ROOT.parent / "ISCV-Workspace").is_dir() else REPO_ROOT.parent.parent
+    )
     iscv_ws = parent_workspace / "ISCV-Workspace"
     thesis_ws = parent_workspace / "Thesis-workspace"
     vault_ws = parent_workspace / "napattan-vault"
@@ -391,13 +392,13 @@ def run_exp2_context_compression_benchmark(warmup: int = 3, trials: int = 30) ->
 
 
 def run_exp3_layax_triage_speed(warmup: int = 3, trials: int = 30) -> Dict[str, Any]:
-    """Experiment 3: Benchmark /layax heading chunking & section shortlisting latency across 30 trials."""
-    laya_script_dir = SKILLS_DIR / "layax" / "scripts"
+    """Experiment 3: Benchmark /xlaya heading chunking & section shortlisting latency across 30 trials."""
+    laya_script_dir = SKILLS_DIR / "xlaya" / "scripts"
     if str(laya_script_dir) not in sys.path:
         sys.path.insert(0, str(laya_script_dir))
     import laya_triage  # type: ignore
 
-    parent_ws = REPO_ROOT.parent.parent
+    parent_ws = REPO_ROOT.parent if (REPO_ROOT.parent / "ISCV-Workspace").is_dir() else REPO_ROOT.parent.parent
     iscv_docs = parent_ws / "ISCV-Workspace" / "docs"
     targets = [REPO_ROOT / "README.md", REPO_ROOT / "CHANGELOG.md"]
     for smd in sorted(SKILLS_DIR.glob("*/SKILL.md")):
@@ -451,10 +452,10 @@ def run_exp3_layax_triage_speed(warmup: int = 3, trials: int = 30) -> Dict[str, 
 
 def run_exp4_redteam_defect_benchmark(warmup: int = 3, trials: int = 20) -> Dict[str, Any]:
     """Experiment 4: Seed 25 defects across 5 engineering categories + clean controls and audit."""
-    audit_dir = SKILLS_DIR / "publishx-audit" / "scripts"
-    qt6_dir = SKILLS_DIR / "publishx-qgis" / "scripts"
-    ev_dir = SKILLS_DIR / "deep-researchx" / "scripts"
-    sync_dir = SKILLS_DIR / "syncx" / "scripts"
+    audit_dir = SKILLS_DIR / "xpublish-audit" / "scripts"
+    qt6_dir = SKILLS_DIR / "xpublish-qgis" / "scripts"
+    ev_dir = SKILLS_DIR / "xdeep-research" / "scripts"
+    sync_dir = SKILLS_DIR / "xsync" / "scripts"
 
     for d in (audit_dir, qt6_dir, ev_dir, sync_dir):
         if str(d) not in sys.path:
@@ -667,6 +668,9 @@ def run_exp6_transcript_token_economics() -> Dict[str, Any]:
         full_logs = sorted(brain_dir.glob("*/.system_generated/logs/transcript.jsonl"))
 
     bx_triggers = [
+        "/xboost", "/xbrief", "/xcontext", "/xcreate-skill", "/xdeep-research",
+        "/xkickoff", "/xlaya", "/xobsidian", "/xplan", "/xpublish-audit",
+        "/xpublish-qgis", "/xsync", "/xultra", "/xresearch",
         "/boostx", "/briefx", "/brief", "/deep-researchx", "/deep-research",
         "/researchx", "/syncx", "/update-doc", "/planx", "/plan",
         "/obsidianx", "/layax", "/publishx-audit", "/publishx-qgis",
@@ -787,11 +791,11 @@ def run_exp6_transcript_token_economics() -> Dict[str, Any]:
     sess_single_bx = [s for s in sessions_data if s["cmds_count"] == 1]
     sess_multi_bx = [s for s in sessions_data if s["cmds_count"] >= 2]
 
-    t_no_summary = summarize_token_pool("Standard Turn (No -x Skill)", turns_no_bx)
-    t_1_summary = summarize_token_pool("Single -x Skill Turn", turns_single_bx)
-    t_m_summary = summarize_token_pool("Chained Multi-Skill -x Turn (2+ Skills)", turns_multi_bx)
+    t_no_summary = summarize_token_pool("Standard Turn (No /x* Skill)", turns_no_bx)
+    t_1_summary = summarize_token_pool("Single /x* Skill Turn", turns_single_bx)
+    t_m_summary = summarize_token_pool("Chained Multi-Skill /x* Turn (2+ Skills)", turns_multi_bx)
 
-    s_no_summary = summarize_token_pool("Standard Session (No -x Skill)", sess_no_bx)
+    s_no_summary = summarize_token_pool("Standard Session (No /x* Skill)", sess_no_bx)
     s_1_summary = summarize_token_pool("Single-Skill BoostX Session", sess_single_bx)
     s_m_summary = summarize_token_pool("Chained Multi-Skill BoostX Session", sess_multi_bx)
 
@@ -868,7 +872,7 @@ def build_exp5_composable_ablation(
         },
         {
             "level": "Level 1: Single Core Solver",
-            "command": "/boostx",
+            "command": "/xboost",
             "context_scan_tokens": bx_tok,
             "vault_nodes_routed": 0,
             "cli_gates_active": 2,
@@ -880,7 +884,7 @@ def build_exp5_composable_ablation(
         },
         {
             "level": "Level 2: Repo-Briefed + Primary Probe + 2-Hop Vault",
-            "command": "/briefx /researchx /boostx /obsidianx",
+            "command": "/xbrief /xdeep-research /xboost /xobsidian",
             "context_scan_tokens": cmb_tok,
             "vault_nodes_routed": exp2["vault_md_files_available"],
             "cli_gates_active": 4,
@@ -892,7 +896,7 @@ def build_exp5_composable_ablation(
         },
         {
             "level": "Level 3: Full 5-Stage Lifecycle + System 1 + 7 CLI Gates",
-            "command": "/briefx /deep-researchx /boostx /syncx /layax + /publishx-audit",
+            "command": "/xbrief /xdeep-research /xboost /xsync /xlaya + /xpublish-audit",
             "context_scan_tokens": cmb_tok,
             "vault_nodes_routed": exp2["vault_md_files_available"],
             "cli_gates_active": 7,
@@ -933,7 +937,7 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
     cb = e4["category_breakdown"]
 
     lines = [
-        "# BoostX (`v3.1.0`) — Empirical Benchmark & Token Economics Report",
+        "# BoostX (`v3.2.0`) — Empirical Benchmark & Token Economics Report",
         "",
         "> **Reproducible Verification Harness**: Generated deterministically by "
         "[`benchmarks/run_boostx_benchmark.py`](./run_boostx_benchmark.py)  ",
@@ -950,7 +954,7 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         "## Executive Findings: High Intelligence via High Compute",
         "",
         "1. **System-Prompt Budget Discipline (`100%` Compliance & Dual-Trigger Guards)**: "
-        f"Across all `{bx1['count']}` BoostX `-x` skills, YAML discovery descriptions average "
+        f"Across all `{bx1['count']}` BoostX `/x*` skills, YAML discovery descriptions average "
         f"**`{bx1['desc_chars']['mean']} ± {bx1['desc_chars']['std']} chars`** "
         f"(Median `{bx1['desc_chars']['median']}` chars, **`{bx1['budget_500_compliance_pct']}%` within "
         "the `≤ 500` char `audit_engine.py` budget gate**) with "
@@ -959,12 +963,12 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         f"`{ent1['count']}` official cloud/enterprise skills.",
         "2. **Context Noise Compression (`-97.9%` Scan Reduction)**: When briefing across multi-project "
         f"repositories and the `{e2['vault_md_files_available']}`-node Obsidian Second Brain "
-        f"(`{unb['tokens_loaded']:,}` tokens total), `/briefx` (`Cap 8` Two-Pass) + `/obsidianx` "
+        f"(`{unb['tokens_loaded']:,}` tokens total), `/xbrief` (`Cap 8` Two-Pass) + `/xobsidian` "
         f"(`2-Hop = 4` vault files) loads only **`{cmb['tokens_loaded']:,}` tokens** "
         f"(**`{cmb['token_reduction_pct']}%` noise reduction** / **`{cmb['compression_factor_x']}×` "
         f"compression**) in a median disk read time of **`{cmb['latency_ms']['median']} ms`** "
         f"(vs `{unb['latency_ms']['median']} ms` unbounded).",
-        f"3. **System 1 `/layax` Triage (`{e3['latency_ms']['median']} ms` Median)**: Chunking and ranking "
+        f"3. **System 1 `/xlaya` Triage (`{e3['latency_ms']['median']} ms` Median)**: Chunking and ranking "
         f"`{e3['total_chunks_evaluated']}` fence-safe (`≤ 1,200`-char) heading sections across "
         f"`{e3['files_chunked']}` specs completes in **`{e3['latency_ms']['median']} ms`** "
         f"(`Mean {e3['latency_ms']['mean']} ± {e3['latency_ms']['std']} ms`, "
@@ -997,7 +1001,7 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         "Dual Trigger Guard (`Use when` + `Do NOT use`) | Full `SKILL.md` Tokens (`Mean ± SD` / `Median`) | "
         "Bundled CLI Scripts (`LOC`) |",
         "|:---|:---:|:---:|:---:|:---:|:---:|:---:|",
-        f"| **BoostX `v3.1.0` Suite (`-x` Skills)** | `{bx1['count']}` | "
+        f"| **BoostX `v3.2.0` Suite (`/x*` Skills)** | `{bx1['count']}` | "
         f"**`{bx1['desc_chars']['mean']} ± {bx1['desc_chars']['std']}`** (`{bx1['desc_chars']['median']}`) | "
         f"**`{bx1['budget_500_compliance_pct']}%`** | **`{bx1['dual_trigger_guard_pct']}%`** | "
         f"`{bx1['body_tokens']['mean']:,.0f} ± {bx1['body_tokens']['std']:,.0f}` "
@@ -1030,12 +1034,12 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         f"`{unb['tokens_loaded']:,}` tok | Baseline (`1.0×`) | `{unb['latency_ms']['median']} ms` "
         f"(`{unb['latency_ms']['mean']} ± {unb['latency_ms']['std']} ms` / "
         f"`P95: {unb['latency_ms']['p95']} ms`) |",
-        f"| **2. `/briefx` Repo-Only (`Cap 8` Two-Pass)** | **`{bx2['files_read']}`** | "
+        f"| **2. `/xbrief` Repo-Only (`Cap 8` Two-Pass)** | **`{bx2['files_read']}`** | "
         f"**`{bx2['lines_read']:,}`** | **`{bx2['tokens_loaded']:,}` tok** | "
         f"**`-{bx2['token_reduction_pct']}%` (`{bx2['compression_factor_x']}×`)** | "
         f"**`{bx2['latency_ms']['median']} ms`** (`{bx2['latency_ms']['mean']} ± "
         f"{bx2['latency_ms']['std']} ms` / `P95: {bx2['latency_ms']['p95']} ms`) |",
-        f"| **3. `/briefx /obsidianx` (`Cap 8` + `2-Hop` Vault)** | **`{cmb['files_read']}`** "
+        f"| **3. `/xbrief /xobsidian` (`Cap 8` + `2-Hop` Vault)** | **`{cmb['files_read']}`** "
         f"(`8` Repo + `4` Vault) | **`{cmb['lines_read']:,}`** | **`{cmb['tokens_loaded']:,}` tok** | "
         f"**`-{cmb['token_reduction_pct']}%` (`{cmb['compression_factor_x']}×`)** | "
         f"**`{cmb['latency_ms']['median']} ms`** (`{cmb['latency_ms']['mean']} ± "
@@ -1043,7 +1047,7 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         "",
         "---",
         "",
-        f"## Experiment 3: `/layax` System 1 Section Shortlisting Speed "
+        f"## Experiment 3: `/xlaya` System 1 Section Shortlisting Speed "
         f"(`{e3['warmup']}` Warm-Ups + `{e3['trials']}` Trials)",
         "",
         "| Metric | Measured Value |",
@@ -1060,7 +1064,7 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         f"| **Chunk Evaluation Throughput** | **`{e3['throughput_chunks_per_sec']:,.1f}` chunks / sec** "
         f"(`{e3['backend']}`) |",
         "",
-        "![Figure 2: Context Window Compression & /layax Section Triage Latency]"
+        "![Figure 2: Context Window Compression & /xlaya Section Triage Latency]"
         "(../docs/assets/fig2_compression_latency.svg)",
         "",
         "---",
@@ -1072,16 +1076,16 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         "BoostX CLI Verification Gate | Defects Caught |",
         "|:---|:---:|:---|:---:|",
         "| **1. Security & Portability** (AWS/GH keys, hardcoded user path, `eval`, `shell=True`, `pickle`) "
-        "| `0 / 5` | `publishx-audit/scripts/audit_engine.py` | "
+        "| `0 / 5` | `xpublish-audit/scripts/audit_engine.py` | "
         f"**`{cb['cat1_security_and_portability']['caught']} / 5` (`100%`)** |",
         "| **2. QGIS 4 / Qt6 & INI Packaging** (`Qt.AlignCenter`, `QDialog.Accepted`, `QMessageBox.Yes`, "
-        "raw `%`, hook) | `0 / 5` | `publishx-qgis/scripts/check_qt6.py` + `audit_engine.py` | "
+        "raw `%`, hook) | `0 / 5` | `xpublish-qgis/scripts/check_qt6.py` + `audit_engine.py` | "
         f"**`{cb['cat2_qgis4_qt6_and_packaging']['caught']} / 5` (`100%`)** |",
         "| **3. Deep-Research Evidence & Schema** (`[TBD]`, `example.com`, bare root URL, quota, year bounds) "
-        "| `0 / 5` | `deep-researchx/scripts/verify_evidence.py` | "
+        "| `0 / 5` | `xdeep-research/scripts/verify_evidence.py` | "
         f"**`{cb['cat3_research_evidence_and_schema']['caught']} / 5` (`100%`)** |",
         "| **4. Doc Sync, Links, Zero-LaTeX & Mirrors** (2 broken links, inline LaTeX, deprecated term, "
-        "SHA-256 drift) | `0 / 5` | `syncx/scripts/audit_workspace_docs.py` | "
+        "SHA-256 drift) | `0 / 5` | `xsync/scripts/audit_workspace_docs.py` | "
         f"**`{cb['cat4_doc_sync_links_latex_mirror']['caught']} / 5` (`100%`)** |",
         "| **5. Skill Budget & Hygiene** (`>500` char YAML, naming, broken link, `__pycache__`, `.pyc` binary) "
         "| `0 / 5` | `audit_engine.py --platform skill` | "
@@ -1125,7 +1129,7 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         "Uncached New Input (`NewIn`) | KV-Cache Replay (`Cached Input`) | Internal `Thinking` | "
         "Model `Output` | **Total Processed / Turn** |",
         "|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|",
-        f"| **1. Standard Turn (No `-x` Skill)** | `{t_no['count']}` turns | "
+        f"| **1. Standard Turn (No `/x*` Skill)** | `{t_no['count']}` turns | "
         f"`{t_no['steps']['mean']:.1f}` *(Med `{t_no['steps']['median']:.0f}`)* | "
         f"`{t_no['uncached_new_input_tokens']['mean']:,.0f}` "
         f"*(Med `{t_no['uncached_new_input_tokens']['median']:,.0f}`)* | "
@@ -1137,7 +1141,7 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         f"*(Med `{t_no['output_tokens']['median']:,.0f}`)* | "
         f"**`{t_no['total_processed_tokens']['mean']:,.0f}`** "
         f"*(Med `{t_no['total_processed_tokens']['median']:,.0f}`)* |",
-        f"| **2. Single `-x` Skill Turn** | `{t_1['count']}` turns | "
+        f"| **2. Single `/x*` Skill Turn** | `{t_1['count']}` turns | "
         f"`{t_1['steps']['mean']:.1f}` *(Med `{t_1['steps']['median']:.0f}`)* | "
         f"`{t_1['uncached_new_input_tokens']['mean']:,.0f}` "
         f"*(Med `{t_1['uncached_new_input_tokens']['median']:,.0f}`)* | "
@@ -1149,7 +1153,7 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         f"*(Med `{t_1['output_tokens']['median']:,.0f}`)* | "
         f"**`{t_1['total_processed_tokens']['mean']:,.0f}`** "
         f"*(Med `{t_1['total_processed_tokens']['median']:,.0f}`)* |",
-        f"| **3. Chained Multi-Skill `-x` Turn** | `{t_m['count']}` turns | "
+        f"| **3. Chained Multi-Skill `/x*` Turn** | `{t_m['count']}` turns | "
         f"**`{t_m['steps']['mean']:.1f}`** *(Med `{t_m['steps']['median']:.0f}` • "
         f"`{mult['steps_multiplier_x']}×`)* | "
         f"**`{t_m['uncached_new_input_tokens']['mean']:,.0f}`** "
@@ -1171,7 +1175,7 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         "Thinking (`Mean` / `Median`) | Output (`Mean` / `Median`) | "
         "**Total Session Throughput (`Mean` / `Median` / `P90`)** |",
         "|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|",
-        f"| **Standard Session (No `-x`)** | `{s_no['count']}` | "
+        f"| **Standard Session (No `/x*`)** | `{s_no['count']}` | "
         f"`{s_no['steps']['mean']:.1f}` / `{s_no['steps']['median']:.0f}` / `{s_no['steps']['p90']:.0f}` | "
         f"`{s_no['uncached_new_input_tokens']['mean']:,.0f}` / "
         f"`{s_no['uncached_new_input_tokens']['median']:,.0f}` | "
@@ -1211,17 +1215,17 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         "Empirical Token Budget Justification |",
         "|:---|:---|:---|:---|",
         "| **Tier 1: `1×` Base Pro** | Claude Pro (`1×`), Gemini Advanced, Cursor Pro | "
-        "**Single-Skill Tactical Tasks** (`/briefx`, `/researchx`, localized `/boostx`) | "
+        "**Single-Skill Tactical Tasks** (`/xbrief`, `/xdeep-research` Tier 1, localized `/xboost`) | "
         "Handles `~35k` uncached input + `~20k` output tokens (`~44` steps/turn). "
         "Multi-wave chains will hit 5-hour rolling caps after 1–2 runs. |",
         "| **Tier 2: `5×` High-Throughput** *(Recommended Minimum)* | "
         "**Claude Max `5×`**, **Gemini `5×`**, API Tier 2+ | "
-        "**Daily Chained Multi-Skill Sprints** (`/briefx /researchx /boostx /syncx /obsidianx`) | "
+        "**Daily Chained Multi-Skill Sprints** (`/xbrief /xdeep-research /xboost /xsync /xobsidian`) | "
         "Sustains `~74k` uncached input + `~27k` output + `~2.95M` KV-cache replay tokens across "
         "`~63` verification steps per turn without throttling. |",
         "| **Tier 3: `20×` Ultra / Marathon** *(Studio Standard)* | "
         "**Gemini Ultra `20×`**, **Claude Max `20×`**, Enterprise API | "
-        "**Autonomous `/goal` Marathons & `/deep-researchx` 5-Wave Swarms** | "
+        "**Autonomous `/goal` Marathons & `/xdeep-research` 5-Wave Swarms** | "
         "Engineered for `400+`-step autonomous sessions (`~340k` uncached input, `~166k` output, "
         "`~22.6M` cumulative session tokens + parallel subagent swarms). |",
         "",
@@ -1232,13 +1236,13 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
 
 
 def main() -> int:
-    print("🚀 Running BoostX v3.1.0 Reproducible 6-Experiment Benchmark Suite...")
+    print("🚀 Running BoostX v3.2.0 Reproducible 6-Experiment Benchmark Suite...")
     t_start = time.perf_counter()
 
     exp1 = run_exp1_skill_discovery_audit()
     print(
         f"  ✓ Exp 1 (Skill Budget Audit): Scanned {exp1['total_installed_skills_scanned']} skills "
-        f"(BoostX 14 mean desc: {exp1['boostx_13']['desc_chars']['mean']} chars, "
+        f"(BoostX 13 mean desc: {exp1['boostx_13']['desc_chars']['mean']} chars, "
         f"{exp1['boostx_13']['budget_500_compliance_pct']}% <=500 gate, "
         f"{exp1['boostx_13']['dual_trigger_guard_pct']}% dual triggers)"
     )
@@ -1246,14 +1250,14 @@ def main() -> int:
     exp2 = run_exp2_context_compression_benchmark(warmup=3, trials=30)
     print(
         f"  ✓ Exp 2 (Context Compression, 30 trials): Unbounded {exp2['unbounded_crawl']['tokens_loaded']:,} tok "
-        f"-> /briefx+/obsidianx {exp2['briefx_obsidianx_2hop']['tokens_loaded']:,} tok "
+        f"-> /xbrief+/xobsidian {exp2['briefx_obsidianx_2hop']['tokens_loaded']:,} tok "
         f"(-{exp2['briefx_obsidianx_2hop']['token_reduction_pct']}% / "
         f"{exp2['briefx_obsidianx_2hop']['compression_factor_x']}×)"
     )
 
     exp3 = run_exp3_layax_triage_speed(warmup=3, trials=30)
     print(
-        f"  ✓ Exp 3 (/layax Triage Speed, 30 trials): {exp3['total_chunks_evaluated']} chunks in "
+        f"  ✓ Exp 3 (/xlaya Triage Speed, 30 trials): {exp3['total_chunks_evaluated']} chunks in "
         f"Median {exp3['latency_ms']['median']} ms ({exp3['throughput_chunks_per_sec']:,.1f} chunks/sec)"
     )
 
@@ -1278,7 +1282,7 @@ def main() -> int:
 
     elapsed = round(time.perf_counter() - t_start, 2)
     results = {
-        "benchmark_version": "3.1.0",
+        "benchmark_version": "3.2.0",
         "elapsed_wall_seconds": elapsed,
         "exp1_skill_discovery": exp1,
         "exp2_context_compression": exp2,
