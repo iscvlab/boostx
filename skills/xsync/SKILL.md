@@ -2,8 +2,8 @@
 name: xsync
 description: >
   Synchronize documentation after a system, API, schema, metric, or architectural change (/xsync, /syncx, /update-doc, /doc-sync).
-  Use when the user runs /xsync, /syncx, /update-doc, /doc-sync, /audit-docs, or asks to sync docs,
-  purge stale references, arbitrate conflicts, or resolve outdated numbers across markdown and HTML.
+  Use when running /xsync, /syncx, /update-doc, /doc-sync, or /audit-docs to sync docs,
+  purge stale references, arbitrate conflicts, or update metrics across markdown and HTML.
   Do NOT use for publishing (/xpublish-audit) or authoring skills (/xcreate-skill).
 ---
 
@@ -16,7 +16,7 @@ Discover changes from **the active conversation**, then systematically scan and 
 Do not assume specific project filenames, layer counts, or local author paths.
 
 Red failure modes to prevent:
-1. Touching only 1–2 surface files while leaving stale metrics, outdated cardinalities, or dead links in related documents.
+1. Touching only surface files while leaving stale metrics, outdated cardinalities, or dead links in related documents.
 2. Silently propagating conflicting claims between documents without formal arbitration against code or ground truth.
 3. Leaving ghost links pointing to files that were renamed, merged, or deleted in earlier turns.
 4. Copying numbers from doc to doc without verifying against underlying code or data receipts.
@@ -94,7 +94,7 @@ Search markdown, HTML, and web documentation across the workspace (excluding `.g
    * *Shadow Mirrors*: Identify whether modified documents are duplicated in distribution packages (e.g. `dist/docs/`, `package_name/docs_reference/`, or mirrored sub-workspaces).
    * *Strict Opt-In [`/xobsidian`](../xobsidian/SKILL.md) Boundary (`/xsync /xobsidian`)*: By default, **never** scan or modify an Obsidian vault (`*/.obsidian/..`) during `/xsync`. Only when `/xobsidian` (or `/obsidianx`, `/obsidian-vault`) is explicitly paired in the command (`/xsync /xobsidian`) should you resolve the active vault via [`/xobsidian`](../xobsidian/SKILL.md) and synchronize affected reusable atomic notes and `Hub - *.md` tables alongside repository docs.
    * *Opt-In [`/xlaya`](../xlaya/SKILL.md) Semantic Contradiction Pre-Filter (`/xsync /xlaya`)*: When chained with `/xlaya` (or `/layax`, `/laya`), run the `noul` hypothesis scanner across candidate `.md` and `.html` paragraphs to detect semantic contradictions against the SSOT that keyword grep misses, then apply surgical fixes via `edit_file`.
-   * *Opt-In [`/xultra`](../xultra/SKILL.md) Tier-Partitioned Sync Swarm (`/xsync /xultra`)*: When chained with `/xultra` across large multi-tier repositories (`> 6` relation-set files), partition file updates across concurrent subagents by non-overlapping document tiers (`Tiers 1–2`, `Tier 3–4`, `Tier 5 HTML/Decks`) and spawn an independent **Blind Adversarial Sync Auditor** (`Maker ≠ Checker`) to run `audit_workspace_docs.py` and verify zero stale numbers or broken links.
+   * *Opt-In [`/xultra`](../xultra/SKILL.md) Cognitive-Density Sync Swarm (`/xsync /xultra`)*: When chained with `/xultra`, lock the **Canonical Fact & Metric Delta Header** in Step 1 first, then partition relation-set updates via **Cognitive-Density Sharding** ([`/xultra`](../xultra/SKILL.md) Law 3 — 1 dedicated subagent per heavy interactive HTML deck/dashboard/viewer, and tier-clustered subagents for lightweight Markdown specs across rolling waves), followed by an independent **Blind Adversarial Sync Auditor** (`Maker ≠ Checker`) running `audit_workspace_docs.py` and SHA-256 mirror verification.
 2. **Ghost Reference & Dead Link Sweep**:
    * If any file was renamed, merged, or deleted, grep the workspace for its old base name and relative path.
    * Update or remove dangling hyperlinks, navigation cards, and table references pointing to the deceased file.

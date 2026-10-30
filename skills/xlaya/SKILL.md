@@ -11,7 +11,7 @@ description: >
 
 A lightweight, non-autoregressive **System 1 decision layer** for agent workflows (`/xlaya`, legacy aliases `/layax`, `/laya`), powered by the local `laya` Python library (`convaiinnovations/laya` and `convaiinnovations/laya-multilingual`) and the bundled [`laya_triage.py`](scripts/laya_triage.py) CLI engine.
 
-Runs as a standalone decision helper or as a pluggable zero-token accelerator chained with other `/x...` skills (`/xsync /xlaya`, `/xbrief /xlaya`, `/xplan /xlaya`, `/xdeep-research /xlaya`, `/xpublish-audit /xlaya`).
+Runs as a standalone decision helper or as a pluggable zero-token accelerator chained with other `/x...` skills (`/xsync /xlaya`, `/xbrief /xlaya`, `/xplan /xlaya`, `/xdeep-research /xlaya`, `/xpublish-audit /xlaya`, `/xlaya /xultra`).
 
 Operates on **Dual-Process Cognitive Architecture**:
 - **System 1 (`laya` Python Engine)**: Ultra-fast, zero-LLM-token local semantic triage (`output_tokens: 0`), fence-safe heading chunking (`≤ 1,200` chars / `~300` tokens fitting `ModernBERT-large`'s `512`-token window), section shortlisting (`shortlist`), ordinal scoring (`score`), and calibrated contradiction testing (`noul`).
@@ -146,7 +146,7 @@ Invoke [`scripts/laya_triage.py`](scripts/laya_triage.py) on the target file/dir
 
 ### 5.2 [`/xbrief`](../xbrief/SKILL.md) / [`/xplan`](../xplan/SKILL.md) + `/xlaya` (`/xbrief /xlaya` — Large-Corpus Section Shortlisting)
 - **Role Division**:
-  - When exploring an unfamiliar or large documentation tree (`> 8` files or `> 500`-line specs), `/xlaya` runs `laya_triage.py --mode shortlist --query "..."` to return exact `file.md#L<start>-L<end>` line ranges.
+  - When exploring an unfamiliar or multi-file documentation tree, `/xlaya` runs `laya_triage.py --mode shortlist --query "..."` to return exact `file.md#L<start>-L<end>` line ranges.
   - `/xbrief` or `/xplan` then executes Pass B (`read_file`) strictly on those shortlisted line ranges, saving massive context tokens.
 
 ### 5.3 [`/xdeep-research`](../xdeep-research/SKILL.md) + `/xlaya` (`/xdeep-research /xlaya` — Candidate Triage)
@@ -157,6 +157,11 @@ Invoke [`scripts/laya_triage.py`](scripts/laya_triage.py) on the target file/dir
 - **Role Division**:
   - `/xpublish-audit` runs deterministic AST, secret, path, and packaging checks via `audit_engine.py`.
   - `/xlaya` evaluates README and release prose using `--mode contradiction` to verify that public status claims (`LIVE`, `REGISTERED`, `PREPARED`, `IN PIPELINE`) match verifiable receipts.
+
+### 5.5 [`/xultra`](../xultra/SKILL.md) + `/xlaya` (`/xlaya /xultra` — System 1 Gatekeeper Before System 2 Swarm Fan-Out)
+- **Role Division**:
+  - `/xlaya` executes Law 1 deterministic pre-filtering (`laya_triage.py --mode shortlist`, `contradiction`, or `rubric`) in milliseconds with `0` LLM output tokens, pruning clean or low-signal chunks before any subagent is spawned.
+  - `/xultra` then fans out System 2 Builder/Critic shards strictly on the high-signal or flagged `#L<start>-L<end>` targets.
 
 ---
 

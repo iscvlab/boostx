@@ -103,12 +103,15 @@ Run the Ponytail Senior Dev Filter to determine the simplest structure:
   * Only produce a script (`scripts/run.py`) if deterministic file parsing, mathematical transformations, or API rate-limiting are required.
   * If a script is required: use Python stdlib (`argparse`, `pathlib`, `json`, `urllib`) — avoid third-party dependencies unless strictly necessary.
 
-#### Core Architectural Invariant: Anti-Hardcoded Ephemeral Metrics & Zero-Persona Neutrality
-* **Strict Rule**: Never hardcode transient, volatile dataset counts (e.g. "all [N] layers", "14,203 rows", "5,924 complaints") or personal author/hardware inventories (e.g. specific laptop models, personal bilingual defaults, or private project names) into general skill guardrails or instructions.
-* **Rationale**: Datasets grow, shrink, and evolve across project milestones, and global open-source skills must run cleanly for any engineer in any domain. Hardcoding snapshot numbers or personal hardware/persona references causes instant documentation staleness, triggers false-positive synchronization diffs between machines, and obscures the universal architectural principle.
-* **Invariant Formulation Pattern**: Always formulate guardrails as **timeless, domain-adaptive behavioral protocols** paired with actionable alternative patterns:
-  - *Anti-Pattern*: "Never query across all [N] layers."
-  - *Invariant Standard*: "**Bounded Scope (Zero Full-Project Dumps)**: Never execute unbounded discovery calls across the canvas root (e.g. avoid unfiltered `get_layers()`, root `get_layer_tree()`, or dumping `mapLayers().values()`). Treat the layer tree as an indexed database: use `find_layer(name="...")` or scope-bound group probes."
+#### Core Architectural Invariant: The 3-Bucket Numeric Litmus Test, Anti-Hardcoded Metrics & Zero-Persona Neutrality
+* **The 3-Bucket Numeric Classification Rule**: Every numeric bound in a skill specification must be classified into one of three buckets:
+  1. **Bucket 1 — Physical / Platform Constants (Keep & Cite Source)**: Hardware, model, or runtime limits (`512`-token `ModernBERT` window, `< 30s` synchronous tool timeout, `2-Hop` GraphRAG diameter, `≤ 400`-char target / `≤ 500`-char advisory YAML description budget).
+  2. **Bucket 2 — Per-Window Cognitive Working-Set Bounds (Keep Per Window, Scale via `/xultra` Shards)**: Per-thread reading caps (such as `/xbrief`'s `8`-file Pass-B cap per single context window) paired with horizontal [`/xultra`](../xultra/SKILL.md) shard scaling when corpus size exceeds one window.
+  3. **Bucket 3 — Arbitrary Task / Subagent Quotas, Snapshot Counts & Persona Leaks (Strictly Forbidden)**: Never hardcode fixed subagent headcounts (`3+2`, `4–12`, `2–4 scouts`), arbitrary output word/line caps (`≤ 150 words`, `1–2 notes`, `< 30 lines`), transient dataset counts (`all [N] layers`, `14,203 rows`), or personal hardware/persona strings into general skill instructions.
+* **Rationale**: Datasets and task sizes vary by orders of magnitude across runs, and global open-source skills must run cleanly for any engineer in any domain. Hardcoding arbitrary quotas or snapshot numbers causes anchoring bias, silent truncation, and instant documentation staleness.
+* **Invariant Formulation Pattern**: Always formulate guardrails as **timeless, first-principles protocols**:
+  - *Anti-Pattern*: "Spawn 2–4 scouts and return ≤ 150 words" or "Never query across all [N] layers."
+  - *Invariant Standard*: "**Cognitive-Density Sharding & Pointer-Not-Payload Return**: Size shards by per-target cognitive weight (`N × K × T`), return Compact Pointer Receipts for disk writes or Schema-Complete Telegraphic Tables for read-only scouts, and query large trees via bounded indexed probes."
 
 ---
 
@@ -169,17 +172,18 @@ flowchart LR
 #### Tier 1: Static Frontmatter Linter
 * `name` matches regex `^[a-z0-9-]+$` and is ≤ 64 characters.
 * `description` exists and is ≤ 1024 characters.
-* **Context Budget Conciseness**: Target description length is ≤ 250 characters (strictly ≤ 400 characters). Overly long descriptions bloat the system prompt and trigger Antigravity's context budget limit, causing other skills to be silently excluded.
+* **Context Budget Conciseness**: Target description length is ≤ 400 characters (hard advisory gate at ≤ 500 characters in `audit_engine.py`, schema max 1024). Overly long descriptions bloat the system prompt and trigger Antigravity's context budget limit, causing other skills to be silently excluded.
 * If model-invoked: Description contains both positive trigger keywords and an explicit `Do NOT use for` negative exclusion clause.
 * Frontmatter starts on line 1 with `---` and ends with `---`.
 
-#### Tier 2: Integrity, Anti-Hardcode & Ephemeral Scan
+#### Tier 2: Integrity, 3-Bucket Numeric & Anti-Hardcode Scan
 * **Universal Globalization Verification**: Verify that the skill is stored in the Global Customizations Root (`~/.gemini/config/skills/<name>/` / `OneDrive\gemini-config\skills\<name>\`). Flag any skill saved inside a workspace-local `.agents/` folder as non-globalized.
 * **Zero-Hardcode & Secret Audit**: Run an automated regex check across all created files (`.md`, `.py`, `.sh`, `.json`):
   * **Machine Paths**: Flag any line matching `(?i)([a-z]:[/\\]users[/\\]|/Users/|/home/)` (unless sanitized as `<User>` or `<username>`).
   * **Secrets & Tokens**: Flag any unredacted token matching `(?i)(api[_-]?key|secret|token)\s*[:=]\s*["'][a-zA-Z0-9_\-\.]{16,}["']`.
 * **Zero-Recursive-Nesting Invariant**: Verify no self-named child folder exists (`assert not (skill_dir / skill_dir.name).exists()`).
-* **Anti-Hardcoded Ephemeral Metrics & Persona Sweep**: Scan for `all \d+ layers`, transient dataset counts, or hardcoded personal hardware/persona strings; replace with universal behavioral protocols.
+* **3-Bucket Numeric, Ephemeral Metrics & Persona Sweep**: Extract every numeric threshold (`≤ N`, `N..M`, `< N`) and classify into Bucket 1 (Physical Constant), Bucket 2 (Per-Window Bound), or Bucket 3 (Arbitrary Quota / Snapshot Count); replace all Bucket 3 quotas, `all \d+ layers` counts, or personal hardware/persona strings with universal protocols.
+* **Opt-In [`/xultra`](../xultra/SKILL.md) Ecosystem Audit Mode (`/xcreate-skill /xultra`)**: When authoring or auditing multiple skills across an ecosystem, shard skill inspection by cognitive density, run Law 1 deterministic checks (`audit_engine.py --platform skill` + 3-Bucket regex threshold scanner), and spawn an independent Wave 2 Blind Adversarial Critic subagent (`Maker ≠ Checker`) to catch anchoring bias or cross-skill drift.
 * **Markdown Link Integrity & Forward-Slash Check**:
   * Every relative link (`[file](...)`, `references/...`, `scripts/...`) must resolve to a real file on disk.
   * Zero backslashes inside markdown link parentheses (`assert not re.search(r'\[.*?\]\([^\)]*\\[^\)]*\)', text)`).

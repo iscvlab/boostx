@@ -23,20 +23,20 @@ Match execution topology to research scope and host subagent capabilities in Ste
 | Tier | Scope & Trigger Condition | Execution Strategy |
 | :--- | :--- | :--- |
 | **Tier 1 — Fast Inline Probe** | ≤ 2 known sources, single API signature check, or quick local manifest/SQLite/XML/AST schema probe. | Execute directly in the main thread (`read_file` / `view_file`, `read_url_content`, `search_web`, or 1-liner Python stdlib inspection). **Zero subagent cold-start latency.** |
-| **Tier 2 — Single Isolated Scout** | Deep single-topic investigation requiring 3+ docs, upstream code tracing, or heavy web reading. | Spawn **1 background subagent** (`≤ 150-word` Caveman Receipt) so raw search/file dumps stay out of the main context window. |
-| **Tier 3 — 5-Wave Deep Research Swarm** | Precedent/dataset harvesting, fact-checking existing JSON/DB/drafts, comparing ≥ 2 architectures, or formulating mathematical/standard models. | Execute the full **5-Wave Harvester ↔ Blind Adversarial Auditor Lifecycle** (`2–4` concurrent Harvester Scouts + `verify_evidence.py` + Blind Auditor + Prune-and-Replace Loop). |
+| **Tier 2 — Single Isolated Scout** | Deep single-topic investigation requiring 3+ docs, upstream code tracing, or heavy web reading. | Spawn **1 background subagent** (returning a **Pointer Receipt** or **Telegraphic Evidence Table**) so raw search/file dumps stay out of the main context window. |
+| **Tier 3 — 5-Wave Deep Research Swarm** | Precedent/dataset harvesting, fact-checking existing JSON/DB/drafts, comparing ≥ 2 architectures, or formulating mathematical/standard models. | Execute the full **5-Wave Harvester ↔ Blind Adversarial Auditor Lifecycle** (Cognitive-Density Harvester Sharding + `verify_evidence.py` + Orthogonal Blind Auditor + Prune-and-Replace Loop). |
 
-### B. Host Subagent Write-Permission & Return Contract
-In multi-agent runtimes (Antigravity IDE, `agy` CLI, Claude Code), prevent **Read-Only Subagent Deadlocks** and **Main-Context Bloat**:
+### B. Host Subagent Write-Permission & Pointer-Not-Payload Return Contract
+In multi-agent runtimes (Antigravity IDE, `agy` CLI, Claude Code), prevent **Read-Only Subagent Deadlocks**, **Arbitrary Evidence Truncation**, and **Main-Context Bloat**:
 1. **Capability-Aware Subagent Selection**:
    * **Direct-Write Subagent (`TypeName="self"` in Antigravity / `general-purpose` in Claude Code)**: Use when the subagent should both investigate *and* write the Markdown report or dataset directly to disk.
    * **Read-Only Subagent (`TypeName="research"` in Antigravity / `Explore` / `cavecrew-investigator`)**: Has **read-only tools** (`enable_write_tools=false`). Never instruct a read-only subagent to save files; instead, instruct it to return a structured citation payload so the main thread writes the Markdown file.
-2. **Compressed Return Contract (`/cavecrew` Discipline)**:
-   * When a subagent writes a research Markdown file to disk, its reply message back to the main thread **MUST NOT paste the full Markdown report**.
-   * Return **≤ 150 words** containing only:
+2. **Pointer-Not-Payload Return Contract (`/cavecrew` & [`/xultra`](../xultra/SKILL.md) Discipline)**:
+   * **For Write-Capable Subagents**: Write the research Markdown or dataset directly to disk. Never paste the full report into the reply message; return a **Compact Pointer Receipt** containing only:
      1. `Saved Path`: Clickable `[filename.md](file:///...)`
-     2. `TL;DR Verdict`: 3–5 bullet conclusions with exact version/source citations
+     2. `TL;DR Verdict & Scorecard`: Concise bullet conclusions with exact version/source citations
      3. `Open Gaps`: Any unverified claim or recommended `/prototype` spike
+   * **For Read-Only Harvester Scouts**: Return a **Schema-Complete Telegraphic Evidence Dossier** (Markdown table or JSON) containing 100% of required primary-source fields, deep links, line ranges (`#L<start>-L<end>`), and verbatim proof snippets—with zero conversational filler and zero arbitrary word-count truncation of verified facts.
 3. **Causality & Anti-Timeout Turn Rule**:
    * **Parallel Safe**: Keep working in the main thread *only* if you have strictly independent tasks that do not depend on the research answer.
    * **Dependency Blocked**: If the next code edit or architectural decision depends on the research result (e.g., [`/xboost`](../xboost/SKILL.md) Section 4.B escalation), **never write speculative code while waiting**. Launch the subagent and **end your turn immediately** to wait for reactive wakeup.
@@ -71,7 +71,7 @@ For Tier 3 investigations (and as the structured backbone for Tier 1–2 studies
 graph TD
     W1["Wave 1: SYNTHESIZE 2D RESEARCH CONTRACT & AXES"] --> H1["Wave 2A: Harvester Scout 1 (Primary Portals / Official Specs)"]
     W1 --> H2["Wave 2B: Harvester Scout 2 (Literature / Industry Archives)"]
-    W1 --> H3["Wave 2C: Harvester Scout 3 (Local DBs / Code / Schemas)"]
+    W1 --> H3["Wave 2N: Harvester Scout N (Local DBs / Schemas — Sharded by Cognitive Density)"]
     H1 --> W3["Wave 3: BLIND ADVERSARIAL AUDITOR + verify_evidence.py"]
     H2 --> W3
     H3 --> W3
@@ -96,8 +96,8 @@ Select **ONLY the active Research Intent Row** and cross it with the active **Kn
 | Research Intent Archetype | Self-Synthesized Goal, Criteria & Execution Strategy |
 | :--- | :--- |
 | **`HARVEST / CURATE`** *(Case Studies, Precedents, Datasets, Catalogs)* | **Goal**: *Derive target schema, category/date/scope bounds, and quota count → fan out Harvester Scouts to scrape primary pages → run **Blind Adversarial Auditor** on every record → **delete & re-harvest** out-of-bounds or unverifiable entries until 100% of quota passes.* |
-| **`VERIFY / AUDIT`** *(Fact-Checking Existing JSON / DB / Drafts / Claims)* | **Goal**: *Treat existing records/claims as untrusted → run `verify_evidence.py` + Blind Auditor against primary sources → classify `VERIFIED` / `INCORRECT` / `UNVERIFIED` with discrepancy evidence → apply conservative in-bounds fixes or prune & replace.* |
-| **`BENCHMARK / COMPARE`** *(Evaluating Competing Tools, Systems, Precedents)* | **Goal**: *Synthesize 4–6 orthogonal evaluation axes → spawn 1 Scout per candidate → extract quantitative metrics, trade-offs, and failure modes → build `mermaid` architecture comparison + weighted decision matrix.* |
+| **`VERIFY / AUDIT`** *(Fact-Checking Existing JSON / DB / Drafts / Claims)* | **Goal**: *Treat existing records/claims as untrusted → run `verify_evidence.py` + 3-Bucket Numeric/Parameter Litmus Test + Blind Auditor against primary sources → classify `VERIFIED` / `INCORRECT` / `UNVERIFIED` with discrepancy evidence → apply conservative in-bounds fixes or prune & replace.* |
+| **`BENCHMARK / COMPARE`** *(Evaluating Competing Tools, Systems, Precedents)* | **Goal**: *Synthesize domain-relevant orthogonal evaluation axes → spawn 1 Scout per candidate → extract quantitative metrics, trade-offs, and failure modes → build `mermaid` architecture comparison + weighted decision matrix.* |
 | **`FORMULATE / MODEL`** *(Physics, Algorithms, Mathematical Models, Specs)* | **Goal**: *Lock governing equations, dimensional unit bridge (input units ↔ SI), empirical coefficients, boundary conditions, and stability limits from standards/papers → construct a closed-form **1D Analytical Toy Benchmark**.* |
 | **`REVERSE-ENGINEER / TRACE`** *(SDKs, Databases, Binaries, Undocumented APIs)* | **Goal**: *Lock local pinned versions from manifests first → inspect local schemas/binaries/ASTs + upstream source code, tests, and specs → map exact internal pipeline, method signatures, and invariants.* |
 | **`STRATEGIZE / RECOMMEND`** *(Design Proposals, Architecture Decisions, Policy)* | **Goal**: *Establish verified facts & constraints first → pass the **100%-Proof Recommendation Gate**: every recommendation must bind to `[VERIFIED FACT]` receipts and explicitly separate proven facts from `[RECOMMENDED SYNTHESIS]`.* |
@@ -132,7 +132,7 @@ Output the 4-line contract before probing or spawning scouts:
 
 ## 5. Wave 2: Parallel Harvester Swarm (`invoke_subagent`)
 
-For Tier 3 investigations, decompose across **2–4 concurrent Harvester Subagents** via parallel `invoke_subagent` calls in the same turn (e.g., splitting by category, era bucket, candidate system, or local code vs. external standards):
+For Tier 3 investigations, decompose across **parallel Harvester Subagents sized by Cognitive-Density Sharding** ([`/xultra`](../xultra/SKILL.md) Law 3 — 1 dedicated Harvester Scout per heavy category, candidate architecture, or deep-scrape bucket; clustered scouts for lightweight lookups) via parallel `invoke_subagent` calls in the same turn:
 
 1. **Deep-Link Content Scraping Mandatory**:
    * Harvesters must **never** trust search-snippet blurbs alone. For every candidate fact or case study, the Harvester must fetch the actual page or file text (`read_file`, `read_url_content`, `search_web`, or Python `urllib`) to extract verbatim evidence.
@@ -142,7 +142,7 @@ For Tier 3 investigations, decompose across **2–4 concurrent Harvester Subagen
      * `Candidate / Claim ID`
      * `Extracted Fields / Equations / Metrics`
      * `Primary Deep-Link URL or Local Path`
-     * `Verbatim Evidence Snippet` (the exact 1–2 sentences or table row from the source proving the date, author, formula, or metric)
+     * `Verbatim Evidence Snippet` (the exact verbatim passage, equation, or table row from the source proving the date, author, formula, or metric)
 
 ---
 
@@ -202,14 +202,14 @@ Never drop loose `.md` files into a repository root (preserving clean `git statu
      5. **Actionable Blueprint (`[VERIFIED FACTS]` → `[RECOMMENDED SYNTHESIS]`)**.
 2. **Structured Dataset Payload (`.json` / `.sqlite` / `.csv`)**:
    * When executing `HARVEST / CURATE` or `VERIFY / AUDIT` on a dataset, write the 100% verified records to the target dataset file, rebuild any paired SQLite database, and validate with `verify_evidence.py`.
-3. **Context-Compressed Main Chat Digest (`≤ 150 Words`)**:
+3. **Pointer-First Main Chat Digest**:
    * Never dump the full multi-page study into the chat window. Output a concise executive digest, the Wave 3 Verification Scorecard, and clickable `file://` links to the saved artifacts.
 
 ### B. Composable Power Modes (`/xdeep-research` × `/xlaya` × `/xplan` × `/xboost` × `/xobsidian` × `/xultra` × `/goal`)
 * **Default Isolation Rule (Without `/xobsidian`)**:
   * When `/xobsidian` is **not** in the user's command, never read from or write to any Obsidian vault.
 * **Paired with [`/xultra`](../xultra/SKILL.md) (`/xdeep-research /xultra` or `/xdeep-research /xboost /xultra`)**:
-  * **High-Throughput Partitioned Swarm & Dual-Blind Audit**: Scale Wave 2 Harvester Scouts dynamically via [`/xultra`](../xultra/SKILL.md) (`1` Scout per `≤ 3` records/axes, up to `6` concurrent scouts per wave) and run **2 independent Blind Adversarial Auditors** (`verify_evidence.py` + Red-Team Falsifier + Domain/Unit Critic) in Wave 3.
+  * **Elastic Cognitive-Density Harvester Fleet & Axis-Matched Blind Audit**: Scale Wave 2 Harvester Scouts dynamically via [`/xultra`](../xultra/SKILL.md)'s **Elastic Cognitive Swarm (`N × K × T`)**—assigning 1 dedicated Harvester Scout per heavy candidate/category shard across rolling waves, running Law 1 deterministic checks (`verify_evidence.py`), and spawning **Axis-Matched Blind Adversarial Auditors** (e.g., `Temporal/Attribution/Signature Falsifier` + `Quantitative/Schema/Unit Falsifier`) in Wave 3.
 * **Paired with [`/xlaya`](../xlaya/SKILL.md) (`/xdeep-research /xlaya`)**:
   * **Wave 2.5 Fast Candidate Triage**: Between Wave 2 (Harvester Swarm) and Wave 3 (Blind Adversarial Auditor), use `/xlaya` (`score` + `noul`) to locally score harvested records or shortlist candidate specification sections in milliseconds before spawning expensive Auditor turns.
 * **Paired with [`/xplan`](../xplan/SKILL.md) (`/xdeep-research /xplan`)**:

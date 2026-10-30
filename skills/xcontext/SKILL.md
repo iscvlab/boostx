@@ -30,6 +30,7 @@ Red failure modes to prevent:
 | Author or distill a new skill | [`/xcreate-skill`](../xcreate-skill/SKILL.md) |
 | General documentation briefing | [`/xbrief`](../xbrief/SKILL.md) |
 | Fast System 1 local semantic triage | [`/xlaya`](../xlaya/SKILL.md) |
+| Offload heavy multi-file work or tournaments into isolated subagent windows so the main thread stays at Round 0 | [`/xultra`](../xultra/SKILL.md) |
 
 ---
 

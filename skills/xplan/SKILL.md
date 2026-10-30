@@ -60,11 +60,11 @@ graph TD
 * **Opt-In [`/xlaya`](../xlaya/SKILL.md) Sidecar (`/xplan /xlaya`)**:
   * When planning across a large, unpinned documentation corpus, use `/xlaya` (`shortlist_choice` / `score`) to shortlist relevant specification sections with zero context bloat.
 * **Opt-In [`/xultra`](../xultra/SKILL.md) Multi-Architect Scout Mode (`/xplan /xultra`)**:
-  * When `/xultra` is included in the command, spawn **3 parallel Architect Scouts** (Vector A: Simplification/Stdlib, Vector B: Surgical Local Seam, Vector C: Deep Module Interface) to stress-test trade-offs and edge cases before synthesizing their findings into `implementation_plan.md`.
+  * When `/xultra` is included in the command, spawn **`K` Orthogonal Architect Scouts** ([`/xultra`](../xultra/SKILL.md) Law 2: Vector A Simplification/Stdlib, Vector B Surgical Local Seam, Vector C Deep Module Interface, plus any domain-specific numerical/layout vector) paired with **1 Red-Team Seam & SSOT Breaker** to stress-test trade-offs and edge cases before synthesizing their findings into `implementation_plan.md`.
 
 #### 2. Synthesize the 2D Plan Contract (`Task Archetype × Project Archetype`)
 Cross the active **Task Intent** (`BUILD / FEATURE`, `REFACTOR / SIMPLIFY`, `SIMULATE / SOLVER`, `OPTIMIZE / SCALE`, `SHIP / RELEASE`) with the **Project Domain Harness** (`CAD / Rhino / Grasshopper`, `GIS / QGIS`, `Web UI / Figma / Diagrams`, `Data / GCP / ML`, `Agent Skills / CLI / Configs`):
-* **Tier 1 Plan (1–2 files, localized change)**: Compact seam diff + 1 inline decision (if any) + 1 Red → Green command.
+* **Tier 1 Plan (1–2 files, localized change)**: Compact seam diff + inline grilling decisions (if any) + 1 Red → Green command.
 * **Tier 2 Plan (Multi-file feature, refactor, or UI)**: Full `mermaid` architecture diagram + Deep Module interface spec + component-by-component change matrix.
 * **Tier 3 Plan (`SIMULATE / SOLVER` — Physics, Numerical, Grasshopper/CAD)**: Mandatory **SI Unit Bridge Table** (`mm`/`cm`/`m` ↔ `m`/`kg`/`s`/`N`/`W/m²`, `deg` ↔ `rad`), stability bounds (`dt`, convergence `ε`, max iterations), and the **Physics Triad** verification plan (zero-load identity = `0.0` with no `NaN`/`Inf`, 1D analytical toy benchmark, conservation/symmetry check).
 
@@ -122,6 +122,7 @@ Structure `<appDataDir>/brain/<conversation-id>/implementation_plan.md` using th
 - **Module Interface Contract**:
   - **Signature**: `<function_or_class_signature(inputs) -> outputs>`
   - **Invariants**: <Null/empty guards, unit conversions, O(N) bounds, Dual-OS path safety>
+  - **Swarm Wave & Shared Seam Blueprint (When executing via `/xboost /xultra`)**: <Pre-Locked Shared Seam Header (signatures/tokens/schemas), Cognitive-Density Shard Partitioning (`N × K × T`), and Wave 2 Blind Critic probes>
 
 ```mermaid
 flowchart LR

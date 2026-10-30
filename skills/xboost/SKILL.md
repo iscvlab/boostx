@@ -25,10 +25,10 @@ Depending on host runtime capabilities, select the appropriate execution engine:
 * **Engine B: Multi-Agent & Context-Compressed Delegation (`invoke_subagent` / `/cavecrew`)**:
   * Delegate specialized subtasks to preserve main-thread context across long sessions:
     * **`DeepCoder` / `cavecrew-builder`**: Minimal diff implementation (`invoke_subagent`).
-    * **`DeepInvestigator` / `cavecrew-investigator`**: Root cause analysis, invariant mapping, or scanning >4 unfamiliar files so raw file dumps do not bloat the main context window.
+    * **`DeepInvestigator` / `cavecrew-investigator`**: Root cause analysis, invariant mapping, or multi-file unfamiliar subsystem exploration so raw file dumps do not bloat the main context window.
     * **`cavecrew-reviewer`**: Adversarial diff review prior to completion.
-* **Engine C: Opt-In [`/xultra`](../xultra/SKILL.md) Swarm & Blind Verification Multiplier (`/xboost /xultra`)**:
-  * When `/xultra` is included in the command, delegate execution topology to [`/xultra`](../xultra/SKILL.md): fan out `Best-of-3` candidate builders (or `N` partitioned batch builders with a Pre-Locked Shared Seam Header) and enforce the `Maker ≠ Checker` Blind Adversarial Critic + Red-Team Breaker before Phase 4 completion.
+* **Engine C: Opt-In [`/xultra`](../xultra/SKILL.md) Elastic Cognitive Swarm & Blind Verification Multiplier (`/xboost /xultra`)**:
+  * When `/xultra` is included in the command, delegate execution topology to [`/xultra`](../xultra/SKILL.md)'s **Elastic Cognitive Swarm (`N × K × T`)**: run Law 1 deterministic probes, fan out **Orthogonal `K`-Vector Tournament Builders** (for coupled design/solver problems), **Elastic Cognitive-Density Module Shards** (with a Pre-Locked Shared Seam Header), or **Evolutionary Ratchet Loops (`T` generations)** (for solver/performance optimization), and enforce the Anti-Inline-Shortcut `Maker ≠ Checker` Blind Adversarial Critic in Phase 4.
 
 ### B. Dynamic Complexity Tier Scaling
 Match ceremony to task scope in Step 0:
@@ -102,7 +102,7 @@ State the 3-line contract concisely before mutating files:
 
 ### Phase 2: Architectural Exploration & Ponytail × Deep Module Ladder
 
-Before implementing, use fast semantic triage ([`/xlaya`](../xlaya/SKILL.md) mindset) to prune dead-end hypotheses and evaluate 2–3 solution vectors against the **Ponytail × Deep Module Ladder**:
+Before implementing, use fast semantic triage ([`/xlaya`](../xlaya/SKILL.md) mindset) to prune dead-end hypotheses and evaluate orthogonal solution vectors against the **Ponytail × Deep Module Ladder**:
 
 1. **Vector Comparison**:
   - **Vector A (Simplification / Deletion / Config)**: Eliminates the complexity altogether (YAGNI) or fixes config/stdlib usage.
@@ -197,12 +197,12 @@ Whenever engineering across a multi-machine ecosystem (Windows, macOS, and Linux
 
 ### A. `/goal` Autonomous Marathon Contract
 When `/xboost` is paired with `/goal` for long-running autonomous execution:
-1. **Persistent Scratch Checkpoint Ledger**: For runs >10 steps, maintain `<artifactDir>/scratch/boostx_state.md` tracking:
+1. **Persistent Scratch Checkpoint Ledger**: For multi-stage or multi-wave autonomous runs, maintain `<artifactDir>/scratch/boostx_state.md` tracking:
   - *Step 0 XBoost Goal Contract & Acceptance Criteria*
   - *Verified Completed Milestones (with command proof)*
   - *Falsified Dead Ends (so post-compaction rounds never repeat failed approaches)*
 2. **3-Strike Anti-Spin Circuit Breaker**:
-  - If the same command, test, or approach fails **3 times**, **STOP** editing production files. Isolate a <30-line reproduction script in `scratch/` or pivot hypotheses.
+  - If the same command, test, or approach fails **3 times**, **STOP** editing production files. Isolate a minimal standalone reproduction script in `scratch/` or pivot hypotheses.
   - If a global environment lock (e.g., broken system hook or missing external credential) blocks tool execution and cannot be bypassed in-session, output a concise diagnostic + copy-paste fix and terminate cleanly rather than spinning in an infinite loop.
 3. **Anti-Premature `GOAL_COMPLETE` Gate**:
   - Never emit `<!-- GOAL_COMPLETE -->` on the same turn a major code edit is written unless fresh Phase 4 verification has executed and passed *after* the final edit.
@@ -213,7 +213,7 @@ When `/xboost` is paired with `/goal` for long-running autonomous execution:
   * When transitioning from an approved [`implementation_plan.md`](file:///implementation_plan.md) created via [`/xplan`](../xplan/SKILL.md), lock Section 4 (`Red → Green Verification Matrix`) and the user's selected inline grilling options directly into Phase 1 as the XBoost Goal Contract.
 * **Opt-In [`/xultra`](../xultra/SKILL.md) Multiplier (`/xboost /xultra` or `/xboost /xultra /goal`)**:
   * **Default (Without `/xultra`)**: Execute inline or via standard single-task delegation (`Engine A` / `Engine B`).
-  * **With `/xultra`**: Normalize any multi-skill command into the Canonical Stage DAG (`RETRIEVE → RESEARCH → PLAN → BUILD → AUDIT/SYNC → RATCHET → VERIFY`), route Phase 2–3 through `/xultra`'s Dynamic `N × K` Topology Sizer (`Best-of-3` Tournament or `N+2` Partitioned Batch with Build-Lock Serialization), and enforce `Maker ≠ Checker` Blind Adversarial Verification in Phase 4.
+  * **With `/xultra`**: Normalize any multi-skill command into the Canonical Stage DAG (`Context → Research → Plan/Build → Sync/Ratchet`), route Phase 2–3 through `/xultra`'s **Elastic Cognitive Swarm (`N × K × T`)** (`Orthogonal K-Vector Tournament`, `Elastic Cognitive-Density Fleet` with Pre-Locked Shared Seam Header & Build-Lock Serialization, or `Evolutionary Ratchet Loop` across `T` generations for `OPTIMIZE / SCALE` and `SIMULATE / SOLVER`), and enforce the Anti-Inline-Shortcut `Maker ≠ Checker` Blind Adversarial Verification in Phase 4.
 * **When to Escalate to [`/xdeep-research`](../xdeep-research/SKILL.md)**:
   * Invoke [`/xdeep-research`](../xdeep-research/SKILL.md) in **Tier 1 (Fast Inline Probe)** for quick primary-source lookups (checking an unfamiliar SDK signature, pinned manifest version, local SQLite/XML schema, or single physical constant), or in **Tier 3 (5-Wave Swarm)** when a task requires multi-agent precedent harvesting, blind adversarial fact-auditing, multi-system architecture benchmarking, or full mathematical/standard formulation with a 1D analytical benchmark.
   * When paired (`/xdeep-research /xboost` or `/xdeep-research /xboost /goal`), lock the verified equation, SI unit bridge, or API signature directly into Phase 1 as the Red → Green verification gate.

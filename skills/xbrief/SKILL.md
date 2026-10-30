@@ -58,14 +58,14 @@ Search `*.md` in the current workspace, including hidden skill or configuration 
 * **Exclusions**: `.git`, `node_modules`, `dist`, `build`, `__pycache__`, `.venv`, vendor bundles, and **any directory containing an `.obsidian/` subfolder** (so Obsidian Second Brain notes never pollute or consume the 8-file Repository SSOT cap during standard `/xbrief` runs).
 * **Strict Opt-In [`/xobsidian`](../xobsidian/SKILL.md) Combinator Rule (`/xbrief /xobsidian`)**:
   * **Default (Without `/xobsidian`)**: Do **not** read or query any Obsidian vault.
-  * **Opt-In (`/xbrief /xobsidian`)**: When `/xobsidian` (or `/obsidianx`, `/obsidian-vault`) is explicitly included in the command, keep the 8-file discovery cap strictly for project repository SSOTs, and perform an additional bounded 2-Hop read via [`/xobsidian`](../xobsidian/SKILL.md) (`00 *Index*.md` → target `Hub - *.md` → 1–2 atomic notes) to include reusable domain formulas, precedents, or component specs in the Briefing Table.
+  * **Opt-In (`/xbrief /xobsidian`)**: When `/xobsidian` (or `/obsidianx`, `/obsidian-vault`) is explicitly included in the command, keep the 8-file per-window discovery cap strictly for project repository SSOTs, and perform an additional bounded 2-Hop read via [`/xobsidian`](../xobsidian/SKILL.md) (`00 *Index*.md` → target `Hub - *.md` → task-relevant atomic notes) to include reusable domain formulas, precedents, or component specs in the Briefing Table.
 * **Opt-In [`/xlaya`](../xlaya/SKILL.md) Sidecar Rule (`/xbrief /xlaya`)**:
-  * When invoked alongside `/xlaya` (or `/layax`, `/laya`) in a large, unpinned documentation corpus (`> 8` candidate files or `> 500`-line specs), use [`/xlaya`](../xlaya/SKILL.md) (`shortlist_choice` / `score`) to semantically rank heading sections before executing Pass B reads.
-* **Opt-In [`/xultra`](../xultra/SKILL.md) Parallel Scout Rule (`/xbrief /xultra`)**:
-  * When invoked alongside `/xultra` across a multi-root workspace or large specification corpus, fan out 2–3 parallel Read-Only Scouts to inspect candidate SSOT documents and return `≤ 150-word` Briefing Table rows without bloating the main thread's context window.
+  * When invoked alongside `/xlaya` (or `/layax`, `/laya`) in a multi-file unpinned documentation corpus or long specification, use [`/xlaya`](../xlaya/SKILL.md) (`shortlist_choice` / `score`) to semantically rank heading sections before executing Pass B reads.
+* **Opt-In [`/xultra`](../xultra/SKILL.md) Elastic Subsystem Scout Rule (`/xbrief /xultra`)**:
+  * When invoked alongside `/xultra` across a multi-root workspace or large specification corpus, fan out **Elastic Read-Only Subsystem Scouts** (1 scout per subsystem root or spec cluster, each applying the per-window 8-file Pass-B reading bound) to return **Telegraphic Briefing Table Rows** without bloating the main thread's context window.
 * **Discovery & Reading Tools**: Use native file-reading (`read_file` / `view_file`) and platform search (`rg --hidden`, `grep`, or PowerShell `Select-String`).
 
-#### Authority Hierarchy (Cap at 8 Files)
+#### Authority Hierarchy (Cap at 8 Files per Context Window)
 
 Rank discovered documents using this 4-tier authority ladder rather than raw keyword frequency:
 
@@ -114,7 +114,7 @@ Before generating output, verify alignment against the Briefing Table:
 ## Quality Rubric
 
 - [ ] Task parsed cleanly, or empty-task command stopped immediately after the table.
-- [ ] Markdown discovered via authority hierarchy (SSOT and latest version precedence over hit count); capped at 8 files.
+- [ ] Markdown discovered via authority hierarchy (SSOT and latest version precedence over hit count); capped at 8 files per context window (or sharded across [`/xultra`](../xultra/SKILL.md) subsystem scouts).
 - [ ] Large documents (> 200 lines) read using Pass A (Structural Skeleton/Cardinality) before Pass B (Section Deep Dive).
 - [ ] Deferred zones, frozen markers, and out-of-scope sections identified.
 - [ ] Briefing Table rendered with Cardinality, Invariants, and Deferred Zones.

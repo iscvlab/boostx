@@ -1,66 +1,85 @@
 ---
 name: xultra
 description: >
-  Dynamic multi-agent swarm orchestrator, Best-of-3 tournament builder, and Maker-vs-Checker blind adversarial verifier (/xultra, /ultrax, /ultra).
+  Elastic Cognitive Swarm orchestrator, K-vector tournament builder, evolutionary ratchet loop, and Maker-vs-Checker blind verifier (/xultra, /ultrax, /ultra).
   Use when running /xultra, /ultrax, or /ultra standalone or chained (/xboost /xultra, /xplan /xultra, /xdeep-research /xultra, /xsync /xultra) for parallel subagent execution.
-  Do NOT use for trivial 1-line edits or zero-token local triage (/xlaya).
+  Do NOT use for trivial 1-line edits or local triage (/xlaya).
 ---
 
 # Antigravity XUltra Protocol (`/xultra`)
 
-When `/xultra` (or legacy aliases `/ultrax`, `/ultra`) is invoked standalone or chained with any BoostX `/x...` skill, enter the **XUltra Dynamic Swarm & Adversarial Verification Protocol**. XUltra multiplies System 2 compute across isolated subagent context windows while keeping the **Main Thread at Compaction Round 0** (`🟢 HEALTHY`).
+When `/xultra` (or legacy aliases `/ultrax`, `/ultra`) is invoked standalone or chained with any BoostX `/x...` skill, enter the **XUltra Elastic Cognitive Swarm & Adversarial Verification Protocol**. XUltra multiplies System 2 compute across isolated subagent context windows while keeping the **Main Thread at Compaction Round 0** (`🟢 HEALTHY`).
 
-Unlike fixed headcount spawners, `/xultra` inspects task structure first—matching agent topology to **Independent Targets (`N`) × Orthogonal Axes (`K`)**, enforcing a **Maker ≠ Checker Blind Falsification Gate**, and requiring **Disk-First + ≤ 150-Word Caveman Receipts** so raw work never bloats the main conversation.
+Unlike rigid headcount spawners that hardcode fixed agent quotas, `/xultra` derives swarm topology from first principles—sizing execution across **Cognitive-Density Shards (`N`) × Orthogonal Paradigm Vectors (`K`) × Evolutionary Ratchet Generations (`T`)**, enforcing an **Anti-Inline-Shortcut `Maker ≠ Checker` Blind Falsification Gate**, and requiring **Pointer-Not-Payload Returns** so raw work never bloats the main conversation.
 
 Portable across **Google Gemini / Antigravity, Claude Code, Grok, Cursor, and Codex** on **Windows, macOS, and Linux**.
 
 ---
 
-## 1. When to Use & Step 0 Complexity Floor
+## 1. The 4-Law First-Principles Swarm Sizing Calculus (`N × K × T`)
 
-| Workload Profile | `/xultra` Action |
-| :--- | :--- |
-| **Single-target complex design, UI/motion prototype, or solver (`N = 1`)** | **Archetype 1 (`3 + 2` Tournament — `4-5` Agents)**: `3` orthogonal builders/architects (`_vA`, `_vB`, `_vC` or isolated worktree) + `1-2` blind critics. |
-| **Multi-target audit, multi-module build, deck, dataset, or vault (`N = 2..10`)** | **Archetype 2 (`N + 2` Partitioned Swarm — `4-12` Agents)**: `1` dedicated agent per target (`≤ 3` items/agent cap) + `1-2` cross-target blind auditors. |
-| **Full-stack multi-stage pipeline (`/xobsidian /xdeep-research /xboost /xsync /xultra`)** | **Archetype 3 (Multi-Wave DAG)**: Normalizes stages into causal order (`Context → Research → Build → Sync`) and runs a parallel swarm wave per stage. |
-| **Trivial 1-file edit (`N = 1`, `< 50` LOC diff, `0` design ambiguity)** | **Auto-Downshift (`2-Agent Fast Pair`)**: `1` surgical builder + `1` blind verifier. Never spawn 5+ agents on a trivial fix. |
-| **Zero-token local heading shortlist or contradiction pre-filter** | Chain [`/xlaya`](../xlaya/SKILL.md) (`/xlaya /xultra`) so System 1 filters chunks in milliseconds before spawning System 2 subagents. |
+Never hardcode arbitrary subagent counts or arbitrary word-count caps. Derive the exact swarm topology in Step 0 using four laws:
+
+1. **Law 1 — Code-Over-Swarm Split (Deterministic Compute vs. Semantic Reasoning)**:
+   * Never spawn LLM subagents to perform deterministic math, regex scanning, CSV/SQLite joins, HTTP status checks, or AST linting that a parallel Python CLI script (`concurrent.futures`, `asyncio`, `sqlite3`, `laya_triage.py`, `audit_engine.py`, `verify_evidence.py`) can execute in milliseconds with `0` token cost.
+   * Execute Law 1 deterministic scripts *first* to bound the exact problem surface; reserve System 2 subagents strictly for semantic reasoning, design synthesis, primary-source interpretation, and adversarial falsification.
+2. **Law 2 — True Orthogonality Sizing (`K` Vectors for Coupled Problems, `N = 1`)**:
+   * When tackling a single coupled architectural, algorithmic, or visual problem (`N = 1`), spawn `K` parallel builders **only** for genuinely orthogonal paradigms (`K ≥ 2` distinct algorithms, module seams, numerical schemes, or visual systems).
+   * Never pad `K` with cosmetic prompt paraphrases just to hit a fixed number, and never spawn competing builders when `0` design ambiguity exists.
+3. **Law 3 — Cognitive-Density Partitioning (`N` Shards by Per-Shard Working-Set Weight)**:
+   * When a task decomposes into `N` independent targets (modules, files, case studies, skills, slides, or atomic notes), never cap total swarm size to a fixed ceiling or fixed item quota. Partition shards by **per-shard cognitive & output weight**:
+     * **Heavy Shards** *(deep code generation, primary-source page scraping, interactive HTML/SVG authoring, or line-by-line spec auditing)*: Assign **1 dedicated subagent per heavy target** so each target receives 100% attention density with zero "Lost-in-the-Middle" skimming.
+     * **Lightweight Shards** *(short atomic notes, simple metadata rows, or small config stubs)*: Group into **coherent domain or constellation clusters** per subagent.
+     * **Pre-Locked Shared Seam Header**: Before fanning out `N` parallel builders, lock an explicit **Shared Seam Header** (exact function signatures, type contracts, CSS design tokens, JSON schema keys, or pre-assigned Obsidian `[[wikilink]]` neighbor signatures) inside every subagent prompt so all `N` outputs merge with zero interface drift.
+4. **Law 4 — Rolling Wave Pacing, Evolutionary Ratchet Loops (`T` Generations) & Anti-Inline-Shortcut Gate**:
+   * **Rolling Wave Pacing**: Stream large shard fleets (`N` shards) across rolling waves matched to host concurrency and build/file locks so gRPC channels and disk locks never contend.
+   * **Evolutionary Ratchet Loops (`T` Generations)**: For open-ended optimization, numerical solver tuning, or multi-axis dataset curation (`N × K × T`), iterate across generations (`Wave t Generators → Deterministic CLI Benchmark + Blind Critic → Cull Losers & Mutate/Hybridize Pareto Winners in Wave t+1`) until the target metric or verification gate converges.
+   * **Anti-Inline-Shortcut Invariant (`Maker ≠ Checker`)**: When `/xultra` is invoked, the main thread is **strictly forbidden** from skipping subagent dispatch and grading its own work inline within the same context window. Every `/xultra` run must execute both a Law 1 deterministic CLI probe and an isolated Wave 2 Blind Adversarial Critic subagent (`invoke_subagent`) with a fresh, unanchored attention matrix.
 
 ---
 
-## 2. Step 0: Canonical Stage DAG Normalization & Dynamic Topology Sizer
+## 2. Swarm Archetypes & Canonical Stage DAG Normalization
 
-### A. Order-Independent Canonical Stage DAG Normalization
+### A. The 4 Elastic Swarm Archetypes (`N × K × T`)
+
+| Workload Profile | Topology (`N × K × T`) | `/xultra` Execution Strategy |
+| :--- | :---: | :--- |
+| **Single-target complex design, UI/motion prototype, or solver with design ambiguity** | **`1 × K × 1`**<br>*(Archetype 1: Orthogonal `K`-Vector Tournament)* | Spawn `K` (`K ≥ 2`) genuinely orthogonal builders (`_vA`, `_vB`, ... or isolated worktrees) locked to distinct architectural/visual vectors + orthogonal Blind Critics. |
+| **Multi-target audit, multi-module build, deck, dataset, or vault** | **`N × 1 × 1`**<br>*(Archetype 2: Elastic Cognitive-Density Fleet)* | Spawn `N` cognitive-density shards (1 subagent per heavy target; domain-clustered subagents for lightweight targets, bound by a Pre-Locked Shared Seam Header) across rolling waves + cross-shard Blind Critics. |
+| **Full-stack multi-stage pipeline (`/xobsidian /xdeep-research /xboost /xsync /xultra`)** | **`S` Stages**<br>*(Archetype 3: Multi-Stage Pipeline DAG)* | Normalizes stages into strict causal order (`Context → Research → Plan/Build → Sync/Ratchet`) and runs a right-sized swarm wave at each stage. |
+| **Iterative solver tuning, hot-path performance optimization, or prune-and-replace harvest** | **`N × K × T`**<br>*(Archetype 4: Evolutionary Ratchet Loop)* | Runs `T` (`T ≥ 2`) evolutionary generations: `Wave t Candidates → Objective CLI Benchmark & Blind Critic → Cull Losers & Cross-Pollinate Top Pareto Winners in Wave t+1` until convergence. |
+| **Localized 1-file edit (`N = 1`, `K = 1`, `0` design ambiguity)** | **`1 × 1 × 1`**<br>*(Auto-Downshift: Builder + Blind Verifier Pair)* | `1` surgical builder + `1` independent Blind Critic (`Maker ≠ Checker`). Never waste multi-vector tournament turns when zero design ambiguity exists. |
+| **Zero-token local heading shortlist or contradiction pre-filter** | **System 1 Pre-Gate** | Chain [`/xlaya`](../xlaya/SKILL.md) (`/xlaya /xultra`) so `laya_triage.py` filters chunks in milliseconds before spawning System 2 subagents. |
+
+### B. Order-Independent Canonical Stage DAG Normalization
 Users may chain slash commands in any prompt order (e.g., `/xobsidian /xdeep-research /xsync /xboost /xlaya /goal /xultra`). Never execute a downstream stage (such as `/xsync`) before an upstream build stage (`/xboost`). Always sort active skills into the **4 Causal Lifecycle Stages** wrapped by active cross-cutting modifiers:
 
 ```mermaid
 flowchart LR
-    S1["Stage 1: Context & Cache<br>/xbrief + /xobsidian (Hop 0→2)<br>+ /xlaya (shortlist)"] --> S2["Stage 2: Research & Proof<br>/xdeep-research<br>(Harvester Swarm + /xlaya rubric)"]
-    S2 --> S3["Stage 3: Plan & Execute<br>/xplan → /xboost<br>(3+2 Tournament or N+2 Batch)"]
+    S1["Stage 1: Context & Cache<br>/xbrief + /xobsidian (Hop 0→2)<br>+ /xlaya (shortlist)"] --> S2["Stage 2: Research & Proof<br>/xdeep-research<br>(Cognitive-Density Harvesters + /xlaya)"]
+    S2 --> S3["Stage 3: Plan & Execute<br>/xplan → /xboost<br>(K-Vector Tournament, N-Shard Fleet, or T-Ratchet)"]
     S3 --> S4["Stage 4: Sync, Audit & Ratchet<br>/xsync + /xobsidian Ratchet<br>+ /xpublish-audit + /xlaya noul"]
 ```
 
 * **Cross-Cutting Modifiers Active Across All Stages**:
   * **[`/xlaya`](../xlaya/SKILL.md)**: System 1 zero-token local pre-filter (`laya_triage.py`) before each System 2 wave.
-  * **`/xultra`**: System 2 parallel subagent fan-out + `Maker ≠ Checker` blind falsification at each stage.
-  * **`/goal`**: Persistent state tracking (`<artifactDir>/scratch/boostx_state.md`) looping across stages and turns until 100% of verification gates pass (`<!-- GOAL_COMPLETE -->`).
+  * **`/xultra`**: System 2 `N × K × T` subagent fan-out + `Maker ≠ Checker` blind falsification at each stage.
+  * **`/goal`**: Persistent state tracking (`<artifactDir>/scratch/boostx_state.md`) looping across stages and generations until 100% of verification gates pass (`<!-- GOAL_COMPLETE -->`).
 
-### B. Dynamic Task Decomposition (`N × K` Sizer)
+### C. Pre-Flight Swarm Contract
 Before spawning subagents, output the 4-line **XUltra Swarm Contract**:
-> **⚡ XUltra Swarm Contract** — `[Archetype 1 Tournament | Archetype 2 Partitioned Batch | Archetype 3 Multi-Wave]`
-> • **Normalized Pipeline**: `<Stage 1 → Stage 2 → Stage 3 → Stage 4>`
-> • **Wave 1 Generators (`M` Agents)**: `<Exact role, orthogonal hypothesis/bucket, and disjoint output path per agent>`
-> • **Wave 2 Blind Critics (`C` Agents)**: `<Exact falsification probe, CLI script, and ground-truth receipt check>`
+> **⚡ XUltra Swarm Contract** — `[Archetype 1 K-Vector | Archetype 2 N-Shard Fleet | Archetype 3 Multi-Stage DAG | Archetype 4 T-Generation Ratchet]` (`N × K × T`)
+> • **Law 1 Deterministic Pre-Gate & Pipeline**: `<CLI pre-filter/scanner + Stage 1 → Stage 2 → Stage 3 → Stage 4>`
+> • **Wave 1 Generators (`N × K` Shards/Vectors)**: `<Exact role, orthogonal vector or cognitive-density shard, Shared Seam Header, and disjoint output path>`
+> • **Wave 2 Blind Critics (`Maker ≠ Checker`)**: `<Isolated Critic subagent role + exact deterministic falsification probe>`
 
-1. **Archetype 1 — `3 + 2` Orthogonal Tournament (`N = 1` Target, `4-5` Agents)**:
-   * **Forced Orthogonal Priors**: Never give 3 competing builders the same generic prompt (which produces 3 copies of the same blind spot). Lock each builder into a **distinct architectural vector, algorithm, or visual paradigm**:
-     * *Builder A*: Vector A — Minimal stdlib / synchronous / clean editorial baseline.
-     * *Builder B*: Vector B — Deep Module / high-throughput / kinetic or rich interactive paradigm.
-     * *Builder C*: Vector C — Alternative data structure, GPU/vectorized kernel, or high-contrast spatial layout.
-   * **Paired Critics (`1-2` Agents)**: `1` Functional/Benchmark Verifier + `1` Visual/Spec Auditor.
-2. **Archetype 2 — `N + 2` Partitioned Batch (`N = 2..10` Targets, `4-12` Agents)**:
-   * **Attention Density Cap (`≤ 3` Items per Agent)**: LLMs suffer from "Lost-in-the-Middle" attention dilution when auditing or editing 8+ files/slides/records in one window. Assign **1 dedicated agent per 1–3 items** so every target receives 100% attention density.
-   * **Pre-Locked Shared Seam Header**: Before launching `N` parallel builders, lock a **5-line Shared Seam Header** (exact function signatures, type contracts, CSS design tokens, or JSON schema keys) inside every subagent prompt so all `N` outputs integrate cleanly.
+1. **Forced Orthogonal Priors (Archetype 1 — `K` Vectors)**:
+   * Never give competing builders the same generic prompt (which produces `K` copies of the same blind spot). Lock each builder into a **distinct architectural vector, algorithm, or visual paradigm**:
+     * *Vector A*: Minimal stdlib / synchronous / clean editorial baseline.
+     * *Vector B*: Deep Module seam / high-throughput / kinetic or rich interactive paradigm.
+     * *Vector C (and `K_i` as warranted)*: Alternative data structure, vectorized/GPU kernel, or high-contrast spatial layout.
+2. **Pre-Locked Shared Seam Header (Archetype 2 — `N` Shards)**:
+   * Before launching `N` parallel shard builders, lock a **Shared Seam Header** (exact function signatures, type contracts, CSS design tokens, JSON schema keys, or pre-assigned wikilink bridge matrices) inside every subagent prompt so all `N` shards integrate cleanly without post-hoc rewrite churn.
 
 ---
 
@@ -68,67 +87,77 @@ Before spawning subagents, output the 4-line **XUltra Swarm Contract**:
 
 ### A. 5-Domain Adaptation Matrix (100% Project-Agnostic)
 
-| Project Domain | Wave 1: Generator / Builder Strategy | Wave 2: Blind Adversarial Critic (`Maker ≠ Checker`) |
+| Project Domain | Wave 1: Generator / Builder Strategy (`N × K × T`) | Wave 2: Blind Adversarial Critic (`Maker ≠ Checker`) |
 | :--- | :--- | :--- |
-| **1. Backend, APIs & Distributed Systems** *(Go, Rust, TS, Python, C#, SQL)* | `3` competing algorithms (`Workspace="share"`) or `N` disjoint module builders with locked interface types. | Runs unit/integration tests, concurrency/race probes, `O(N)` latency benchmarks, and AST security checks. |
-| **2. Frontend, Web UI, Diagrams & Motion** *(React, Vue, HTML/CSS, SVG, Canvas, WebGL)* | `3` side-by-side visual/motion prototypes (`<stem>_vA.<ext>`, `_vB`, `_vC`) or `N` component/frame builders sharing CSS tokens. | Captures viewport screenshots/DOM metrics to verify `0` console errors, overflow bounds, typography contrast, and token parity. |
-| **3. Data Engineering, Cloud & ML** *(BigQuery, Spark, dbt, PyTorch, Notebooks)* | `3` feature/query/model pipelines or `N` table/DAG stage workers. | Audits train/test leakage, schema grain uniqueness, null rates, and SQL `--dry_run` cost bounds. |
-| **4. Physical Sciences, Solvers, CAD & GIS** *(FEM/CFD, C#/ILGPU, Rhino/GH, PyQGIS)* | `3` numerical schemes or `N` solver/layer workers bound to an explicit SI Unit Bridge. | Verifies the **Physics Triad** (`zero-load = 0.0` with no `NaN`/`Inf`, 1D Analytical Toy Benchmark, conservation/CFL stability). |
-| **5. Research, Security & Knowledge Graphs** *(Docs, Specs, Literature, Obsidian)* | `N` high-density scouts (`≤ 3` records/scout) or disjoint 5-Tier doc/vault workers. | Executes `verify_evidence.py`, `audit_workspace_docs.py`, `audit_engine.py`, and Graph Integrity (`BROKEN=0`). |
+| **1. Backend, APIs & Distributed Systems** *(Go, Rust, TS, Python, C#, SQL)* | `K` orthogonal algorithms (`Workspace="share"`), `N` disjoint module shards with locked interface types, or `T` optimization generations. | Runs unit/integration tests, concurrency/race probes, `O(N)` latency benchmarks, and AST security checks. |
+| **2. Frontend, Web UI, Diagrams & Motion** *(React, Vue, HTML/CSS, SVG, Canvas, WebGL)* | `K` side-by-side visual/motion prototypes (`<stem>_vA.<ext>`, `_vB`, `_vC`) or `N` component/frame shards sharing CSS design tokens. | Captures viewport screenshots/DOM metrics to verify `0` console errors, overflow bounds, typography contrast, and token parity. |
+| **3. Data Engineering, Cloud & ML** *(BigQuery, Spark, dbt, PyTorch, Notebooks)* | `K` feature/query/model pipelines or `N` table/DAG stage workers. | Audits train/test leakage, schema grain uniqueness, null rates, and SQL `--dry_run` cost bounds. |
+| **4. Physical Sciences, Solvers, CAD & GIS** *(FEM/CFD, C#/ILGPU, Rhino/GH, PyQGIS)* | `K` numerical schemes, `N` solver/layer workers bound to an explicit SI Unit Bridge, or `T` convergence ratchet loops. | Verifies the **Physics Triad** (`zero-load = 0.0` with no `NaN`/`Inf`, 1D Analytical Toy Benchmark, conservation/CFL stability). |
+| **5. Research, Security & Knowledge Graphs** *(Docs, Specs, Literature, Obsidian)* | `N` cognitive-density scouts (1 scout per heavy candidate/spec; clustered scouts for lightweight items) or disjoint 5-Tier doc/vault workers. | Executes `verify_evidence.py`, `audit_workspace_docs.py`, `audit_engine.py`, 3-Bucket numeric audit, and Graph Integrity (`BROKEN=0`). |
 
 ### B. Multi-Host Dispatch Adapter & Build-Lock Safety
 
 | Host Runtime | Parallel Subagent Dispatch | Read-Only Scout | Read-Write Builder / Critic | Workspace & Build-Lock Isolation |
 | :--- | :--- | :--- | :--- | :--- |
-| **Gemini / Antigravity** | Parallel `invoke_subagent` calls in same turn | `TypeName="research"` | `TypeName="self"` | `Workspace="share"`/`"branch"` (compiled code) or disjoint `_vA.._vC` files |
+| **Gemini / Antigravity** | Parallel `invoke_subagent` calls in same turn | `TypeName="research"` | `TypeName="self"` | `Workspace="share"`/`"branch"` (compiled code) or disjoint `_vA.._vK` files |
 | **Claude Code** | Parallel `Task` calls in single assistant turn | `subagent_type="Explore"` | `subagent_type="general-purpose"` | Disjoint file paths or git worktrees in `<scratch>/xultra/` |
 | **Grok / Cursor / Codex** | Native parallel background agent tool | Read-only scout | Full execution agent | Disjoint output paths + serialized build verification |
-| **Single-Agent Fallback** | **Sequential Multi-Persona Tournament** | Bounded Pass A → B reads | Writes `_vA`, `_vB`, `_vC` to disk → switches to **Blind Critic Persona** | Disjoint files + mandatory deterministic CLI verification |
+| **Single-Agent Fallback** | **Sequential Multi-Persona Tournament** | Bounded Pass A → B reads | Writes `_vA.._vK` to disk → switches to **Blind Critic Persona** | Disjoint files + mandatory deterministic CLI verification |
 
 > [!IMPORTANT]
 > **Build-Lock & Git-Index Serialization Gate (Zero Race Conditions)**:
-> When running with shared disk state (`Workspace="inherit"`), parallel Builder subagents **MUST NEVER** execute package installers (`npm install`, `pip`, `cargo`), global repo compilers (`dotnet build`, `tsc`), or `git` index mutations concurrently. Builders write their disjoint files only; **Wave 2 (the single Verification Critic)** executes the unified build/test runner once all file writes finish.
+> When running with shared disk state (`Workspace="inherit"`), parallel Builder subagents **MUST NEVER** execute package installers (`npm install`, `pip`, `cargo`), global repo compilers (`dotnet build`, `tsc`), or `git` index mutations concurrently. Builders write their disjoint files only; **Wave 2 (the Verification Critic)** executes the unified build/test runner once all file writes finish.
 
 ---
 
-## 4. Zero-Hallucination (`Maker ≠ Checker`) & Zero-Bloat Contracts
+## 4. Zero-Hallucination (`Maker ≠ Checker`), 3-Bucket Numeric Rule & Pointer-Not-Payload Contract
 
-### A. Zero-Trust Deterministic Critic Contract (Anti-"Rubber-Stamp" Rule)
-No generator subagent may grade its own work, and no Critic subagent may return `PASS` based on reading prose/code alone:
-1. **Mandatory Red-Team Prompt**: Instruct every Critic subagent: *"Assume the builders introduced subtle regressions, hallucinated unverified numbers/links, violated frozen boundaries, or caused visual clipping. Attempt to falsify every claim against ground truth."*
-2. **Mandatory Deterministic Execution Receipt**: Every Critic must run at least one deterministic CLI probe (unit tests, compiler, `verify_evidence.py`, `audit_workspace_docs.py`, `audit_engine.py`, SQLite/CSV query, or headless screenshot check) and return an `Invariant | Probe Command | Observed Output | Verdict` table.
-3. **Partial-Wave Fault Recovery**: All subagents enforce non-interactive CLI flags (`CI=true`, `--yes`, `--no-input`, `PAGER=cat`, `< 30s` timeout). If 1 subagent in a wave fails, preserve all passing outputs and spawn a single targeted replacement for the failed bucket only.
+### A. Zero-Trust Deterministic Critic Contract (Anti-"Rubber-Stamp" & Anti-Anchoring Rule)
+No generator subagent (and never the main thread acting inline) may grade its own work, and no Critic subagent may return `PASS` based on reading prose/code alone:
+1. **Mandatory Red-Team Prompt**: Instruct every Critic subagent: *"Assume Wave 1 suffered from anchoring bias, introduced subtle regressions, hallucinated unverified numbers/links, skipped edge cases, or violated frozen boundaries. Attempt to falsify every claim against ground truth."*
+2. **Mandatory Deterministic Execution Receipt**: Every Critic must run at least one deterministic CLI probe (unit tests, compiler, `verify_evidence.py`, `audit_workspace_docs.py`, `audit_engine.py`, SQLite/CSV query, regex threshold scanner, or headless screenshot check) and return an `Invariant | Probe Command | Observed Output | Verdict` table.
+3. **3-Bucket Numeric Litmus Test (Zero Arbitrary Quotas)**:
+   When auditing or authoring specs, skills, or architectures, classify every numeric threshold (`≤ N`, `N..M`, `< N`) into three buckets:
+   * **Bucket 1 (Physical / Platform Constants — Enforce Strictly)**: Hardware, model, or runtime limits (`512`-token `ModernBERT` window, `< 30s` synchronous tool timeout, `2-Hop` GraphRAG diameter, `≤ 400`-char target / `≤ 500`-char advisory YAML description budget).
+   * **Bucket 2 (Per-Window Cognitive Working-Set Bounds — Enforce Per Window, Scale via Shards)**: Per-thread reading caps (such as `/xbrief`'s `8`-file Pass-B cap per single context window); when corpus size exceeds one window, scale horizontally via `/xultra` shards rather than truncating discovery.
+   * **Bucket 3 (Arbitrary Task / Headcount Quotas — Strictly Forbidden)**: Never hardcode fixed subagent counts (`3+2`, `4–12`, `2–4 scouts`) or arbitrary output quotas (`≤ 150 words`, `1–2 notes`, `< 30 lines`). Always derive topology from `N × K × T`.
+4. **Partial-Wave Fault Recovery**: All subagents enforce non-interactive CLI flags (`CI=true`, `--yes`, `--no-input`, `PAGER=cat`, `< 30s` timeout). If 1 subagent in a wave fails, preserve all passing outputs and spawn a single targeted replacement for the failed shard only.
 
-### B. Caveman Receipt Contract (`≤ 150 Words`) & Winner Promotion Policy
-1. **Disk-First Persistence**: Subagents write all code, prototypes, markdown studies, and logs directly to disk. Returning raw multi-hundred-line file dumps in subagent replies is strictly forbidden.
-2. **Compact Receipt (`≤ 150 Words` / `≤ 12 Lines`)**: Each subagent reply to the main thread contains only:
-   * `Saved Path`: Clickable `[filename](file:///...)`
-   * `Metrics & Proof`: LOC, runtime `ms`, test/CLI exit code, or verified record count
-   * `Key Trade-Off / Findings`: 2–3 concise bullets
-3. **Objective vs. Aesthetic Winner Promotion (`Best-of-3`)**:
-   * **Objective Code / Solver / Data Tasks**: Once the Wave 2 Critic proves a clear winner on correctness, performance, and Ponytail simplicity, automatically promote the winning variant to the canonical target path and clean up temporary `_vA`/`_vB`/`_vC` scratch files.
-   * **Aesthetic / Web UI / Diagram / Motion Tasks**: Preserve all passing variants side-by-side (`<stem>_vA.<ext>`, `<stem>_vB.<ext>`, `<stem>_vC.<ext>`) and present the Critic's Visual QA Scorecard so the user can inspect all 3 live or hybridize (`vA layout + vB motion`) before cleanup.
+### B. Pointer-Not-Payload Return Contract & Winner Promotion Policy
+Never truncate required primary-source evidence to fit an arbitrary word cap, and never bloat the main thread with raw file dumps:
+1. **Disk-First Pointer Receipt (Write-Capable Subagents)**:
+   * Subagents that create or modify code, prototypes, markdown reports, or datasets write all artifacts directly to disk. Returning raw multi-hundred-line file dumps in subagent replies is strictly forbidden.
+   * Reply to the main thread with a **Compact Pointer Receipt** containing only:
+     * `Saved Path`: Clickable `[filename](file:///...)`
+     * `Metrics & Proof`: LOC, runtime `ms`, test/CLI exit code, or verified record count
+     * `Key Trade-Offs / Deltas`: Concise bullet summary of architectural decisions or fixes
+2. **Telegraphic Evidence Table (Read-Only Scouts)**:
+   * Read-only scouts (`TypeName="research"` / `Explore`) cannot write files to disk. They return a **Schema-Complete Telegraphic Markdown Table / JSON** containing 100% of required primary-source fields, deep links, line ranges (`#L<start>-L<end>`), and verbatim proof snippets—with zero conversational filler and zero word-count truncation of verified facts.
+3. **Objective vs. Aesthetic Winner Promotion (`K`-Vector Tournament & `T`-Generation Ratchet)**:
+   * **Objective Code / Solver / Data Tasks**: Once the Wave 2 Critic proves a winner on correctness, performance, and Ponytail simplicity (or after `T` ratchet generations converge), automatically promote the winning variant to the canonical target path and clean up temporary `_vA.._vK` scratch files.
+   * **Aesthetic / Web UI / Diagram / Motion Tasks**: Preserve all passing variants side-by-side (`<stem>_vA.<ext>`, `<stem>_vB.<ext>`, ...) and present the Critic's Visual QA Scorecard so the user can inspect all variants live or hybridize (`vA layout + vB motion`) before cleanup.
 
 ---
 
 ## 5. Composable BoostX Skill Combination Matrix
 
-| Skill Combination | Wave 1: Parallel Swarm Execution | Wave 2: Blind Adversarial Critic Gate |
+| Skill Combination | Wave 1: Elastic Swarm Execution (`N × K × T`) | Wave 2: Blind Adversarial Critic Gate (`Maker ≠ Checker`) |
 | :--- | :--- | :--- |
-| **[`/xbrief`](../xbrief/SKILL.md) `/xultra`** | `2-4` Read-Only Scouts reading Pass A → Pass B across Repo SSOTs, Schemas, and active specs in disposable windows. | `1` Cross-Doc Contradiction & Boundary Scout checking `[FROZEN]`/`[DEFERRED]` zones and version leaders. |
-| **[`/xplan`](../xplan/SKILL.md) `/xultra`** | `3` Orthogonal Architect Scouts (`Design-It-3x`: Vector A Stdlib, Vector B Surgical Seam, Vector C Deep Module). | `1` Red-Team Seam & SSOT Breaker checking unit bridges, portability, and blast radius before authoring `implementation_plan.md`. |
-| **[`/xboost`](../xboost/SKILL.md) `/xultra`** | `3` Competing Builders (`N = 1` tournament) OR `N` Disjoint Module/Frame Builders (`N = 2..8` batch with Shared Seam Header). | `1-2` Blind Critics running the 3-Tier Green Gate, Physics Triad (`zero-load = 0.0`, 1D Toy Benchmark), or Visual QA screenshots + anti-hardcode sweep. |
-| **[`/xdeep-research`](../xdeep-research/SKILL.md) `/xultra`** | Expands Wave 2 to `N` High-Density Harvester / Primary-Source Scouts (`≤ 3` records/scout, mandatory deep-link scraping + local manifest/DB probes). | Spawns `2` Orthogonal Blind Auditors in Wave 3 (`Temporal/Attribution/Signature Falsifier` + `Quantitative/Schema Falsifier` + `verify_evidence.py`). |
-| **[`/xsync`](../xsync/SKILL.md) `/xultra`** | `3-6` Disjoint Tier Workers synchronizing Tiers 1-2 (Code/Specs), Tiers 3-4 (Roadmaps), and Tier 5 (HTML/Mirrors). | `1` Blind Ground-Truth & Ghost-Link Auditor running `audit_workspace_docs.py` + SHA-256 mirror verification. |
-| **[`/xobsidian`](../xobsidian/SKILL.md) `/xultra`** *(Strict Opt-In)* | `N` Parallel Vault Workers minting disjoint `#tier/method`, `#tier/asset`, and `#tier/career-cluster` notes in `VAULT_ROOT`. | `1` Graph Topology Auditor updating `Hub - *.md` tables and running the Graph Integrity Gate (`BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`). |
-| **[`/xpublish-audit`](../xpublish-audit/SKILL.md) `/xultra`** | Runs `audit_engine.py` + `2-3` Specialized Audit Scouts (`Secret/Path`, `AST/Portability`, `Public-Claim Receipt`). | `1` Release Gatekeeper verifying `0` blocking issues and `0` unverified `LIVE` claims. |
+| **[`/xbrief`](../xbrief/SKILL.md) `/xultra`** | Elastic Read-Only Subsystem Scouts (1 scout per subsystem root or spec cluster, each applying the per-window 8-file Pass-B reading bound). | Cross-Doc Contradiction & Boundary Scout checking `[FROZEN]`/`[DEFERRED]` zones and version leaders. |
+| **[`/xplan`](../xplan/SKILL.md) `/xultra`** | `K` Orthogonal Architect Scouts (Vector A Stdlib/YAGNI, Vector B Surgical Seam, Vector C Deep Module, plus domain vectors). | Red-Team Seam & SSOT Breaker checking unit bridges, Shared Seam Header completeness, portability, and blast radius before authoring `implementation_plan.md`. |
+| **[`/xboost`](../xboost/SKILL.md) `/xultra`** | `K` Orthogonal Tournament Builders (`N = 1`), `N` Cognitive-Density Module Shards (with Pre-Locked Shared Seam Header), or `T` Evolutionary Ratchet Generations. | Orthogonal Blind Critics running the 3-Tier Green Gate, Physics Triad (`zero-load = 0.0`, 1D Toy Benchmark), or Visual QA screenshots + anti-hardcode sweep. |
+| **[`/xdeep-research`](../xdeep-research/SKILL.md) `/xultra`** | Cognitive-Density Harvester Shards (1 dedicated scout per heavy candidate/category/source bucket; mandatory deep-link scraping + local manifest/DB probes). | Axis-Matched Blind Adversarial Auditors (`Temporal/Attribution/Signature Falsifier` + `Quantitative/Schema/Unit Falsifier` + `verify_evidence.py`). |
+| **[`/xsync`](../xsync/SKILL.md) `/xultra`** | Locks the Canonical Fact & Metric Delta Header first, then shards updates by cognitive density (1 dedicated subagent per heavy HTML deck/dashboard; tier-clustered subagents for Markdown specs). | Blind Ground-Truth & Ghost-Link Auditor running `audit_workspace_docs.py` + SHA-256 mirror verification. |
+| **[`/xobsidian`](../xobsidian/SKILL.md) `/xultra`** *(Strict Opt-In)* | Locks a **Pre-Assigned Bridge Matrix** in the Shared Seam Header (guaranteeing unique `[[wikilink]]` neighbor sets), then fans out rolling Vault Builder waves across `VAULT_ROOT`. | Graph Topology Auditor synchronizing `Hub - *.md` tables and running the Graph Integrity Gate (`BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`). |
+| **[`/xlaya`](../xlaya/SKILL.md) `/xultra`** | Runs Law 1 `laya_triage.py` (`shortlist`, `contradiction`, or `rubric`) in milliseconds (`0` output tokens) to prune low-signal chunks before spawning System 2 subagents. | Dispatches System 2 Builder/Critic shards strictly on the high-signal `#L<start>-L<end>` ranges flagged by System 1. |
+| **[`/xcreate-skill`](../xcreate-skill/SKILL.md) `/xultra`** & **[`/xpublish-audit`](../xpublish-audit/SKILL.md) `/xultra`** | Runs Law 1 `audit_engine.py` + 3-Bucket numeric regex scan, then shards skill/package audits across specialized Audit Scouts (`Secret/Path`, `AST/Portability`, `3-Bucket Quota & Claim Receipt`). | Independent Blind Release Gatekeeper verifying `0` blocking issues, `0` Bucket 3 magic quotas, and `0` unverified `LIVE` claims. |
 
 ---
 
 ## 6. Completion Rubric
 
 - [ ] **Canonical Stage DAG Normalized**: Multi-skill chains executed in strict causal order (`Context → Research → Plan/Build → Sync/Ratchet`).
-- [ ] **Dynamic `N × K` Topology Matched**: Sized to `3+2` Tournament (`N = 1`), `N+2` Partitioned Batch (`≤ 3` items/agent), or `2-Agent Fast Pair` (trivial floor).
+- [ ] **4-Law `N × K × T` Topology Matched**: Offloaded deterministic scans to Law 1 scripts first; sized `K` to true orthogonal vectors, `N` to cognitive-density shards with a Pre-Locked Shared Seam Header, and `T` to evolutionary ratchet loops where needed.
 - [ ] **Collision & Build-Lock Safe**: Disjoint file paths or isolated worktrees used; compilers/tests serialized in Wave 2.
-- [ ] **Maker ≠ Checker Verified**: Independent Blind Critic executed deterministic CLI probes/screenshots and verified ground-truth receipts.
-- [ ] **Main Context Protected**: All subagents returned `≤ 150-word` Caveman Receipts with clickable `file://` links.
+- [ ] **Anti-Inline-Shortcut `Maker ≠ Checker` Verified**: Independent Blind Critic subagent executed deterministic CLI probes/screenshots and verified ground-truth receipts (`0` self-grading inline shortcuts).
+- [ ] **Pointer-Not-Payload Enforced**: Write-capable subagents returned Compact Pointer Receipts (`file://` links + metrics); read-only scouts returned schema-complete Telegraphic Evidence Tables with zero main-context bloat.

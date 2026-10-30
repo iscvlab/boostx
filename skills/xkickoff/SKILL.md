@@ -12,8 +12,8 @@ Prepare a seamless, zero-loss transition from a compacted or ending conversation
 
 This skill performs a three-way bridge:
 1. **Doc Sync Verification**: Ensures decisions made in this session are committed to documentation before exiting.
-2. **Strategic Options Formulation**: Analyzes active roadmaps to offer 2–3 structured next-step paths.
-3. **Pristine Kickoff Prompt Generation**: Assembles a self-contained prompt block containing locked invariants, active file paths, and task-matched `/x...` slash commands (`/xbrief`, `/xplan`, `/xdeep-research`, `/xlaya`, `/xobsidian`, `/xboost`, `/xultra`, `/goal`) for the new chat.
+2. **Strategic Options Formulation**: Analyzes active roadmaps to offer orthogonal, roadmap-grounded next-step paths.
+3. **Pristine Kickoff Prompt Generation**: Assembles a self-contained prompt block containing locked invariants, active file paths, and task-matched `/x...` slash commands (`/xbrief`, `/xplan`, `/xdeep-research`, `/xlaya`, `/xobsidian`, `/xboost`, [`/xultra`](../xultra/SKILL.md), `/goal`) for the new chat.
 
 Portable across Antigravity IDE, `agy` CLI, Claude Code, Cursor, and multi-agent platforms across Windows, macOS, and Linux.
 
@@ -71,7 +71,7 @@ Determine which path applies based on how the user invoked `/xkickoff` (or `/kic
 
 #### Path B — Bare `/xkickoff` Invoked Without a Specific Topic (`Select Option First → Write Kickoff Later`)
 1. **Turn 1 (Formulate & Ask Options ONLY — Do NOT Write the Kickoff Prompt Yet)**:
-   - Analyze the active workspace roadmap, master plan, or presentation deck to formulate **2–3 clear, high-impact options** for the next conversation:
+   - Analyze the active workspace roadmap, master plan, or presentation deck to formulate **orthogonal, high-impact next-step options** (sized to genuine roadmap branches, e.g. Options A/B/C) for the next conversation:
      * **Option A (Recommended — Direct Continuation)**: The immediate next logical subsection, slide, module, or task on the active roadmap.
      * **Option B (Technical Deep Dive / Parallel Scope)**: Evidence modeling, script execution, simulation, or multi-slide pairing.
      * **Option C (Bookmark Polish / Synthesis)**: Returning to bookmarked cards/maps, visualization polish, or executive review.
@@ -95,7 +95,7 @@ Select the exact `/x...` slash command pipeline for the bottom of the Kickoff Pr
 | **Primary-Source API / Formula / DB Lookup → Implementation** | `/xbrief "[Topic Name]" /xdeep-research /xboost /goal` |
 | **Multi-File Doc Sync / Semantic Conflict Audit** | `/xbrief "[Topic Name]" /xsync /xlaya` |
 | **Large Unpinned Corpus / Deep Research / Dataset Triage** | `/xdeep-research /xlaya "[Topic Name]" /xboost /goal` *(or `/xbrief /xlaya`)* |
-| **High-Complexity Swarm / Best-of-3 Tournament / Multi-Agent Batch** | Append `/xultra` (e.g., `/xbrief "[Topic Name]" /xboost /xultra /goal` or `/xdeep-research /xboost /xultra /goal`) |
+| **Elastic Cognitive Swarm / Orthogonal K-Vector Tournament / Evolutionary Ratchet Loop** | Append [`/xultra`](../xultra/SKILL.md) (e.g., `/xbrief "[Topic Name]" /xboost /xultra /goal` or `/xdeep-research /xboost /xultra /goal`) |
 | **Any Task Reading or Ratcheting Second Brain Knowledge** | Append `/xobsidian` (e.g., `/xbrief "[Topic Name]" /xboost /xobsidian /goal`) |
 
 #### B. 5-Part Kickoff Prompt Architecture
@@ -145,4 +145,4 @@ Deliver the final instructions to the user:
   - If explicit topic given → wrote Kickoff Prompt immediately in 1 turn without redundant option questioning.
   - If bare `/xkickoff` given → presented Options A/B/C first (`ask_question` or concise list) and waited for selection before generating the Kickoff Prompt.
 - [ ] **Strict Terminal-Session Guardrail enforced**: Never executed the chosen option inside the current chat; treated option selection strictly as a directive to write/rewrite the Kickoff Prompt.
-- [ ] **Task-Smart Command Selector applied**: Included `/xlaya`, `/xplan`, `/xdeep-research`, or `/xobsidian` when matched to the next session's workload, while keeping pinned-file build kickoffs lean (`/xbrief "[Topic]" /xboost /goal`).
+- [ ] **Task-Smart Command Selector applied**: Included `/xlaya`, `/xplan`, `/xdeep-research`, `/xultra`, or `/xobsidian` when matched to the next session's workload, while keeping pinned-file build kickoffs lean (`/xbrief "[Topic]" /xboost /goal`).

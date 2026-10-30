@@ -593,9 +593,14 @@ def audit_skill_invariants(target: Path, result: AuditResult):
             str(skill_md),
         )
 
-    # 4. Anti-Hardcoded Ephemeral Metrics & Persona Neutrality Scanner
+    # 4. Anti-Hardcoded Ephemeral Metrics, Bucket 3 Quotas & Persona Neutrality Scanner
     ephemeral_pat = re.compile(r"(?i)\b(all\s+\d+\s+layers|\b\d+\s+layers\b)")
     persona_pat = re.compile(r"(?i)\b(asus\s+laptop|windows\s+desktop\s+pc)\b")
+    bucket3_pat = re.compile(
+        r"(?i)(≤\s*150[- ]words?|150[- ]word\s+caveman|≤\s*12\s+lines|"
+        r"\b4[-–]12`?\s+agents\b|\b4[-–]5`?\s+agents\b|\bup\s+to\s+`?6`?\s+concurrent\s+scouts\b|"
+        r"<\s*30-line\s+reproduction)"
+    )
     for i, line in enumerate(lines, 1):
         m = ephemeral_pat.search(line)
         if m:
@@ -614,6 +619,15 @@ def audit_skill_invariants(target: Path, result: AuditResult):
                 str(skill_md),
                 i,
             )
+        if not any(tag in line for tag in ("Bucket 3", "Anti-Pattern", "Strictly Forbidden", "Never hardcode")):
+            m_b3 = bucket3_pat.search(line)
+            if m_b3:
+                result.add_warning(
+                    f"Potential hardcoded Bucket 3 task/swarm quota detected: `{m_b3.group(0)}`. "
+                    "Use the 4-Law Elastic Cognitive Swarm (`N x K x T`) and Pointer-Not-Payload contract instead.",
+                    str(skill_md),
+                    i,
+                )
 
     # 5. Markdown Links & Forward-Slash Audit
     for md_file in target.rglob("*.md"):

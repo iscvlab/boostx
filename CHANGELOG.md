@@ -17,7 +17,14 @@
     - `/publishx-qgis` → **`/xpublish-qgis`**
     - `/syncx` → **`/xsync`**
     - `/ultrax` → **`/xultra`**
-  - **Backward-Compatible Trigger Aliases**: All 13 `SKILL.md` YAML frontmatter descriptions preserve legacy `-x` (`/*x`) and unprefixed triggers while maintaining **`100%` compliance (`393.08 ± 8.18 chars`)** within the `≤ 400`-char `audit_engine.py --platform skill` context budget guard.
+  - **Backward-Compatible Trigger Aliases**: All 13 `SKILL.md` YAML frontmatter descriptions preserve legacy `-x` (`/*x`) and unprefixed triggers while maintaining **`100%` compliance** within the `≤ 400`-char `audit_engine.py --platform skill` context budget guard.
+- **Elastic Cognitive Swarm (`N × K × T` Topology & 4-Law First-Principles Sizing Framework)**:
+  - **4-Law Swarm Sizing Calculus**: Upgraded `/xultra` and integrated first-principles swarm sizing across all 13 skills—replacing arbitrary headcount quotas (`3+2`, `4–12 agents`, `≤ 3 items/agent`, `2–4 scouts`) with:
+    1. **Law 1 (Code-Over-Swarm Split)**: Offloads deterministic sweeps (`laya_triage.py`, `audit_engine.py`, `verify_evidence.py`, regex/SQLite/AST probes) to zero-token CLI scripts before spawning System 2 subagents.
+    2. **Law 2 (True Orthogonality Sizing — `K` Vectors)**: Spawns `K ≥ 2` competing builders on coupled problems (`N = 1`) strictly for genuinely orthogonal algorithms, module seams, or visual paradigms.
+    3. **Law 3 (Cognitive-Density Partitioning — `N` Shards)**: Sizes parallel fleets by per-shard working-set weight (1 dedicated subagent per heavy module, case study, or interactive HTML deck; domain-clustered subagents for lightweight items) bound by a **Pre-Locked Shared Seam Header** (and a **Pre-Assigned Bridge Matrix** for `/xobsidian /xultra`).
+    4. **Law 4 (Rolling Waves, `T`-Generation Evolutionary Ratchet Loops & Anti-Inline-Shortcut `Maker ≠ Checker` Gate)**: Supports multi-generation evolutionary tournaments (`Generate Wave t → CLI Benchmark / Blind Critic → Mutate Pareto Winners in Wave t+1`) and forbids inline self-grading when `/xultra` is invoked.
+  - **Pointer-Not-Payload Return Contract & 3-Bucket Numeric Litmus Test**: Replaced arbitrary word-count caps (`≤ 150 words`) with **Compact Pointer Receipts** (for write-capable subagents) and **Schema-Complete Telegraphic Evidence Tables** (for read-only scouts), and embedded the **3-Bucket Numeric Litmus Test** into `/xcreate-skill`, `/xdeep-research`, `/xultra`, and `audit_engine.py`.
 - **Unified `/xdeep-research` (Retiring Standalone `researchx`)**:
   - Merged `researchx`'s **3-Tier Adaptive Scope Routing** (`Tier 1: Fast Inline Probe ≤ 2 sources`, `Tier 2: Single Isolated Scout`, `Tier 3: 5-Wave Adversarial Swarm`), **4-Tier Primary-Source Authority Ladder** (local pinned manifests, SQLite/AST/CLI probes first), and **Capability-Aware Subagent Write-Permission Contract** directly into **`/xdeep-research`** (and `/xboost` Track B).
   - Eliminated routing ambiguity between tactical lookups and multi-agent proof synthesis while keeping fast `≤ 2`-source lookups in the main thread with zero subagent spawn overhead.

@@ -92,7 +92,7 @@ graph LR
 
 ### Fast 2-Hop Retrieval Workflow
 1. **Hop 0 Read**: View `00 *Index*.md` inside `VAULT_ROOT` to identify the relevant `Hub - *.md` file(s).
-2. **Hop 1 Read**: View the target `Hub - *.md` table to identify the exact atomic notes (`[[Note Name]]`), then read only the 1–3 atomic notes needed for the task.
+2. **Hop 1 Read**: View the target `Hub - *.md` table to identify the exact atomic notes (`[[Note Name]]`), then read only the specific atomic notes linked to the active task.
 
 ---
 
@@ -108,7 +108,7 @@ Whenever creating or updating notes in `VAULT_ROOT`, enforce all five invariants
    * Never batch-generate leaf notes that link only to the same parent hub or share identical `[[wikilink]]` sets (which causes Force-Atlas-2 graph layout engines to collapse them into artificial peripheral "parachute" arcs).
    * Every atomic note must link to:
      1. Its primary `[[Hub - ...]]` parent (`#tier/hub`)
-     2. At least **2–4 content-specific cross-domain bridges** (`#tier/method` ↔ `#tier/asset` ↔ `#tier/career-cluster`)
+     2. **At least 2 content-specific cross-domain bridges** (`#tier/method` ↔ `#tier/asset` ↔ `#tier/career-cluster`, sized to genuine domain couplings with zero arbitrary upper cap)
      3. At least **2 distinct peer notes** so that **zero node pairs share an identical set of undirected neighbors**.
 4. **Zero-LaTeX Native Unicode Typography**:
    * Never use inline or block dollar-sign math delimiters. Always use direct UTF-8 Unicode symbols (`→`, `←`, `↔`, `×`, `÷`, `±`, `≈`, `≠`, `≤`, `≥`, `∑`, `√`, `∝`, `²`, `³`, `°`, `µ`).
@@ -153,7 +153,7 @@ When `/xobsidian` is combined with other slash skills in the same prompt, execut
 | **`/xboost /xobsidian`** | In XBoost Phase 1, load governing physics formulas, SI unit bridges, or component contracts from `00 *Index*.md` → `Hub - *`. | In XBoost Phase 4, automatically ratchet any newly engineered reusable algorithm, solver contract, or architectural pattern into `VAULT_ROOT`. |
 | **`/xdeep-research /xboost /xobsidian`** *(+ optional `/goal`)* | **Full-Stack Loop**: Vault Cache Check → `/xdeep-research` Primary-Source Probe / Harvester on delta → Lock 2D Contract & Analytical Toy Benchmark into [`/xboost`](../xboost/SKILL.md) Phase 1. | Execute XBoost Phases 1–4 → Ratchet reusable findings & component specs into `VAULT_ROOT` → Run Graph Integrity Gate (`BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`) before `<!-- GOAL_COMPLETE -->`. |
 | **`/xsync /xobsidian`** | Resolve `VAULT_ROOT` alongside the workspace relation set. | Synchronize both project repository documentation AND matching atomic notes / `Hub - *` tables in `VAULT_ROOT`. |
-| **`/xobsidian /xultra`** *(or combined with `/xdeep-research` / `/xboost`)* | Resolve `VAULT_ROOT` → Parallel 2-Hop Scouts inspect candidate `Hub - *.md` constellations (`≤ 3` notes/agent). | Partition atomic note authoring across non-overlapping neighbor sets via [`/xultra`](../xultra/SKILL.md), synchronize parent `Hub - *.md` tables sequentially in the main thread, and run the Blind Graph Integrity Verifier (`BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`). |
+| **`/xobsidian /xultra`** *(or combined with `/xdeep-research` / `/xboost`)* | Resolve `VAULT_ROOT` → Parallel 2-Hop Scouts inspect candidate `Hub - *.md` constellations by domain cluster. | Lock a **Pre-Assigned Bridge Matrix** in the [`/xultra`](../xultra/SKILL.md) Shared Seam Header (assigning each target note a guaranteed-unique `[[wikilink]]` neighbor signature before spawning builders), fan out rolling Vault Builder waves, synchronize parent `Hub - *.md` tables sequentially in the main thread, and run the Blind Graph Integrity Verifier (`BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`). |
 
 ---
 
