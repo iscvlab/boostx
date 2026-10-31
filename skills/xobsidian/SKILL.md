@@ -74,11 +74,11 @@ print("HOP0_ROUTER:", routers[0] if routers else None)
 The vault uses a **100% flat root directory (`<VAULT_ROOT>/*.md`)** so file tools (`read_file` / `view_file`, `grep`, `glob`) resolve every note deterministically without subfolder guessing:
 
 ```mermaid
-graph LR
-    Hop0["Hop 0: Root Index Router<br>(00 *Index*.md)"] --> Hop1["Hop 1: Constellation Hubs<br>(Hub - *.md | #tier/hub)"]
-    Hop1 --> Method["Hop 2A: Methods & Standards<br>(#tier/method)"]
-    Hop1 --> Asset["Hop 2B: Assets, Components & Cases<br>(#tier/asset)"]
-    Hop1 --> Career["Hop 2C: Packages, Targets & Proofs<br>(#tier/career-cluster)"]
+flowchart LR
+    Hop0["Hop 0: Root Index Router (00 *Index*.md)"] --> Hop1["Hop 1: Constellation Hubs (Hub - *.md)"]
+    Hop1 --> Method["Hop 2A: Methods & Standards (#tier/method)"]
+    Hop1 --> Asset["Hop 2B: Assets, Components & Cases (#tier/asset)"]
+    Hop1 --> Career["Hop 2C: Packages, Targets & Proofs (#tier/career-cluster)"]
     Method <-->|"Typed Cross-Domain Bridges"| Asset
     Asset <-->|"Quantified Proof Links"| Career
 ```

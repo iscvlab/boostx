@@ -58,10 +58,10 @@ Do not write LIVE, Published, or 1-click install without a verifiable receipt (U
 When two or more documents contradict each other, resolve the discrepancy using this strict 4-level authority ladder:
 
 ```mermaid
-graph TD
-    A["Level 1: Source Code & Runtime Data Receipts<br>(Test assertions, database schemas, code parameters)"] -->|Overrides| B["Level 2: Canonical SSOT & Latest Version<br>(Master specs, system roadmaps, *_vLatest)"]
-    B -->|Overrides| C["Level 3: Current Session User Locks<br>(Explicit decisions agreed in active chat)"]
-    C -->|Overrides| D["Level 4: Iterative Drafts & Historical Notes<br>(Working notes, scratchpads, older versions)"]
+flowchart TD
+    A["Level 1: Source Code & Runtime Data Receipts (Tests, schemas, code constants)"] -->|Overrides| B["Level 2: Canonical SSOT & Latest Version (Master specs, roadmaps, *_vLatest)"]
+    B -->|Overrides| C["Level 3: Current Session User Locks (Explicit decisions in active chat)"]
+    C -->|Overrides| D["Level 4: Iterative Drafts & Historical Notes (Working notes, older versions)"]
 ```
 
 1. **Level 1 (Code & Data Receipts)**: Real source code constants, database tables, test assertions, and generated data files strictly override written Markdown prose.

@@ -56,9 +56,9 @@ Users may chain slash commands in any prompt order (e.g., `/xobsidian /xdeep-res
 
 ```mermaid
 flowchart LR
-    S1["Stage 1: Context & Cache<br>/xbrief + /xobsidian (Hop 0→2)<br>+ /xlaya (shortlist)"] --> S2["Stage 2: Research & Proof<br>/xdeep-research<br>(Cognitive-Density Harvesters + /xlaya)"]
-    S2 --> S3["Stage 3: Plan & Execute<br>/xplan → /xboost<br>(K-Vector Tournament, N-Shard Fleet, or T-Ratchet)"]
-    S3 --> S4["Stage 4: Sync, Audit & Ratchet<br>/xsync + /xobsidian Ratchet<br>+ /xpublish-audit + /xlaya noul"]
+    S1["Stage 1: Context & Cache (/xbrief + /xobsidian + /xlaya)"] --> S2["Stage 2: Research & Proof (/xdeep-research + /xlaya)"]
+    S2 --> S3["Stage 3: Plan & Execute (/xplan -> /xboost Swarm)"]
+    S3 --> S4["Stage 4: Sync, Audit & Ratchet (/xsync + /xobsidian + /xpublish-audit)"]
 ```
 
 * **Cross-Cutting Modifiers Active Across All Stages**:

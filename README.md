@@ -19,30 +19,30 @@ Sister toolkits: **[mcp-bridges](https://github.com/iscvlab/mcp-bridges)** (Mode
 BoostX organizes software engineering, scientific research, spatial/physics simulation, and documentation governance into **five deterministic lifecycle stages** plus **cross-stage System 1 semantic & multi-agent swarm multipliers** across **14 composable `/x*` skills**:
 
 ```mermaid
-graph LR
+flowchart LR
     subgraph S1["Stage 1: Context & Memory"]
-        BX["/xbrief<br>Workspace Briefing (Cap 8)"]
-        OX["/xobsidian<br>Opt-In 2-Hop Second Brain"]
+        BX["/xbrief (Workspace Briefing, Cap 8)"]
+        OX["/xobsidian (Opt-In 2-Hop Second Brain)"]
     end
     subgraph S2["Stage 2: Research & Proof"]
-        DRX["/xdeep-research<br>3-Tier Research & 5-Wave Proof Engine"]
-        OCX["/xocr<br>C++ PyMuPDF Table & 4-Tier VLM OCR"]
+        DRX["/xdeep-research (3-Tier Research & 5-Wave Engine)"]
+        OCX["/xocr (C++ PyMuPDF Table & 4-Tier VLM OCR)"]
     end
     subgraph S3["Stage 3: Plan & Execute"]
-        PLX["/xplan<br>BoostX Architecture Planner"]
-        BSX["/xboost<br>4-Phase Deep Solver"]
-        ULX["/xultra<br>Swarm & Blind Verification Multiplier"]
+        PLX["/xplan (BoostX Architecture Planner)"]
+        BSX["/xboost (4-Phase Deep Solver)"]
+        ULX["/xultra (Swarm & Blind Verification Multiplier)"]
     end
     subgraph S4["Stage 4: Sync & Release Gates"]
-        SX["/xsync<br>5-Tier Doc Synchronizer"]
-        CSX["/xcreate-skill<br>Global Skill Distiller"]
-        PAX["/xpublish-audit<br>6-Pillar Security Gate"]
-        PQX["/xpublish-qgis<br>QGIS 4 / Qt6 Packager"]
+        SX["/xsync (5-Tier Doc Synchronizer)"]
+        CSX["/xcreate-skill (Global Skill Distiller)"]
+        PAX["/xpublish-audit (6-Pillar Security Gate)"]
+        PQX["/xpublish-qgis (QGIS 4 / Qt6 Packager)"]
     end
     subgraph S5["Stage 5: Continuity & Sidecar"]
-        CTX["/xcontext<br>Compaction Diagnostics"]
-        KOX["/xkickoff<br>Session Handover Architect"]
-        LX["/xlaya<br>System 1 Semantic Sidecar"]
+        CTX["/xcontext (Compaction Diagnostics)"]
+        KOX["/xkickoff (Session Handover Architect)"]
+        LX["/xlaya (System 1 Semantic Sidecar)"]
     end
 
     BX --> DRX
@@ -86,13 +86,13 @@ By default, all skills operate in **100% Repo-Only Mode** and ignore any directo
 
 ```mermaid
 flowchart TD
-    Prompt["User Prompt + /x Slash Combination"] --> Gate{"Is /xobsidian<br>in the command?"}
-    Gate -->|"NO (Default)<br>e.g. /xbrief, /xdeep-research /xboost"| NoVault["Standard Repo-Only Execution<br>• Zero vault reads or writes<br>• Any folder with .obsidian/ is ignored in repo scans"]
-    Gate -->|"YES (Opt-In Combo)<br>e.g. /xdeep-research /xboost /xobsidian"| Resolve["Step 0: Dynamic Vault Resolver<br>1. Read OS obsidian.json (open: true)<br>2. Fallback: scan ., .., ../.. for .obsidian/<br>3. Read Hop-0 Router (00 Index.md)"]
-    Resolve -->|"/xbrief /xobsidian"| BriefCombo["/xbrief + Vault 2-Hop Lookup<br>1. Repo SSOTs (Cap 8 files)<br>2. 2-Hop read from Vault for domain specs"]
-    Resolve -->|"/xdeep-research /xobsidian"| ResCombo["/xdeep-research + Vault Cache & Ratchet<br>1. Check Vault Hop 0->1->2 before web/DB probe<br>2. Probe delta -> Save repo report<br>3. Auto-Ratchet reusable facts into Vault"]
-    Resolve -->|"/xdeep-research /xboost /xobsidian<br>(+ optional /goal)"| BoostCombo["Full Stack Research -> Build -> Ratchet<br>1. Vault Cache + Primary-Source Probe<br>2. Lock 2D Contract & Toy Benchmark<br>3. /xboost Phase 1-4 Execution<br>4. Auto-Ratchet new reusable specs to Vault"]
-    Resolve -->|"/xsync /xobsidian"| SyncCombo["Repo + Second Brain Sync<br>Synchronize repo docs AND update matching<br>Vault atomic nodes + Hub tables"]
+    Prompt["User Prompt + /x Slash Combination"] --> Gate{"Is /xobsidian in the command?"}
+    Gate -->|"NO (Default: /xbrief, /xdeep-research /xboost)"| NoVault["Standard Repo-Only Execution (Zero vault reads/writes)"]
+    Gate -->|"YES (Opt-In: /xdeep-research /xboost /xobsidian)"| Resolve["Step 0: Dynamic Vault Resolver (obsidian.json + 00 Index.md)"]
+    Resolve -->|"/xbrief /xobsidian"| BriefCombo["/xbrief (Cap 8) + Vault 2-Hop Domain Lookup"]
+    Resolve -->|"/xdeep-research /xobsidian"| ResCombo["/xdeep-research + Vault Hop 0->2 Cache & Auto-Ratchet"]
+    Resolve -->|"/xdeep-research /xboost /xobsidian"| BoostCombo["Full Stack Research -> Lock 2D Contract -> Build -> Vault Ratchet"]
+    Resolve -->|"/xsync /xobsidian"| SyncCombo["Repo + Second Brain Sync (Update Repo Docs & Vault Hub Tables)"]
 ```
 
 ### High-Leverage Command Combinations
@@ -218,14 +218,14 @@ Reproducible multi-trial measurements (`3` warm-ups + `20–30` timed iterations
 
 > **Transparency on Token Consumption**: BoostX reduces low-value file-scanning noise by **`97.48%`**, then deliberately invests that freed context capacity into **`2.68×` more verification steps** and **`5.19×` more primary-source & CLI telemetry inputs** per chained turn. While single-skill runs work comfortably on `1×` Pro plans, daily chained workflows (`/xbrief /xdeep-research /xboost /xsync /xobsidian`) are best paired with **`5×` High-Throughput tiers** (Claude Max `5×`, Gemini `5×`), and `400+`-step autonomous `/goal` marathons or `/xultra` / `/xdeep-research` multi-agent swarms are engineered for **`20×` Ultra tiers** (Gemini Ultra `20×`, Claude Max `20×`).
 
-```mermaid
-xychart-beta
-    title "BoostX v3.2.0 Composable Workflow Ablation — Defect Recall (%) vs Active CLI Gates (N=25 Seeded Defects)"
-    x-axis ["Level 0: Raw Prompt (0 Gates)", "Level 1: /xboost (2 Gates)", "Level 2: /xbrief+/xdeep-research+/xboost (4 Gates)", "Level 3: Full 5-Stage + 8 CLI Gates"]
-    y-axis "Seeded Defect Catch Rate (%)" 0 --> 100
-    bar [0, 40, 80, 100]
-    line [0, 40, 80, 100]
-```
+#### Composable Workflow Ablation — Seeded Defect Recall (`N = 25` Red-Team Defects)
+
+| Workflow Level & Active CLI Gates | Visual Defect Recall Bar | Defect Catch Rate | False Positives |
+| :--- | :--- | :--- | :---: |
+| **Level 3: Full 5-Stage + 8 CLI Gates** | `████████████████████` **`100.0%`** | **`25 / 25` (`100.0%`)** | **`0`** |
+| **Level 2: `/xbrief` + `/xdeep-research` + `/xboost` (4 Gates)** | `████████████████░░░░` `80.0%` | `20 / 25` (`80.0%`) | `0` |
+| **Level 1: `/xboost` Standalone (2 Gates)** | `████████░░░░░░░░░░░░` `40.0%` | `10 / 25` (`40.0%`) | `0` |
+| **Level 0: Raw Prompt Baseline (0 Gates)** | `░░░░░░░░░░░░░░░░░░░░` `0.0%` | `0 / 25` (`0.0%`) | — |
 
 <details>
 <summary>📄 <b>LaTeX (<code>booktabs</code>) Source for Academic Citations — BoostX v3.2.0 Empirical Benchmark Summary</b></summary>

@@ -24,14 +24,6 @@
 | **Official Cloud & Enterprise Vendor Skills** | `31` | `428.61 ± 206.17` (`373.0`) | `74.2%` | `25.8%` | `2,559 ± 1,707` (`2,474`) | `5` (`2,712` LOC) |
 | **All Installed Host Skills Pool** | `109` | `323.61 ± 181.14` (`334.0`) | `89.9%` | `29.4%` | `1,898 ± 1,693` (`1,398`) | `56` (`20,710` LOC) |
 
-```mermaid
-xychart-beta
-    title "Experiment 1 — System-Prompt Budget Compliance (<=500 Chars %) & Dual-Trigger Guard Coverage (%)"
-    x-axis ["BoostX v3.2.0 Suite (N=14)", "Official Cloud & Enterprise Skills (N=31)", "All Installed Host Skills Pool (N=109)"]
-    y-axis "Compliance Rate (%)" 0 --> 100
-    bar [100.0, 74.2, 89.9]
-    line [100.0, 25.8, 29.4]
-```
 
 <details>
 <summary>📄 <b>LaTeX (<code>booktabs</code>) Source for Academic Citations — Experiment 1: Skill Discovery & Budget Audit</b></summary>
@@ -77,13 +69,6 @@ All Installed Host Skills Pool & 109 & $323.61 \pm 181.14$ & $334.0$ & $89.9\%$ 
 | **Single-Pass Triage Latency (`N = 30`)** | **Median `10.06 ms`** (`Mean 10.3 ± 0.69 ms` • `IQR 0.72 ms` • `P95 11.71 ms`) |
 | **Chunk Evaluation Throughput** | **`44,731.6` chunks / sec** (`deterministic-lexical-stdlib`) |
 
-```mermaid
-xychart-beta
-    title "Experiments 2 & 3 — Disk Read & Section Triage Latency (Median ms across N=30 Trials)"
-    x-axis ["Unbounded Crawl (752 files)", "/xbrief Cap-8 (8 files)", "/xbrief+/xobsidian 2-Hop (12 files)", "/xlaya System-1 Triage (450 chunks)"]
-    y-axis "Median Latency (ms)" 0 --> 45
-    bar [40.77, 0.73, 0.79, 10.06]
-```
 
 <details>
 <summary>📄 <b>LaTeX (<code>booktabs</code>) Source for Academic Citations — Experiments 2 & 3: Context Compression & System 1 Triage</b></summary>
@@ -132,14 +117,6 @@ xychart-beta
 | **Level 2: Repo-Briefed + Primary Probe + 2-Hop Vault** | `/xbrief /xdeep-research /xboost /xobsidian` | `30,764` | `592` | `4` | **`80.0%`** | `61.9` | **5× Max Tier (Claude Max 5× / Gemini 5×)** |
 | **Level 3: Full 5-Stage Lifecycle + System 1 + 8 CLI Gates** | `/xbrief /xdeep-research /xboost /xsync /xlaya + /xpublish-audit` | `30,764` | `592` | `8` | **`100.0%`** | `471.6` | **20× Ultra Tier (Gemini Ultra 20× / Claude Max 20×)** |
 
-```mermaid
-xychart-beta
-    title "Experiments 4 & 5 — Composable Workflow Ablation: Seeded Defect Catch Rate (%) vs CLI Gates"
-    x-axis ["Level 0: Raw Prompt (0 Gates)", "Level 1: /xboost (2 Gates)", "Level 2: /xbrief+/xdeep-research+/xboost (4 Gates)", "Level 3: Full 5-Stage (8 Gates)"]
-    y-axis "Seeded Defect Recall (%)" 0 --> 100
-    bar [0, 40, 80, 100]
-    line [0, 40, 80, 100]
-```
 
 <details>
 <summary>📄 <b>LaTeX (<code>booktabs</code>) Source for Academic Citations — Experiments 4 & 5: Red-Team Injection & Workflow Ablation</b></summary>
@@ -192,13 +169,6 @@ Level 2: Brief + Probe + Vault & \texttt{/xbrief /xdeep-research /xboost /xobsid
 | **Tier 2: `5×` High-Throughput** *(Recommended Minimum)* | **Claude Max `5×`**, **Gemini `5×`**, API Tier 2+ | **Daily Chained Multi-Skill Sprints** (`/xbrief /xdeep-research /xboost /xsync /xobsidian`) | Sustains `~74k` uncached input + `~27k` output + `~2.95M` KV-cache replay tokens across `~63` verification steps per turn without throttling. |
 | **Tier 3: `20×` Ultra / Marathon** *(Studio Standard)* | **Gemini Ultra `20×`**, **Claude Max `20×`**, Enterprise API | **Autonomous `/goal` Marathons & `/xdeep-research` 5-Wave Swarms** | Engineered for `400+`-step autonomous sessions (`~340k` uncached input, `~166k` output, `~22.6M` cumulative session tokens + parallel subagent swarms). |
 
-```mermaid
-xychart-beta
-    title "Experiment 6 — Real Session Token Throughput (Mean Million Tokens across N=214 Sessions)"
-    x-axis ["Standard Session (No /x*, n=152)", "Single-Skill BoostX Session (n=4)", "Chained Multi-Skill BoostX Session (n=58)"]
-    y-axis "Mean Total Session Throughput (Million Tokens)" 0 --> 28
-    bar [2.16, 20.13, 25.66]
-```
 
 <details>
 <summary>📄 <b>LaTeX (<code>booktabs</code>) Source for Academic Citations — Experiment 6: Per-Turn & Session Token Telemetry</b></summary>

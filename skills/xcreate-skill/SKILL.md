@@ -64,9 +64,9 @@ The skill operates in two distinct modes based on context:
 
 ```mermaid
 flowchart TD
-    P1["Phase 1: THE RED INVARIANT GATE<br>• Define AI failure mode & hallucinations to cure<br>• Draft 2 Trigger Probes (1 Positive, 1 Negative)<br>• Decide Model-Invoked vs. User-Invoked"] --> P2["Phase 2: ARCHITECTURAL VECTORS & PONYTAIL LADDER<br>• Vector A: Rule in AGENTS.md (No skill needed?)<br>• Vector B: Pure Instruction Skill (Zero scripts)<br>• Vector C: Hybrid Skill (Instructions + stdlib CLI)<br>• Invariant Formulation (Anti-Hardcoded Snapshot Rule)"]
-    P2 --> P3["Phase 3: DUAL-OS SURGICAL EXECUTION<br>• Write SKILL.md with front-loaded leading words<br>• Progressive disclosure (push reference to .md)<br>• POSIX paths (/), UTF-8 encoding, dual shell syntax<br>• Packaging hygiene (zero .pyc / __pycache__ debris)"]
-    P3 --> P4["Phase 4: RUTHLESS 3-TIER VERIFICATION<br>• Tier 1: Static YAML Schema & Character Limit Lint<br>• Tier 2: Integrity, Anti-Hardcode & Link Check<br>• Tier 3: Automated Audit (audit_engine --platform skill)"]
+    P1["Phase 1: THE RED INVARIANT GATE (Define failure mode, 2 Trigger Probes, Invocation mode)"] --> P2["Phase 2: ARCHITECTURAL VECTORS & PONYTAIL LADDER (Rule vs Pure Instruction vs Hybrid CLI)"]
+    P2 --> P3["Phase 3: DUAL-OS SURGICAL EXECUTION (Front-loaded SKILL.md, POSIX paths, UTF-8 header)"]
+    P3 --> P4["Phase 4: RUTHLESS 3-TIER VERIFICATION (Static YAML Lint, Anti-Hardcode, audit_engine)"]
 ```
 
 ---
