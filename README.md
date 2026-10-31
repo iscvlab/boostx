@@ -1,16 +1,37 @@
-# BoostX: Composable `/x*` Agent Skills Ecosystem
+# BoostX - Composable `/x*` Agent Skills Ecosystem & Verification Harness
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-v3.2.0-blue.svg)](https://github.com/iscvlab/boostx/releases/tag/v3.2.0)
 [![Skills](https://img.shields.io/badge/Suite-14_Composable_%2Fx_Skills-005FB8)](#3-the-14-skill-suite)
+[![CLI Engines](https://img.shields.io/badge/CLI_Gates-8_Python_Engines_(100%25_Recall)-059669)](#5-bundled-zero-dependency-cli-engines)
 [![Platforms](https://img.shields.io/badge/Platforms-Claude_•_Grok_•_Gemini_•_Cursor_•_Codex-8A2BE2)](#6-universal-installation)
 [![Dual-OS](https://img.shields.io/badge/Dual--OS-Windows_•_macOS_•_Linux-success)](#6-universal-installation)
-[![Verification](https://img.shields.io/badge/Protocol-BoostX_Verified_✓-emerald)](#5-bundled-zero-dependency-cli-engines)
 
-> **A unified, composable `/x*` skill ecosystem and verification harness for AI coding agents.**  
-> Type `/x` in any supported IDE or CLI to surface the entire **14-skill BoostX ecosystem** (`xboost`, `xbrief`, `xcontext`, `xcreate-skill`, `xdeep-research`, `xkickoff`, `xlaya`, `xobsidian`, `xocr`, `xplan`, `xpublish-audit`, `xpublish-qgis`, `xsync`, `xultra`) and **8 bundled Python CLI engines** across **Claude Code, Grok, Google Gemini / Antigravity, Cursor, and Codex** on **Windows, macOS, and Linux**.
+**BoostX** (`iscvlab/boostx` `v3.2.0`) is a unified, composable **`/x*` skill ecosystem and deterministic CLI verification harness** for AI coding agents engineered by **[ISCV | Isocurve Research Lab (`@iscvlab`)](https://github.com/iscvlab)**. Type `/x` in any supported IDE or CLI to surface all **14 composable skills** (`xboost`, `xbrief`, `xcontext`, `xcreate-skill`, `xdeep-research`, `xkickoff`, `xlaya`, `xobsidian`, `xocr`, `xplan`, `xpublish-audit`, `xpublish-qgis`, `xsync`, `xultra`) and **8 zero-dependency Python CLI engines** across **Claude Code, Grok, Google Gemini / Antigravity, Cursor, and Codex** on **Windows, macOS, and Linux**.
 
-Sister toolkits: **[mcp-bridges](https://github.com/iscvlab/mcp-bridges)** (Model Context Protocol automation bridges for QGIS, Rhino 3D, Grasshopper, Adobe Illustrator, and Figma) · **[xocr](https://github.com/iscvlab/xocr)** (Standalone Hybrid Document AI, Two-Stage LaTeX `booktabs` Table Surgery & 4-Tier `baidu/Unlimited-OCR-2` Engine).
+Sister toolkits & upstream contributions: **[mcp-bridges](https://github.com/iscvlab/mcp-bridges)** (7 Model Context Protocol automation bridges for QGIS, Rhino 3D, Grasshopper, Adobe Illustrator, and Figma) · **[xocr](https://github.com/iscvlab/xocr)** (Hybrid Document AI, Two-Stage LaTeX `booktabs` & HTML Table Surgery, and Local `SCB 10X Typhoon-OCR v1.5` × `Baidu Unlimited-OCR-2` Engine · **[Upstream PR #15 to `scb-10x/typhoon-ocr`](https://github.com/scb-10x/typhoon-ocr/pull/15)**).
+
+---
+
+## ⚡ TL;DR - Capabilities & Performance at a Glance (`v3.2.0`)
+
+* **Composable 5-Stage Lifecycle (`Stage 1 → Stage 5`)**: Chain any combination of `/x*` slash skills in a single prompt (`/xbrief /xdeep-research /xboost /xsync /xobsidian /xultra /goal`). BoostX automatically normalizes the execution order into `Context → Research → Plan/Build → Sync/Ratchet`.
+* **`-97.48%` Context Noise Reduction + `10.06 ms` System 1 Triage**: `/xbrief` (`Cap 8` Two-Pass reader) + `/xobsidian` (opt-in `2-Hop` Second Brain router) compresses `1,222,816` raw workspace/vault tokens down to **`30,764` high-authority tokens (`39.7×` compression)** in **`0.79 ms`**, while `/xlaya` (`laya_triage.py`) ranks `450` heading chunks across `20` specs in **`10.06 ms`** (`-98.34%` Pass-B reading tokens).
+* **`100.0%` Red-Team Defect Recall (`25 / 25` in `6.45 ms`)**: `8` bundled Python CLI engines (`4,299 LOC`) enforce 16-pattern secret scanning, Python AST security checks, Qt6/QGIS 4 scoped-enum validation, deep-link URL verification, SHA-256 mirror parity, and `≤ 400`-char YAML skill budgets (**`388.57 ± 12.43` chars** across all `14` skills, **`0%` sibling skill truncation**).
+* **Which Subscription Quota Tier Should You Pair With BoostX?**
+  * **`1× Base Pro` (`Claude Pro`, `Gemini Advanced`, `Cursor Pro`)**: Best for **Single-Skill Tactical Tasks** (`/xbrief`, `/xdeep-research` Tier 1, localized `/xboost` - `~34.8 steps/turn`).
+  * **`5× High-Throughput` (`Claude Max 5×`, `Gemini 5×` - Recommended Minimum)**: Best for **Daily Chained Multi-Skill Sprints** (`/xbrief /xdeep-research /xboost /xsync /xobsidian` - `~61.9 steps/turn`, `2.68×` verification depth).
+  * **`20× Ultra` (`Gemini Ultra 20×`, `Claude Max 20×`)**: Engineered for **`400+`-Step Autonomous `/goal` Marathons & `/xultra` (`N × K × T`) Multi-Agent Swarms** (`~471.6 steps/session`, `~25.66M` cumulative session tokens).
+
+### Horizontal Bar Comparison (`N = 109` Skills • `752` Docs/Vault Nodes • `25` Red-Team Defects • `987` Real IDE Turns)
+
+| Evaluation Dimension | Workflow / Cohort Configuration | Visual Comparison Bar | Measured Result & Delta vs. Baseline |
+| :--- | :--- | :--- | :--- |
+| **1. Red-Team Defect Catch Rate ↑**<br>*(25 Seeded Defects across 5 Pillars)* | **Level 3: Full 5-Stage + 8 CLI Gates**<br>Level 2: `/xbrief` + `/xdeep-research` + `/xboost`<br>Level 1: `/xboost` Standalone (2 Gates)<br>Level 0: Prompt-Only Baseline (0 Gates) | `████████████████████` **`100.0% (25/25)`**<br>`████████████████░░░░` `80.0% (20/25)`<br>`████████░░░░░░░░░░░░` `40.0% (10/25)`<br>`░░░░░░░░░░░░░░░░░░░░` `0.0% (0/25)` | **`0` False Positives in Median `6.45 ms`** ✨<br>`4` Active CLI Verification Gates<br>`2` Active CLI Verification Gates<br>No Deterministic Pre-LLM Enforcement |
+| **2. Context Noise Compression ↑**<br>*(752 Repo + Vault Files, `1.22M` tok)* | **`/xbrief` (`Cap 8`) Repo-Only**<br>**`/xbrief` (`Cap 8`) + `/xobsidian` (`2-Hop`)**<br>Unbounded Repo + Vault Crawl | `████████████████████` **`97.84% Removed (46.2×)`**<br>`████████████████████` **`97.48% Removed (39.7×)`**<br>`░░░░░░░░░░░░░░░░░░░░` `0.0% Removed (1.0×)` | **`26,472` tok in Median `0.73 ms`** ✨<br>**`30,764` tok (`12` files) in `0.79 ms`** ✨<br>`1,222,816` tok (`752` files) in `40.77 ms` |
+| **3. System 1 Section Triage ↑**<br>*(20 Specs / 450 Chunks, `91.2k` tok)* | **BoostX `/xlaya` Top-5 Shortlist**<br>Unfiltered Full-Corpus Pass-B Read | `████████████████████` **`98.34% Saved (60.1×)`**<br>`░░░░░░░░░░░░░░░░░░░░` `0.0% Saved (1.0×)` | **`1,516` tok in Median `10.06 ms`** (`44.7k` chunks/s) ✨<br>`91,173` tok (Full 20-File Read) |
+| **4. Dual-Trigger Budget Guard ↑**<br>*(`Use when` + `Do NOT use` across `N=109`)* | **BoostX `v3.2.0` Suite (`N = 14`)**<br>All Installed Host Skills (`N = 109`)<br>Official Cloud/Vendor Skills (`N = 31`) | `████████████████████` **`100.0% (14/14)`**<br>`██████░░░░░░░░░░░░░░` `29.4% (32/109)`<br>`█████░░░░░░░░░░░░░░░` `25.8% (8/31)` | **`388.57 ± 12.43` chars (`0%` Truncation)** ✨<br>`323.61 ± 181.14` chars (`89.9%` `≤500` pass)<br>`428.61 ± 206.17` chars (`74.2%` `≤500` pass) |
+| **5. Verification Depth / Turn ↑**<br>*(`N = 987` Real IDE Prompt Turns)* | **Chained Multi-Skill `/x*` Turn (`N=156`)**<br>Single `/x*` Skill Turn (`N = 88`)<br>Standard Turn Without `/x*` (`N = 743`) | `████████████████████` **`61.9 Steps (2.68×)`**<br>`███████████░░░░░░░░░` `34.8 Steps (1.51×)`<br>`███████░░░░░░░░░░░░░` `23.1 Steps (1.0×)` | **`3.13M` tok/turn (`65.6k` new in, `21.3k` out)** ✨<br>`2.14M` tok/turn (`25.9k` new in, `14.4k` out)<br>`1.25M` tok/turn (`12.6k` new in, `7.4k` out) |
 
 ---
 
@@ -19,54 +40,26 @@ Sister toolkits: **[mcp-bridges](https://github.com/iscvlab/mcp-bridges)** (Mode
 BoostX organizes software engineering, scientific research, spatial/physics simulation, and documentation governance into **five deterministic lifecycle stages** plus **cross-stage System 1 semantic & multi-agent swarm multipliers** across **14 composable `/x*` skills**:
 
 ```mermaid
+%%{init: {'theme': 'neutral'}}%%
 flowchart LR
-    subgraph S1["Stage 1: Context & Memory"]
-        BX["/xbrief (Workspace Briefing, Cap 8)"]
-        OX["/xobsidian (Opt-In 2-Hop Second Brain)"]
-    end
-    subgraph S2["Stage 2: Research & Proof"]
-        DRX["/xdeep-research (3-Tier Research & 5-Wave Engine)"]
-        OCX["/xocr (C++ PyMuPDF Table & 4-Tier VLM OCR)"]
-    end
-    subgraph S3["Stage 3: Plan & Execute"]
-        PLX["/xplan (BoostX Architecture Planner)"]
-        BSX["/xboost (4-Phase Deep Solver)"]
-        ULX["/xultra (Swarm & Blind Verification Multiplier)"]
-    end
-    subgraph S4["Stage 4: Sync & Release Gates"]
-        SX["/xsync (5-Tier Doc Synchronizer)"]
-        CSX["/xcreate-skill (Global Skill Distiller)"]
-        PAX["/xpublish-audit (6-Pillar Security Gate)"]
-        PQX["/xpublish-qgis (QGIS 4 / Qt6 Packager)"]
-    end
-    subgraph S5["Stage 5: Continuity & Sidecar"]
-        CTX["/xcontext (Compaction Diagnostics)"]
-        KOX["/xkickoff (Session Handover Architect)"]
-        LX["/xlaya (System 1 Semantic Sidecar)"]
-    end
+    subgraph Canvas [" "]
+        S1["Stage 1: Context & Memory - /xbrief + /xobsidian"]
+        S2["Stage 2: Research & Proof - /xdeep-research + /xocr"]
+        S3["Stage 3: Plan & Execute - /xplan + /xboost + /xultra"]
+        S4["Stage 4: Sync & Release - /xsync + /xcreate-skill + /xpublish-audit + /xpublish-qgis"]
+        S5["Stage 5: Continuity & Sidecar - /xcontext + /xkickoff + /xlaya"]
+        REG["Cloud Skill Registry Sync (coming soon)"]
 
-    BX --> DRX
-    OX --> DRX
-    OCX -.-> BX
-    OCX -.-> DRX
-    OCX -.-> BSX
-    OCX -.-> OX
-    DRX --> PLX
-    DRX --> BSX
-    PLX --> BSX
-    ULX -.-> DRX
-    ULX -.-> PLX
-    ULX -.-> BSX
-    ULX -.-> SX
-    BSX --> SX
-    CSX --> PAX
-    PAX --> PQX
-    SX -.-> KOX
-    CTX --> KOX
-    LX -.-> BX
-    LX -.-> DRX
-    LX -.-> SX
-    LX -.-> PAX
+        S1 --> S2
+        S2 --> S3
+        S3 --> S4
+        S4 --> S5
+        S5 -.-> S1
+        S4 -.-> REG
+    end
+    classDef default fill:#ffffff,stroke:#475569,color:#0f172a,stroke-width:1px
+    style Canvas fill:#ffffff,stroke:#cbd5e1,stroke-width:1.5px,color:#0f172a
+    style REG fill:#ffffff,stroke:#94a3b8,stroke-dasharray: 5 5,color:#64748b
 ```
 
 ---
@@ -85,14 +78,19 @@ Every skill in BoostX is prefixed with `x` so typing `/x` in any IDE autocomplet
 By default, all skills operate in **100% Repo-Only Mode** and ignore any directory containing an `.obsidian/` subfolder. The 2-Hop Obsidian Second Brain and Knowledge Ratchet activate **only** when `/xobsidian` is explicitly included in the command chain:
 
 ```mermaid
+%%{init: {'theme': 'neutral'}}%%
 flowchart TD
-    Prompt["User Prompt + /x Slash Combination"] --> Gate{"Is /xobsidian in the command?"}
-    Gate -->|"NO (Default: /xbrief, /xdeep-research /xboost)"| NoVault["Standard Repo-Only Execution (Zero vault reads/writes)"]
-    Gate -->|"YES (Opt-In: /xdeep-research /xboost /xobsidian)"| Resolve["Step 0: Dynamic Vault Resolver (obsidian.json + 00 Index.md)"]
-    Resolve -->|"/xbrief /xobsidian"| BriefCombo["/xbrief (Cap 8) + Vault 2-Hop Domain Lookup"]
-    Resolve -->|"/xdeep-research /xobsidian"| ResCombo["/xdeep-research + Vault Hop 0->2 Cache & Auto-Ratchet"]
-    Resolve -->|"/xdeep-research /xboost /xobsidian"| BoostCombo["Full Stack Research -> Lock 2D Contract -> Build -> Vault Ratchet"]
-    Resolve -->|"/xsync /xobsidian"| SyncCombo["Repo + Second Brain Sync (Update Repo Docs & Vault Hub Tables)"]
+    subgraph Canvas [" "]
+        Prompt["User Prompt + /x Slash Combination"] --> Gate{"Is /xobsidian in the command?"}
+        Gate -->|"NO (Default: /xbrief, /xdeep-research /xboost)"| NoVault["Standard Repo-Only Execution (Zero vault reads or writes)"]
+        Gate -->|"YES (Opt-In: /xdeep-research /xboost /xobsidian)"| Resolve["Step 0: Dynamic Vault Resolver (obsidian.json + 00 Index.md)"]
+        Resolve -->|"/xbrief /xobsidian"| BriefCombo["/xbrief (Cap 8) + Vault 2-Hop Domain Lookup"]
+        Resolve -->|"/xdeep-research /xobsidian"| ResCombo["/xdeep-research + Vault Hop 0 to 2 Cache & Auto-Ratchet"]
+        Resolve -->|"/xdeep-research /xboost /xobsidian"| BoostCombo["Full Stack Research to 2D Contract to Build to Vault Ratchet"]
+        Resolve -->|"/xsync /xobsidian"| SyncCombo["Repo + Second Brain Sync (Update Repo Docs & Vault Hub Tables)"]
+    end
+    classDef default fill:#ffffff,stroke:#475569,color:#0f172a,stroke-width:1px
+    style Canvas fill:#ffffff,stroke:#cbd5e1,stroke-width:1.5px,color:#0f172a
 ```
 
 ### High-Leverage Command Combinations
@@ -135,42 +133,42 @@ boostx/skills/
 
 ### Stage 1: Context, Triage & Memory
 
-| Skill | Command (Legacy Aliases) | Core Architecture & Protocol | Failure Modes Prevented |
-|:---|:---|:---|:---|
-| **XBrief** | `/xbrief` (`/briefx`, `/brief`) | Discovers related markdown in the active repository via a **4-tier authority hierarchy** (hard-capped at 8 files), applies **Two-Pass reading** (`Pass A` structural skeleton/cardinality scan before `Pass B` targeted section reading), verifies frozen/deferred boundaries, and executes `/xbrief <task>` in the same turn. | Answering from stale LLM memory, keyword-grep tunneling without knowing total section counts, or modifying frozen modules. |
-| **XObsidian** | `/xobsidian` (`/obsidianx`, `/obsidian-vault`) | **Dynamic Vault Resolver** reads OS `obsidian.json` (`open: true`) or parent directories with zero hardcoded paths. Enforces the **2-Hop Navigation Rule** (`00 Index.md` → `Hub - <Domain>.md` → Atomic Note), requires **Cross-Domain Bridges** (`## Cross-Domain Connections`), and runs a **4-Check Graph Verification** (`0` broken wikilinks, `0` orphans, `100%` frontmatter, `0` duplicate concepts). | Dumping 50+ markdown notes into context, hardcoded vault paths breaking across PCs, or polluting vaults with transient repo tasks. |
-| **XLaya** | `/xlaya` (`/layax`, `/laya`) | **System 1 Semantic Decision & Triage Sidecar** (`scripts/laya_triage.py`) powered by `convaiinnovations/laya` (~7–33 ms single-pass inference). Provides fence-safe heading chunking (`≤ 1,200` chars / `#L<start>-L<end>`), auto-routed English/multilingual checkpoints (`laya.is_english`), categorical routing (`choice`), ordinal rubric evaluation (`score`), and calibrated contradiction testing (`noul`) with 100% graceful fallback to native tools when `laya` is not installed. | Silent 512-token truncation, burning thousands of LLM tokens on large-corpus section shortlisting, or missing subtle semantic contradictions between docs. |
+| Skill & Command (Legacy Aliases) | Core Architecture & Protocol | Failure Modes Prevented |
+|:---|:---|:---|
+| **1. XBrief**<br>`/xbrief` (`/briefx`, `/brief`) | Discovers related markdown in the active repository via a **4-tier authority hierarchy** (hard-capped at 8 files), applies **Two-Pass reading** (`Pass A` structural skeleton/cardinality scan before `Pass B` targeted section reading), verifies frozen/deferred boundaries, and executes `/xbrief <task>` in the same turn. | Answering from stale LLM memory, keyword-grep tunneling without knowing total section counts, or modifying frozen modules. |
+| **2. XObsidian**<br>`/xobsidian` (`/obsidianx`, `/obsidian-vault`) | **Dynamic Vault Resolver** reads OS `obsidian.json` (`open: true`) or parent directories with zero hardcoded paths. Enforces the **2-Hop Navigation Rule** (`00 Index.md` → `Hub - <Domain>.md` → Atomic Note), requires **Cross-Domain Bridges**, and runs a **4-Check Graph Verification** (`0` broken wikilinks, `0` orphans, `100%` frontmatter, `0` duplicate neighbor groups). | Dumping 50+ markdown notes into context, hardcoded vault paths breaking across PCs, or polluting vaults with transient repo tasks. |
+| **3. XLaya**<br>`/xlaya` (`/layax`, `/laya`) | **System 1 Semantic Decision & Triage Sidecar** (`scripts/laya_triage.py`) powered by `convaiinnovations/laya` (`~7-33 ms` single-pass inference). Provides fence-safe heading chunking (`≤ 1,200` chars / `#L<start>-L<end>`), auto-routed English/multilingual checkpoints (`laya.is_english`), categorical routing (`choice`), ordinal rubric evaluation (`score`), and calibrated contradiction testing (`noul`) with 100% graceful fallback to native tools when `laya` is not installed. | Silent 512-token truncation, burning thousands of LLM tokens on large-corpus section shortlisting, or missing subtle semantic contradictions between docs. |
 
 ### Stage 2: Research & Proof
 
-| Skill | Command (Legacy Aliases) | Core Architecture & Protocol | Failure Modes Prevented |
-|:---|:---|:---|:---|
-| **XDeep-Research** | `/xdeep-research` (`/deep-researchx`, `/deep-research`, `/xresearch`, `/researchx`) | Unified **3-Tier Primary-Source Research & 5-Wave Adversarial Proof Engine**. Routes dynamically across **Tier 1 (Fast Inline Probe `≤ 2` sources)**, **Tier 2 (Single Isolated Scout)**, and **Tier 3 (5-Wave Multi-Agent Deep Research Swarm)**: (1) 2D `Intent × Domain` contract synthesis & **4-Tier Primary-Source Authority Ladder** (local pinned manifests/SQLite/AST probes first + automatic `/xocr` PDF/table ingestion), (2) parallel Harvester scouts with mandatory deep-link scraping & capability-aware subagent write routing, (3) **Blind Adversarial Auditor** + deterministic `scripts/verify_evidence.py` CLI gate with **Wave 3.5 Prune & Replace Loop**, (4) `[VERIFIED FACT]` vs `[RECOMMENDED SYNTHESIS]` binding, and (5) `/xboost` handoff. | Secondary-blog guesswork, researching the wrong SDK version, read-only subagent write deadlocks, search-snippet hallucinations, bare root-domain lazy URLs, and fabricated citations. |
-| **XOCR** | `/xocr` (`/ocrx`, `/ocr`, `/unlimited-ocr`) | **High-Speed Hybrid PDF & Table Extraction Engine** (`scripts/ocr_runner.py` `v2.1.0`). Combines **Single-Pass C++ `PyMuPDF` (`fitz`)** coordinate-sorted text (`sort=True`), a **Two-Stage Grid + LaTeX `booktabs` Table Extractor** (`page.find_tables()` with horizontal-rule grouping, multi-line header auto-coalescing, and non-table figure exclusion), **Scanned VLM HTML `<table>` → RFC-4180 CSV Surgery** (`colspan`/`rowspan` expansion), **Thai PUA (`U+F700..U+F71A`) & Toned Decomposed Sara-Am (`\u0e4d[\u0e48-\u0e4b]?\u0e32` → `\1\u0e33`) Glyph Normalization**, a **Surgical Per-Page Garble & Image-Coverage Router** (`garble_ratio` + `image_area_ratio`), and a **4-Tier Local VLM/OCR Backend Ladder** (`SGLang / Ollama / vLLM` → Local HuggingFace [`scb10x/typhoon-ocr1.5-2b`](https://huggingface.co/scb10x/typhoon-ocr1.5-2b) / `3B-QAT` (`Qwen3-VL`) & [`baidu/Unlimited-OCR-2`](https://huggingface.co/baidu/Unlimited-OCR-2) CUDA VLM → process-cached `EasyOCR` → `pytesseract`). Automatically invoked by `/xdeep-research`, `/xbrief`, `/xboost`, and `/xobsidian` on PDF/image sources. | Zero-table silent failures when `pdfplumber` is absent, collapsed 1-row LaTeX `booktabs` tables, unparsed raw HTML `<table>` tags in VLM output, Thai PUA/Sara-Am mojibake, `(cid:...)` CMap garbage passing naive length checks, and slow full-PDF VLM rasterization on clean vector pages. |
+| Skill & Command (Legacy Aliases) | Core Architecture & Protocol | Failure Modes Prevented |
+|:---|:---|:---|
+| **4. XDeep-Research**<br>`/xdeep-research` (`/deep-researchx`, `/deep-research`, `/xresearch`, `/researchx`) | Unified **3-Tier Primary-Source Research & 5-Wave Adversarial Proof Engine**. Routes dynamically across **Tier 1 (Fast Inline Probe `≤ 2` sources)**, **Tier 2 (Single Isolated Scout)**, and **Tier 3 (5-Wave Multi-Agent Deep Research Swarm)**: (1) 2D `Intent × Domain` contract synthesis & **4-Tier Primary-Source Authority Ladder** (local pinned manifests/SQLite/AST probes first + automatic `/xocr` PDF/table ingestion), (2) parallel Harvester scouts with mandatory deep-link scraping, (3) **Blind Adversarial Auditor** + deterministic `scripts/verify_evidence.py` CLI gate with **Wave 3.5 Prune & Replace Loop**, (4) `[VERIFIED FACT]` vs `[RECOMMENDED SYNTHESIS]` binding, and (5) `/xboost` handoff. | Secondary-blog guesswork, researching the wrong SDK version, read-only subagent write deadlocks, search-snippet hallucinations, bare root-domain lazy URLs, and fabricated citations. |
+| **5. XOCR**<br>`/xocr` (`/ocrx`, `/ocr`, `/unlimited-ocr`) | **High-Speed Hybrid PDF & Table Extraction Engine** (`scripts/ocr_runner.py` `v2.1.0`, standalone repo [`iscvlab/xocr`](https://github.com/iscvlab/xocr), **[Upstream PR #15 to `scb-10x/typhoon-ocr`](https://github.com/scb-10x/typhoon-ocr/pull/15)**). Combines **Single-Pass C++ `PyMuPDF` (`fitz`)** coordinate-sorted text (`19-97 ms/page`), a **Two-Stage Grid + LaTeX `booktabs` Table Extractor** (`100%` recall, `0` false positives), **Scanned VLM HTML `<table>` → RFC-4180 CSV Surgery** (`colspan`/`rowspan` expansion), **Thai PUA (`U+F700..U+F71A`) & Decomposed Sara-Am Normalization**, a **Surgical Per-Page Garble & Image-Coverage Router**, and a **4-Tier Local VLM/OCR Backend Ladder** (`SGLang` → Local HuggingFace [`typhoon-ai/typhoon-ocr1.5-2b`](https://huggingface.co/typhoon-ai/typhoon-ocr1.5-2b) / [`3b-qat`](https://huggingface.co/typhoon-ai/typhoon-ocr1.5-3b-qat) (`-35.9%` vision token bloat, `+9.11%` table accuracy on `ThaiOCRBench`) & [`baidu/Unlimited-OCR-2`](https://github.com/baidu/Unlimited-OCR) CUDA VLM → `EasyOCR` → `pytesseract`). | Zero-table silent failures when `pdfplumber` is absent, collapsed 1-row LaTeX `booktabs` tables, unparsed raw HTML `<table>` tags in VLM output, Thai PUA/Sara-Am mojibake, `(cid:...)` CMap garbage passing naive length checks, and slow full-PDF VLM rasterization (`15.0×-3,326×` speedup on mixed/vector PDFs). |
 
 ### Stage 3: Planning & Deep Execution
 
-| Skill | Command (Legacy Aliases) | Core Architecture & Protocol | Failure Modes Prevented |
-|:---|:---|:---|:---|
-| **XPlan** | `/xplan` (`/planx`, `/plan`) | **BoostX Architectural Planner**. Locks a **2D Plan Contract (`Scope × Risk`)**, runs blast-radius & invariant discovery, evaluates **Ponytail × Deep Module Vectors A/B/C** (`Vector A (Recommended): Zero-New-File / Stdlib Seam`), embeds an **Inline Grilling Decision Matrix** (`DEC-01..N`) and **Red → Green Verification Matrix** inside `implementation_plan.md` with zero chat Q&A spam, and halts for user approval. | Jumping straight into code on underspecified requirements, noisy chat Q&A walls, or over-engineered multi-file abstractions. |
-| **XBoost** | `/xboost` (`/boostx`) | Flagship **4-Phase Engineering & Simulation Solver**: (1) **2D `Task × Project` Goal Contract** & **Tri-Track Signal Gate** (Track A bug repro, Track B greenfield probe, Track C **Simulation Physics Triad**: SI unit bridge, CFL stability cap, zero-load identity check), (2) **Ponytail × Deep Module Ladder** (`YAGNI → Reuse → Stdlib → Deep Seam → Shortest Diff`), (3) **Universal Parity** (Dual-OS + OneDrive + IDE/CLI), (4) **3-Tier Verification** (Before proof, After/Mutation proof, Bloat & Anti-Hardcode sweep). | Speculative blind fixes, shallow pass-through wrapper bloat, numerical `NaN`/`Inf` blowups in CAD/CFD solvers, and machine-bound paths. |
-| **XUltra** | `/xultra` (`/ultrax`, `/ultra`) | **Elastic Cognitive Swarm (`N × K × T`) & Blind Verification Multiplier**. Normalizes any multi-skill combo into the **Canonical Stage DAG** (`Context → Research → Plan/Build → Sync/Ratchet`), derives topology via the **4-Law Swarm Sizing Calculus (`N × K × T`)** (`Law 1: Code-Over-Swarm Split`, `Law 2: True Orthogonality K-Vectors`, `Law 3: Cognitive-Density N-Sharding` with **Pre-Locked Shared Seam Header**, `Law 4: Rolling Waves, T-Generation Evolutionary Ratchet Loops & Anti-Inline-Shortcut Maker ≠ Checker Gate`), and enforces the **3-Bucket Numeric Litmus Test** + **Pointer-Not-Payload Return Contract** (`Compact Pointer Receipts` for disk writes; `Telegraphic Evidence Tables` for read-only scouts). | Arbitrary fixed-count subagent quotas, anchoring bias, multi-agent file-write race conditions, cross-shard interface drift, arbitrary evidence truncation, and self-grading inline shortcuts. |
+| Skill & Command (Legacy Aliases) | Core Architecture & Protocol | Failure Modes Prevented |
+|:---|:---|:---|
+| **6. XPlan**<br>`/xplan` (`/planx`, `/plan`) | **BoostX Architectural Planner**. Locks a **2D Plan Contract (`Scope × Risk`)**, runs blast-radius & invariant discovery, evaluates **Ponytail × Deep Module Vectors A/B/C** (`Vector A (Recommended): Zero-New-File / Stdlib Seam`), embeds an **Inline Grilling Decision Matrix** (`DEC-01..N`) and **Red → Green Verification Matrix** inside `implementation_plan.md` with zero chat Q&A spam, and halts for user approval. | Jumping straight into code on underspecified requirements, noisy chat Q&A walls, or over-engineered multi-file abstractions. |
+| **7. XBoost**<br>`/xboost` (`/boostx`) | Flagship **4-Phase Engineering & Simulation Solver**: (1) **2D `Task × Project` Goal Contract** & **Tri-Track Signal Gate** (Track A bug repro, Track B greenfield probe, Track C **Simulation Physics Triad**: SI unit bridge, CFL stability cap, zero-load identity check), (2) **Ponytail × Deep Module Ladder** (`YAGNI → Reuse → Stdlib → Deep Seam → Shortest Diff`), (3) **Universal Parity** (Dual-OS + OneDrive + IDE/CLI), (4) **3-Tier Verification** (Before proof, After/Mutation proof, Bloat & Anti-Hardcode sweep). | Speculative blind fixes, shallow pass-through wrapper bloat, numerical `NaN`/`Inf` blowups in CAD/CFD solvers, and machine-bound paths. |
+| **8. XUltra**<br>`/xultra` (`/ultrax`, `/ultra`) | **Elastic Cognitive Swarm (`N × K × T`) & Blind Verification Multiplier**. Normalizes any multi-skill combo into the **Canonical Stage DAG** (`Context → Research → Plan/Build → Sync/Ratchet`), derives topology via the **4-Law Swarm Sizing Calculus (`N × K × T`)** (`Law 1: Code-Over-Swarm Split`, `Law 2: True Orthogonality K-Vectors`, `Law 3: Cognitive-Density N-Sharding` with **Pre-Locked Shared Seam Header**, `Law 4: Rolling Waves, T-Generation Evolutionary Ratchet Loops & Anti-Inline-Shortcut Maker ≠ Checker Gate`), and enforces the **3-Bucket Numeric Litmus Test** + **Pointer-Not-Payload Return Contract**. | Arbitrary fixed-count subagent quotas, anchoring bias, multi-agent file-write race conditions, cross-shard interface drift, arbitrary evidence truncation, and self-grading inline shortcuts. |
 
 ### Stage 4: Synchronization & Release Gates
 
-| Skill | Command (Legacy Aliases) | Core Architecture & Protocol | Failure Modes Prevented |
-|:---|:---|:---|:---|
-| **XSync** | `/xsync` (`/syncx`, `/update-doc`, `/doc-sync`, `/audit-docs`) | Exhaustive multi-file synchronizer with bundled `scripts/audit_workspace_docs.py`. Applies a **4-Level Conflict Arbitration Hierarchy** (`Level 1: Code/Data Receipts > Level 2: Canonical SSOT > Level 3: Session User Lock > Level 4: Drafts`), verifies relative links, Zero-LaTeX compliance, SHA-256 mirror parity, and `--deprecated` sweeps across **Tiers 1-5**, and outputs a verified **Synchronization Ledger**. | Touching 1-2 surface files while leaving stale numbers elsewhere, propagating unverified metrics, or breaking HTML slide/card counters. |
-| **XCreate-Skill** | `/xcreate-skill` (`/create-skillx`, `/create-skill`) | **4-Step Cognitive Distillation Protocol** for authoring agent skills: (1) Universal Globalization into `~/.gemini/config/skills/<name>/`, (2) **Context Budget Guard** (`≤ 400 chars` YAML description with explicit `Use when...` and `Do NOT use for...` triggers so host IDEs never drop sibling skills), (3) progressive disclosure into `references/` and `scripts/`, and (4) mandatory `--platform skill` audit. | Workspace-siloed skills invisible to other projects, bloated frontmatter descriptions that overflow system prompts, and unverified helper scripts. |
-| **XPublish-Audit** | `/xpublish-audit` (`/publishx-audit`, `/publish-audit`) | **6-Pillar Pre-Flight Release Gate** (`scripts/audit_engine.py`) supporting `generic`, `github`, `qgis`, `food4rhino`, and `skill` profiles. Scans 16 high-entropy secret patterns, hardcoded user paths (`C:\Users\...`, `/Users/...`), Python AST security risks (`eval`, `shell=True`, `pickle`), Flake8 compliance, and platform-specific package invariants. | Leaked API keys, developer username leaks in committed files, shell injection vulnerabilities, and broken skill frontmatter. |
-| **XPublish-QGIS** | `/xpublish-qgis` (`/publishx-qgis`, `/publish-qgis`) | **5-Gate Deterministic QGIS Release Packager** (`scripts/package_qgis.py` + `scripts/check_qt6.py`). Enforces `metadata.txt` INI `%` escaping, `classFactory(iface)` verification, **Qt6 / QGIS 4 scoped enum AST checks** (earning the official *QGIS 4 Ready* badge), pure runtime file filtering, SemVer bumping, and fixed-epoch `(2026, 1, 1)` single-root ZIP creation. | `plugins.qgis.org` server `InterpolationSyntaxError`, Qt5 unscoped enum crashes in QGIS 4, and top-level ZIP folder mismatches. |
+| Skill & Command (Legacy Aliases) | Core Architecture & Protocol | Failure Modes Prevented |
+|:---|:---|:---|
+| **9. XSync**<br>`/xsync` (`/syncx`, `/update-doc`, `/doc-sync`, `/audit-docs`) | Exhaustive multi-file synchronizer with bundled `scripts/audit_workspace_docs.py`. Applies a **4-Level Conflict Arbitration Hierarchy** (`Level 1: Code/Data Receipts > Level 2: Canonical SSOT > Level 3: Session User Lock > Level 4: Drafts`), verifies relative links, Zero-LaTeX compliance, SHA-256 mirror parity, and `--deprecated` sweeps across **Tiers 1-5**, and outputs a verified **Synchronization Ledger**. | Touching 1-2 surface files while leaving stale numbers elsewhere, propagating unverified metrics, or breaking HTML slide/card counters. |
+| **10. XCreate-Skill**<br>`/xcreate-skill` (`/create-skillx`, `/create-skill`) | **4-Step Cognitive Distillation Protocol** for authoring agent skills: (1) Universal Globalization into `~/.gemini/config/skills/<name>/`, (2) **Context Budget Guard** (`≤ 400 chars` YAML description with explicit `Use when...` and `Do NOT use for...` triggers so host IDEs never drop sibling skills), (3) progressive disclosure into `references/` and `scripts/`, and (4) mandatory `--platform skill` audit. | Workspace-siloed skills invisible to other projects, bloated frontmatter descriptions that overflow system prompts, and unverified helper scripts. |
+| **11. XPublish-Audit**<br>`/xpublish-audit` (`/publishx-audit`, `/publish-audit`) | **6-Pillar Pre-Flight Release Gate** (`scripts/audit_engine.py`) supporting `generic`, `github`, `qgis`, `food4rhino`, and `skill` profiles, plus the **GitHub Repository Publishing & Visual README Protocol (`v1.2`)**. Scans 16 high-entropy secret patterns, hardcoded user paths (`C:\Users\...`, `/Users/...`), Python AST security risks (`eval`, `shell=True`, `pickle`), Flake8 compliance, and platform-specific package invariants. | Leaked API keys, developer username leaks in committed files, shell injection vulnerabilities, broken Mermaid diagrams, and broken skill frontmatter. |
+| **12. XPublish-QGIS**<br>`/xpublish-qgis` (`/publishx-qgis`, `/publish-qgis`) | **5-Gate Deterministic QGIS Release Packager** (`scripts/package_qgis.py` + `scripts/check_qt6.py`). Enforces `metadata.txt` INI `%` escaping, `classFactory(iface)` verification, **Qt6 / QGIS 4 scoped enum AST checks** (earning the official *QGIS 4 Ready* badge), pure runtime file filtering, SemVer bumping, and fixed-epoch `(2026, 1, 1)` single-root ZIP creation. | `plugins.qgis.org` server `InterpolationSyntaxError`, Qt5 unscoped enum crashes in QGIS 4, and top-level ZIP folder mismatches. |
 
 ### Stage 5: Session Continuity
 
-| Skill | Command (Legacy Aliases) | Core Architecture & Protocol | Failure Modes Prevented |
-|:---|:---|:---|:---|
-| **XContext** | `/xcontext` (`/contextx`, `/context`) | Runs `scripts/check_context.py` against the active IDE conversation transcript (`transcript.jsonl`) and SQLite step logs (`conversations/*.db`), filtering out isolated subagent logs, reporting **Session & Cross-Platform Token Telemetry** (`--tokens`, `--days N`, `--all-time` across Antigravity 2.0, IDE, and CLI), and evaluating a **2D Health Rubric (`Compaction Round × Active Window Pressure %`)** across strict `CHECKPOINT` boundaries (`🟢 HEALTHY`, `🟡 NOMINAL`, `🟠 CAUTION`, `🔴 CRITICAL`). | Continuing complex edits after multi-pass compactions, subagent transcript hijacking, or invisible cross-platform token usage. |
-| **XKickoff** | `/xkickoff` (`/kickoffx`, `/kickoff`) | End-of-session handover protocol. Runs a pre-handover `/xsync` verification check, presents a structured **Next-Step Options Table** (`Option A Recommended`, `Option B`, `Option C`), applies the **Task-Smart Recommended Command Selector** (auto-routing `/xlaya` only for large-corpus/audit tasks), and generates a **self-contained copy-pasteable Kickoff Prompt**. | Starting a fresh conversation with vague context, losing mid-session decisions, or leaving unsynchronized documentation behind. |
+| Skill & Command (Legacy Aliases) | Core Architecture & Protocol | Failure Modes Prevented |
+|:---|:---|:---|
+| **13. XContext**<br>`/xcontext` (`/contextx`, `/context`) | Runs `scripts/check_context.py` against the active IDE conversation transcript (`transcript.jsonl`) and SQLite step logs (`conversations/*.db`), filtering out isolated subagent logs, reporting **Session & Cross-Platform Token Telemetry** (`--tokens`, `--days N`, `--all-time` across Antigravity 2.0, IDE, and CLI), and evaluating a **2D Health Rubric (`Compaction Round × Active Window Pressure %`)** across strict `CHECKPOINT` boundaries (`🟢 HEALTHY`, `🟡 NOMINAL`, `🟠 CAUTION`, `🔴 CRITICAL`). | Continuing complex edits after multi-pass compactions, subagent transcript hijacking, or invisible cross-platform token usage. |
+| **14. XKickoff**<br>`/xkickoff` (`/kickoffx`, `/kickoff`) | End-of-session handover protocol. Runs a pre-handover `/xsync` verification check, presents a structured **Next-Step Options Table** (`Option A Recommended`, `Option B`, `Option C`), applies the **Task-Smart Recommended Command Selector** (auto-routing `/xlaya` only for large-corpus/audit tasks), and generates a **self-contained copy-pasteable Kickoff Prompt**. | Starting a fresh conversation with vague context, losing mid-session decisions, or leaving unsynchronized documentation behind. |
 
 ---
 
@@ -188,7 +186,7 @@ For numerical, spatial, and multi-physics solvers (`SIMULATE / SOLVER`), `/xboos
 ### 4.2 Unified 3-Tier Research & 5-Wave Adversarial Fact Auditing (`/xdeep-research`)
 
 Standard LLM web research either spawns heavy subagents for 10-second SDK lookups or hallucinates metrics from search snippets on deep studies. `/xdeep-research` unifies **3-Tier Adaptive Scope Routing** (`Tier 1: Fast Inline Probe`, `Tier 2: Single Isolated Scout`, `Tier 3: 5-Wave Deep Research Swarm`) with **4-Tier Primary-Source Authority** and **Blind Adversarial Verification**:
-- **Tier 1–2 (Tactical Primary-Source Probe)**: Checks local pinned manifests (`package.json`, `pyproject.toml`, `*.csproj`, `metadata.txt`) and local SQLite/AST/CLI probes before querying external documentation.
+- **Tier 1-2 (Tactical Primary-Source Probe)**: Checks local pinned manifests (`package.json`, `pyproject.toml`, `*.csproj`, `metadata.txt`) and local SQLite/AST/CLI probes before querying external documentation.
 - **Wave 1 (2D Contract)**: Locks domain axes, minimum record quotas, and disambiguation rules (e.g., separating construction completion year from policy adoption year).
 - **Wave 2 (Harvester Swarm)**: Parallel scouts scrape full page bodies and deep links under strict capability-aware write-permission rules.
 - **Wave 3 & 3.5 (Blind Adversarial Audit + Prune & Replace)**: An independent auditor runs `scripts/verify_evidence.py` to reject `[TBD]` placeholders, root-domain URLs, and schema violations, triggering replacement harvesting until the quota is 100% verified.
@@ -205,7 +203,7 @@ Both `/xsync` and `/xpublish-audit` enforce five canonical status terms across a
 
 ### 4.4 Empirical Benchmark & Token Economics ([`benchmarks/BENCHMARK_REPORT.md`](benchmarks/BENCHMARK_REPORT.md))
 
-Reproducible multi-trial measurements (`3` warm-ups + `20–30` timed iterations via [`benchmarks/run_boostx_benchmark.py`](benchmarks/run_boostx_benchmark.py)) across `109` installed skills, `752` repository/vault markdown files (`592`-node Obsidian Second Brain), `25` seeded red-team defects, and `214` real IDE sessions (`987` prompt turns):
+Reproducible multi-trial measurements (`3` warm-ups + `20-30` timed iterations via [`benchmarks/run_boostx_benchmark.py`](benchmarks/run_boostx_benchmark.py)) across `109` installed skills, `752` repository/vault markdown files (`592`-node Obsidian Second Brain), `25` seeded red-team defects, and `214` real IDE sessions (`987` prompt turns):
 
 | Benchmark Dimension | Unstructured / Prompt-Only Baseline | `BoostX v3.2.0` Composable `/x*` Suite | Empirical Delta & Receipt |
 |:---|:---|:---|:---|
@@ -214,21 +212,12 @@ Reproducible multi-trial measurements (`3` warm-ups + `20–30` timed iterations
 | **3. System 1 `/xlaya` Section Triage** | Full-corpus read (`91,173` tokens across `20` specs / `450` chunks) | **Top-5 `#L<start>-L<end>` sections (`1,516` tokens) in Median `10.06 ms`** (`44,731.6` chunks/sec) | **`-98.34%` Pass-B Reading Tokens** |
 | **4. 25-Defect Red-Team Catch Rate** | `0 / 25` (`0.0%` deterministic pre-LLM enforcement) | **`25 / 25` (`100.0%` Recall • `100.0%` Precision • `0` False Positives)** in **Median `6.45 ms`** | **8 Bundled CLI Engines (`4,299` LOC)** |
 | **5. Real Turn & Session Token Depth** | `23.1` steps/turn (`12.6k` new input • `7.4k` output • `1.25M` total/turn) | **`61.9` steps/turn (`2.68×`)** • **`65.6k` new input (`5.19×`)** • **`21.3k` output (`2.90×`)** • **`25.66M` tok/session (`11.87×`)** | **Recommended: `5×` Max (Sprints) / `20×` Ultra (Swarms & Marathons)** |
-| **6. Hybrid PDF, `booktabs` & VLM HTML Table Extraction (`/xocr` `v2.1.0`)** | `0 / 6` tables when `pdfplumber` is absent; `1`-row collapsed `booktabs` cells; unparsed HTML `<table>` tags; Thai PUA/Sara-Am mojibake | **`6 / 6` vector `booktabs` tables (`0` false positives)** in **`0.78 s` (`~97 ms/page`)** + **`12 / 12` scanned HTML `<table>` → CSV surgery** via local `SCB 10X Typhoon-OCR v1.5` (`Qwen3-VL`) | **`100%` Vector & Scanned Table + Thai Glyph Fidelity (`ocr_runner.py`)** |
+| **6. Hybrid PDF, `booktabs` & VLM HTML Table Extraction (`/xocr` `v2.1.0`)** | `0 / 6` tables when `pdfplumber` is absent; `1`-row collapsed `booktabs` cells; unparsed HTML `<table>` tags; `5.11×` VLM upscale token bloat | **`19-97 ms/page` vector (`15.0×-3,326×` faster)** + **`-35.9%` vision tokens** + **`+9.11%` Table EditSim (`50.75%`)** & **HTML `<table>` → CSV surgery** via local `SCB 10X Typhoon-OCR v1.5` | **`100%` Vector & Scanned Table Fidelity ([Upstream PR #15](https://github.com/scb-10x/typhoon-ocr/pull/15))** |
 
 > **Transparency on Token Consumption**: BoostX reduces low-value file-scanning noise by **`97.48%`**, then deliberately invests that freed context capacity into **`2.68×` more verification steps** and **`5.19×` more primary-source & CLI telemetry inputs** per chained turn. While single-skill runs work comfortably on `1×` Pro plans, daily chained workflows (`/xbrief /xdeep-research /xboost /xsync /xobsidian`) are best paired with **`5×` High-Throughput tiers** (Claude Max `5×`, Gemini `5×`), and `400+`-step autonomous `/goal` marathons or `/xultra` / `/xdeep-research` multi-agent swarms are engineered for **`20×` Ultra tiers** (Gemini Ultra `20×`, Claude Max `20×`).
 
-#### Composable Workflow Ablation — Seeded Defect Recall (`N = 25` Red-Team Defects)
-
-| Workflow Level & Active CLI Gates | Visual Defect Recall Bar | Defect Catch Rate | False Positives |
-| :--- | :--- | :--- | :---: |
-| **Level 3: Full 5-Stage + 8 CLI Gates** | `████████████████████` **`100.0%`** | **`25 / 25` (`100.0%`)** | **`0`** |
-| **Level 2: `/xbrief` + `/xdeep-research` + `/xboost` (4 Gates)** | `████████████████░░░░` `80.0%` | `20 / 25` (`80.0%`) | `0` |
-| **Level 1: `/xboost` Standalone (2 Gates)** | `████████░░░░░░░░░░░░` `40.0%` | `10 / 25` (`40.0%`) | `0` |
-| **Level 0: Raw Prompt Baseline (0 Gates)** | `░░░░░░░░░░░░░░░░░░░░` `0.0%` | `0 / 25` (`0.0%`) | — |
-
 <details>
-<summary>📄 <b>LaTeX (<code>booktabs</code>) Source for Academic Citations — BoostX v3.2.0 Empirical Benchmark Summary</b></summary>
+<summary><b>LaTeX (booktabs) Source for Academic Citations — BoostX v3.2.0 Empirical Benchmark Summary</b></summary>
 
 ```latex
 \begin{table}[htbp]
@@ -244,7 +233,7 @@ Reproducible multi-trial measurements (`3` warm-ups + `20–30` timed iterations
 3. System 1 \texttt{/xlaya} Section Triage & $91,173$ tok ($20$ specs / $450$ chunks) & \textbf{Top-5 ($1,516$ tok in $10.06\text{ ms}$)} & \textbf{$-98.34\%$ Pass-B Tokens} \\
 4. 25-Defect Red-Team Catch Rate & $0 / 25$ ($0.0\%$ pre-LLM enforcement) & \textbf{$25 / 25$ ($100.0\%$ Recall in $6.45\text{ ms}$)} & \textbf{8 CLI Engines ($4,299$ LOC)} \\
 5. Real Turn \& Session Token Depth & $23.1$ steps/turn ($2.16\text{M}$ tok/session) & \textbf{$61.9$ steps/turn ($25.66\text{M}$ tok/session)} & \textbf{$2.68\times$ Verification Depth} \\
-6. Hybrid PDF \& Table Engine (\texttt{/xocr}) & $0/6$ tables (no \texttt{pdfplumber}) $\cdot$ raw HTML & \textbf{$6/6$ vector ($97\text{ ms/p}$) + $12/12$ HTML CSV} & \textbf{$100\%$ Table \& Thai Fidelity} \\
+6. Hybrid PDF \& Table Engine (\texttt{/xocr}) & $0/6$ tables (no \texttt{pdfplumber}) $\cdot$ raw HTML & \textbf{$19\text{--}97\text{ ms/p}$ vector ($15\text{--}3326\times$) + HTML CSV} & \textbf{$-35.9\%$ Tok / $+9.1\%$ Tab (PR \#15)} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -406,8 +395,9 @@ boostx/
 
 ## 8. Related Toolkits & Author
 
+- **[xocr](https://github.com/iscvlab/xocr)**: High-speed C++ PyMuPDF vector/table extractor, Two-Stage LaTeX `booktabs` & scanned HTML `<table>` → RFC-4180 CSV surgery (`19-97 ms/page`, `15.0×-3,326×` faster hybrid routing), Thai PUA/Sara-Am normalizer, and 4-Tier local `SCB 10X Typhoon-OCR v1.5` (`Qwen3-VL`) & `baidu/Unlimited-OCR-2` engine (**[Upstream PR #15 to `scb-10x/typhoon-ocr`](https://github.com/scb-10x/typhoon-ocr/pull/15)**).
 - **[mcp-bridges](https://github.com/iscvlab/mcp-bridges)**: Model Context Protocol (MCP) automation bridges for **QGIS, Rhino 3D, Grasshopper, Adobe Illustrator, and Figma**.
-- **[qgis-axonometric-transformer](https://plugins.qgis.org/plugins/axonometric_transformer/)**: Official QGIS plugin (Plugin ID: `6219`) for 1-click isometric, dimetric, and oblique axonometric map diagrams.
+- **[qgis-axonometric-transformer](https://plugins.qgis.org/plugins/axonometric_transformer/)**: Official QGIS plugin (Plugin ID: `6219`, `v1.2.2 LIVE`) for 1-click isometric, dimetric, and oblique axonometric map diagrams.
 
 **Napat Phasundhiae**  
 *Computational Design Technologist | Spatial Analytics • Urban & Environmental Simulation • Workflow Automation*

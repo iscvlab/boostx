@@ -1,8 +1,20 @@
-# BoostX (`v3.2.0`) — Empirical Benchmark & Token Economics Report
+# BoostX (`v3.2.0`) - Empirical Benchmark & Token Economics Report
 
 > **Reproducible Verification Harness**: Generated deterministically by [`benchmarks/run_boostx_benchmark.py`](./run_boostx_benchmark.py)  
 > **Corpus Scope**: `109` Installed Agent Skills • `160` Repository Markdown Specs • `592` Obsidian Second Brain Nodes • `214` Real IDE Sessions (`987` Prompt Turns)  
-> **Statistical Rigor**: Timing benchmarks execute `3` warm-up passes followed by `N = 30` timed iterations (`time.perf_counter_ns()`), reporting **Median (`P50`)**, **Mean ± StdDev**, **IQR (`P25–P75`)**, and **`P95`**.
+> **Statistical Rigor**: Timing benchmarks execute `3` warm-ups followed by `N = 30` timed iterations (`time.perf_counter_ns()`), reporting **Median (`P50`)**, **Mean ± StdDev**, **IQR (`P25-P75`)**, and **`P95`**.
+
+---
+
+## ⚡ TL;DR - Empirical Scorecard at a Glance (`v3.2.0`)
+
+| Evaluation Dimension | Workflow / Cohort Configuration | Visual Comparison Bar | Measured Result & Delta vs. Baseline |
+| :--- | :--- | :--- | :--- |
+| **1. Red-Team Defect Catch Rate ↑**<br>*(25 Seeded Defects across 5 Pillars)* | **Level 3: Full 5-Stage + 8 CLI Gates**<br>Level 2: `/xbrief` + `/xdeep-research` + `/xboost`<br>Level 1: `/xboost` Standalone (2 Gates)<br>Level 0: Prompt-Only Baseline (0 Gates) | `████████████████████` **`100.0% (25/25)`**<br>`████████████████░░░░` `80.0% (20/25)`<br>`████████░░░░░░░░░░░░` `40.0% (10/25)`<br>`░░░░░░░░░░░░░░░░░░░░` `0.0% (0/25)` | **`0` False Positives in Median `6.45 ms`** ✨<br>`4` Active CLI Verification Gates<br>`2` Active CLI Verification Gates<br>No Deterministic Pre-LLM Enforcement |
+| **2. Context Noise Compression ↑**<br>*(752 Repo + Vault Files, `1.22M` tok)* | **`/xbrief` (`Cap 8`) Repo-Only**<br>**`/xbrief` (`Cap 8`) + `/xobsidian` (`2-Hop`)**<br>Unbounded Repo + Vault Crawl | `████████████████████` **`97.84% Removed (46.2×)`**<br>`████████████████████` **`97.48% Removed (39.7×)`**<br>`░░░░░░░░░░░░░░░░░░░░` `0.0% Removed (1.0×)` | **`26,472` tok in Median `0.73 ms`** ✨<br>**`30,764` tok (`12` files) in `0.79 ms`** ✨<br>`1,222,816` tok (`752` files) in `40.77 ms` |
+| **3. System 1 Section Triage ↑**<br>*(20 Specs / 450 Chunks, `91.2k` tok)* | **BoostX `/xlaya` Top-5 Shortlist**<br>Unfiltered Full-Corpus Pass-B Read | `████████████████████` **`98.34% Saved (60.1×)`**<br>`░░░░░░░░░░░░░░░░░░░░` `0.0% Saved (1.0×)` | **`1,516` tok in Median `10.06 ms`** (`44.7k` chunks/s) ✨<br>`91,173` tok (Full 20-File Read) |
+| **4. Dual-Trigger Budget Guard ↑**<br>*(`Use when` + `Do NOT use` across `N=109`)* | **BoostX `v3.2.0` Suite (`N = 14`)**<br>All Installed Host Skills (`N = 109`)<br>Official Cloud/Vendor Skills (`N = 31`) | `████████████████████` **`100.0% (14/14)`**<br>`██████░░░░░░░░░░░░░░` `29.4% (32/109)`<br>`█████░░░░░░░░░░░░░░░` `25.8% (8/31)` | **`388.57 ± 12.43` chars (`0%` Truncation)** ✨<br>`323.61 ± 181.14` chars (`89.9%` `≤500` pass)<br>`428.61 ± 206.17` chars (`74.2%` `≤500` pass) |
+| **5. Verification Depth / Turn ↑**<br>*(`N = 987` Real IDE Prompt Turns)* | **Chained Multi-Skill `/x*` Turn (`N=156`)**<br>Single `/x*` Skill Turn (`N = 88`)<br>Standard Turn Without `/x*` (`N = 743`) | `████████████████████` **`61.9 Steps (2.68×)`**<br>`███████████░░░░░░░░░` `34.8 Steps (1.51×)`<br>`███████░░░░░░░░░░░░░` `23.1 Steps (1.0×)` | **`3.13M` tok/turn (`65.6k` new in, `21.3k` out)** ✨<br>`2.14M` tok/turn (`25.9k` new in, `14.4k` out)<br>`1.25M` tok/turn (`12.6k` new in, `7.4k` out) |
 
 ---
 
