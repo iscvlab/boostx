@@ -11,7 +11,7 @@
 1. **System-Prompt Budget Discipline (`100%` Compliance & Dual-Trigger Guards)**: Across all `13` BoostX `/x*` skills, YAML discovery descriptions average **`393.08 ± 8.18 chars`** (Median `393.0` chars, **`100.0%` within the `≤ 500` char `audit_engine.py` budget gate**) with **`100.0%` dual positive + negative (`Use when` / `Do NOT use for`) routing guards**, compared to `25.8%` dual-trigger coverage across `31` official cloud/enterprise skills.
 2. **Context Noise Compression (`-97.9%` Scan Reduction)**: When briefing across multi-project repositories and the `592`-node Obsidian Second Brain (`1,222,816` tokens total), `/xbrief` (`Cap 8` Two-Pass) + `/xobsidian` (`2-Hop = 4` vault files) loads only **`30,764` tokens** (**`97.48%` noise reduction** / **`39.7×` compression**) in a median disk read time of **`0.79 ms`** (vs `40.77 ms` unbounded).
 3. **System 1 `/xlaya` Triage (`10.06 ms` Median)**: Chunking and ranking `450` fence-safe (`≤ 1,200`-char) heading sections across `20` specs completes in **`10.06 ms`** (`Mean 10.3 ± 0.69 ms`, `44,731.6 chunks/sec`), cutting Pass-B reading tokens by **`98.34%`**.
-4. **Deterministic Red-Team Defect Catch Rate (`100.0%` vs `0.0%`)**: Across `25` seeded security, Qt6/QGIS 4, research citation, doc-sync, and skill-packaging defects, the 7 zero-dependency CLI gates achieve **`25 / 25` (`100.0%` recall)** and **`100.0%` precision** (`0` false positives) in **`6.45 ms`**.
+4. **Deterministic Red-Team Defect Catch Rate (`100.0%` vs `0.0%`)**: Across `25` seeded security, Qt6/QGIS 4, research citation, doc-sync, and skill-packaging defects, the 8 CLI gates achieve **`25 / 25` (`100.0%` recall)** and **`100.0%` precision** (`0` false positives) in **`6.45 ms`**.
 5. **Transparent Token Economics (Why BoostX Recommends `5×`–`20×` Subscriptions)**: While BoostX slashes *garbage file noise* by `97.48%`, it deliberately invests that freed context capacity into **deep multi-gate verification**. Across `987` real prompt turns, a chained multi-skill BoostX turn executes **`61.86 steps`** (`2.68×` deeper than standard `23.08`-step turns), consuming **`65,591` uncached input tokens (`5.19×`)**, **`21,323` output tokens (`2.9×`)**, and **`3,039,085` KV-cache read tokens** per turn (`~25.66M` total tokens across a full `472`-step marathon session).
 
 ---
@@ -61,7 +61,7 @@
 | **3. Deep-Research Evidence & Schema** (`[TBD]`, `example.com`, bare root URL, quota, year bounds) | `0 / 5` | `xdeep-research/scripts/verify_evidence.py` | **`5 / 5` (`100%`)** |
 | **4. Doc Sync, Links, Zero-LaTeX & Mirrors** (2 broken links, inline LaTeX, deprecated term, SHA-256 drift) | `0 / 5` | `xsync/scripts/audit_workspace_docs.py` | **`5 / 5` (`100%`)** |
 | **5. Skill Budget & Hygiene** (`>500` char YAML, naming, broken link, `__pycache__`, `.pyc` binary) | `0 / 5` | `audit_engine.py --platform skill` | **`5 / 5` (`100%`)** |
-| **Total Recall / Precision / Latency (`N = 20`)** | **`0 / 25` (`0.0%`)** | **All 7 BoostX Zero-Dependency CLI Gates** | **`25 / 25` (`100.0%` Recall • `100.0%` Precision • Median `6.45 ms`)** |
+| **Total Recall / Precision / Latency (`N = 20`)** | **`0 / 25` (`0.0%`)** | **All 8 BoostX CLI Gates** | **`25 / 25` (`100.0%` Recall • `100.0%` Precision • Median `6.45 ms`)** |
 
 ---
 
@@ -72,7 +72,7 @@
 | **Baseline 0: Unstructured Prompting (No Skills)** | `<raw prompt>` | `1,222,816` | `0` | `0` | **`0.0%`** | `23.1` | **Free / 1× Base Tier** |
 | **Level 1: Single Core Solver** | `/xboost` | `26,472` | `0` | `2` | **`40.0%`** | `34.8` | **1× Pro / 5× Max Tier** |
 | **Level 2: Repo-Briefed + Primary Probe + 2-Hop Vault** | `/xbrief /xdeep-research /xboost /xobsidian` | `30,764` | `592` | `4` | **`80.0%`** | `61.9` | **5× Max Tier (Claude Max 5× / Gemini 5×)** |
-| **Level 3: Full 5-Stage Lifecycle + System 1 + 7 CLI Gates** | `/xbrief /xdeep-research /xboost /xsync /xlaya + /xpublish-audit` | `30,764` | `592` | `7` | **`100.0%`** | `471.6` | **20× Ultra Tier (Gemini Ultra 20× / Claude Max 20×)** |
+| **Level 3: Full 5-Stage Lifecycle + System 1 + 8 CLI Gates** | `/xbrief /xdeep-research /xboost /xsync /xlaya + /xpublish-audit` | `30,764` | `592` | `8` | **`100.0%`** | `471.6` | **20× Ultra Tier (Gemini Ultra 20× / Claude Max 20×)** |
 
 ![Figure 3: 25-Defect Red-Team Recall & Composable Workflow Ablation](../docs/assets/fig3_ablation_redteam.svg)
 

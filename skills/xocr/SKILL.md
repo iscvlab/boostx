@@ -76,23 +76,13 @@ python "$env:USERPROFILE\.gemini\config\skills\xocr\scripts\ocr_runner.py" "<pat
 
 ---
 
-## 3. Verifiable Output Artifacts & Empirical Benchmark
+## 3. Verifiable Output Artifacts
 
 Every run emits pure JSON telemetry on `stdout` and writes four deterministic artifacts to `--output`:
 * `extracted_document.md`: Reading-order Markdown containing `## Page N` sections and **inline GitHub Flavored Markdown tables** (`| Col A | Col B |`).
 * `extracted_text.txt`: Plain page-delimited text (`--- PAGE N ---`) for legacy regex/NLP pipelines.
 * `table_p{page}_{table_id}.csv`: UTF-8 with BOM (`utf-8-sig`) RFC-4180 CSV tables ready for `pandas.read_csv()` or Excel.
 * `ocr_manifest.json`: Per-page audit telemetry (`page`, `char_count`, `table_count`, `garble_ratio`, `image_area_ratio`, `needs_ocr`, `engine`, and `elapsed_ms`).
-
-### Empirical Benchmark (`Unlimited-OCR.pdf` v1, `Unlimited-OCR-2.pdf` v2 & `Unlimited-OCR.png`)
-
-| Evaluation Scenario | Naive `pypdf` / `pdfplumber` Baseline | `/xocr` Hybrid Engine (`ocr_runner.py`) |
-|:---|:---|:---|
-| **`Unlimited-OCR-2.pdf` (15p Academic Paper, 4 `booktabs` Tables)** | Misses `Table 2` (buffer invalidation), clips `Table 3` header, and misses 3-rule `Table 4` | **`4 / 4` tables (`100%` recall, `0` false positives)** + `35,096` non-whitespace chars in **`2.57 s` (`~171 ms/page`)** ✓ |
-| **`Unlimited-OCR.pdf` (14p Academic Paper, 5 `booktabs` Table Blocks)** | `0 / 5` tables when `pdfplumber` is absent; `1`-row collapsed strings on borderless `booktabs` tables | **`5 / 5` table blocks (`100%` recall, `0` false positives)** + `32,084` non-whitespace chars in **`2.28 s` (`~163 ms/page`)** ✓ |
-| **Surgical Page Slice (`--pages "9-10"`)** | Full 14-page scan required | Pages `9–10` + **`3 / 3` tables** (`table_p9_1.csv`, `table_p9_2.csv`, `table_p10_1.csv`) in **`889 ms`** ✓ |
-| **Standalone Raster Image (`Unlimited-OCR.png`, Offline CPU)** | `0` chars extracted when VLM server is offline | **`177` non-whitespace chars (`204` total)** extracted automatically via Tier-3 `EasyOCR` ✓ |
-| **Legacy Thai PUA (`\uf70a\uf701`) & Toned Decomposed Sara Am (`น\u0e4d\u0e49\u0e32`)** | Raw PUA boxes and broken vowel/tone sequence | Normalized deterministically to `น้ำ\u0e48\u0e34` and `น้ำ` (`0%` mojibake) ✓ |
 
 ---
 

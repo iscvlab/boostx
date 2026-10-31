@@ -218,12 +218,13 @@ def _is_booktabs_strip(rows):
     return max_nl >= 2
 
 
-def _find_booktabs_rule_bboxes(page):
+def _find_booktabs_rule_bboxes(page, drawings=None):
     """Detect LaTeX booktabs horizontal rule clusters (top/mid/bottomrule)."""
-    try:
-        drawings = page.get_drawings() or []
-    except Exception:  # nosec B110
-        return []
+    if drawings is None:
+        try:
+            drawings = page.get_drawings() or []
+        except Exception:  # nosec B110
+            return []
 
     h_rules = []
     for drw in drawings:
@@ -280,9 +281,40 @@ def _find_booktabs_rule_bboxes(page):
     ]
 
 
-def extract_tables_from_page(page, fitz_mod):
+def extract_tables_from_page(page, fitz_mod, raw_text=""):
     """Two-Stage Grid + LaTeX booktabs table extractor using PyMuPDF."""
     extracted = []
+    try:
+        drawings = page.get_drawings() or []
+    except Exception:  # nosec B110
+        drawings = []
+
+    if not drawings:
+        return extracted
+
+    h_rules_cnt = 0
+    g_rects_cnt = 0
+    for drw in drawings:
+        rect = drw.get("rect")
+        if not rect:
+            continue
+        w = rect.x1 - rect.x0
+        h = rect.y1 - rect.y0
+        if w >= 150 and h <= 5:
+            h_rules_cnt += 1
+        elif w >= 25 and h >= 10 and drw.get("type") != "f":
+            g_rects_cnt += 1
+
+    if h_rules_cnt < 3 and g_rects_cnt < 8:
+        return extracted
+
+    if len(drawings) > 200 and not re.search(
+        r"(?:^|\n)\s*(?:Table|Tab\.|ตาราง)\s*\d*\s*[:.|]",
+        raw_text or "",
+        re.IGNORECASE,
+    ):
+        return extracted
+
     try:
         raw_tabs = page.find_tables().tables
     except Exception:  # nosec B110
@@ -331,7 +363,7 @@ def extract_tables_from_page(page, fitz_mod):
 
     # Merge or append pure horizontal-rule booktabs clusters (3-rule tables
     # or header bands between \toprule and \midrule missed by lines strategy).
-    for rbox in _find_booktabs_rule_bboxes(page):
+    for rbox in _find_booktabs_rule_bboxes(page, drawings=drawings):
         matched = False
         for grp in groups:
             gbox = grp["bbox"]
@@ -727,7 +759,9 @@ def extract_pdf(
         page_table_count = 0
 
         if has_fitz_tables:
-            page_tables = extract_tables_from_page(page, fitz)
+            page_tables = extract_tables_from_page(
+                page, fitz, raw_text=raw_text
+            )
             for rows in page_tables:
                 page_table_count += 1
                 tables_extracted += 1

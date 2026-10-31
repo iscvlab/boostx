@@ -10,7 +10,7 @@
 > **A unified, composable `/x*` skill ecosystem and verification harness for AI coding agents.**  
 > Type `/x` in any supported IDE or CLI to surface the entire **14-skill BoostX ecosystem** (`xboost`, `xbrief`, `xcontext`, `xcreate-skill`, `xdeep-research`, `xkickoff`, `xlaya`, `xobsidian`, `xocr`, `xplan`, `xpublish-audit`, `xpublish-qgis`, `xsync`, `xultra`) and **8 bundled Python CLI engines** across **Claude Code, Grok, Google Gemini / Antigravity, Cursor, and Codex** on **Windows, macOS, and Linux**.
 
-Sister toolkit: **[mcp-bridges](https://github.com/iscvlab/mcp-bridges)** (Model Context Protocol automation bridges for QGIS, Rhino 3D, Grasshopper, Adobe Illustrator, and Figma).
+Sister toolkits: **[mcp-bridges](https://github.com/iscvlab/mcp-bridges)** (Model Context Protocol automation bridges for QGIS, Rhino 3D, Grasshopper, Adobe Illustrator, and Figma) · **[xocr](https://github.com/iscvlab/xocr)** (Standalone Hybrid Document AI, Two-Stage LaTeX `booktabs` Table Surgery & 4-Tier `baidu/Unlimited-OCR-2` Engine).
 
 ---
 
