@@ -52,7 +52,7 @@ Public-claim **vocabulary** (LIVE, REGISTERED, PREPARED, IN PIPELINE) is owned b
 5. **Platform Invariant Enforcer (QGIS / Food4Rhino / GitHub)**:
    - QGIS: Validates `metadata.txt` (zero unescaped `%`), verifies `def classFactory(iface)` in `__init__.py`, and checks Qt6/QGIS 4 readiness via `check_qt6.py`.
    - Food4Rhino: Verifies compiled `.gha`/`.dll` assembly.
-   - GitHub: Verifies OSI-compliant `LICENSE`.
+   - GitHub: Verifies OSI-compliant `LICENSE` and follows the visual README, White-Mode Mermaid, `0 ms` Horizontal Bar Chart, `≤ 4`-column PR table width, and `UTF-16LE` zero-mojibake clipboard standards in [`references/github_readme_protocol.md`](references/github_readme_protocol.md).
 6. **Packaging Hygiene**:
    - Detects build debris (`.pyc`, `__pycache__`, `Thumbs.db`, `.DS_Store`, `.swp`, `.env`).
 
