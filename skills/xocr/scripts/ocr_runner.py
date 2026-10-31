@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""High-speed, zero-corruption PDF & Image OCR engine for /xocr (/unlimited-ocr).
+"""High-speed, zero-corruption PDF & Image OCR engine for /xocr.
 
 Features:
 1. Single-pass C++ PyMuPDF (`fitz`) coordinate-sorted text (`sort=True`) and
@@ -192,7 +192,18 @@ def clean_table_rows(raw_rows):
         [r[ci] if ci < len(r) else "" for ci in keep_cols] for r in rows
     ]
     multi_col_rows = sum(1 for r in pruned if sum(1 for c in r if c) >= 2)
-    if multi_col_rows < 2:
+    if multi_col_rows < 2 or (multi_col_rows / len(pruned)) < 0.60:
+        return []
+    total_cells = len(pruned) * len(keep_cols)
+    raw_total = max(1, len(raw_rows) * ncol)
+    filled_cells = sum(1 for r in pruned for c in r if c)
+    if (
+        total_cells > 0
+        and (
+            (filled_cells / total_cells) < 0.52
+            or (filled_cells / raw_total) < 0.32
+        )
+    ):
         return []
     return pruned
 
@@ -207,24 +218,94 @@ def _is_booktabs_strip(rows):
     return max_nl >= 2
 
 
+def _find_booktabs_rule_bboxes(page):
+    """Detect LaTeX booktabs horizontal rule clusters (top/mid/bottomrule)."""
+    try:
+        drawings = page.get_drawings() or []
+    except Exception:  # nosec B110
+        return []
+
+    h_rules = []
+    for drw in drawings:
+        rect = drw.get("rect")
+        if not rect:
+            continue
+        width = rect.x1 - rect.x0
+        height = rect.y1 - rect.y0
+        if width >= 200 and height <= 4.5:
+            h_rules.append(
+                [
+                    float(rect.x0),
+                    float(rect.y0),
+                    float(rect.x1),
+                    float(rect.y1),
+                ]
+            )
+
+    if len(h_rules) < 3:
+        return []
+
+    h_rules.sort(key=lambda r: (r[1], r[0]))
+    clusters = []
+    for rule in h_rules:
+        placed = False
+        for cl in clusters:
+            if (
+                abs(rule[0] - cl["x0"]) < 25
+                and abs(rule[2] - cl["x1"]) < 25
+                and 0 <= (rule[1] - cl["last_y"]) < 240
+            ):
+                if (rule[1] - cl["last_y"]) > 3.5:
+                    cl["rule_count"] += 1
+                cl["y1"] = max(cl["y1"], rule[3])
+                cl["last_y"] = rule[3]
+                placed = True
+                break
+        if not placed:
+            clusters.append(
+                {
+                    "x0": rule[0],
+                    "y0": rule[1],
+                    "x1": rule[2],
+                    "y1": rule[3],
+                    "last_y": rule[3],
+                    "rule_count": 1,
+                }
+            )
+
+    return [
+        [cl["x0"], cl["y0"], cl["x1"], cl["y1"]]
+        for cl in clusters
+        if cl["rule_count"] >= 3 and (cl["y1"] - cl["y0"]) >= 25
+    ]
+
+
 def extract_tables_from_page(page, fitz_mod):
     """Two-Stage Grid + LaTeX booktabs table extractor using PyMuPDF."""
     extracted = []
     try:
         raw_tabs = page.find_tables().tables
     except Exception:  # nosec B110
-        return extracted
+        raw_tabs = []
 
-    if not raw_tabs:
-        return extracted
+    # Pre-extract rows before any subsequent page.find_tables(clip=...) call,
+    # which mutates PyMuPDF's internal table buffers on the same Page object.
+    cached_tabs = []
+    for tab in sorted(raw_tabs, key=lambda x: (x.bbox[1], x.bbox[0])):
+        try:
+            cached_tabs.append((list(tab.bbox), tab.extract() or []))
+        except Exception:  # nosec B110
+            pass
 
-    # Group vertically adjacent horizontal-rule boxes (LaTeX booktabs)
-    # without merging two distinct multi-row grid tables
     groups = []
-    sorted_tabs = sorted(raw_tabs, key=lambda x: (x.bbox[1], x.bbox[0]))
-    for tab in sorted_tabs:
-        box = list(tab.bbox)
-        rows = tab.extract() or []
+    for box, rows in cached_tabs:
+        if len(rows) >= 5:
+            r_ncol = max((len(r) for r in rows if r), default=1)
+            r_fill = sum(
+                1 for r in rows for c in (r or []) if c and str(c).strip()
+            ) / max(1, len(rows) * r_ncol)
+            if r_fill < 0.08:
+                continue
         if (
             groups
             and abs(box[1] - groups[-1]["bbox"][3]) < 15
@@ -236,32 +317,97 @@ def extract_tables_from_page(page, fitz_mod):
             )
         ):
             groups[-1]["bbox"][3] = max(groups[-1]["bbox"][3], box[3])
-            groups[-1]["tabs"].append(tab)
+            groups[-1]["rows_list"].append(rows)
             groups[-1]["last_rows"] = rows
         else:
-            groups.append({"bbox": box, "tabs": [tab], "last_rows": rows})
+            groups.append(
+                {
+                    "bbox": box,
+                    "rows_list": [rows],
+                    "last_rows": rows,
+                    "reextract": False,
+                }
+            )
+
+    # Merge or append pure horizontal-rule booktabs clusters (3-rule tables
+    # or header bands between \toprule and \midrule missed by lines strategy).
+    for rbox in _find_booktabs_rule_bboxes(page):
+        matched = False
+        for grp in groups:
+            gbox = grp["bbox"]
+            y_overlap = min(gbox[3], rbox[3]) - max(gbox[1], rbox[1])
+            if (
+                abs(gbox[0] - rbox[0]) < 25
+                and abs(gbox[2] - rbox[2]) < 25
+                and y_overlap > -15
+            ):
+                if rbox[1] < gbox[1] - 4 or rbox[3] > gbox[3] + 4:
+                    grp["bbox"] = [
+                        min(gbox[0], rbox[0]),
+                        min(gbox[1], rbox[1]),
+                        max(gbox[2], rbox[2]),
+                        max(gbox[3], rbox[3]),
+                    ]
+                    grp["reextract"] = True
+                matched = True
+                break
+        if not matched:
+            near_rect = fitz_mod.Rect(
+                0, rbox[1] - 48, page.rect.width, rbox[3] + 48
+            )
+            top_rect = fitz_mod.Rect(rbox[0], rbox[1], rbox[2], rbox[1] + 24)
+            near_txt = page.get_text("text", clip=near_rect) or ""
+            top_txt = (page.get_text("text", clip=top_rect) or "").strip()
+            if re.search(
+                r"(?:^|\n)\s*(?:Table|Tab\.|ตาราง)\s*\d+\s*[:.|]",
+                near_txt,
+                re.IGNORECASE,
+            ) and not re.match(
+                r"^(Algorithm|Figure|Fig\.)\b", top_txt, re.IGNORECASE
+            ):
+                groups.append(
+                    {
+                        "bbox": rbox,
+                        "rows_list": [],
+                        "last_rows": [],
+                        "reextract": True,
+                    }
+                )
+
+    groups.sort(key=lambda g: (g["bbox"][1], g["bbox"][0]))
 
     for grp in groups:
-        t0_rows = grp["tabs"][0].extract() or []
+        t0_rows = grp["rows_list"][0] if grp["rows_list"] else []
         max_nl = max(
             (str(c or "").count("\n") for r in t0_rows for c in r), default=0
         )
         candidates = []
-        if len(grp["tabs"]) == 1 and len(t0_rows) >= 2 and max_nl < 2:
+        grp_w = grp["bbox"][2] - grp["bbox"][0]
+        if (
+            grp_w < 200
+            or (
+                not grp.get("reextract")
+                and len(grp["rows_list"]) == 1
+                and len(t0_rows) >= 2
+                and max_nl < 2
+            )
+        ):
             candidates.append(t0_rows)
         else:
             try:
                 clip_rect = fitz_mod.Rect(grp["bbox"])
+                min_v = 2 if not grp["rows_list"] else 3
                 sub_tabs = page.find_tables(
                     clip=clip_rect,
                     vertical_strategy="text",
                     horizontal_strategy="text",
+                    min_words_vertical=min_v,
                 ).tables
                 for st in sub_tabs:
                     candidates.append(st.extract())
             except Exception:  # nosec B110
                 pass
-            if not candidates:
+            if not candidates and t0_rows:
                 candidates.append(t0_rows)
 
         for cand in candidates:
@@ -443,20 +589,37 @@ def run_vlm_engine(target_path, output_dir, image_paths=None):
         if torch.cuda.is_available():
             from transformers import AutoModel, AutoTokenizer
 
-            model_name = "baidu/Unlimited-OCR"
-            tokenizer = AutoTokenizer.from_pretrained(
-                model_name, trust_remote_code=True
+            env_model = os.environ.get("UNLIMITED_OCR_MODEL", "").strip()
+            model_candidates = (
+                [env_model]
+                if env_model
+                else ["baidu/Unlimited-OCR-2", "baidu/Unlimited-OCR"]
             )
-            model = (
-                AutoModel.from_pretrained(
-                    model_name,
-                    trust_remote_code=True,
-                    use_safetensors=True,
-                    torch_dtype=torch.bfloat16,
-                )
-                .eval()
-                .cuda()
-            )
+            tokenizer = None
+            model = None
+            model_name = model_candidates[0]
+            for cand_model in model_candidates:
+                try:
+                    tokenizer = AutoTokenizer.from_pretrained(
+                        cand_model, trust_remote_code=True
+                    )
+                    model = (
+                        AutoModel.from_pretrained(
+                            cand_model,
+                            trust_remote_code=True,
+                            use_safetensors=True,
+                            torch_dtype=torch.bfloat16,
+                        )
+                        .eval()
+                        .cuda()
+                    )
+                    model_name = cand_model
+                    break
+                except Exception:  # nosec B110
+                    continue
+            if model is None or tokenizer is None:
+                raise RuntimeError("No Unlimited-OCR model available")
+
             vlm_texts = {}
             if image_paths and len(image_paths) > 1:
                 res = model.infer_multi(
@@ -470,11 +633,22 @@ def run_vlm_engine(target_path, output_dir, image_paths=None):
                     ngram_window=1024,
                     save_results=True,
                 )
+                if isinstance(res, tuple):
+                    res = res[0]
                 if isinstance(res, list):
                     for img_p, txt in zip(image_paths, res):
                         vlm_texts[img_p] = normalize_text(str(txt or ""))
                 elif isinstance(res, str):
-                    vlm_texts[image_paths[0]] = normalize_text(res)
+                    if "<PAGE>" in res:
+                        parts = [
+                            p.strip()
+                            for p in res.split("<PAGE>")
+                            if p.strip()
+                        ]
+                        for img_p, txt in zip(image_paths, parts):
+                            vlm_texts[img_p] = normalize_text(txt)
+                    else:
+                        vlm_texts[image_paths[0]] = normalize_text(res)
             else:
                 img_target = image_paths[0] if image_paths else target_path
                 res = model.infer(
@@ -490,11 +664,15 @@ def run_vlm_engine(target_path, output_dir, image_paths=None):
                     ngram_window=128,
                     save_results=True,
                 )
+                if isinstance(res, tuple):
+                    res = res[0]
                 if isinstance(res, str):
-                    vlm_texts[img_target] = normalize_text(res)
+                    vlm_texts[img_target] = normalize_text(
+                        res.replace("<PAGE>", "").strip()
+                    )
             return {
                 "vlm_executed": True,
-                "engine": "hf_unlimited_ocr_cuda",
+                "engine": f"hf_{model_name.split('/')[-1].lower()}_cuda",
                 "vlm_texts": vlm_texts,
             }
     except Exception:  # nosec B110
