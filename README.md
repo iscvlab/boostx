@@ -18,13 +18,6 @@ Sister toolkits: **[mcp-bridges](https://github.com/iscvlab/mcp-bridges)** (Mode
 
 BoostX organizes software engineering, scientific research, spatial/physics simulation, and documentation governance into **five deterministic lifecycle stages** plus **cross-stage System 1 semantic & multi-agent swarm multipliers** across **14 composable `/x*` skills**:
 
-<p align="center">
-  <img src="docs/assets/boostx-master-ecosystem.svg" alt="BoostX Master 5-Stage Ecosystem Architecture" width="100%" />
-</p>
-
-<details>
-<summary><b>View Mermaid Architecture Source</b></summary>
-
 ```mermaid
 graph LR
     subgraph S1["Stage 1: Context & Memory"]
@@ -76,8 +69,6 @@ graph LR
     LX -.-> PAX
 ```
 
-</details>
-
 ---
 
 ## 2. Composable `/x*` Slash-Command Grammar & Opt-In Second Brain
@@ -93,13 +84,6 @@ Every skill in BoostX is prefixed with `x` so typing `/x` in any IDE autocomplet
 
 By default, all skills operate in **100% Repo-Only Mode** and ignore any directory containing an `.obsidian/` subfolder. The 2-Hop Obsidian Second Brain and Knowledge Ratchet activate **only** when `/xobsidian` is explicitly included in the command chain:
 
-<p align="center">
-  <img src="docs/assets/boostx-composable-routing.svg" alt="BoostX Composable Slash-Command Routing & Opt-In Second Brain Flow" width="100%" />
-</p>
-
-<details>
-<summary><b>View Mermaid Routing Source</b></summary>
-
 ```mermaid
 flowchart TD
     Prompt["User Prompt + /x Slash Combination"] --> Gate{"Is /xobsidian<br>in the command?"}
@@ -110,8 +94,6 @@ flowchart TD
     Resolve -->|"/xdeep-research /xboost /xobsidian<br>(+ optional /goal)"| BoostCombo["Full Stack Research -> Build -> Ratchet<br>1. Vault Cache + Primary-Source Probe<br>2. Lock 2D Contract & Toy Benchmark<br>3. /xboost Phase 1-4 Execution<br>4. Auto-Ratchet new reusable specs to Vault"]
     Resolve -->|"/xsync /xobsidian"| SyncCombo["Repo + Second Brain Sync<br>Synchronize repo docs AND update matching<br>Vault atomic nodes + Hub tables"]
 ```
-
-</details>
 
 ### High-Leverage Command Combinations
 
@@ -164,7 +146,7 @@ boostx/skills/
 | Skill | Command (Legacy Aliases) | Core Architecture & Protocol | Failure Modes Prevented |
 |:---|:---|:---|:---|
 | **XDeep-Research** | `/xdeep-research` (`/deep-researchx`, `/deep-research`, `/xresearch`, `/researchx`) | Unified **3-Tier Primary-Source Research & 5-Wave Adversarial Proof Engine**. Routes dynamically across **Tier 1 (Fast Inline Probe `≤ 2` sources)**, **Tier 2 (Single Isolated Scout)**, and **Tier 3 (5-Wave Multi-Agent Deep Research Swarm)**: (1) 2D `Intent × Domain` contract synthesis & **4-Tier Primary-Source Authority Ladder** (local pinned manifests/SQLite/AST probes first + automatic `/xocr` PDF/table ingestion), (2) parallel Harvester scouts with mandatory deep-link scraping & capability-aware subagent write routing, (3) **Blind Adversarial Auditor** + deterministic `scripts/verify_evidence.py` CLI gate with **Wave 3.5 Prune & Replace Loop**, (4) `[VERIFIED FACT]` vs `[RECOMMENDED SYNTHESIS]` binding, and (5) `/xboost` handoff. | Secondary-blog guesswork, researching the wrong SDK version, read-only subagent write deadlocks, search-snippet hallucinations, bare root-domain lazy URLs, and fabricated citations. |
-| **XOCR** | `/xocr` (`/ocrx`, `/ocr`, `/unlimited-ocr`) | **High-Speed Hybrid PDF & Table Extraction Engine** (`scripts/ocr_runner.py`). Combines **Single-Pass C++ `PyMuPDF` (`fitz`)** coordinate-sorted text (`sort=True`), a **Two-Stage Grid + LaTeX `booktabs` Table Extractor** (`page.find_tables()` with horizontal-rule grouping), **Thai PUA (`U+F700..U+F71A`) & Toned Decomposed Sara-Am (`\u0e4d[\u0e48-\u0e4b]?\u0e32` → `\1\u0e33`) Glyph Normalization**, a **Surgical Per-Page Garble & Image-Coverage Router** (`garble_ratio` + `image_area_ratio`), and a **4-Tier OCR Backend Ladder** (`SGLang :10000` → HuggingFace [`baidu/Unlimited-OCR`](https://github.com/baidu/Unlimited-OCR) CUDA VLM with `no_repeat_ngram_size=35` → process-cached `EasyOCR` → `pytesseract`). Automatically invoked by `/xdeep-research`, `/xbrief`, `/xboost`, and `/xobsidian` on PDF/image sources. | Zero-table silent failures when `pdfplumber` is absent, collapsed 1-row LaTeX `booktabs` tables, Thai PUA/Sara-Am mojibake, `(cid:...)` CMap garbage passing naive length checks, and slow full-PDF VLM rasterization on clean vector pages. |
+| **XOCR** | `/xocr` (`/ocrx`, `/ocr`, `/unlimited-ocr`) | **High-Speed Hybrid PDF & Table Extraction Engine** (`scripts/ocr_runner.py` `v2.1.0`). Combines **Single-Pass C++ `PyMuPDF` (`fitz`)** coordinate-sorted text (`sort=True`), a **Two-Stage Grid + LaTeX `booktabs` Table Extractor** (`page.find_tables()` with horizontal-rule grouping, multi-line header auto-coalescing, and non-table figure exclusion), **Scanned VLM HTML `<table>` → RFC-4180 CSV Surgery** (`colspan`/`rowspan` expansion), **Thai PUA (`U+F700..U+F71A`) & Toned Decomposed Sara-Am (`\u0e4d[\u0e48-\u0e4b]?\u0e32` → `\1\u0e33`) Glyph Normalization**, a **Surgical Per-Page Garble & Image-Coverage Router** (`garble_ratio` + `image_area_ratio`), and a **4-Tier Local VLM/OCR Backend Ladder** (`SGLang / Ollama / vLLM` → Local HuggingFace [`scb10x/typhoon-ocr1.5-2b`](https://huggingface.co/scb10x/typhoon-ocr1.5-2b) / `3B-QAT` (`Qwen3-VL`) & [`baidu/Unlimited-OCR-2`](https://huggingface.co/baidu/Unlimited-OCR-2) CUDA VLM → process-cached `EasyOCR` → `pytesseract`). Automatically invoked by `/xdeep-research`, `/xbrief`, `/xboost`, and `/xobsidian` on PDF/image sources. | Zero-table silent failures when `pdfplumber` is absent, collapsed 1-row LaTeX `booktabs` tables, unparsed raw HTML `<table>` tags in VLM output, Thai PUA/Sara-Am mojibake, `(cid:...)` CMap garbage passing naive length checks, and slow full-PDF VLM rasterization on clean vector pages. |
 
 ### Stage 3: Planning & Deep Execution
 
@@ -232,21 +214,43 @@ Reproducible multi-trial measurements (`3` warm-ups + `20–30` timed iterations
 | **3. System 1 `/xlaya` Section Triage** | Full-corpus read (`91,173` tokens across `20` specs / `450` chunks) | **Top-5 `#L<start>-L<end>` sections (`1,516` tokens) in Median `10.06 ms`** (`44,731.6` chunks/sec) | **`-98.34%` Pass-B Reading Tokens** |
 | **4. 25-Defect Red-Team Catch Rate** | `0 / 25` (`0.0%` deterministic pre-LLM enforcement) | **`25 / 25` (`100.0%` Recall • `100.0%` Precision • `0` False Positives)** in **Median `6.45 ms`** | **8 Bundled CLI Engines (`4,299` LOC)** |
 | **5. Real Turn & Session Token Depth** | `23.1` steps/turn (`12.6k` new input • `7.4k` output • `1.25M` total/turn) | **`61.9` steps/turn (`2.68×`)** • **`65.6k` new input (`5.19×`)** • **`21.3k` output (`2.90×`)** • **`25.66M` tok/session (`11.87×`)** | **Recommended: `5×` Max (Sprints) / `20×` Ultra (Swarms & Marathons)** |
-| **6. Hybrid PDF & `booktabs` Table Extraction (`/xocr`)** | `0 / 6` tables when `pdfplumber` is absent; `1`-row collapsed `booktabs` cells; Thai PUA/Sara-Am mojibake | **`6 / 6` tables (`100%` row/col fidelity)** + `32,084` chars in **`2.48 s` (`~177 ms/page`)**; `--pages "9-10"` in **`889 ms`** | **`100%` Table & Thai Glyph Fidelity (`ocr_runner.py`)** |
+| **6. Hybrid PDF, `booktabs` & VLM HTML Table Extraction (`/xocr` `v2.1.0`)** | `0 / 6` tables when `pdfplumber` is absent; `1`-row collapsed `booktabs` cells; unparsed HTML `<table>` tags; Thai PUA/Sara-Am mojibake | **`6 / 6` vector `booktabs` tables (`0` false positives)** in **`0.78 s` (`~97 ms/page`)** + **`12 / 12` scanned HTML `<table>` → CSV surgery** via local `SCB 10X Typhoon-OCR v1.5` (`Qwen3-VL`) | **`100%` Vector & Scanned Table + Thai Glyph Fidelity (`ocr_runner.py`)** |
 
 > **Transparency on Token Consumption**: BoostX reduces low-value file-scanning noise by **`97.48%`**, then deliberately invests that freed context capacity into **`2.68×` more verification steps** and **`5.19×` more primary-source & CLI telemetry inputs** per chained turn. While single-skill runs work comfortably on `1×` Pro plans, daily chained workflows (`/xbrief /xdeep-research /xboost /xsync /xobsidian`) are best paired with **`5×` High-Throughput tiers** (Claude Max `5×`, Gemini `5×`), and `400+`-step autonomous `/goal` marathons or `/xultra` / `/xdeep-research` multi-agent swarms are engineered for **`20×` Ultra tiers** (Gemini Ultra `20×`, Claude Max `20×`).
 
-<p align="center">
-  <img src="docs/assets/boostx-benchmark-summary.svg" alt="BoostX v3.2.0 Empirical Evaluation Summary (2x2 Multi-Panel Academic Figure)" width="100%">
-</p>
+```mermaid
+xychart-beta
+    title "BoostX v3.2.0 Composable Workflow Ablation — Defect Recall (%) vs Active CLI Gates (N=25 Seeded Defects)"
+    x-axis ["Level 0: Raw Prompt (0 Gates)", "Level 1: /xboost (2 Gates)", "Level 2: /xbrief+/xdeep-research+/xboost (4 Gates)", "Level 3: Full 5-Stage + 8 CLI Gates"]
+    y-axis "Seeded Defect Catch Rate (%)" 0 --> 100
+    bar [0, 40, 80, 100]
+    line [0, 40, 80, 100]
+```
 
-| Academic Evaluation Figure | Empirical Scope & Statistical Protocol |
-|:---|:---|
-| [`docs/assets/boostx-benchmark-summary.svg`](docs/assets/boostx-benchmark-summary.svg) | **Composite Summary (Panels a–d)** — System-prompt character distributions (`N=109`), log-scale context compression (`n=30`), composable workflow ablation (`Level 0 → Level 3`), and session token throughput (`N=214`). |
-| [`docs/assets/fig1_discovery_distribution.svg`](docs/assets/fig1_discovery_distribution.svg) | **Figure 1 (Experiment 1)** — YAML frontmatter character boxplots (`Min / IQR / Max / Median / Mean ♦`) and `≤ 500`-char budget pass vs. explicit dual trigger guard compliance (`100.0%` vs. `25.8%` vendor baseline). |
-| [`docs/assets/fig2_compression_latency.svg`](docs/assets/fig2_compression_latency.svg) | **Figure 2 (Experiments 2 & 3)** — Log₁₀ context token volume & disk read latency (`0.79 ms`, `-97.48%` noise) alongside `/xlaya` System 1 section shortlisting (`-98.34%` tokens, Median `10.06 ms` across `n=30` trials). |
-| [`docs/assets/fig3_ablation_redteam.svg`](docs/assets/fig3_ablation_redteam.svg) | **Figure 3 (Experiments 4 & 5)** — `25`-defect red-team injection recall (`25/25 = 100.0%`, `0` false positives, Median `6.45 ms`) and progressive workflow ablation across `0 → 8` bundled CLI engines (`7` security/audit gates + `/xocr`). |
-| [`docs/assets/fig4_token_distributions.svg`](docs/assets/fig4_token_distributions.svg) | **Figure 4 (Experiment 6)** — Per-turn token component quantiles (`N=987` turns on log₁₀ scale) and cumulative session throughput (`N=214` sessions) mapped to `1×` Pro, `5×` Max, and `20×` Ultra subscription tiers. |
+<details>
+<summary>📄 <b>LaTeX (<code>booktabs</code>) Source for Academic Citations — BoostX v3.2.0 Empirical Benchmark Summary</b></summary>
+
+```latex
+\begin{table}[htbp]
+\centering
+\caption{BoostX v3.2.0 Empirical Evaluation across Skill Discovery ($N=109$), Context Compression ($n=30$), Red-Team Recall ($N=25$), and Session Telemetry ($N=214$).}
+\label{tab:boostx_empirical_summary}
+\begin{tabular}{llcc}
+\toprule
+\textbf{Benchmark Dimension} & \textbf{Unstructured / Vendor Baseline} & \textbf{BoostX v3.2.0 (\texttt{/x*} Suite, $N=14$)} & \textbf{Empirical Delta} \\
+\midrule
+1. System-Prompt Discovery Guard & $74.2\%$ $\le 500$-char $\cdot$ $25.8\%$ dual guards & \textbf{$388.57 \pm 12.43$ chars} ($100\%$ dual guards) & \textbf{$0\%$ Sibling Truncation} \\
+2. Briefing \& 2-Hop Vault Compression & $752$ files ($1,222,816$ tok in $40.77\text{ ms}$) & \textbf{$12$ files ($30,764$ tok in $0.79\text{ ms}$)} & \textbf{$-97.48\%$ Noise ($39.7\times$)} \\
+3. System 1 \texttt{/xlaya} Section Triage & $91,173$ tok ($20$ specs / $450$ chunks) & \textbf{Top-5 ($1,516$ tok in $10.06\text{ ms}$)} & \textbf{$-98.34\%$ Pass-B Tokens} \\
+4. 25-Defect Red-Team Catch Rate & $0 / 25$ ($0.0\%$ pre-LLM enforcement) & \textbf{$25 / 25$ ($100.0\%$ Recall in $6.45\text{ ms}$)} & \textbf{8 CLI Engines ($4,299$ LOC)} \\
+5. Real Turn \& Session Token Depth & $23.1$ steps/turn ($2.16\text{M}$ tok/session) & \textbf{$61.9$ steps/turn ($25.66\text{M}$ tok/session)} & \textbf{$2.68\times$ Verification Depth} \\
+6. Hybrid PDF \& Table Engine (\texttt{/xocr}) & $0/6$ tables (no \texttt{pdfplumber}) $\cdot$ raw HTML & \textbf{$6/6$ vector ($97\text{ ms/p}$) + $12/12$ HTML CSV} & \textbf{$100\%$ Table \& Thai Fidelity} \\
+\bottomrule
+\end{tabular}
+\end{table}
+```
+
+</details>
 
 ---
 
@@ -350,18 +354,8 @@ boostx/
 ├── .flake8
 ├── benchmarks/
 │   ├── run_boostx_benchmark.py
-│   ├── generate_figures.py
 │   ├── BENCHMARK_REPORT.md
 │   └── BENCHMARK_RESULTS.json
-├── docs/
-│   └── assets/
-│       ├── boostx-master-ecosystem.svg
-│       ├── boostx-composable-routing.svg
-│       ├── boostx-benchmark-summary.svg
-│       ├── fig1_discovery_distribution.svg
-│       ├── fig2_compression_latency.svg
-│       ├── fig3_ablation_redteam.svg
-│       └── fig4_token_distributions.svg
 ├── scripts/
 │   ├── install.ps1
 │   └── install.sh

@@ -8,7 +8,7 @@
 
 ## Executive Findings: High Intelligence via High Compute
 
-1. **System-Prompt Budget Discipline (`100%` Compliance & Dual-Trigger Guards)**: Across all `13` BoostX `/x*` skills, YAML discovery descriptions average **`393.08 ± 8.18 chars`** (Median `393.0` chars, **`100.0%` within the `≤ 500` char `audit_engine.py` budget gate**) with **`100.0%` dual positive + negative (`Use when` / `Do NOT use for`) routing guards**, compared to `25.8%` dual-trigger coverage across `31` official cloud/enterprise skills.
+1. **System-Prompt Budget Discipline (`100%` Compliance & Dual-Trigger Guards)**: Across all `14` BoostX `/x*` skills, YAML discovery descriptions average **`388.57 ± 12.43 chars`** (Median `392.0` chars, **`100.0%` within the `≤ 500` char `audit_engine.py` budget gate**) with **`100.0%` dual positive + negative (`Use when` / `Do NOT use for`) routing guards**, compared to `25.8%` dual-trigger coverage across `31` official cloud/enterprise skills.
 2. **Context Noise Compression (`-97.9%` Scan Reduction)**: When briefing across multi-project repositories and the `592`-node Obsidian Second Brain (`1,222,816` tokens total), `/xbrief` (`Cap 8` Two-Pass) + `/xobsidian` (`2-Hop = 4` vault files) loads only **`30,764` tokens** (**`97.48%` noise reduction** / **`39.7×` compression**) in a median disk read time of **`0.79 ms`** (vs `40.77 ms` unbounded).
 3. **System 1 `/xlaya` Triage (`10.06 ms` Median)**: Chunking and ranking `450` fence-safe (`≤ 1,200`-char) heading sections across `20` specs completes in **`10.06 ms`** (`Mean 10.3 ± 0.69 ms`, `44,731.6 chunks/sec`), cutting Pass-B reading tokens by **`98.34%`**.
 4. **Deterministic Red-Team Defect Catch Rate (`100.0%` vs `0.0%`)**: Across `25` seeded security, Qt6/QGIS 4, research citation, doc-sync, and skill-packaging defects, the 8 CLI gates achieve **`25 / 25` (`100.0%` recall)** and **`100.0%` precision** (`0` false positives) in **`6.45 ms`**.
@@ -20,11 +20,40 @@
 
 | Skill Cohort | Count | YAML Desc Chars (`Mean ± SD` / `Median`) | `≤ 500` Char Gate Pass | Dual Trigger Guard (`Use when` + `Do NOT use`) | Full `SKILL.md` Tokens (`Mean ± SD` / `Median`) | Bundled CLI Scripts (`LOC`) |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|
-| **BoostX `v3.2.0` Suite (`/x*` Skills)** | `13` | **`393.08 ± 8.18`** (`393.0`) | **`100.0%`** | **`100.0%`** | `3,384 ± 1,368` (`3,109`) | **`7` (`3,405` LOC)** |
+| **BoostX `v3.2.0` Suite (`/x*` Skills)** | `14` | **`388.57 ± 12.43`** (`392.0`) | **`100.0%`** | **`100.0%`** | `3,352 ± 1,324` (`3,109`) | **`8` (`4,299` LOC)** |
 | **Official Cloud & Enterprise Vendor Skills** | `31` | `428.61 ± 206.17` (`373.0`) | `74.2%` | `25.8%` | `2,559 ± 1,707` (`2,474`) | `5` (`2,712` LOC) |
 | **All Installed Host Skills Pool** | `109` | `323.61 ± 181.14` (`334.0`) | `89.9%` | `29.4%` | `1,898 ± 1,693` (`1,398`) | `56` (`20,710` LOC) |
 
-![Figure 1: Skill Discovery & Trigger Guard Compliance](../docs/assets/fig1_discovery_distribution.svg)
+```mermaid
+xychart-beta
+    title "Experiment 1 — System-Prompt Budget Compliance (<=500 Chars %) & Dual-Trigger Guard Coverage (%)"
+    x-axis ["BoostX v3.2.0 Suite (N=14)", "Official Cloud & Enterprise Skills (N=31)", "All Installed Host Skills Pool (N=109)"]
+    y-axis "Compliance Rate (%)" 0 --> 100
+    bar [100.0, 74.2, 89.9]
+    line [100.0, 25.8, 29.4]
+```
+
+<details>
+<summary>📄 <b>LaTeX (<code>booktabs</code>) Source for Academic Citations — Experiment 1: Skill Discovery & Budget Audit</b></summary>
+
+```latex
+\begin{table}[htbp]
+\centering
+\caption{Skill Discovery YAML Frontmatter Character Distribution and Dual-Trigger Guard Compliance ($N = 109$).}
+\label{tab:exp1_skill_discovery}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Skill Cohort} & \textbf{$N$} & \textbf{YAML Chars ($\mu \pm \sigma$)} & \textbf{Median} & \textbf{$\le 500$ Pass} & \textbf{Dual Guards} & \textbf{CLI Scripts (LOC)} \\
+\midrule
+\textbf{BoostX v3.2.0 Suite (\texttt{/x*})} & \textbf{14} & \textbf{$388.57 \pm 12.43$} & \textbf{$392.0$} & \textbf{$100.0\%$} & \textbf{$100.0\%$} & \textbf{8 ($4,299$)} \\
+Official Cloud \& Vendor Skills & 31 & $428.61 \pm 206.17$ & $373.0$ & $74.2\%$ & $25.8\%$ & 5 ($2,712$) \\
+All Installed Host Skills Pool & 109 & $323.61 \pm 181.14$ & $334.0$ & $89.9\%$ & $29.4\%$ & 56 ($20,710$) \\
+\bottomrule
+\end{tabular}
+\end{table}
+```
+
+</details>
 
 ---
 
@@ -48,7 +77,36 @@
 | **Single-Pass Triage Latency (`N = 30`)** | **Median `10.06 ms`** (`Mean 10.3 ± 0.69 ms` • `IQR 0.72 ms` • `P95 11.71 ms`) |
 | **Chunk Evaluation Throughput** | **`44,731.6` chunks / sec** (`deterministic-lexical-stdlib`) |
 
-![Figure 2: Context Window Compression & /xlaya Section Triage Latency](../docs/assets/fig2_compression_latency.svg)
+```mermaid
+xychart-beta
+    title "Experiments 2 & 3 — Disk Read & Section Triage Latency (Median ms across N=30 Trials)"
+    x-axis ["Unbounded Crawl (752 files)", "/xbrief Cap-8 (8 files)", "/xbrief+/xobsidian 2-Hop (12 files)", "/xlaya System-1 Triage (450 chunks)"]
+    y-axis "Median Latency (ms)" 0 --> 45
+    bar [40.77, 0.73, 0.79, 10.06]
+```
+
+<details>
+<summary>📄 <b>LaTeX (<code>booktabs</code>) Source for Academic Citations — Experiments 2 & 3: Context Compression & System 1 Triage</b></summary>
+
+```latex
+\begin{table}[htbp]
+\centering
+\caption{Context Window Compression and System 1 \texttt{/xlaya} Section Triage Latency ($3$ Warm-Ups + $N=30$ Trials).}
+\label{tab:exp2_3_compression_latency}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Briefing / Triage Regime} & \textbf{Files / Chunks} & \textbf{Tokens Loaded} & \textbf{Noise Reduction} & \textbf{Median (ms)} & \textbf{Mean $\pm$ SD (ms)} \\
+\midrule
+1. Unbounded Repo + Vault Crawl & $752$ files & $1,222,816$ & Baseline ($1.0\times$) & $40.77$ & $40.73 \pm 2.74$ \\
+\textbf{2. \texttt{/xbrief} Repo-Only (Cap 8)} & \textbf{$8$ files} & \textbf{$26,472$} & \textbf{$-97.84\%$ ($46.2\times$)} & \textbf{$0.73$} & \textbf{$0.76 \pm 0.12$} \\
+\textbf{3. \texttt{/xbrief /xobsidian} (Cap 8 + 2-Hop)} & \textbf{$12$ files} & \textbf{$30,764$} & \textbf{$-97.48\%$ ($39.7\times$)} & \textbf{$0.79$} & \textbf{$0.88 \pm 0.28$} \\
+\textbf{4. \texttt{/xlaya} Top-5 Section Triage} & \textbf{$450 \to 5$ chunks} & \textbf{$1,516$} & \textbf{$-98.34\%$ ($60.1\times$)} & \textbf{$10.06$} & \textbf{$10.30 \pm 0.69$} \\
+\bottomrule
+\end{tabular}
+\end{table}
+```
+
+</details>
 
 ---
 
@@ -74,7 +132,37 @@
 | **Level 2: Repo-Briefed + Primary Probe + 2-Hop Vault** | `/xbrief /xdeep-research /xboost /xobsidian` | `30,764` | `592` | `4` | **`80.0%`** | `61.9` | **5× Max Tier (Claude Max 5× / Gemini 5×)** |
 | **Level 3: Full 5-Stage Lifecycle + System 1 + 8 CLI Gates** | `/xbrief /xdeep-research /xboost /xsync /xlaya + /xpublish-audit` | `30,764` | `592` | `8` | **`100.0%`** | `471.6` | **20× Ultra Tier (Gemini Ultra 20× / Claude Max 20×)** |
 
-![Figure 3: 25-Defect Red-Team Recall & Composable Workflow Ablation](../docs/assets/fig3_ablation_redteam.svg)
+```mermaid
+xychart-beta
+    title "Experiments 4 & 5 — Composable Workflow Ablation: Seeded Defect Catch Rate (%) vs CLI Gates"
+    x-axis ["Level 0: Raw Prompt (0 Gates)", "Level 1: /xboost (2 Gates)", "Level 2: /xbrief+/xdeep-research+/xboost (4 Gates)", "Level 3: Full 5-Stage (8 Gates)"]
+    y-axis "Seeded Defect Recall (%)" 0 --> 100
+    bar [0, 40, 80, 100]
+    line [0, 40, 80, 100]
+```
+
+<details>
+<summary>📄 <b>LaTeX (<code>booktabs</code>) Source for Academic Citations — Experiments 4 & 5: Red-Team Injection & Workflow Ablation</b></summary>
+
+```latex
+\begin{table}[htbp]
+\centering
+\caption{Composable Workflow Ablation Matrix and 25-Defect Red-Team Catch Rate ($3$ Warm-Ups + $N=20$ Trials).}
+\label{tab:exp4_5_ablation_redteam}
+\begin{tabular}{llcccc}
+\toprule
+\textbf{Workflow Level} & \textbf{Command Chain} & \textbf{Scan Tokens} & \textbf{CLI Gates} & \textbf{Defect Recall} & \textbf{Avg Steps/Turn} \\
+\midrule
+Baseline 0: Unstructured & \texttt{<raw prompt>} & $1,222,816$ & 0 & $0.0\%$ ($0/25$) & $23.1$ \\
+Level 1: Core Solver & \texttt{/xboost} & $26,472$ & 2 & $40.0\%$ ($10/25$) & $34.8$ \\
+Level 2: Brief + Probe + Vault & \texttt{/xbrief /xdeep-research /xboost /xobsidian} & $30,764$ & 4 & $80.0\%$ ($20/25$) & $61.9$ \\
+\textbf{Level 3: Full 5-Stage Suite} & \textbf{\texttt{/xbrief /xdeep-research /xboost /xsync /xlaya}} & \textbf{$30,764$} & \textbf{8} & \textbf{$100.0\%$ ($25/25$)} & \textbf{$471.6$} \\
+\bottomrule
+\end{tabular}
+\end{table}
+```
+
+</details>
 
 ---
 
@@ -104,4 +192,36 @@
 | **Tier 2: `5×` High-Throughput** *(Recommended Minimum)* | **Claude Max `5×`**, **Gemini `5×`**, API Tier 2+ | **Daily Chained Multi-Skill Sprints** (`/xbrief /xdeep-research /xboost /xsync /xobsidian`) | Sustains `~74k` uncached input + `~27k` output + `~2.95M` KV-cache replay tokens across `~63` verification steps per turn without throttling. |
 | **Tier 3: `20×` Ultra / Marathon** *(Studio Standard)* | **Gemini Ultra `20×`**, **Claude Max `20×`**, Enterprise API | **Autonomous `/goal` Marathons & `/xdeep-research` 5-Wave Swarms** | Engineered for `400+`-step autonomous sessions (`~340k` uncached input, `~166k` output, `~22.6M` cumulative session tokens + parallel subagent swarms). |
 
-![Figure 4: Per-Turn & Full-Session Token Distributions](../docs/assets/fig4_token_distributions.svg)
+```mermaid
+xychart-beta
+    title "Experiment 6 — Real Session Token Throughput (Mean Million Tokens across N=214 Sessions)"
+    x-axis ["Standard Session (No /x*, n=152)", "Single-Skill BoostX Session (n=4)", "Chained Multi-Skill BoostX Session (n=58)"]
+    y-axis "Mean Total Session Throughput (Million Tokens)" 0 --> 28
+    bar [2.16, 20.13, 25.66]
+```
+
+<details>
+<summary>📄 <b>LaTeX (<code>booktabs</code>) Source for Academic Citations — Experiment 6: Per-Turn & Session Token Telemetry</b></summary>
+
+```latex
+\begin{table}[htbp]
+\centering
+\caption{Per-Prompt Turn ($N=987$) and Full Multi-Turn Session ($N=214$) Token Telemetry.}
+\label{tab:exp6_token_telemetry}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Execution Regime} & \textbf{$N$} & \textbf{Mean Steps} & \textbf{Uncached Input} & \textbf{KV-Cache Read} & \textbf{Output} & \textbf{Total Processed} \\
+\midrule
+Standard Turn (No \texttt{/x*}) & 743 & $23.1$ & $12,643$ & $1,228,053$ & $7,351$ & $1,249,519$ \\
+Single \texttt{/x*} Skill Turn & 88 & $34.8$ & $25,922$ & $2,097,057$ & $14,399$ & $2,139,411$ \\
+\textbf{Chained Multi-Skill Turn} & \textbf{156} & \textbf{$61.9$ ($2.68\times$)} & \textbf{$65,591$ ($5.19\times$)} & \textbf{$3,039,085$} & \textbf{$21,323$ ($2.9\times$)} & \textbf{$3,129,947$} \\
+\midrule
+Standard Session (No \texttt{/x*}) & 152 & $62.8$ & $70,112$ & $2.07\text{M}$ & $20,627$ & $2.16\text{M}$ \\
+Single-Skill BoostX Session & 4 & $379.8$ & $220,993$ & $19.77\text{M}$ & $118,813$ & $20.13\text{M}$ \\
+\textbf{Chained Multi-Skill Session} & \textbf{58} & \textbf{$471.6$} & \textbf{$356,706$} & \textbf{$25.11\text{M}$} & \textbf{$161,243$} & \textbf{$25.66\text{M}$ ($11.87\times$)} \\
+\bottomrule
+\end{tabular}
+\end{table}
+```
+
+</details>
