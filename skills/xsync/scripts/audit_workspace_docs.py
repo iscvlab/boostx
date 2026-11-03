@@ -201,7 +201,7 @@ def audit_workspace(args) -> int:
             errors.append(f"Repo-local `scripts/audit_docs.py` failed:\n{proc.stdout}\n{proc.stderr}")
 
     print("=" * 70)
-    print("SYNCX WORKSPACE DOCUMENTATION AUDIT SCORECARD")
+    print("XSYNC WORKSPACE DOCUMENTATION AUDIT SCORECARD")
     print("=" * 70)
     print(f"Workspace: {ws_root}")
     print(f"Files:     {len(docs)} (.md / .html)")

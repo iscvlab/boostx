@@ -1,15 +1,15 @@
 ---
 name: xlaya
 description: >
-  System 1 fast semantic decision, section shortlisting, and conflict triage sidecar (/xlaya, /layax, /laya).
-  Use when running /xlaya, /layax, or /laya standalone or chained (/xsync /xlaya, /xbrief /xlaya, /xdeep-research /xlaya, /xpublish-audit /xlaya)
+  System 1 fast semantic decision, section shortlisting, and conflict triage sidecar (/xlaya, /laya).
+  Use when running /xlaya or /laya standalone or chained (/xsync /xlaya, /xbrief /xlaya, /xdeep-research /xlaya, /xpublish-audit /xlaya)
   for local classification (choice), scoring (score), or truth validation (noul).
   Do NOT use for prose generation or code authoring (/xboost).
 ---
 
 # `/xlaya` (System 1 Decision & Semantic Triage Sidecar)
 
-A lightweight, non-autoregressive **System 1 decision layer** for agent workflows (`/xlaya`, legacy aliases `/layax`, `/laya`), powered by the local `laya` Python library (`convaiinnovations/laya` and `convaiinnovations/laya-multilingual`) and the bundled [`laya_triage.py`](scripts/laya_triage.py) CLI engine.
+A lightweight, non-autoregressive **System 1 decision layer** for agent workflows (`/xlaya`, alias `/laya`), powered by the local `laya` Python library (`convaiinnovations/laya` and `convaiinnovations/laya-multilingual`) and the bundled [`laya_triage.py`](scripts/laya_triage.py) CLI engine.
 
 Runs as a standalone decision helper or as a pluggable zero-token accelerator chained with other `/x...` skills (`/xsync /xlaya`, `/xbrief /xlaya`, `/xplan /xlaya`, `/xdeep-research /xlaya`, `/xpublish-audit /xlaya`, `/xlaya /xultra`).
 
@@ -81,11 +81,11 @@ questions = {
     # 1. choice: Calibrated categorical distribution across caller-defined labels (dict or list)
     "category": {
         "type": "choice",
-        "instructions": "Classify the primary environmental complaint category.",
+        "instructions": "Classify the primary software engineering section category.",
         "criteria": {
-            "odor": "กลิ่นเหม็น ขยะ สารเคมี กลิ่นไหม้",
-            "leachate": "น้ำเสีย น้ำชะขยะ คลองเน่าเสีย",
-            "noise": "มลพิษทางเสียง เครื่องจักร รถขยะ",
+            "architecture": "System architecture, module seams, dataflow diagrams, and design invariants",
+            "runtime_cli": "CLI execution flags, deterministic runners, and runtime performance benchmarks",
+            "verification": "Unit test suites, perturbation probes, and regression verification gates",
         },
     },
     # 2. score: Ordinal rubric (criteria is a list of level descriptions, index 0 first)

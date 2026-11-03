@@ -1,19 +1,19 @@
 ---
 name: xsync
 description: >
-  Synchronize documentation after a system, API, schema, metric, or architectural change (/xsync, /syncx, /update-doc, /doc-sync).
-  Use when running /xsync, /syncx, /update-doc, /doc-sync, or /audit-docs to sync docs,
+  Synchronize documentation after a system, API, schema, metric, or architectural change (/xsync, /update-doc, /doc-sync).
+  Use when running /xsync, /update-doc, /doc-sync, or /audit-docs to sync docs,
   purge stale references, arbitrate conflicts, or update metrics across markdown and HTML.
   Do NOT use for publishing (/xpublish-audit) or authoring skills (/xcreate-skill).
 ---
 
 # `/xsync` (Portable Cross-Document Synchronizer)
 
-Cross-document synchronization, conflict arbitration, and zero-stale audit for **whatever repository is open now** (`/xsync`, legacy aliases `/syncx`, `/update-doc`, `/doc-sync`, `/audit-docs`).
+Cross-document synchronization, conflict arbitration, and zero-stale audit for **whatever repository is open now** (`/xsync`, aliases `/update-doc`, `/doc-sync`, `/audit-docs`).
 
 Discover changes from **the active conversation**, then systematically scan and align **all markdown, HTML, and web documentation in the current workspace**. Portable across Antigravity IDE, `agy` CLI, Claude Code, Cursor, and multi-agent platforms across Windows, macOS, and Linux.
 
-Do not assume specific project filenames, layer counts, or local author paths.
+Do not assume specific project filenames, schema counts, or local author paths.
 
 Red failure modes to prevent:
 1. Touching only surface files while leaving stale metrics, outdated cardinalities, or dead links in related documents.
@@ -59,12 +59,12 @@ When two or more documents contradict each other, resolve the discrepancy using 
 
 ```mermaid
 flowchart TD
-    A["Level 1: Source Code & Runtime Data Receipts (Tests, schemas, code constants)"] -->|Overrides| B["Level 2: Canonical SSOT & Latest Version (Master specs, roadmaps, *_vLatest)"]
+    A["Level 1: Verified Non-Fallback Code & Runtime Receipts (Passing Stage 3 Wave 2, source != fallback, N_proc == N_exp)"] -->|Overrides| B["Level 2: Canonical SSOT & Latest Version (Master specs, roadmaps, *_vLatest)"]
     B -->|Overrides| C["Level 3: Current Session User Locks (Explicit decisions in active chat)"]
     C -->|Overrides| D["Level 4: Iterative Drafts & Historical Notes (Working notes, older versions)"]
 ```
 
-1. **Level 1 (Code & Data Receipts)**: Real source code constants, database tables, test assertions, and generated data files strictly override written Markdown prose.
+1. **Level 1 (Verified Non-Fallback Code & Runtime Receipts)**: Source code constants, database tables, test assertions, and generated data files that have **passed Stage 3 Wave 2 verification (`source != "fallback"`, `N_processed == N_expected`, and `UL-04` partition conservation `∑ Child_k + Remainder == Parent`)** strictly override written Markdown prose. Unverified or fallback-truncated outputs never override locked specifications.
 2. **Level 2 (Canonical SSOT & Version Leaders)**: Master architectural plans, specifications, and latest version files (`*_v5`) strictly override older iterative drafts (`*_v4`, `*_v3`).
 3. **Level 3 (Current Session User Lock)**: Decisions locked by the user in the current conversation override older written documentation across all tiers.
 4. **Level 4 (Conflict Quarantine)**: If two top-tier specs have an unresolved structural contradiction not addressed in the chat, **do not guess**. Quarantine the conflict in a `Conflict Ledger` and halt for user confirmation.
@@ -92,12 +92,13 @@ Search markdown, HTML, and web documentation across the workspace (excluding `.g
    * *Markdown Suites*: Root README, module docs, schemas, roadmaps, specifications, and portfolios.
    * *Interactive Web Artifacts*: Presentation slide decks, architecture viewers, dashboard portals, storyboards, and reports.
    * *Shadow Mirrors*: Identify whether modified documents are duplicated in distribution packages (e.g. `dist/docs/`, `package_name/docs_reference/`, or mirrored sub-workspaces).
-   * *Strict Opt-In [`/xobsidian`](../xobsidian/SKILL.md) Boundary (`/xsync /xobsidian`)*: By default, **never** scan or modify an Obsidian vault (`*/.obsidian/..`) during `/xsync`. Only when `/xobsidian` (or `/obsidianx`, `/obsidian-vault`) is explicitly paired in the command (`/xsync /xobsidian`) should you resolve the active vault via [`/xobsidian`](../xobsidian/SKILL.md) and synchronize affected reusable atomic notes and `Hub - *.md` tables alongside repository docs.
-   * *Opt-In [`/xlaya`](../xlaya/SKILL.md) Semantic Contradiction Pre-Filter (`/xsync /xlaya`)*: When chained with `/xlaya` (or `/layax`, `/laya`), run the `noul` hypothesis scanner across candidate `.md` and `.html` paragraphs to detect semantic contradictions against the SSOT that keyword grep misses, then apply surgical fixes via `edit_file`.
+   * *Strict Opt-In [`/xobsidian`](../xobsidian/SKILL.md) Boundary (`/xsync /xobsidian`)*: By default, **never** scan or modify an Obsidian vault (`*/.obsidian/..`) during `/xsync`. Only when `/xobsidian` (or `/obsidian-vault`) is explicitly paired in the command (`/xsync /xobsidian`) should you resolve the active vault via [`/xobsidian`](../xobsidian/SKILL.md) and synchronize affected reusable atomic notes and `Hub - *.md` tables alongside repository docs.
+   * *Opt-In [`/xlaya`](../xlaya/SKILL.md) Semantic Contradiction Pre-Filter (`/xsync /xlaya`)*: When chained with `/xlaya` (or `/laya`), run the `noul` hypothesis scanner across candidate `.md` and `.html` paragraphs to detect semantic contradictions against the SSOT that keyword grep misses, then apply surgical fixes via `edit_file`.
    * *Opt-In [`/xultra`](../xultra/SKILL.md) Cognitive-Density Sync Swarm (`/xsync /xultra`)*: When chained with `/xultra`, lock the **Canonical Fact & Metric Delta Header** in Step 1 first, then partition relation-set updates via **Cognitive-Density Sharding** ([`/xultra`](../xultra/SKILL.md) Law 3 — 1 dedicated subagent per heavy interactive HTML deck/dashboard/viewer, and tier-clustered subagents for lightweight Markdown specs across rolling waves), followed by an independent **Blind Adversarial Sync Auditor** (`Maker ≠ Checker`) running `audit_workspace_docs.py` and SHA-256 mirror verification.
-2. **Ghost Reference & Dead Link Sweep**:
+2. **Ghost Reference, Dead Link & Forked Sibling Doc Sweep**:
    * If any file was renamed, merged, or deleted, grep the workspace for its old base name and relative path.
    * Update or remove dangling hyperlinks, navigation cards, and table references pointing to the deceased file.
+   * Check `docs/` directories for forked duplicate sibling documents (`RESEARCH_*.md` or `*_AUDIT.md` covering the same subsystem with cloned sections or skipped heading numbers) and consolidate into the single canonical SSOT.
 3. **Quantitative Variation Sweep**:
    * When a number, total count, or structural cardinality changes (e.g. from old to new count), search for:
      * The old exact count: `[OldNumber] [Unit]` (e.g. old act count, deprecated item total, former slide count).
@@ -123,7 +124,7 @@ Classify every discovered file into the 5-tier architecture:
 Apply updates systematically from the inside out (Tier 1-2 → Tier 3 → Tier 4 → Tier 5) using surgical `edit_file` (`replace_file_content`) replacements:
 
 1. **Inner Specs First**: Update code signatures, parameter tables, and module READMEs to anchor local truth.
-2. **Ground-Truth Receipt Check**: Before writing a technical metric into high-level docs, run a 1-line check against the actual artifact (e.g. SQLite query, checking `df.shape`, reading JSON/CSV headers, or inspecting code constants). Never propagate unverified claims.
+2. **Ground-Truth, Partition Conservation (`UL-04`) & Non-Fallback Provenance Check**: Before writing a technical metric or breakdown table into high-level docs, run a 1-line check against the actual artifact (e.g. SQLite query, checking `df.shape`, reading JSON/CSV headers, or inspecting code constants) and verify **non-fallback provenance (`source != "fallback"`), full expected coverage (`N_processed == N_expected`), and closed-system partition conservation (`∑ Child_Rows + Remainder == Parent_Total`, `UL-04`)** ([`deep_audit_protocol.md`](../xboost/references/deep_audit_protocol.md)). Never propagate unverified claims or metrics from truncated/fallback runs.
 3. **Pipelines and Architecture**: Update system flowcharts, roadmaps, and workspace indices.
 4. **Interactive HTML Deliverable Parity**:
    * *DOM Structure*: Verify that container counts (e.g. `<section class="slide">`, `.card`) match the upgraded narrative or data model.
@@ -145,7 +146,7 @@ Verify completion programmatically before concluding:
      ```
    * **macOS / Linux**:
      ```bash
-     python ~/.gemini/config/skills/xsync/scripts/audit_workspace_docs.py "<workspace_root>" --deprecated "<old_val_1>,<old_val_2>"
+     python3 ~/.gemini/config/skills/xsync/scripts/audit_workspace_docs.py "<workspace_root>" --deprecated "<old_val_1>,<old_val_2>"
      ```
 4. **Render the Synchronization Ledger**: Present the final audit scorecard:
 
@@ -162,7 +163,7 @@ Verify completion programmatically before concluding:
 * **Computational Simulation & Numerical Solvers**: XML/docstring contracts (T1) → solver component manuals & benchmark latency (T2) → pipeline runbooks & GPU requirements (T3) → system dataflow diagrams (T4) → technical portfolio & conference decks (T5).
 * **Web Applications, APIs & Dashboards**: Route annotations & fetch handlers (T1) → endpoint schemas & query dictionaries (T2) → dev server scripts & CORS policies (T3) → portal launch cards & system architecture viewers (T4) → release notes & UI previews (T5).
 * **Embedded Hardware & IoT Firmware**: Pinout headers & baud rate constants (T1) → wiring diagrams & sensor specs (T2) → telemetry handoffs & field sampling protocols (T3) → hardware inventory & power budgets (T4) → field testing whitepapers & hardware photos (T5).
-* **Spatial Data, GIS & Cadastre**: Attribute codebooks & CRS metadata (T1) → layer specs & QML style rules (T2) → drawing plate checklists & data pipeline manifests (T3) → master spatial plans & zoning matrices (T4) → publication plates & presentation deck maps (T5).
+* **Data Pipelines, Analytics & Domain Databases**: Attribute codebooks & schema metadata (T1) → table specs & validation rules (T2) → ETL pipeline manifests & runbooks (T3) → master data architecture & decision matrices (T4) → publication reports & presentation decks (T5).
 
 ---
 

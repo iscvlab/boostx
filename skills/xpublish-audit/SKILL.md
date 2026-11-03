@@ -1,15 +1,15 @@
 ---
 name: xpublish-audit
 description: >
-  Pre-flight security, secret, privacy, quality, and agent skill globalization audit (/xpublish-audit, /publishx-audit, /publish-audit).
+  Pre-flight security, secret, privacy, quality, and agent skill globalization audit (/xpublish-audit, /publish-audit).
   Use when the user asks to audit before publish, scan for secrets or tokens, check API keys,
-  or run /xpublish-audit, /publishx-audit, /publish-audit, or audit a global agent skill.
+  or run /xpublish-audit, /publish-audit, or audit a global agent skill.
   Do NOT use for documentation sync (/xsync) or QGIS zip packaging (/xpublish-qgis).
 ---
 
 # `/xpublish-audit` (portable & 100% risk-proof)
 
-Pre-flight security, privacy, and code quality engine for a **target directory** (`/xpublish-audit`, legacy aliases `/publishx-audit`, `/publish-audit`). Works on any OS. No workspace-specific paths.
+Pre-flight security, privacy, and code quality engine for a **target directory** (`/xpublish-audit`, alias `/publish-audit`). Works on any OS. No workspace-specific paths.
 
 ---
 
@@ -66,7 +66,7 @@ Execute via cross-platform paths:
 
 **macOS / Linux**:
 ```bash
-python ~/.gemini/config/skills/xpublish-audit/scripts/audit_engine.py <target_directory> --platform <generic|qgis|food4rhino|github|skill>
+python3 ~/.gemini/config/skills/xpublish-audit/scripts/audit_engine.py <target_directory> --platform <generic|qgis|food4rhino|github|skill>
 ```
 
 **Windows (PowerShell / Command Prompt)**:

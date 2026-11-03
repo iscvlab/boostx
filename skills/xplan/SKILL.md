@@ -1,15 +1,15 @@
 ---
 name: xplan
 description: >
-  BoostX architectural & implementation planner (/xplan, /planx, /plan).
-  Use when the user runs /xplan, /planx, or /plan, or requests an implementation plan with inline structured grilling questions,
+  BoostX architectural & implementation planner (/xplan, /plan).
+  Use when the user runs /xplan or /plan, or requests an implementation plan with inline structured grilling questions,
   Ponytail × Deep Module options, Mermaid diagrams, and a Red → Green verification matrix without asking questions in chat.
   Do NOT use for direct code execution (/xboost) or doc sync (/xsync).
 ---
 
 # Antigravity Architectural & Implementation Planner (`/xplan`)
 
-When `/xplan` (or legacy aliases `/planx`, `/plan`) is invoked, enter the **Antigravity XPlan Protocol**. XPlan constructs a rigorous, decision-complete `implementation_plan.md` artifact combining **inline structured grilling**, **Ponytail × Deep Module seam evaluation**, **Mermaid architecture diagrams**, and a **falsifiable Red → Green verification matrix**—with **zero chat-window interrogation**.
+When `/xplan` (or alias `/plan`) is invoked, enter the **Antigravity XPlan Protocol**. XPlan constructs a rigorous, decision-complete `implementation_plan.md` artifact combining **inline structured grilling**, **Ponytail × Deep Module seam evaluation**, **Mermaid architecture diagrams**, and a **falsifiable Red → Green verification matrix**—with **zero chat-window interrogation**.
 
 Portable across Antigravity IDE, `agy` CLI, Claude Code, and multi-agent environments across Windows, macOS, and Linux.
 
@@ -60,13 +60,13 @@ graph TD
 * **Opt-In [`/xlaya`](../xlaya/SKILL.md) Sidecar (`/xplan /xlaya`)**:
   * When planning across a large, unpinned documentation corpus, use `/xlaya` (`shortlist_choice` / `score`) to shortlist relevant specification sections with zero context bloat.
 * **Opt-In [`/xultra`](../xultra/SKILL.md) Multi-Architect Scout Mode (`/xplan /xultra`)**:
-  * When `/xultra` is included in the command, spawn **`K` Orthogonal Architect Scouts** ([`/xultra`](../xultra/SKILL.md) Law 2: Vector A Simplification/Stdlib, Vector B Surgical Local Seam, Vector C Deep Module Interface, plus any domain-specific numerical/layout vector) paired with **1 Red-Team Seam & SSOT Breaker** to stress-test trade-offs and edge cases before synthesizing their findings into `implementation_plan.md`.
+  * When `/xultra` is included in the command, spawn **`K` Orthogonal Architect Scouts** ([`/xultra`](../xultra/SKILL.md) Law 2: Vector A Simplification/Stdlib, Vector B Surgical Local Seam, Vector C Deep Module Interface, plus any domain-specific numerical/layout vector) paired with **Elastic Red-Team Seam & SSOT Critic(s) (`C ≥ 1` by Law 3)** to stress-test trade-offs, bidirectional counter-anchors (`UL-05`), and live-callable parity (`UL-08`) before synthesizing their findings into `implementation_plan.md`.
 
 #### 2. Synthesize the 2D Plan Contract (`Task Archetype × Project Archetype`)
-Cross the active **Task Intent** (`BUILD / FEATURE`, `REFACTOR / SIMPLIFY`, `SIMULATE / SOLVER`, `OPTIMIZE / SCALE`, `SHIP / RELEASE`) with the **Project Domain Harness** (`CAD / Rhino / Grasshopper`, `GIS / QGIS`, `Web UI / Figma / Diagrams`, `Data / GCP / ML`, `Agent Skills / CLI / Configs`):
+Cross the active **Task Intent** (`BUILD / FEATURE`, `REFACTOR / SIMPLIFY`, `SIMULATE / SOLVER`, `OPTIMIZE / SCALE`, `SHIP / RELEASE`) with the **Project Domain Harness** (`Backend / APIs / Distributed Systems`, `Web UI / Figma / Diagrams`, `Data / Cloud / ML`, `Numerical Solvers / Simulation / CAD / GIS`, `Agent Skills / CLI / Configs`):
 * **Tier 1 Plan (1–2 files, localized change)**: Compact seam diff + inline grilling decisions (if any) + 1 Red → Green command.
 * **Tier 2 Plan (Multi-file feature, refactor, or UI)**: Full `mermaid` architecture diagram + Deep Module interface spec + component-by-component change matrix.
-* **Tier 3 Plan (`SIMULATE / SOLVER` — Physics, Numerical, Grasshopper/CAD)**: Mandatory **SI Unit Bridge Table** (`mm`/`cm`/`m` ↔ `m`/`kg`/`s`/`N`/`W/m²`, `deg` ↔ `rad`), stability bounds (`dt`, convergence `ε`, max iterations), and the **Physics Triad** verification plan (zero-load identity = `0.0` with no `NaN`/`Inf`, 1D analytical toy benchmark, conservation/symmetry check).
+* **Tier 3 Plan (`SIMULATE / SOLVER` — Physics, Numerical, Scientific)**: Mandatory **SI Unit & Step-Measure Bridge Table** (source schema units & discretization step `Δμ` ↔ SI `m`/`kg`/`s`/`N`/`W/m²`, `deg` ↔ `rad`), stability bounds (`dt`, convergence `ε`, max iterations), and the **Physics & Numerical Triad** verification plan (zero-load identity = `0.0` with no `NaN`/`Inf`, 1D analytical toy benchmark, conservation/step-scaling check `UL-01..UL-08`).
 
 ---
 
@@ -122,7 +122,7 @@ Structure `<appDataDir>/brain/<conversation-id>/implementation_plan.md` using th
 - **Module Interface Contract**:
   - **Signature**: `<function_or_class_signature(inputs) -> outputs>`
   - **Invariants**: <Null/empty guards, unit conversions, O(N) bounds, Dual-OS path safety>
-  - **Swarm Wave & Shared Seam Blueprint (When executing via `/xboost /xultra`)**: <Pre-Locked Shared Seam Header (signatures/tokens/schemas), Cognitive-Density Shard Partitioning (`N × K × T`), and Wave 2 Blind Critic probes>
+  - **Swarm Wave & Shared Seam Blueprint (When executing via `/xboost /xultra`)**: <Pre-Locked Shared Seam Header (signatures/tokens/schemas), Cognitive-Density Shard Partitioning (`N × K × C × T`), and Wave 2A Critic Shards → Wave 2B Main Checker probes>
 
 ```mermaid
 flowchart LR
@@ -145,24 +145,25 @@ flowchart LR
 
 | Tier | Verification Gate | Exact Command / Probe | Expected Pass Signal |
 | :---: | :--- | :--- | :--- |
-| **Tier 1 (Red / Baseline)** | Repro failure / Pre-flight probe / 1D Toy Benchmark | `<exact CLI command>` | Proves baseline state or closed-form match |
-| **Tier 2 (Green + Boundary)** | Core pass + null/zero-load/`NaN` edge case | `<exact CLI command>` | `0` errors, exact expected output |
-| **Tier 3 (Parity & Hygiene)** | Regression suite + Anti-hardcode path sweep | `<exact CLI command>` | `0` regressions, `0` hardcoded user paths |
+| **Tier 1 (Red / Baseline & Counter-Anchors)** | Repro failure / Pre-flight probe / 1D Toy Benchmark + **Bidirectional Counter-Anchors (`A_pos ∧ A_neg`, `UL-05`)** | `<exact CLI command>` | Proves baseline state, closed-form match, and simultaneous positive + negative counter-anchor bounds |
+| **Tier 2 (Green + Live-Callable, Perturbation & Conservation)** | **Production Live-Callable (`UL-08`)** + `ΔInput X → ΔOutput Y ≠ 0` + branch reachability (`UL-06`) + `∑ Child_k + Remainder == Parent` (`UL-04`) ([`deep_audit_protocol.md`](../xboost/references/deep_audit_protocol.md)) | `<exact CLI command>` | `0` errors, live callable verified (`callable.__module__ == prod_module`), non-zero sensitivity, `100%` coverage, `0` silent fallback masking |
+| **Tier 3 (Parity, Cumulative Ratchet & Hygiene)** | Cumulative regression suite (`Pass_Set(t+1) ⊇ Pass_Set(t)`) + Anti-hardcode path sweep | `<exact CLI command>` | `0` regressions across prior turns, `0` hardcoded user paths |
 ```
 
 ---
 
-### Phase 4: Artifact Persistence & `/xboost` Execution Handoff
+### Phase 4: Artifact Persistence & Conditional `/xboost` Execution Handoff
 
 1. **Write the Plan Artifact**:
-   * Save the plan to `<appDataDir>/brain/<conversation-id>/implementation_plan.md` using `write_file` (or `edit_file` when updating an existing plan).
+   * Save the plan to `<appDataDir>/brain/<conversation-id>/implementation_plan.md` using `write_file` (or `edit_file` when updating an existing plan in-place).
    * Always pass `ArtifactMetadata` with `RequestFeedback = true` and `UserFacing = true`.
 2. **Concise Chat Handoff (Zero Redundant Wall-of-Text)**:
    * Do **not** re-summarize or paste the plan contents into the chat response.
    * Point the user to the generated `implementation_plan.md` artifact (`[implementation_plan.md](file:///<appDataDir>/brain/<conversation-id>/implementation_plan.md)`), list only the **Decision IDs** (e.g., `Decision 1`, `Decision 2`) that need their selection, and note:
      *"Reply with your option choices (e.g. `1A, 2A`) or click **Proceed** to execute via `/xboost`."*
-3. **Automatic `/xplan` → [`/xboost`](../xboost/SKILL.md) Bridge**:
-   * Once the user approves the plan or selects their options, immediately lock Section 4 (`Red → Green Verification Matrix`) as the **XBoost Phase 1 Goal Contract** and execute the surgical implementation.
+3. **Conditional Stage 3A → 3B Bridge (`/xplan` → [`/xboost`](../xboost/SKILL.md))**:
+   * **When Open Grilling Decisions Exist (`Decision 1..M`) and `/goal` is Not Active**: Halt after saving `implementation_plan.md` so the user can select options or click **Proceed**.
+   * **When User Approves OR When Chained (`/xplan /xboost`) with `0` Open Ambiguities (or with `/goal`)**: Lock all 3 plan blocks—**(1) Header `[FROZEN]`/`[DEFERRED]` Guardrails**, **(2) Selected Options + `Shared Seam Header` / SI Unit Bridge**, and **(3) Section 4 `Red → Green Verification Matrix` (`UL-05` + `UL-08`)**—into `<artifactDir>/scratch/boostx_state.md` and execute [`/xboost`](../xboost/SKILL.md) immediately.
 
 ---
 

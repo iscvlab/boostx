@@ -1,7 +1,7 @@
 ---
 name: xcontext
 description: >
-  Inspect Antigravity conversation transcript and SQLite step logs to report context compaction round, active window pressure, token telemetry, and memory risk (/xcontext, /contextx, /context).
+  Inspect Antigravity conversation transcript and SQLite step logs to report context compaction round, active window pressure, token telemetry, and memory risk (/xcontext, /context).
   Use when the user checks compaction round, context health, window capacity, or token usage (--tokens, --days N, --all-time), or runs /xcontext.
   Do NOT use for doc sync (/xsync) or kickoff prompts (/xkickoff).
 ---

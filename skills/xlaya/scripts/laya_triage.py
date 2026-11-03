@@ -499,7 +499,7 @@ def main() -> int:
     args = parser.parse_args()
     files = collect_target_files(args.paths, pattern=args.pattern)
     if not files:
-        print("[Layax Sidecar] No matching files found for the given paths.", file=sys.stderr)
+        print("[XLaya Sidecar] No matching files found for the given paths.", file=sys.stderr)
         return 0
 
     all_chunks: List[Dict[str, Any]] = []
@@ -510,7 +510,7 @@ def main() -> int:
             break
 
     if not all_chunks:
-        print("[Layax Sidecar] No non-empty text chunks extracted.", file=sys.stderr)
+        print("[XLaya Sidecar] No non-empty text chunks extracted.", file=sys.stderr)
         return 0
 
     labels_dict = parse_label_spec(args.labels)
@@ -553,7 +553,7 @@ def main() -> int:
         return 0
 
     print(
-        f"[Layax Sidecar] model={meta.get('model')} | device={meta.get('device')} "
+        f"[XLaya Sidecar] model={meta.get('model')} | device={meta.get('device')} "
         f"| mode={args.mode} | files={len(files)} | chunks={len(results)}"
     )
     if meta.get("laya_available") and meta.get("device") == "cpu":

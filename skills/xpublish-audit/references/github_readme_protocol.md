@@ -19,7 +19,7 @@ Every public repository `README.md` follows a clean 6-layer visual hierarchy, ad
 
 | Repository Archetype | What to Highlight in `TL;DR` Bullets | What to Compare in the Horizontal Bar Table |
 | :--- | :--- | :--- |
-| **A. Agent Skills & Workflow Suites**<br>*(e.g., `boostx`)* | Composable slash commands, context-window noise reduction, and deterministic verification gates. | `Defect Catch Rate (%)`, `Context Token Compression (%)`, `Triage / Gate Latency (ms)` |
+| **A. Agent Skills & Workflow Suites**<br>*(e.g., `xboost`)* | Composable slash commands, context-window noise reduction, and deterministic verification gates. | `Defect Catch Rate (%)`, `Context Token Compression (%)`, `Triage / Gate Latency (ms)` |
 | **B. MCP Bridges & Host Integrations**<br>*(e.g., `mcp-bridges`)* | Connected desktop/cloud hosts, zero-UI-freeze execution safety, and bidirectional sync speed. | `Automated vs. Manual Steps`, `Round-Trip Tool Latency (ms)`, `API / Component Coverage (%)` |
 | **C. Desktop GIS / CAD Plugins**<br>*(e.g., QGIS / Rhino / GH plugins)* | Core geometric/spatial transformation, cross-version compatibility (`QGIS 3/4`, `Qt5/Qt6`, `Rhino 7/8`), and 1-click workflow. | `Processing Speed vs. Manual CAD/GIS`, `Feature / Layer Preservation (%)`, `Zero-Dependency Portability` |
 | **D. CLI Tools, Solvers & AI Engines**<br>*(e.g., data pipelines, solvers, OCR)* | Speedup vs. baseline, accuracy/fidelity delta, and *when multiple modes/models exist*, which flag to pick for speed vs. accuracy vs. memory. | `End-to-End Speedup (×)`, `Benchmark Accuracy (%)`, `Memory / Resource Footprint` |
@@ -205,46 +205,62 @@ To maximize credibility for both the research lab/organization and the individua
    `<personal-username> wants to merge N commits into <upstream>:master from <org>:<branch-name>`
    This permanently records **both** the personal account (as commit author & PR opener) and the organization fork on the upstream repository.
 
-### C. Zero-Mojibake Clipboard & Browser Pre-Fill Automation (Windows / Dual-OS)
+### C. Zero-Mojibake Clipboard & Browser Pre-Fill Automation (Windows / macOS / Linux Tri-OS)
 > [!CAUTION]
 > **Never Use PowerShell 5.1 `Get-Content | Set-Clipboard` or `clip.exe` for Unicode / Multilingual Markdown**:
 > In Windows PowerShell 5.1, pipeline strings default to legacy ANSI codepages (`cp1252` / `cp874`), which silently corrupts non-ASCII characters—turning Unicode arrows/bars (`→`, `█`), Thai tone marks (`่ ้ ๊ ๋`), decomposed vowels (`นํ้า`), bullets (`•`), and em-dashes (`—`) into `` replacement diamonds when pasted into GitHub's editor.
 
 Always use these two rules when automating PR or README pasting:
 1. **ASCII Punctuation Hygiene in PR Bodies**: Use standard ASCII hyphens `-` instead of `•` or `—` in section headers and empty table cells.
-2. **Native Win32 `CF_UNICODETEXT` (`UTF-16LE`) Clipboard Loader + Pre-Filled Browser Launch**:
-   Since isolated agent browser profiles are not logged into the user's personal GitHub session, pre-fill the PR Title via URL query parameters (`?expand=1&title=...`) in the user's default logged-in browser and load the PR Description directly into the Windows Clipboard as raw `UTF-16LE` bytes via Python `ctypes`:
+2. **Tri-OS Zero-Mojibake Clipboard Loader (`CF_UNICODETEXT` / `pbcopy` / `wl-copy`) + Pre-Filled Browser Launch**:
+   Since isolated agent browser profiles are not logged into the user's personal GitHub session, pre-fill the PR Title via URL query parameters (`?expand=1&title=...`) in the user's default logged-in browser and load the PR Description directly into the system clipboard with zero encoding loss across Windows (`UTF-16LE` `CF_UNICODETEXT`), macOS (`UTF-8` `pbcopy`), and Linux (`wl-copy` / `xclip`):
 
 ```python
-import sys, ctypes, urllib.parse, subprocess
+import os, sys, ctypes, shutil, urllib.parse, subprocess
 sys.dont_write_bytecode = True
 
 def copy_utf16_clipboard(text: str) -> None:
-    """Copy Unicode text (bars, symbols, multilingual text) to Windows Clipboard with zero mojibake."""
-    CF_UNICODETEXT, GMEM_MOVEABLE = 13, 0x0002
-    user32, kernel32 = ctypes.windll.user32, ctypes.windll.kernel32
-    kernel32.GlobalAlloc.argtypes = [ctypes.c_uint, ctypes.c_size_t]
-    kernel32.GlobalAlloc.restype = ctypes.c_void_p
-    kernel32.GlobalLock.argtypes = [ctypes.c_void_p]
-    kernel32.GlobalLock.restype = ctypes.c_void_p
-    kernel32.GlobalUnlock.argtypes = [ctypes.c_void_p]
-    user32.SetClipboardData.argtypes = [ctypes.c_uint, ctypes.c_void_p]
+    """Copy Unicode text (bars, symbols, multilingual text) to clipboard with zero mojibake across Windows/macOS/Linux."""
+    if sys.platform == "win32":
+        CF_UNICODETEXT, GMEM_MOVEABLE = 13, 0x0002
+        user32, kernel32 = ctypes.windll.user32, ctypes.windll.kernel32
+        kernel32.GlobalAlloc.argtypes = [ctypes.c_uint, ctypes.c_size_t]
+        kernel32.GlobalAlloc.restype = ctypes.c_void_p
+        kernel32.GlobalLock.argtypes = [ctypes.c_void_p]
+        kernel32.GlobalLock.restype = ctypes.c_void_p
+        kernel32.GlobalUnlock.argtypes = [ctypes.c_void_p]
+        user32.SetClipboardData.argtypes = [ctypes.c_uint, ctypes.c_void_p]
 
-    encoded = text.replace("\r\n", "\n").replace("\n", "\r\n").encode("utf-16le") + b"\x00\x00"
-    user32.OpenClipboard(0)
-    user32.EmptyClipboard()
-    h_mem = kernel32.GlobalAlloc(GMEM_MOVEABLE, len(encoded))
-    ptr = kernel32.GlobalLock(h_mem)
-    ctypes.memmove(ptr, encoded, len(encoded))
-    kernel32.GlobalUnlock(h_mem)
-    user32.SetClipboardData(CF_UNICODETEXT, h_mem)
-    user32.CloseClipboard()
+        encoded = text.replace("\r\n", "\n").replace("\n", "\r\n").encode("utf-16le") + b"\x00\x00"
+        user32.OpenClipboard(0)
+        user32.EmptyClipboard()
+        h_mem = kernel32.GlobalAlloc(GMEM_MOVEABLE, len(encoded))
+        ptr = kernel32.GlobalLock(h_mem)
+        ctypes.memmove(ptr, encoded, len(encoded))
+        kernel32.GlobalUnlock(h_mem)
+        user32.SetClipboardData(CF_UNICODETEXT, h_mem)
+        user32.CloseClipboard()
+    elif sys.platform == "darwin":
+        subprocess.run(
+            ["pbcopy"],
+            input=text.encode("utf-8"),
+            env={**os.environ, "LANG": "en_US.UTF-8"},
+            check=True,
+        )
+    else:
+        cmd = ["wl-copy"] if shutil.which("wl-copy") else ["xclip", "-selection", "clipboard"]
+        subprocess.run(cmd, input=text.encode("utf-8"), check=True)
 
 def launch_prefilled_github_pr(upstream_repo: str, org_fork: str, branch: str, title: str, body: str) -> None:
     copy_utf16_clipboard(body)
     q_title = urllib.parse.quote(title)
     url = f"https://github.com/{upstream_repo}/compare/master...{org_fork}:{branch}?expand=1&title={q_title}"
-    subprocess.run(["powershell", "-NoProfile", "-Command", f'Start-Process "{url}"'], check=True)
+    if sys.platform == "win32":
+        os.startfile(url)
+    elif sys.platform == "darwin":
+        subprocess.run(["open", url], check=True)
+    else:
+        subprocess.run(["xdg-open", url], check=True)
 ```
 
 ---

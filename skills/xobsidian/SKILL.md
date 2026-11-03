@@ -1,18 +1,18 @@
 ---
 name: xobsidian
 description: >
-  Search, author, and maintain atomic notes in an AI-first Obsidian Second Brain using the 2-Hop Hub + Cross-Domain Bridge graph (/xobsidian, /obsidianx, /obsidian-vault).
+  Search, author, and maintain atomic notes in an AI-first Obsidian Second Brain using the 2-Hop Hub + Cross-Domain Bridge graph (/xobsidian, /obsidian-vault).
   Use when running /xobsidian (standalone or chained with /xbrief, /xdeep-research, /xboost, /xsync) to query or ratchet reusable domain knowledge.
   Do NOT use for repo-only sync (/xsync) or briefing (/xbrief) without /xobsidian.
 ---
 
 # AI-First Obsidian Second Brain Protocol (`/xobsidian`)
 
-Operate an AI-first Obsidian Second Brain structured as a **Flat-Root 2-Hop Small-World Knowledge Graph (GraphRAG)** (`/xobsidian`, legacy aliases `/obsidianx`, `/obsidian-vault`). This skill is 100% repository-agnostic and resolves the active vault dynamically across Windows, macOS, and Linux—even when the IDE workspace is opened inside a child project or separate repository.
+Operate an AI-first Obsidian Second Brain structured as a **Flat-Root 2-Hop Small-World Knowledge Graph (GraphRAG)** (`/xobsidian`, alias `/obsidian-vault`). This skill is 100% repository-agnostic and resolves the active vault dynamically across Windows, macOS, and Linux—even when the IDE workspace is opened inside a child project or separate repository.
 
 > [!IMPORTANT]
 > **Strict Opt-In Combinator Invariant**:
-> Other workspace skills ([`/xbrief`](../xbrief/SKILL.md), [`/xplan`](../xplan/SKILL.md), [`/xsync`](../xsync/SKILL.md), [`/xdeep-research`](../xdeep-research/SKILL.md), [`/xboost`](../xboost/SKILL.md), [`/xultra`](../xultra/SKILL.md), [`/xkickoff`](../xkickoff/SKILL.md), `/goal`) **MUST NEVER** read from or write to the Obsidian vault unless `/xobsidian` (or legacy aliases `/obsidianx`, `/obsidian-vault`) is explicitly included in the user's command combination (e.g., `/xdeep-research /xboost /xobsidian`).
+> Other workspace skills ([`/xbrief`](../xbrief/SKILL.md), [`/xplan`](../xplan/SKILL.md), [`/xsync`](../xsync/SKILL.md), [`/xdeep-research`](../xdeep-research/SKILL.md), [`/xboost`](../xboost/SKILL.md), [`/xultra`](../xultra/SKILL.md), [`/xkickoff`](../xkickoff/SKILL.md), `/goal`) **MUST NEVER** read from or write to the Obsidian vault unless `/xobsidian` (or `/obsidian-vault`) is explicitly included in the user's command combination (e.g., `/xdeep-research /xboost /xobsidian`).
 
 ---
 
@@ -78,17 +78,17 @@ flowchart LR
     Hop0["Hop 0: Root Index Router (00 *Index*.md)"] --> Hop1["Hop 1: Constellation Hubs (Hub - *.md)"]
     Hop1 --> Method["Hop 2A: Methods & Standards (#tier/method)"]
     Hop1 --> Asset["Hop 2B: Assets, Components & Cases (#tier/asset)"]
-    Hop1 --> Career["Hop 2C: Packages, Targets & Proofs (#tier/career-cluster)"]
+    Hop1 --> Proof["Hop 2C: Packages, Systems & Proofs (#tier/package)"]
     Method <-->|"Typed Cross-Domain Bridges"| Asset
-    Asset <-->|"Quantified Proof Links"| Career
+    Asset <-->|"Quantified Proof Links"| Proof
 ```
 
 * **Hop 0 (Root Index Router — `00 *Index*.md`)**: Single-file manifest cataloging all Master Domain Hubs and Subsystem Constellation Hubs. **Always read Hop 0 first.**
 * **Hop 1 (Constellation Hubs — `Hub - *.md`, `#tier/hub`)**: High-degree index notes organizing each domain subsystem with structured summary tables and direct `[[wikilinks]]` to atomic leaf nodes.
 * **Hop 2 (Atomic Leaf Nodes)**:
-  * `#tier/method`: Governing equations, numerical algorithms, statutory/engineering standards, architectural invariants, and analytical proofs.
-  * `#tier/asset`: Reusable software/CAD components, empirical material/ecological/species parameters, spatial/infrastructure profiles, and verified case study precedents.
-  * `#tier/career-cluster`: Open-source packages, target organizations, and quantified engineering portfolio proofs.
+  * `#tier/method`: Governing equations, numerical algorithms, engineering standards, architectural invariants, and analytical proofs.
+  * `#tier/asset`: Reusable software/system components, empirical domain parameters, dataset schemas, and verified case study precedents.
+  * `#tier/package` (or vault-specific `#tier/proof` / `#tier/career-cluster`): Open-source packages, production systems, and quantified engineering proofs.
 
 ### Fast 2-Hop Retrieval Workflow
 1. **Hop 0 Read**: View `00 *Index*.md` inside `VAULT_ROOT` to identify the relevant `Hub - *.md` file(s).
@@ -103,12 +103,12 @@ Whenever creating or updating notes in `VAULT_ROOT`, enforce all five invariants
 1. **Zero Ephemeral Repo Duplication**:
    * Never copy transient project schedules, sprint task lists, or local repo file trees into the vault. Store only **reusable domain knowledge**: equations, SI unit bridges, standards, verified case studies, reusable code/component contracts, and empirical parameters.
 2. **Strict Frontmatter & Tag Schema**:
-   * Every note must begin with YAML frontmatter declaring `title`, `type`, `domain`, and hierarchical `tags` (`tier/hub`, `tier/method`, `tier/asset`, or `tier/career-cluster`, plus `domain/*` and `status/verified`).
+   * Every note must begin with YAML frontmatter declaring `title`, `type`, `domain`, and hierarchical `tags` (`tier/hub`, `tier/method`, `tier/asset`, or `tier/package`, plus `domain/*` and `status/verified`).
 3. **Unique Neighborhood Signature Invariant (`0` Parachutes)**:
    * Never batch-generate leaf notes that link only to the same parent hub or share identical `[[wikilink]]` sets (which causes Force-Atlas-2 graph layout engines to collapse them into artificial peripheral "parachute" arcs).
    * Every atomic note must link to:
      1. Its primary `[[Hub - ...]]` parent (`#tier/hub`)
-     2. **At least 2 content-specific cross-domain bridges** (`#tier/method` ↔ `#tier/asset` ↔ `#tier/career-cluster`, sized to genuine domain couplings with zero arbitrary upper cap)
+     2. **At least 2 content-specific cross-domain bridges** (`#tier/method` ↔ `#tier/asset` ↔ `#tier/package`, sized to genuine domain couplings with zero arbitrary upper cap)
      3. At least **2 distinct peer notes** so that **zero node pairs share an identical set of undirected neighbors**.
 4. **Zero-LaTeX Native Unicode Typography**:
    * Never use inline or block dollar-sign math delimiters. Always use direct UTF-8 Unicode symbols (`→`, `←`, `↔`, `×`, `÷`, `±`, `≈`, `≠`, `≤`, `≥`, `∑`, `√`, `∝`, `²`, `³`, `°`, `µ`).
@@ -149,11 +149,11 @@ When `/xobsidian` is combined with other slash skills in the same prompt, execut
 | :--- | :--- | :--- |
 | **`/xbrief /xobsidian`** | Resolve `VAULT_ROOT` → Read `00 *Index*.md` → `Hub - *` to load domain equations, precedents, and component invariants alongside the 8-file Repo SSOT cap. | Include Second Brain domain invariants in the Briefing Table (no vault writes unless requested). |
 | **`/xplan /xobsidian`** | Resolve `VAULT_ROOT` → Read `00 *Index*.md` → `Hub - *` to pull reusable equations, SI unit bridges, and component contracts into Phase 1 of [`/xplan`](../xplan/SKILL.md). | Bind reusable Second Brain specs directly into `implementation_plan.md` Architecture & Verification sections. |
-| **`/xdeep-research /xobsidian`** | In Wave 1, inspect `00 *Index*.md` → `Hub - *` as a **Tier-1 Prior-Art Cache** so existing verified precedents, species, API specs, or formulas are not redundantly re-harvested. | In Wave 5, save the primary research study to the repo **AND** automatically mint/update reusable atomic notes + `Hub - *` index tables in `VAULT_ROOT`, then run the Graph Integrity Gate. |
-| **`/xboost /xobsidian`** | In XBoost Phase 1, load governing physics formulas, SI unit bridges, or component contracts from `00 *Index*.md` → `Hub - *`. | In XBoost Phase 4, automatically ratchet any newly engineered reusable algorithm, solver contract, or architectural pattern into `VAULT_ROOT`. |
-| **`/xdeep-research /xboost /xobsidian`** *(+ optional `/goal`)* | **Full-Stack Loop**: Vault Cache Check → `/xdeep-research` Primary-Source Probe / Harvester on delta → Lock 2D Contract & Analytical Toy Benchmark into [`/xboost`](../xboost/SKILL.md) Phase 1. | Execute XBoost Phases 1–4 → Ratchet reusable findings & component specs into `VAULT_ROOT` → Run Graph Integrity Gate (`BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`) before `<!-- GOAL_COMPLETE -->`. |
-| **`/xsync /xobsidian`** | Resolve `VAULT_ROOT` alongside the workspace relation set. | Synchronize both project repository documentation AND matching atomic notes / `Hub - *` tables in `VAULT_ROOT`. |
-| **`/xocr /xobsidian`** *(or auto-triggered on PDF/image sources)* | Resolve `VAULT_ROOT` and run [`/xocr`](../xocr/SKILL.md) ([`../xocr/scripts/ocr_runner.py`](../xocr/scripts/ocr_runner.py)) on target PDF papers, statutory reports, or image tables (`garble_ratio == 0.0`). | Distill `extracted_document.md` and `table_p*.csv` into atomic vault notes (`#tier/method`, `#tier/asset`) + `Hub - *.md` tables with `0%` Thai PUA/Sara-Am mojibake or collapsed `booktabs` tables, then run the Graph Integrity Gate. |
+| **`/xdeep-research /xobsidian`** | In Wave 1, inspect `00 *Index*.md` → `Hub - *` as a **Tier-1 Prior-Art Cache** so existing verified precedents, empirical parameters, API specs, or formulas are not redundantly re-harvested. | In Wave 5, save the primary research study to the repo **AND** automatically mint/update reusable atomic notes + `Hub - *` index tables in `VAULT_ROOT`, record touched notes in `<artifactDir>/scratch/boostx_state.md` (`Session_Touched_Vault_Notes`), and run the Graph Integrity Gate. |
+| **`/xboost /xobsidian`** | In XBoost Phase 1, load governing formulas, SI unit bridges, component contracts, or domain audit invariants ([`deep_audit_protocol.md`](../xboost/references/deep_audit_protocol.md)) from `00 *Index*.md` → `Hub - *`. | **Converged-Only Ratchet & Dirty-Note Rule**: Defer vault writes until **after** Phase 4 / Wave 2 passes (`0` verified defects). Record touched notes in `boostx_state.md` (`Session_Touched_Vault_Notes`); if a later turn in the same session modifies the backing code/formula, mark the note `DIRTY_IN_SESSION` and sync it before task exit. |
+| **`/xdeep-research /xboost /xobsidian`** *(+ optional `/goal`)* | **Full-Stack Loop**: Vault Cache Check → `/xdeep-research` Primary-Source Probe / Harvester on delta → Lock 2D Contract & Analytical Toy Benchmark into [`/xboost`](../xboost/SKILL.md) Phase 1. | Execute XBoost Phases 1–4 → Ratchet converged findings & component specs into `VAULT_ROOT` (`0` intermediate unverified writes) → Run Graph Integrity Gate (`BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`) before `<!-- GOAL_COMPLETE -->`. |
+| **`/xsync /xobsidian`** | Resolve `VAULT_ROOT` alongside the workspace relation set. | Synchronize both project repository documentation AND matching atomic notes / `Hub - *` tables in `VAULT_ROOT` (clearing any `DIRTY_IN_SESSION` flags). |
+| **`/xocr /xobsidian`** *(or auto-triggered on PDF/image sources)* | Resolve `VAULT_ROOT` and run [`/xocr`](../xocr/SKILL.md) ([`../xocr/scripts/ocr_runner.py`](../xocr/scripts/ocr_runner.py)) on target PDF papers, technical reports, or image tables (`garble_ratio == 0.0`). | Distill `extracted_document.md` and `table_p*.csv` into atomic vault notes (`#tier/method`, `#tier/asset`) + `Hub - *.md` tables with `0%` glyph/encoding corruption (`garble_ratio == 0.0`) or collapsed tables, then run the Graph Integrity Gate. |
 | **`/xobsidian /xultra`** *(or combined with `/xdeep-research` / `/xboost`)* | Resolve `VAULT_ROOT` → Parallel 2-Hop Scouts inspect candidate `Hub - *.md` constellations by domain cluster. | Lock a **Pre-Assigned Bridge Matrix** in the [`/xultra`](../xultra/SKILL.md) Shared Seam Header (assigning each target note a guaranteed-unique `[[wikilink]]` neighbor signature before spawning builders), fan out rolling Vault Builder waves, synchronize parent `Hub - *.md` tables sequentially in the main thread, and run the Blind Graph Integrity Verifier (`BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`). |
 
 ---

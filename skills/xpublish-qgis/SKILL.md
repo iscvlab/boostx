@@ -1,14 +1,14 @@
 ---
 name: xpublish-qgis
 description: >
-  Deterministic QGIS plugin release packaging, semantic versioning, single-root zip build, and Qt6/QGIS 4 verification for plugins.qgis.org (/xpublish-qgis, /publishx-qgis, /publish-qgis).
+  Deterministic QGIS plugin release packaging, semantic versioning, single-root zip build, and Qt6/QGIS 4 verification for plugins.qgis.org (/xpublish-qgis, /publish-qgis).
   Use when publishing or updating a QGIS plugin, building a release zip, bumping metadata.txt, or checking Qt6 compatibility.
   Do NOT use for general QGIS modeling (/qgis) or Rhino plugins (/publish-food4rhino).
 ---
 
 # QGIS Plugin Release & Publishing Protocol (`/xpublish-qgis`)
 
-**Deterministic release packaging, Qt6 forward-compatibility enforcement, and publication protocol for the official QGIS Python Plugins Repository ([plugins.qgis.org](https://plugins.qgis.org/plugins/)) (`/xpublish-qgis`, legacy aliases `/publishx-qgis`, `/publish-qgis`).**  
+**Deterministic release packaging, Qt6 forward-compatibility enforcement, and publication protocol for the official QGIS Python Plugins Repository ([plugins.qgis.org](https://plugins.qgis.org/plugins/)) (`/xpublish-qgis`, alias `/publish-qgis`).**  
 Eliminates packaging rejections, enforces semantic versioning, guarantees the green **"QGIS 4 Ready"** badge, and validates metadata against Django/Python `configparser` interpolation constraints.
 
 ---
@@ -85,8 +85,8 @@ Before packaging, run the universal security, Flake8, and Qt6 forward-compatibil
   ```
 * **macOS / Linux**:
   ```bash
-  python ~/.gemini/config/skills/xpublish-audit/scripts/audit_engine.py "<plugin_dir>" --platform qgis
-  python ~/.gemini/config/skills/xpublish-qgis/scripts/check_qt6.py "<plugin_dir>"
+  python3 ~/.gemini/config/skills/xpublish-audit/scripts/audit_engine.py "<plugin_dir>" --platform qgis
+  python3 ~/.gemini/config/skills/xpublish-qgis/scripts/check_qt6.py "<plugin_dir>"
   ```
 
 * **Security & Secrets Gate**: Zero detected API keys (AWS, GitHub, HF, PyPI, OpenAI), zero hardcoded developer machine paths (`C:\Users\<user>\...`), zero unhandled `B110: try_except_pass` blocks, and zero unescaped `%` symbols in `metadata.txt`.
@@ -142,9 +142,9 @@ Run the deterministic packaging engine ([`scripts/package_qgis.py`](scripts/pack
   ```
 * **macOS / Linux**:
   ```bash
-  python ~/.gemini/config/skills/xpublish-qgis/scripts/package_qgis.py "<plugin_dir>"
-  python ~/.gemini/config/skills/xpublish-qgis/scripts/package_qgis.py "<plugin_dir>" --bump patch
-  python ~/.gemini/config/skills/xpublish-qgis/scripts/package_qgis.py "<plugin_dir>" --package-name "<slug>"
+  python3 ~/.gemini/config/skills/xpublish-qgis/scripts/package_qgis.py "<plugin_dir>"
+  python3 ~/.gemini/config/skills/xpublish-qgis/scripts/package_qgis.py "<plugin_dir>" --bump patch
+  python3 ~/.gemini/config/skills/xpublish-qgis/scripts/package_qgis.py "<plugin_dir>" --package-name "<slug>"
   ```
 
 #### Deterministic Package Name Resolution Ladder:

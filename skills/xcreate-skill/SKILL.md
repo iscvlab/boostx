@@ -1,8 +1,8 @@
 ---
 name: xcreate-skill
 description: >
-  Build, distill, and verify global agent skills for Antigravity and multi-agent frameworks (/xcreate-skill, /create-skillx, /create-skill).
-  Use when the user runs /xcreate-skill, /create-skillx, or /create-skill, or asks to create, distill, optimize, or lint a global agent skill.
+  Build, distill, and verify global agent skills for Antigravity and multi-agent frameworks (/xcreate-skill, /create-skill).
+  Use when the user runs /xcreate-skill or /create-skill, or asks to create, distill, optimize, or lint a global agent skill.
   Do NOT use for documentation sync (/xsync) or pre-flight package auditing (/xpublish-audit).
 ---
 
@@ -147,7 +147,7 @@ description: >
 * **No Hardcoded Absolute Roots**: Never hardcode `C:\Users\...` or `/Users/...`. Derive paths relative to workspace or use home-relative `~/` or `%USERPROFILE%` / `%APPDATA%` paths.
 * **Strict Forward-Slash Links**: Zero backslashes (`\`) inside markdown links `[...](...)`. Backslashes break in web renderers, GitHub markdown, and Unix platforms.
 * **Cross-Platform Command Lines**: When providing terminal commands in `SKILL.md`, provide dual-OS global syntax:
-  - macOS/Linux: `python ~/.gemini/config/skills/...`
+  - macOS/Linux: `python3 ~/.gemini/config/skills/...`
   - Windows (PowerShell): `python "$env:USERPROFILE\.gemini\config\skills\..."`
 * **Packaging Hygiene**: Keep skill directories clean. Never commit or distribute `__pycache__` directories or `.pyc` bytecode files.
 * **UTF-8 & Bytecode Python Header Standard**: Every generated Python helper script or verification probe must start with `sys.dont_write_bytecode = True` and the standard XBoost stream guard to prevent `__pycache__` debris and Windows terminal `cp1252` encoding crashes on symbols (`✓`, `→`, `✨`):
@@ -197,7 +197,7 @@ Execute the universal audit engine ([`/xpublish-audit`](../xpublish-audit/SKILL.
 
 **macOS / Linux**:
 ```bash
-python ~/.gemini/config/skills/xpublish-audit/scripts/audit_engine.py <skill_directory> --platform skill
+python3 ~/.gemini/config/skills/xpublish-audit/scripts/audit_engine.py <skill_directory> --platform skill
 ```
 
 **Windows (PowerShell)**:

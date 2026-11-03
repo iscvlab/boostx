@@ -18,7 +18,8 @@ $LegacyDirs = @(
     "boostx", "briefx", "contextx", "create-skillx", "deep-researchx",
     "kickoffx", "layax", "obsidianx", "ocrx", "planx", "publishx-audit",
     "publishx-qgis", "researchx", "syncx", "ultrax", "unlimited-ocr",
-    "brief", "create-skill", "deep-research", "ocr", "publish-audit", "publish-qgis", "update-doc"
+    "brief", "context", "create-skill", "deep-research", "kickoff", "laya",
+    "obsidian-vault", "ocr", "publish-audit", "publish-qgis", "research", "update-doc"
 )
 
 Write-Host "============================================================" -ForegroundColor Cyan

@@ -331,8 +331,6 @@ def audit_qgis_plugin_invariants(target: Path, result: AuditResult, skip_qt6: bo
     # Optional Qt6 AST check if check_qt6 is available
     if not skip_qt6:
         qt6_script = Path(__file__).resolve().parent.parent.parent / "xpublish-qgis" / "scripts" / "check_qt6.py"
-        if not qt6_script.exists():
-            qt6_script = Path(__file__).resolve().parent.parent.parent / "publishx-qgis" / "scripts" / "check_qt6.py"
 
         if qt6_script.exists():
             try:
@@ -370,7 +368,7 @@ def run_audit(
     # Check packaging hygiene for directories
     all_files = []
     for root, dirs, files in os.walk(target):
-        if "__pycache__" in dirs:
+        if "__pycache__" in dirs and any((Path(root) / "__pycache__").iterdir()):
             result.add_warning(f"Packaging debris detected: `__pycache__` directory at `{Path(root) / '__pycache__'}`")
         dirs[:] = [d for d in dirs if d not in {".git", "__pycache__", "dist", "build", ".idea", ".vscode"}]
         for f in files:
@@ -542,7 +540,7 @@ def audit_skill_invariants(target: Path, result: AuditResult):
             )
         if len(name_str) > 64:
             result.add_blocking(f"Skill name exceeds 64 characters ({len(name_str)} chars)", str(skill_md))
-        if name_str != target.name and not target.name.startswith("_"):
+        if name_str != target.name and not target.name.startswith("_") and "/plugins/" not in target_abs:
             result.add_warning(
                 f"Skill folder name `{target.name}` does not match frontmatter name `{name_str}`", str(skill_md)
             )

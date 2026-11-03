@@ -1,14 +1,14 @@
 ---
 name: xdeep-research
 description: >
-  Primary-source SDK/DB inspection, 5-wave deep research, blind adversarial auditing, and 100%-proof synthesis (/xdeep-research, /deep-researchx, /deep-research, /xresearch, /researchx).
+  Primary-source SDK/DB inspection, 5-wave deep research, blind adversarial auditing, and 100%-proof synthesis (/xdeep-research, /deep-research, /xresearch).
   Use when running /xdeep-research, verifying APIs/specs/constants, harvesting precedents, or auditing datasets.
   Do NOT use for workspace briefing (/xbrief), bug repro (/diagnosing-bugs), or doc sync (/xsync).
 ---
 
 # Antigravity XDeep-Research Protocol (`/xdeep-research`)
 
-When `/xdeep-research` (or legacy aliases `/deep-researchx`, `/deep-research`, `/xresearch`, `/researchx`) is invoked, enter the **Antigravity XDeep-Research Protocol**. XDeep-Research unifies **fast primary-source SDK/DB/binary inspection** with a **5-Wave Multi-Agent Harvester ↔ Blind Adversarial Auditor & 100%-Proof Synthesis Engine**.
+When `/xdeep-research` (or aliases `/deep-research`, `/xresearch`) is invoked, enter the **Antigravity XDeep-Research Protocol**. XDeep-Research unifies **fast primary-source SDK/DB/binary inspection** with a **5-Wave Multi-Agent Harvester ↔ Blind Adversarial Auditor & 100%-Proof Synthesis Engine**.
 
 It scales ceremony to research scope—executing **Tier 1 Fast Inline Probes** with zero subagent latency for single API/manifest/SQLite checks, and scaling to the full **5-Wave Harvester ↔ Blind Adversarial Auditor Swarm** with [`verify_evidence.py`](scripts/verify_evidence.py) for precedent harvesting, dataset fact-checking, multi-system benchmarks, and scientific/standard formulation.
 
@@ -49,14 +49,14 @@ Follow every technical claim back to the source that owns it. Rank evidence stri
 
 1. **Tier 1 — Local Pinned Ground Truth (Highest Authority)**:
    * **Manifests & Lockfiles**: Always inspect `package.json`, `pnpm-lock.yaml`, `pyproject.toml`, `requirements.txt`, `*.csproj`, or `metadata.txt` **first** so you never research v5 docs for a repo pinned to v3.
-   * **Installed Code, Types & Local Databases**: Inspect `.d.ts` type definitions, `.venv`/`node_modules` source, C# assemblies, or local `.sqlite`/`.xml`/`.3dm` files on disk via non-destructive Python stdlib probes (`sqlite3`, `xml.etree.ElementTree`, `zipfile`, `inspect`, `ast`). Local runtime truth beats outdated documentation.
+   * **Installed Code, Types & Local Databases**: Inspect `.d.ts` type definitions, `.venv`/`node_modules` source, compiled assemblies, or local `.sqlite`/`.xml`/binary files on disk via non-destructive Python stdlib probes (`sqlite3`, `xml.etree.ElementTree`, `zipfile`, `inspect`, `ast`). Local runtime truth beats outdated documentation.
 2. **Tier 2 — Version-Matched First-Party Specs & Official Documentation**:
    * Official API references, language specifications, W3C/IETF RFCs, institutional portals, and vendor docs matching the target version (`read_url_content`, `search_web`, or Python `urllib`).
 3. **Tier 3 — Upstream Source Code, Test Suites & Issue Trackers**:
    * Canonical upstream repository source files (`file:line`), unit tests (which prove actual expected inputs/outputs), release notes, and maintainer issue threads.
 4. **Tier 4 — Engineering Standards & Peer-Reviewed Literature**:
-   * Published standards (ISO, EN, ASHRAE, IEEE, ASTM, CIRIA, Eurocode) and peer-reviewed papers for physical constants and numerical algorithms.
-   * **Automatic [`/xocr`](../xocr/SKILL.md) PDF & Image Table Ingestion Rule**: Whenever a primary source (local or downloaded) is a `.pdf` or raster image table (`.png`, `.jpg`, `.webp`, `.tif`), automatically execute [`../xocr/scripts/ocr_runner.py`](../xocr/scripts/ocr_runner.py) (using `--pages` for targeted page slicing) and harvest from `extracted_document.md`, `table_p*.csv`, and `ocr_manifest.json` (`garble_ratio == 0.0`) instead of raw `read_file` or ad-hoc `pypdf` snippets (which drop LaTeX `booktabs` borderless tables and Thai PUA/Sara-Am glyphs).
+   * Published international/industry standards (ISO, EN, IEEE, ASTM, ASHRAE, W3C) and peer-reviewed papers for physical constants and numerical algorithms.
+   * **Automatic [`/xocr`](../xocr/SKILL.md) PDF & Image Table Ingestion Rule**: Whenever a primary source (local or downloaded) is a `.pdf` or raster image table (`.png`, `.jpg`, `.webp`, `.tif`), automatically execute [`../xocr/scripts/ocr_runner.py`](../xocr/scripts/ocr_runner.py) (using `--pages` for targeted page slicing) and harvest from `extracted_document.md`, `table_p*.csv`, and `ocr_manifest.json` (`garble_ratio == 0.0`) instead of raw `read_file` or ad-hoc `pypdf` snippets (which drop borderless vector tables and complex/non-ASCII glyph encodings).
 
 > [!IMPORTANT]
 > **Zero Secondary-Slop Rule**:
@@ -88,8 +88,10 @@ graph TD
 
 **Never start searching or scraping before locking the evaluation framework and proof criteria.**
 
-### A. Context Inheritance First ([`/xbrief`](../xbrief/SKILL.md) Hook)
-Before inventing new rules, perform a fast bounded check of the active workspace for existing domain conventions (`CONTEXT.md`, `AGENTS.md`, `Guidelines/*.md`, `docs/*protocol*.md`, or target `.json`/`.sqlite` schemas). If local rules exist, inherit their exact schema, category/date buckets, and narrative format.
+### A. Context Inheritance & Existing-Study Check First ([`/xbrief`](../xbrief/SKILL.md) Hook)
+Before inventing new rules or spawning external search waves:
+1. Perform a fast bounded check of the active workspace for existing domain conventions (`CONTEXT.md`, `AGENTS.md`, `Guidelines/*.md`, `docs/*protocol*.md`, or target `.json`/`.sqlite` schemas). If local rules exist, inherit their exact schema, category/date buckets, and narrative format.
+2. **Single-SSOT In-Place Upsert & Iterative Delta Routing**: Check `<artifactDir>/scratch/boostx_state.md` and `docs/` (`docs/research/` or module `docs/`) for an existing `RESEARCH_<TOPIC>.md` covering the active subsystem. If a canonical study already exists, **never fork a duplicate `RESEARCH_*.md` file** and **never re-run full 5-wave external web searches for facts already locked**; route Waves 2–3 strictly to unresearched delta questions and internal 4-Axis Forensic Codebase Auditing (`UL-01..UL-08`), updating the existing `RESEARCH_<TOPIC>.md` in-place with sequential heading numbering.
 
 ### B. Synthesize the 2D Research Contract (`Intent × Domain`)
 Select **ONLY the active Research Intent Row** and cross it with the active **Knowledge Domain Harness**:
@@ -97,30 +99,30 @@ Select **ONLY the active Research Intent Row** and cross it with the active **Kn
 | Research Intent Archetype | Self-Synthesized Goal, Criteria & Execution Strategy |
 | :--- | :--- |
 | **`HARVEST / CURATE`** *(Case Studies, Precedents, Datasets, Catalogs)* | **Goal**: *Derive target schema, category/date/scope bounds, and quota count → fan out Harvester Scouts to scrape primary pages → run **Blind Adversarial Auditor** on every record → **delete & re-harvest** out-of-bounds or unverifiable entries until 100% of quota passes.* |
-| **`VERIFY / AUDIT`** *(Fact-Checking Existing JSON / DB / Drafts / Claims)* | **Goal**: *Treat existing records/claims as untrusted → run `verify_evidence.py` + 3-Bucket Numeric/Parameter Litmus Test + Blind Auditor against primary sources → classify `VERIFIED` / `INCORRECT` / `UNVERIFIED` with discrepancy evidence → apply conservative in-bounds fixes or prune & replace.* |
+| **`VERIFY / AUDIT`** *(Fact-Checking Existing JSON / DB / Drafts / Claims / Codebase Mechanics)* | **Goal**: *Treat existing records/claims/simulators as untrusted → run `verify_evidence.py` + 3-Bucket Numeric/Parameter Litmus Test + Blind Auditor against primary sources (and when paired with [`/xboost`](../xboost/SKILL.md), execute the 4-Axis Deep Forensic Audit across `UL-01..UL-08` in [`deep_audit_protocol.md`](../xboost/references/deep_audit_protocol.md)) → classify `VERIFIED` / `INCORRECT` / `UNVERIFIED` with discrepancy evidence → apply conservative in-bounds fixes or prune & replace.* |
 | **`BENCHMARK / COMPARE`** *(Evaluating Competing Tools, Systems, Precedents)* | **Goal**: *Synthesize domain-relevant orthogonal evaluation axes → spawn 1 Scout per candidate → extract quantitative metrics, trade-offs, and failure modes → build `mermaid` architecture comparison + weighted decision matrix.* |
-| **`FORMULATE / MODEL`** *(Physics, Algorithms, Mathematical Models, Specs)* | **Goal**: *Lock governing equations, dimensional unit bridge (input units ↔ SI), empirical coefficients, boundary conditions, and stability limits from standards/papers → construct a closed-form **1D Analytical Toy Benchmark**.* |
+| **`FORMULATE / MODEL`** *(Physics, Algorithms, Mathematical Models, Specs)* | **Goal**: *Lock governing equations, discretization step measure (`Δμ`), dimensional unit bridge (input units ↔ SI), empirical coefficients, bracketed support bounds (`UL-01`), and bidirectional counter-anchors (`A_pos ∧ A_neg`, `UL-05`) from standards/papers → construct a closed-form **1D Analytical Toy Benchmark**.* |
 | **`REVERSE-ENGINEER / TRACE`** *(SDKs, Databases, Binaries, Undocumented APIs)* | **Goal**: *Lock local pinned versions from manifests first → inspect local schemas/binaries/ASTs + upstream source code, tests, and specs → map exact internal pipeline, method signatures, and invariants.* |
 | **`STRATEGIZE / RECOMMEND`** *(Design Proposals, Architecture Decisions, Policy)* | **Goal**: *Establish verified facts & constraints first → pass the **100%-Proof Recommendation Gate**: every recommendation must bind to `[VERIFIED FACT]` receipts and explicitly separate proven facts from `[RECOMMENDED SYNTHESIS]`.* |
 
 Cross the selected Intent with the **Universal Domain Proof Harness**:
-* **Built Environment, Design & Case Study Precedents** *(Architecture, Landscape, Urbanism, Industrial Design)*:
-  * **Primary Sources**: Official designer/firm portfolios, municipal/institutional portals, accredited award archives, and primary industry publications.
-  * **Hard Proof Criteria**:
-    1. **Temporal Disambiguation**: Strictly distinguish `Physical Completion / Inauguration Year` from `Policy Launch Year`, `Masterplan / Competition Year`, or `Ongoing Maintenance Year`.
-    2. **Attribution Lock**: Verify the actual `Lead Designer / Author of Record` directly on the project page.
-    3. **Narrative & Outcome Completeness**: Capture `Overview`, `Problem / Goal`, `Systemic Solution / Approach`, `Physical / Material / Spatial Elements`, and `Verified Quantitative/Qualitative Impacts` (zero invented percentages).
-* **Physical Sciences, Simulation & Quantitative Modeling** *(Physics, Hydrology, Environmental, Structural, Numerical Solvers)*:
-  * **Primary Sources**: International/national standards (ISO, EN, ASHRAE, IEEE, ASTM, CIRIA), peer-reviewed literature, and government technical manuals.
-  * **Hard Proof Criteria**: Dimensional homogeneity (SI unit balance across every equation term), valid parameter bounds, numerical stability limits (`dt`, CFL, convergence `ε`), and a closed-form **1D Analytical Toy Benchmark**.
-* **Software, Systems & Computational Engineering** *(Code, APIs, CAD/3D, GIS, Cloud, ML)*:
+* **Software, Systems & Computational Engineering** *(Code, APIs, Distributed Systems, Databases, Cloud, ML)*:
   * **Primary Sources**: Pinned workspace manifests (`package.json`, `pyproject.toml`, `Cargo.toml`, `*.csproj`, `metadata.txt`), local package/binary/DB probes (`sqlite3`, `xml`, `ast`), official version-matched specs, upstream source & tests.
-  * **Hard Proof Criteria**: Pinned version parity, exact type/method signatures, `file:line` or deep-link citations, and O(N) runtime/memory bounds.
-* **Natural Sciences, Ecology & Empirical Datasets** *(Biology, Botany, Climate, Geodata)*:
+  * **Hard Proof Criteria**: Pinned version parity, exact type/method signatures, `file:line` or deep-link citations, and `O(N)` runtime/memory bounds.
+* **Physical Sciences, Simulation & Quantitative Modeling** *(Physics, Numerical Solvers, Signal Processing, Optimization)*:
+  * **Primary Sources**: International/national standards (ISO, EN, IEEE, ASTM, ASHRAE), peer-reviewed literature, and authoritative technical manuals.
+  * **Hard Proof Criteria**: Dimensional homogeneity (SI unit balance across every equation term), discretization step-measure invariance (`Δμ`, `UL-03`), numerical stability limits (`dt`, CFL, convergence `ε`), and a closed-form **1D Analytical Toy Benchmark**.
+* **Case Studies, Precedents & System Benchmarks** *(Engineering, Design, Product, & Operational Precedents)*:
+  * **Primary Sources**: Official creator/organization records, institutional portals, accredited archives, and primary publications.
+  * **Hard Proof Criteria**:
+    1. **Temporal & Lifecycle Disambiguation**: Strictly distinguish `Actual Release / Completion Year` from `Proposal / Announcement Year`, `Specification Draft Year`, or `Ongoing Maintenance Year`.
+    2. **Attribution Lock**: Verify the actual `Primary Author / Maintainer / Organization of Record` directly on the primary source page.
+    3. **Narrative & Outcome Completeness**: Capture `Overview`, `Problem / Goal`, `Systemic Solution / Approach`, `Core Architecture / Elements`, and `Verified Quantitative/Qualitative Impacts` (zero invented percentages).
+* **Natural Sciences & Empirical Datasets** *(Empirical Sciences, Environmental, Biomedical, Geodata)*:
   * **Primary Sources**: Canonical scientific registries, peer-reviewed empirical studies, and official institutional datasets.
-  * **Hard Proof Criteria**: Taxonomic/nomenclatural accuracy, SI measurement units, geographic/climatic scope bounds, and primary study citations.
-* **Policy, Strategy, Market & General Research** *(Economics, Law, Business, Humanities)*:
-  * **Primary Sources**: Statutory/regulatory filings, primary institutional reports, first-party documentation, and audited datasets.
+  * **Hard Proof Criteria**: Taxonomic/nomenclatural accuracy, SI measurement units, domain/scope bounds, and primary study citations.
+* **Policy, Strategy, Market & Regulatory Research** *(Economics, Law, Governance, Standards)*:
+  * **Primary Sources**: Official regulatory filings, primary institutional reports, first-party documentation, and audited datasets.
   * **Hard Proof Criteria**: Publication date currency, jurisdiction/scope alignment, and multi-source corroboration for quantitative claims.
 
 Output the 4-line contract before probing or spawning scouts:
@@ -161,16 +163,16 @@ After Wave 2 completes, run a two-layer audit on all harvested candidates:
      ```
    * **macOS / Linux**:
      ```bash
-     python ~/.gemini/config/skills/xdeep-research/scripts/verify_evidence.py "<target_md_or_json>" --check-http
+     python3 ~/.gemini/config/skills/xdeep-research/scripts/verify_evidence.py "<target_md_or_json>" --check-http
      ```
-2. **Blind Adversarial Auditor Subagent**:
-   For multi-record datasets, case studies, or critical specifications, spawn a dedicated **Auditor Subagent** instructed with a **Red-Team Falsification Prompt**:
-   * *"Assume the Harvester conflated project names, confused policy/proposal years with physical completion years, misattributed authors, or cited unsupported numbers. Independently verify each record against its primary source and classify as `VERIFIED`, `INCORRECT (with actual truth)`, or `UNVERIFIED`."*
+2. **Blind Adversarial Auditor Subagent(s)**:
+   For multi-record datasets, case studies, or critical specifications, spawn dedicated **Auditor Subagent(s)** (`C ≥ 1` sized by [`/xultra`](../xultra/SKILL.md) Law 3) instructed with a **Red-Team Falsification Prompt**:
+   * *"Assume the Harvester conflated entity names, confused announcement/draft years with actual release/completion years, misattributed authors, or cited unsupported numbers. Independently verify each record against its primary source and classify as `VERIFIED`, `INCORRECT (with actual truth)`, or `UNVERIFIED`."*
 
 ### B. Wave 3.5: Conservative Prune & Replacement Harvest Loop (Zero Data Forgery)
 When the Wave 3 Auditor flags an entry as `INCORRECT` or `UNVERIFIED`:
 * **In-Bounds Correction**: If the true verified fact still satisfies the user's constraints (e.g., correcting `2024` → `2025` within a `2024–2026` bucket, or updating a parameter coefficient to match the official standard), update the record with the verified value and source.
-* **Out-of-Bounds Deletion & Re-Harvest**: If the true verified fact violates the user's scope bounds (e.g., a project was actually built in `2013` instead of `2020–2026`, or a project title does not exist), **delete the entry immediately**. Never forge dates, authors, or metrics to fit a narrative slot.
+* **Out-of-Bounds Deletion & Re-Harvest**: If the true verified fact violates the user's scope bounds (e.g., an entity was actually released outside the required date window, or a cited title does not exist), **delete the entry immediately**. Never forge dates, authors, or metrics to fit a narrative slot.
 * **Replacement Dispatch**: Immediately spawn a targeted Wave 3.5 Replacement Scout to harvest a genuine replacement for the missing slot and re-audit it through Wave 3 until **100% of required slots/axes pass verification**.
 
 ---
@@ -215,13 +217,13 @@ Never drop loose `.md` files into a repository root (preserving clean `git statu
   * **Wave 2.5 Fast Candidate Triage**: Between Wave 2 (Harvester Swarm) and Wave 3 (Blind Adversarial Auditor), use `/xlaya` (`score` + `noul`) to locally score harvested records or shortlist candidate specification sections in milliseconds before spawning expensive Auditor turns.
 * **Paired with [`/xplan`](../xplan/SKILL.md) (`/xdeep-research /xplan`)**:
   * **Evidence-to-Plan Bridge**: Pass Wave 4's `[VERIFIED FACT]` receipts, API signatures, equations, and benchmarks directly into `/xplan` Phase 1 to construct `implementation_plan.md` with inline grilling options.
-* **Paired with [`/xboost`](../xboost/SKILL.md) (`/xdeep-research /xboost`)**:
-  * **Automatic Spec-to-Code Bridge**: Once `/xdeep-research` locks the verified API signature, governing equations, SI unit bridge, schema, and **1D Analytical Toy Benchmark** into `RESEARCH_<TOPIC>.md`, immediately transition into **XBoost Phase 1–4** in the same workflow—using the researched analytical benchmark as the exact **Red → Green verification gate** for the code implementation.
+* **Paired with [`/xboost`](../xboost/SKILL.md) (`/xdeep-research /xboost` or `/xdeep-research /xboost /xultra`)**:
+  * **Automatic Spec-to-Code & 4-Axis Forensic Audit Bridge**: Once `/xdeep-research` locks the verified API signature, governing equations, SI unit bridge, schema, and **1D Analytical Toy Benchmark** into `RESEARCH_<TOPIC>.md`, immediately transition into **XBoost Phase 1–4** (and [`deep_audit_protocol.md`](../xboost/references/deep_audit_protocol.md) when auditing an existing engine/simulator across `Truth/Zero-Cheat`, `Criteria/Scale`, `Wiring/Fallbacks`, and `Hot-Path Perf`) in the same workflow—using the researched analytical benchmark and perturbation/conservation laws as the exact **Red → Green verification gate** for the implementation.
 * **Paired with [`/xobsidian`](../xobsidian/SKILL.md) (`/xdeep-research /xobsidian` or `/xdeep-research /xboost /xobsidian`)**:
-  * **Wave 1 Second Brain Prior-Art Check**: Dynamically resolve `VAULT_ROOT` via [`/xobsidian`](../xobsidian/SKILL.md) and inspect `00 *Index*.md` → `Hub - *.md` so existing verified precedents, species, component contracts, or mathematical models are not redundantly re-harvested.
-  * **Wave 5 Automatic Knowledge Ratchet**: After verification passes, automatically mint or update the reusable atomic notes (`#tier/method`, `#tier/asset`, `#tier/career-cluster`) and parent `Hub - *.md` tables in `VAULT_ROOT` with unique `[[wikilink]]` neighbor signatures, then run the 1-line Vault Graph Integrity check (`BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`).
+  * **Wave 1 Second Brain Prior-Art Check**: Dynamically resolve `VAULT_ROOT` via [`/xobsidian`](../xobsidian/SKILL.md) and inspect `00 *Index*.md` → `Hub - *.md` so existing verified precedents, empirical parameters, component contracts, or mathematical models are not redundantly re-harvested.
+  * **Wave 5 Converged-Only Knowledge Ratchet**: After verification passes (`0` unverified claims and `0` Wave 2 code defects when chained with `/xboost`), automatically mint or update the reusable atomic notes (`#tier/method`, `#tier/asset`, `#tier/package` / `#tier/proof`) and parent `Hub - *.md` tables in `VAULT_ROOT` with unique `[[wikilink]]` neighbor signatures, record touched notes in `<artifactDir>/scratch/boostx_state.md` (`Session_Touched_Vault_Notes`), and run the 1-line Vault Graph Integrity check (`BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`).
 * **Paired with `/goal` (`/goal /xdeep-research` or `/xdeep-research /xboost /xobsidian /goal`)**:
-  * **Autonomous Marathon Mode**: Maintain `<artifactDir>/scratch/deep_research_state.md` tracking Wave progress, verified records (`X/Y verified`), and rejected candidates across turns. Continue looping Wave 2 ↔ Wave 3.5 across turns until **100% of the target quota and verification gates pass with zero unverified claims** before emitting `<!-- GOAL_COMPLETE -->`.
+  * **Autonomous Marathon Mode**: Maintain the unified `<artifactDir>/scratch/boostx_state.md` ledger tracking Wave progress, canonical `RESEARCH_<TOPIC>.md` path, verified records (`X/Y verified`), cumulative ratchet assertions (`Ratchet_Suite(1..t)`), and rejected candidates across turns. Continue looping Wave 2 ↔ Wave 3.5 across turns until **100% of the target quota and verification gates pass with zero unverified claims** before emitting `<!-- GOAL_COMPLETE -->`.
 
 ---
 

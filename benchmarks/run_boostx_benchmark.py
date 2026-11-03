@@ -267,7 +267,7 @@ def run_exp2_context_compression_benchmark(warmup: int = 3, trials: int = 30) ->
     vault_md = discover_md(vault_ws, skip_obsidian=False) if vault_ws.is_dir() else []
     unbounded_pool = repo_md + vault_md
 
-    # Authority-ranked Top 8 for /briefx
+    # Authority-ranked Top 8 for /xbrief
     priority_names = {
         "README.md": 1,
         "MOTION_GRAPHICS_SHOWREEL_DESIGN_PROTOCOL.md": 1,
@@ -521,7 +521,7 @@ def run_exp4_redteam_defect_benchmark(warmup: int = 3, trials: int = 20) -> Dict
         audit_engine.audit_qgis_plugin_invariants(qgis_bad, res_qgis, skip_qt6=True)
         c2_caught = min(5, len(qt6_issues) + len(res_qgis.blocking_errors))
 
-        # Category 3: Deep-ResearchX Evidence & Schema Integrity (5 defects)
+        # Category 3: XDeep-Research Evidence & Schema Integrity (5 defects)
         ev_md = bad_dir / "bad_research.md"
         ev_md_txt = (
             f"# Research Report\n"

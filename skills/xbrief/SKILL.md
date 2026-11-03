@@ -1,8 +1,8 @@
 ---
 name: xbrief
 description: >
-  Load related workspace markdown, extract structural architecture and locked invariants, then execute the user's task in the same turn (/xbrief, /briefx, /brief).
-  Use when the user runs /xbrief, /briefx, or /brief, or asks to read the docs then or brief then.
+  Load related workspace markdown, extract structural architecture and locked invariants, then execute the user's task in the same turn (/xbrief, /brief).
+  Use when the user runs /xbrief or /brief, or asks to read the docs then or brief then.
   Do NOT use for doc sync (/xsync), planning (/xplan), publishing (/xpublish-audit), skill authoring (/xcreate-skill), or handoff (/xkickoff).
 ---
 
@@ -41,7 +41,7 @@ If the task is exclusively one of these standalone workflows without needing a w
 
 ### Step 1: Parse the Task
 
-* Extract slash arguments or the text following `/xbrief` (or `/briefx`, `/brief`).
+* Extract slash arguments or the text following `/xbrief` (or `/brief`).
 * Attached or explicitly named files serve as direct Tier-1 entry seeds, not the entire corpus.
 * **Empty task rule**: If no task is provided, run discovery, display the Briefing Table, and **halt**. Do not invent unrequested work.
 
@@ -59,9 +59,9 @@ Search `*.md` in the current workspace, including hidden skill or configuration 
 * **Exclusions**: `.git`, `node_modules`, `dist`, `build`, `__pycache__`, `.venv`, vendor bundles, and **any directory containing an `.obsidian/` subfolder** (so Obsidian Second Brain notes never pollute or consume the 8-file Repository SSOT cap during standard `/xbrief` runs).
 * **Strict Opt-In [`/xobsidian`](../xobsidian/SKILL.md) Combinator Rule (`/xbrief /xobsidian`)**:
   * **Default (Without `/xobsidian`)**: Do **not** read or query any Obsidian vault.
-  * **Opt-In (`/xbrief /xobsidian`)**: When `/xobsidian` (or `/obsidianx`, `/obsidian-vault`) is explicitly included in the command, keep the 8-file per-window discovery cap strictly for project repository SSOTs, and perform an additional bounded 2-Hop read via [`/xobsidian`](../xobsidian/SKILL.md) (`00 *Index*.md` → target `Hub - *.md` → task-relevant atomic notes) to include reusable domain formulas, precedents, or component specs in the Briefing Table.
+  * **Opt-In (`/xbrief /xobsidian`)**: When `/xobsidian` (or `/obsidian-vault`) is explicitly included in the command, keep the 8-file per-window discovery cap strictly for project repository SSOTs, and perform an additional bounded 2-Hop read via [`/xobsidian`](../xobsidian/SKILL.md) (`00 *Index*.md` → target `Hub - *.md` → task-relevant atomic notes) to include reusable domain formulas, precedents, or component specs in the Briefing Table.
 * **Opt-In [`/xlaya`](../xlaya/SKILL.md) Sidecar Rule (`/xbrief /xlaya`)**:
-  * When invoked alongside `/xlaya` (or `/layax`, `/laya`) in a multi-file unpinned documentation corpus or long specification, use [`/xlaya`](../xlaya/SKILL.md) (`shortlist_choice` / `score`) to semantically rank heading sections before executing Pass B reads.
+  * When invoked alongside `/xlaya` (or `/laya`) in a multi-file unpinned documentation corpus or long specification, use [`/xlaya`](../xlaya/SKILL.md) (`shortlist_choice` / `score`) to semantically rank heading sections before executing Pass B reads.
 * **Opt-In [`/xultra`](../xultra/SKILL.md) Elastic Subsystem Scout Rule (`/xbrief /xultra`)**:
   * When invoked alongside `/xultra` across a multi-root workspace or large specification corpus, fan out **Elastic Read-Only Subsystem Scouts** (1 scout per subsystem root or spec cluster, each applying the per-window 8-file Pass-B reading bound) to return **Telegraphic Briefing Table Rows** without bloating the main thread's context window.
 * **Discovery & Reading Tools**: Use native file-reading (`read_file` / `view_file`) and platform search (`rg --hidden`, `grep`, or PowerShell `Select-String`). When a user-pinned or canonical workspace specification exists only as a `.pdf` or raster image with no extracted `.md` equivalent yet, automatically invoke [`/xocr`](../xocr/SKILL.md) ([`../xocr/scripts/ocr_runner.py`](../xocr/scripts/ocr_runner.py), using `--pages` for targeted Pass A/B slicing) to extract `extracted_document.md` and `table_p*.csv`.

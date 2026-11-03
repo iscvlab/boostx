@@ -203,7 +203,7 @@ def main():
                     blocking.append(f"[{target_path.name}] Broken or unreachable URL ({msg}): `{u}`")
 
     print("=" * 70)
-    print("DEEP-RESEARCHX EVIDENCE AUDIT SCORECARD")
+    print("XDEEP-RESEARCH EVIDENCE AUDIT SCORECARD")
     print("=" * 70)
     print(f"Target:    {target_path}")
     print(f"URLs:      {len(urls)}")

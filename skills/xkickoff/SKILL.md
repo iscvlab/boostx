@@ -1,7 +1,7 @@
 ---
 name: xkickoff
 description: >
-  Synthesize end-of-session progress, verify doc sync, present next-step options, and generate a pristine kickoff prompt for a fresh chat (/xkickoff, /kickoffx, /kickoff).
+  Synthesize end-of-session progress, verify doc sync, present next-step options, and generate a pristine kickoff prompt for a fresh chat (/xkickoff, /kickoff).
   Use when wrapping up a session, starting a fresh chat, transitioning after compaction, or running /xkickoff.
   Do NOT use for context health (/xcontext), mid-session doc sync (/xsync), or skill authoring (/xcreate-skill).
 ---
@@ -54,15 +54,15 @@ Red failure modes to prevent:
 Before formulating the next session's work, verify that the current conversation's outputs are safely recorded on disk:
 
 1. Check `git status --short` (or recent file edits) to identify modified, untracked, or staged files.
-2. Verify that active documentation accurately reflects the latest decisions made in this session.
-3. If documents were edited or spatial/quantitative metrics were recalculated, confirm that [`/xsync`](../xsync/SKILL.md) verification has been completed (and if `/xobsidian` was used in the session, confirm reusable domain knowledge was ratcheted).
+2. Verify that active documentation accurately reflects the latest decisions made in this session (and check for any forked duplicate `RESEARCH_*.md` files in `docs/`).
+3. If documents were edited or quantitative metrics/schemas were recalculated, confirm that [`/xsync`](../xsync/SKILL.md) verification has been completed (and if `/xobsidian` was used in the session—or if `<artifactDir>/scratch/boostx_state.md` lists any `DIRTY_IN_SESSION` vault notes—confirm those notes are synced and pass `BROKEN=0, ORPHANS=0, DUP_NEIGHBOR_GROUPS=0`).
 4. *Sync Guard*: If uncommitted or unsynced state exists, advise the user or sync it before finalizing handoff.
 
 ---
 
 ### Step 2: Smart Hybrid 2A Routing (Explicit Topic vs. Bare `/xkickoff`)
 
-Determine which path applies based on how the user invoked `/xkickoff` (or `/kickoffx`, `/kickoff`):
+Determine which path applies based on how the user invoked `/xkickoff` (or `/kickoff`):
 
 #### Path A — Explicit Topic Provided (e.g. `/xkickoff <task>` or `"write /xkickoff so I can discuss X"`)
 - **Zero Redundant Option Prompting**: Because the user has already stated what they want to do in the next chat, do **NOT** stop to ask them to pick an option, and do **NOT** clutter the response with competing options that distract from their chosen focus.
@@ -73,8 +73,8 @@ Determine which path applies based on how the user invoked `/xkickoff` (or `/kic
 1. **Turn 1 (Formulate & Ask Options ONLY — Do NOT Write the Kickoff Prompt Yet)**:
    - Analyze the active workspace roadmap, master plan, or presentation deck to formulate **orthogonal, high-impact next-step options** (sized to genuine roadmap branches, e.g. Options A/B/C) for the next conversation:
      * **Option A (Recommended — Direct Continuation)**: The immediate next logical subsection, slide, module, or task on the active roadmap.
-     * **Option B (Technical Deep Dive / Parallel Scope)**: Evidence modeling, script execution, simulation, or multi-slide pairing.
-     * **Option C (Bookmark Polish / Synthesis)**: Returning to bookmarked cards/maps, visualization polish, or executive review.
+     * **Option B (Technical Deep Dive / Parallel Scope)**: Evidence modeling, script execution, simulation, or multi-module pairing.
+     * **Option C (Bookmark Polish / Synthesis)**: Returning to deferred modules/views, visualization polish, or executive review.
    - Present the options concisely (using the `ask_question` tool if available, or a clean numbered/lettered list in chat) and ask: *"Which focus would you like me to write the `/xkickoff` prompt for?"*
    - **STOP and end the turn without generating the long Kickoff Prompt block yet** (saves context tokens and avoids writing the wrong prompt).
 2. **Turn 2 (User Selects Option → Write the Pristine Kickoff Prompt)**:
@@ -90,7 +90,7 @@ Select the exact `/x...` slash command pipeline for the bottom of the Kickoff Pr
 
 | Next Session Task Archetype | Recommended Command Line to Generate |
 | :--- | :--- |
-| **Standard Build / Debug / CAD / UI** *(Target files already pinned)* | `/xbrief "[Topic Name]" /xboost /goal` |
+| **Standard Build / Debug / Solver / UI** *(Target files already pinned)* | `/xbrief "[Topic Name]" /xboost /goal` |
 | **Architecture & Design Decision First** *(Needs inline grilling plan)* | `/xbrief "[Topic Name]" /xplan` |
 | **Primary-Source API / Formula / DB Lookup → Implementation** | `/xbrief "[Topic Name]" /xdeep-research /xboost /goal` |
 | **Multi-File Doc Sync / Semantic Conflict Audit** | `/xbrief "[Topic Name]" /xsync /xlaya` |
@@ -116,9 +116,9 @@ Operate as a Principal [Domain / Systems] Architect & Lead Engineer.
 - `[Reference Spec]` (SSOT / Master Roadmap)
 
 ## Locked Invariants & Session Decisions (DO NOT RE-ARGUE OR DRIFT)
-1. [Core Decision 1 established in previous session, e.g. exact framework cardinality: 6 Acts / 4 Tiers]
-2. [Negative Invariant: e.g. Do not touch frozen sections / Do not lock open deliberation items prematurely]
-3. [Architectural, Styling, or Performance Invariant: e.g. design tokens, unit bridges, O(N) runtime bounds]
+1. [Locked Domain & Partition Invariants (UL-04): exact schema cardinalities, conservation totals, and parent-child provenance keys]
+2. [Locked Mathematical & Boundary Guardrails (UL-01..UL-07): bracketed interpolation bounds, discretization step measure Δμ, bidirectional counter-anchors A_pos ∧ A_neg, and frozen zones]
+3. [Locked Verification & Counterexample Ratchets (UL-08): live production callable parity and pinned regression assertions that the next session must keep 100% Green]
 
 ## Immediate Next Task
 [Detailed, actionable instructions for what the agent should accomplish first in this new session].
