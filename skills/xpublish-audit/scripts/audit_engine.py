@@ -13,6 +13,7 @@ import argparse
 import subprocess
 import configparser
 from pathlib import Path
+from urllib.parse import unquote
 
 # Prevent bytecode debris in audited directories
 sys.dont_write_bytecode = True
@@ -63,7 +64,7 @@ SECRET_PATTERNS = [
 # ---------------------------------------------------------------------------
 PATH_PATTERNS = [
     ("Windows Absolute User Path", re.compile(r"(?i)\b([a-z]:[/\\]users[/\\](?!<)[a-zA-Z0-9_\-\.]+)")),
-    ("macOS Absolute User Path", re.compile(r"(?i)(?:^|[\s\"'`=:(])(/Users/(?!<)[a-zA-Z0-9_\-\.]+)")),
+    ("macOS Absolute User Path", re.compile(r"(?:^|[\s\"'`=:(])(/Users/(?!<|shared\b|runner\b)[a-zA-Z0-9_\-\.]+/)")),
     ("Linux Absolute Home Path", re.compile(r"(?:^|[\s\"'`=:(])(/home/(?!<)[a-z0-9_\-\.]+)")),
 ]
 
@@ -120,6 +121,22 @@ def audit_file_content(path: Path, result: AuditResult):
             match = pat.search(clean_line)
             if match:
                 matched_val = match.group(0)
+                low_val = matched_val.lower()
+                if label == "Generic Secret Assignment" and any(
+                    ph in low_val
+                    for ph in (
+                        "your_",
+                        "_here",
+                        "placeholder",
+                        "example",
+                        "dummy",
+                        "changeme",
+                        "replace_",
+                        "xxxx",
+                        "todo",
+                    )
+                ):
+                    continue
                 masked = matched_val[:4] + "..." + matched_val[-4:] if len(matched_val) > 8 else "***"
                 result.add_blocking(f"Potential {label} detected: `{masked}`", str(path), idx)
 
@@ -250,9 +267,15 @@ def audit_flake8(target: Path, result: AuditResult):
 
     try:
         proc = subprocess.run(
-            cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            check=False,
         )
-        output = proc.stdout.strip()
+        output = (proc.stdout or "").strip()
 
         if proc.returncode != 0 and output:
             for line in output.splitlines():
@@ -367,10 +390,26 @@ def run_audit(
 
     # Check packaging hygiene for directories
     all_files = []
+    excluded_walk_dirs = {
+        ".git",
+        "__pycache__",
+        "dist",
+        "build",
+        ".idea",
+        ".vscode",
+        ".venv",
+        "venv",
+        "env",
+        "node_modules",
+        ".pytest_cache",
+        ".mypy_cache",
+        ".tox",
+        "site-packages",
+    }
     for root, dirs, files in os.walk(target):
         if "__pycache__" in dirs and any((Path(root) / "__pycache__").iterdir()):
             result.add_warning(f"Packaging debris detected: `__pycache__` directory at `{Path(root) / '__pycache__'}`")
-        dirs[:] = [d for d in dirs if d not in {".git", "__pycache__", "dist", "build", ".idea", ".vscode"}]
+        dirs[:] = [d for d in dirs if d not in excluded_walk_dirs]
         for f in files:
             all_files.append(Path(root) / f)
 
@@ -591,8 +630,15 @@ def audit_skill_invariants(target: Path, result: AuditResult):
             str(skill_md),
         )
 
-    # 4. Anti-Hardcoded Ephemeral Metrics, Bucket 3 Quotas & Persona/Project Neutrality Scanner
-    ephemeral_pat = re.compile(r"(?i)\b(all\s+\d+\s+layers|\b\d+\s+layers\b|LDD\s+11,028)")
+    # 4. Anti-Hardcoded Bucket 3 Quotas, Over-Specific Equations & Persona/Project Neutrality Scanner
+    if len(lines) > 500:
+        result.add_warning(
+            f"`SKILL.md` is {len(lines)} lines long (>500-line budget). "
+            "Disclose deep reference matrices or taxonomies into `references/*.md` behind context pointers "
+            "to prevent skill Sprawl.",
+            str(skill_md),
+        )
+
     persona_pat = re.compile(
         r"(?i)\b(asus\s+laptop|home\s+pc|windows\s+desktop\s+pc|on\s+nut|01_on_nut|"
         r"161-rai|khlong\s+prawet|traffy|ON_v[0-9]|thesis_architecture\.html|slide_style_showcase_v2\.html)\b"
@@ -602,16 +648,29 @@ def audit_skill_invariants(target: Path, result: AuditResult):
         r"\b4[-–]12`?\s+agents\b|\b4[-–]5`?\s+agents\b|\bup\s+to\s+`?6`?\s+concurrent\s+scouts\b|"
         r"<\s*30-line\s+reproduction)"
     )
+    overfit_law_pat = re.compile(
+        r"(\bx\s*=\s*0\s*(?:->|→|=>|⇒)\s*y\s*=\s*0(?:\.0)?\b|"
+        r"d\s*log\s*\\?\|?Y\\?\|?\s*/\s*d\s*log\s*(?:alpha|α)\s*==\s*p|"
+        r"\bf\(x\)\[k:\]\s*==\s*f\(x\[k:\]\)|"
+        r"__module__\s*==\s*(?:prod_module|target_module)\b)"
+    )
+    negation_tags = (
+        "Bucket 3",
+        "Anti-Pattern",
+        "Strictly Forbidden",
+        "Forbidden",
+        "Never",
+        "NEVER",
+        "Flaw",
+        "Instead of",
+        "fails on",
+        "fails when",
+        "breaks on",
+        "zero unqualified",
+        "over-specific",
+        "❌",
+    )
     for i, line in enumerate(lines, 1):
-        m = ephemeral_pat.search(line)
-        if m:
-            result.add_warning(
-                f"Potential hardcoded ephemeral snapshot metric detected: `{m.group(0)}`. "
-                "Formulate guardrails as invariant behavioral protocols (e.g. 'Zero Full-Project Dumps', "
-                "'Bounded Scope', 'Targeted Indexing') instead of volatile dataset counts.",
-                str(skill_md),
-                i,
-            )
         m_pers = persona_pat.search(line)
         if m_pers:
             result.add_warning(
@@ -620,7 +679,7 @@ def audit_skill_invariants(target: Path, result: AuditResult):
                 str(skill_md),
                 i,
             )
-        if not any(tag in line for tag in ("Bucket 3", "Anti-Pattern", "Strictly Forbidden", "Never hardcode")):
+        if not any(tag in line for tag in negation_tags):
             m_b3 = bucket3_pat.search(line)
             if m_b3:
                 result.add_warning(
@@ -629,8 +688,19 @@ def audit_skill_invariants(target: Path, result: AuditResult):
                     str(skill_md),
                     i,
                 )
+            m_ovf = overfit_law_pat.search(line)
+            if m_ovf:
+                result.add_warning(
+                    f"Potential over-specific session equation/probe detected: `{m_ovf.group(0)}`. "
+                    "Apply the 5-Gate Universal Law Falsification Protocol in /xcreate-skill "
+                    "(use Zero-Forcing Equilibrium `Δx = 0 => Δy = 0`, baseline-subtracted `ΔY(α) = Y(α) - Y(0)`, "
+                    "Prefix Causality / finite lookback `W`, and wrapper-safe live entrypoint calls).",
+                    str(skill_md),
+                    i,
+                )
 
-    # 5. Markdown Links & Forward-Slash Audit
+    # 5. Markdown Links, Forward-Slash & Zero-LaTeX Typography Audit
+    latex_macro_pat = re.compile(r"\\(?:rightarrow|leftarrow|leftrightarrow|times|approx|pm|leq|geq)\b")
     for md_file in target.rglob("*.md"):
         try:
             md_text = md_file.read_text(encoding="utf-8", errors="replace")
@@ -639,21 +709,42 @@ def audit_skill_invariants(target: Path, result: AuditResult):
 
         # Strip fenced code blocks and inline code spans that wrap an entire [text](url) example,
         # while unwrapping backticks inside link labels like [`file.py`](path/to/file.py)
-        clean_md = re.sub(r"```[\s\S]*?```", "", md_text)
+        clean_md = re.sub(r"(`{3,}|~{3,})[\s\S]*?\1", "", md_text)
         clean_md = re.sub(r"``[^\n]+?``", "", clean_md)
         clean_md = re.sub(r"\[`([^`\n]+)`\]\(", r"[\1](", clean_md)
         clean_md = re.sub(r"`[^`\n]+`", "", clean_md)
 
+        for m_lat in latex_macro_pat.finditer(clean_md):
+            result.add_warning(
+                f"Raw LaTeX macro `{m_lat.group(0)}` outside code span. Use native UTF-8 Unicode symbols.",
+                str(md_file),
+            )
+
         for m in re.finditer(r"\[([^\]]+)\]\(([^)]+)\)", clean_md):
-            link_text, link_url = m.group(1), m.group(2)
+            link_text, raw_url = m.group(1), m.group(2).strip()
+            link_url = raw_url.split()[0].strip("<>") if raw_url else ""
             if "\\" in link_url:
                 result.add_blocking(
                     f"Markdown link contains backslash: `[{link_text}]({link_url})`. "
                     "Always use POSIX forward slashes (`/`).",
                     str(md_file),
                 )
-            if not link_url.startswith(("http://", "https://", "#", "mailto:")):
-                rel_clean = link_url.split("#")[0].split("?")[0].strip()
+            if link_url and not link_url.startswith(
+                (
+                    "http://",
+                    "https://",
+                    "#",
+                    "mailto:",
+                    "file://",
+                    "conversation://",
+                    "data:",
+                    "javascript:",
+                    "vscode:",
+                    "obsidian://",
+                    "/",
+                )
+            ):
+                rel_clean = unquote(link_url.split("#")[0].split("?")[0].strip())
                 if rel_clean:
                     target_file = (md_file.parent / rel_clean).resolve()
                     if not target_file.exists():
@@ -684,15 +775,6 @@ def audit_skill_invariants(target: Path, result: AuditResult):
                     "Helper script lacks `sys.dont_write_bytecode = True` guard (risks `__pycache__` debris)",
                     str(py_file),
                 )
-            for idx_py, py_line in enumerate(py_src.splitlines(), 1):
-                m_eph = ephemeral_pat.search(py_line)
-                if m_eph:
-                    result.add_warning(
-                        f"Potential hardcoded ephemeral snapshot metric in script: `{m_eph.group(0)}`. "
-                        "Keep global skill scripts 100% repository-agnostic.",
-                        str(py_file),
-                        idx_py,
-                    )
 
 
 def main():

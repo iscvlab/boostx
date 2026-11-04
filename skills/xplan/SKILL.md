@@ -58,15 +58,16 @@ graph TD
   * **Default (Without `/xobsidian`)**: Never read from or write to any Obsidian vault.
   * **Opt-In (`/xplan /xobsidian` or `/xbrief /xplan /xobsidian`)**: Resolve `VAULT_ROOT` dynamically (`00 *Index*.md` → `Hub - *.md`) to pull reusable governing equations, SI unit bridges, or component contracts into the plan.
 * **Opt-In [`/xlaya`](../xlaya/SKILL.md) Sidecar (`/xplan /xlaya`)**:
-  * When planning across a large, unpinned documentation corpus, use `/xlaya` (`shortlist_choice` / `score`) to shortlist relevant specification sections with zero context bloat.
+  * When planning across a large, unpinned documentation corpus, use `/xlaya` (`shortlist` / `score`) to shortlist relevant specification sections with zero context bloat.
 * **Opt-In [`/xultra`](../xultra/SKILL.md) Multi-Architect Scout Mode (`/xplan /xultra`)**:
   * When `/xultra` is included in the command, spawn **`K` Orthogonal Architect Scouts** ([`/xultra`](../xultra/SKILL.md) Law 2: Vector A Simplification/Stdlib, Vector B Surgical Local Seam, Vector C Deep Module Interface, plus any domain-specific numerical/layout vector) paired with **Elastic Red-Team Seam & SSOT Critic(s) (`C ≥ 1` by Law 3)** to stress-test trade-offs, bidirectional counter-anchors (`UL-05`), and live-callable parity (`UL-08`) before synthesizing their findings into `implementation_plan.md`.
 
 #### 2. Synthesize the 2D Plan Contract (`Task Archetype × Project Archetype`)
-Cross the active **Task Intent** (`BUILD / FEATURE`, `REFACTOR / SIMPLIFY`, `SIMULATE / SOLVER`, `OPTIMIZE / SCALE`, `SHIP / RELEASE`) with the **Project Domain Harness** (`Backend / APIs / Distributed Systems`, `Web UI / Figma / Diagrams`, `Data / Cloud / ML`, `Numerical Solvers / Simulation / CAD / GIS`, `Agent Skills / CLI / Configs`):
-* **Tier 1 Plan (1–2 files, localized change)**: Compact seam diff + inline grilling decisions (if any) + 1 Red → Green command.
-* **Tier 2 Plan (Multi-file feature, refactor, or UI)**: Full `mermaid` architecture diagram + Deep Module interface spec + component-by-component change matrix.
-* **Tier 3 Plan (`SIMULATE / SOLVER` — Physics, Numerical, Scientific)**: Mandatory **SI Unit & Step-Measure Bridge Table** (source schema units & discretization step `Δμ` ↔ SI `m`/`kg`/`s`/`N`/`W/m²`, `deg` ↔ `rad`), stability bounds (`dt`, convergence `ε`, max iterations), and the **Physics & Numerical Triad** verification plan (zero-load identity = `0.0` with no `NaN`/`Inf`, 1D analytical toy benchmark, conservation/step-scaling check `UL-01..UL-08`).
+Cross the active **Task Intent** (`BUILD / FEATURE`, `REFACTOR / SIMPLIFY`, `SIMULATE / SOLVER`, `OPTIMIZE / SCALE`, `SHIP / RELEASE`) with the **Project Domain Harness** (`Backend / APIs / Distributed Systems`, `Web UI / Figma / Diagrams`, `Data / Cloud / ML`, `Numerical Solvers / Simulation / CAD / GIS`, `Agent Skills / CLI / Configs`) across [`/xboost`](../xboost/SKILL.md)'s 3 complexity tiers:
+* **Tier 1 Plan (1–2 files, localized tactical change)**: Compact seam diff + inline grilling decisions (if any) + 1 Red → Green command.
+* **Tier 2 Plan (Multi-file architectural feature, refactor, solver, or UI)**: Full `mermaid` architecture diagram + Deep Module interface spec + component-by-component change matrix.
+* **Tier 3 Plan (Multi-subsystem / `/goal` marathon initiative)**: Multi-wave execution roadmap, persistent `boostx_state.md` ratchet checkpoints, and cross-subsystem verification gates.
+* **`SIMULATE / SOLVER` Overlay (Any Tier — Physics, Numerical, Scientific)**: Attach a mandatory **SI Unit & Step-Measure Bridge Table** (source schema units & discretization step `Δμ` ↔ SI `m`/`kg`/`s`/`N`/`W/m²`, `deg` ↔ `rad`), stability bounds (`dt`, convergence `ε`, max iterations), and the **Physics & Numerical Triad** verification plan (zero-forcing equilibrium identity `Δx = 0 ⇒ Δy = 0.0 / y == y_eq` with no `NaN`/`Inf`, 1D analytical toy benchmark, conservation/step-scaling convergence `UL-01..UL-08`).
 
 ---
 
@@ -145,8 +146,8 @@ flowchart LR
 
 | Tier | Verification Gate | Exact Command / Probe | Expected Pass Signal |
 | :---: | :--- | :--- | :--- |
-| **Tier 1 (Red / Baseline & Counter-Anchors)** | Repro failure / Pre-flight probe / 1D Toy Benchmark + **Bidirectional Counter-Anchors (`A_pos ∧ A_neg`, `UL-05`)** | `<exact CLI command>` | Proves baseline state, closed-form match, and simultaneous positive + negative counter-anchor bounds |
-| **Tier 2 (Green + Live-Callable, Perturbation & Conservation)** | **Production Live-Callable (`UL-08`)** + `ΔInput X → ΔOutput Y ≠ 0` + branch reachability (`UL-06`) + `∑ Child_k + Remainder == Parent` (`UL-04`) ([`deep_audit_protocol.md`](../xboost/references/deep_audit_protocol.md)) | `<exact CLI command>` | `0` errors, live callable verified (`callable.__module__ == prod_module`), non-zero sensitivity, `100%` coverage, `0` silent fallback masking |
+| **Tier 1 (Red / Baseline & Counter-Anchors)** | Repro failure / Pre-flight probe / 1D Toy Benchmark + domain-matched positive & negative counter-anchors (`A_pos ∧ A_neg`, `UL-05` where applicable) | `<exact CLI command>` | Proves baseline state, closed-form match, and simultaneous positive + negative counter-anchor bounds |
+| **Tier 2 (Green + Live Entrypoint, Sensitivity & Invariants)** | Live production entrypoint (`UL-08`) + active-regime sensitivity (`ΔInput X → ΔOutput Y ≠ 0`) + domain invariants (`UL-01..UL-07` in [`deep_audit_protocol.md`](../xboost/references/deep_audit_protocol.md) where applicable) | `<exact CLI command>` | `0` errors, live entrypoint verified, non-zero active-regime sensitivity, `100%` expected coverage, `0` silent fallback masking |
 | **Tier 3 (Parity, Cumulative Ratchet & Hygiene)** | Cumulative regression suite (`Pass_Set(t+1) ⊇ Pass_Set(t)`) + Anti-hardcode path sweep | `<exact CLI command>` | `0` regressions across prior turns, `0` hardcoded user paths |
 ```
 
@@ -156,7 +157,7 @@ flowchart LR
 
 1. **Write the Plan Artifact**:
    * Save the plan to `<appDataDir>/brain/<conversation-id>/implementation_plan.md` using `write_file` (or `edit_file` when updating an existing plan in-place).
-   * Always pass `ArtifactMetadata` with `RequestFeedback = true` and `UserFacing = true`.
+   * Pass `ArtifactMetadata` with `UserFacing = true` and `RequestFeedback = true` when halting for user decision/approval (or `RequestFeedback = false` when auto-advancing immediately under `/xplan /xboost` with `0` open decisions or `/goal`).
 2. **Concise Chat Handoff (Zero Redundant Wall-of-Text)**:
    * Do **not** re-summarize or paste the plan contents into the chat response.
    * Point the user to the generated `implementation_plan.md` artifact (`[implementation_plan.md](file:///<appDataDir>/brain/<conversation-id>/implementation_plan.md)`), list only the **Decision IDs** (e.g., `Decision 1`, `Decision 2`) that need their selection, and note:

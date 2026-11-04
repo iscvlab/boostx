@@ -116,9 +116,9 @@ Operate as a Principal [Domain / Systems] Architect & Lead Engineer.
 - `[Reference Spec]` (SSOT / Master Roadmap)
 
 ## Locked Invariants & Session Decisions (DO NOT RE-ARGUE OR DRIFT)
-1. [Locked Domain & Partition Invariants (UL-04): exact schema cardinalities, conservation totals, and parent-child provenance keys]
-2. [Locked Mathematical & Boundary Guardrails (UL-01..UL-07): bracketed interpolation bounds, discretization step measure Δμ, bidirectional counter-anchors A_pos ∧ A_neg, and frozen zones]
-3. [Locked Verification & Counterexample Ratchets (UL-08): live production callable parity and pinned regression assertions that the next session must keep 100% Green]
+1. [Locked Architecture, Schema & Cardinality Invariants: exact structural counts, API/UI/module contracts, or extensive partition conservation totals where applicable]
+2. [Locked Domain & Boundary Guardrails: frozen/deferred zones, styling/design tokens, or mathematical/solver bounds (UL-01..UL-07) where applicable]
+3. [Locked Verification & Regression Ratchets: live entrypoint verification commands and pinned regression assertions (UL-08) that the next session must keep 100% Green]
 
 ## Immediate Next Task
 [Detailed, actionable instructions for what the agent should accomplish first in this new session].

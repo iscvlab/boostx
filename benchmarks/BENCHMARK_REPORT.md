@@ -1,4 +1,4 @@
-# BoostX (`v3.2.0`) - Empirical Benchmark & Token Economics Report
+# BoostX (`v3.3.0`) - Empirical Benchmark & Token Economics Report
 
 > **Reproducible Verification Harness**: Generated deterministically by [`benchmarks/run_boostx_benchmark.py`](./run_boostx_benchmark.py)  
 > **Corpus Scope**: `109` Installed Agent Skills • `160` Repository Markdown Specs • `592` Obsidian Second Brain Nodes • `214` Real IDE Sessions (`987` Prompt Turns)  
@@ -6,21 +6,21 @@
 
 ---
 
-## ⚡ TL;DR - Empirical Scorecard at a Glance (`v3.2.0`)
+## ⚡ TL;DR - Empirical Scorecard at a Glance (`v3.3.0`)
 
 | Evaluation Dimension | Workflow / Cohort Configuration | Visual Comparison Bar | Measured Result & Delta vs. Baseline |
 | :--- | :--- | :--- | :--- |
 | **1. Red-Team Defect Catch Rate ↑**<br>*(25 Seeded Defects across 5 Pillars)* | **Level 3: Full 5-Stage + 8 CLI Gates**<br>Level 2: `/xbrief` + `/xdeep-research` + `/xboost`<br>Level 1: `/xboost` Standalone (2 Gates)<br>Level 0: Prompt-Only Baseline (0 Gates) | `████████████████████` **`100.0% (25/25)`**<br>`████████████████░░░░` `80.0% (20/25)`<br>`████████░░░░░░░░░░░░` `40.0% (10/25)`<br>`░░░░░░░░░░░░░░░░░░░░` `0.0% (0/25)` | **`0` False Positives in Median `6.45 ms`** ✨<br>`4` Active CLI Verification Gates<br>`2` Active CLI Verification Gates<br>No Deterministic Pre-LLM Enforcement |
 | **2. Context Noise Compression ↑**<br>*(752 Repo + Vault Files, `1.22M` tok)* | **`/xbrief` (`Cap 8`) Repo-Only**<br>**`/xbrief` (`Cap 8`) + `/xobsidian` (`2-Hop`)**<br>Unbounded Repo + Vault Crawl | `████████████████████` **`97.84% Removed (46.2×)`**<br>`████████████████████` **`97.48% Removed (39.7×)`**<br>`░░░░░░░░░░░░░░░░░░░░` `0.0% Removed (1.0×)` | **`26,472` tok in Median `0.73 ms`** ✨<br>**`30,764` tok (`12` files) in `0.79 ms`** ✨<br>`1,222,816` tok (`752` files) in `40.77 ms` |
 | **3. System 1 Section Triage ↑**<br>*(20 Specs / 450 Chunks, `91.2k` tok)* | **BoostX `/xlaya` Top-5 Shortlist**<br>Unfiltered Full-Corpus Pass-B Read | `████████████████████` **`98.34% Saved (60.1×)`**<br>`░░░░░░░░░░░░░░░░░░░░` `0.0% Saved (1.0×)` | **`1,516` tok in Median `10.06 ms`** (`44.7k` chunks/s) ✨<br>`91,173` tok (Full 20-File Read) |
-| **4. Dual-Trigger Budget Guard ↑**<br>*(`Use when` + `Do NOT use` across `N=109`)* | **BoostX `v3.2.0` Suite (`N = 14`)**<br>All Installed Host Skills (`N = 109`)<br>Official Cloud/Vendor Skills (`N = 31`) | `████████████████████` **`100.0% (14/14)`**<br>`██████░░░░░░░░░░░░░░` `29.4% (32/109)`<br>`█████░░░░░░░░░░░░░░░` `25.8% (8/31)` | **`388.57 ± 12.43` chars (`0%` Truncation)** ✨<br>`323.61 ± 181.14` chars (`89.9%` `≤500` pass)<br>`428.61 ± 206.17` chars (`74.2%` `≤500` pass) |
+| **4. Dual-Trigger Budget Guard ↑**<br>*(`Use when` + `Do NOT use` across `N=109`)* | **BoostX `v3.3.0` Suite (`N = 14`)**<br>All Installed Host Skills (`N = 109`)<br>Official Cloud/Vendor Skills (`N = 31`) | `████████████████████` **`100.0% (14/14)`**<br>`██████░░░░░░░░░░░░░░` `29.4% (32/109)`<br>`█████░░░░░░░░░░░░░░░` `25.8% (8/31)` | **`371.29 ± 14.84` chars (`0%` Truncation)** ✨<br>`323.61 ± 181.14` chars (`89.9%` `≤500` pass)<br>`428.61 ± 206.17` chars (`74.2%` `≤500` pass) |
 | **5. Verification Depth / Turn ↑**<br>*(`N = 987` Real IDE Prompt Turns)* | **Chained Multi-Skill `/x*` Turn (`N=156`)**<br>Single `/x*` Skill Turn (`N = 88`)<br>Standard Turn Without `/x*` (`N = 743`) | `████████████████████` **`61.9 Steps (2.68×)`**<br>`███████████░░░░░░░░░` `34.8 Steps (1.51×)`<br>`███████░░░░░░░░░░░░░` `23.1 Steps (1.0×)` | **`3.13M` tok/turn (`65.6k` new in, `21.3k` out)** ✨<br>`2.14M` tok/turn (`25.9k` new in, `14.4k` out)<br>`1.25M` tok/turn (`12.6k` new in, `7.4k` out) |
 
 ---
 
 ## Executive Findings: High Intelligence via High Compute
 
-1. **System-Prompt Budget Discipline (`100%` Compliance & Dual-Trigger Guards)**: Across all `14` BoostX `/x*` skills, YAML discovery descriptions average **`388.57 ± 12.43 chars`** (Median `392.0` chars, **`100.0%` within the `≤ 500` char `audit_engine.py` budget gate**) with **`100.0%` dual positive + negative (`Use when` / `Do NOT use for`) routing guards**, compared to `25.8%` dual-trigger coverage across `31` official cloud/enterprise skills.
+1. **System-Prompt Budget Discipline (`100%` Compliance & Dual-Trigger Guards)**: Across all `14` BoostX `/x*` skills, YAML discovery descriptions average **`371.29 ± 14.84 chars`** (Median `375.0` chars, **`100.0%` within the `≤ 500` char `audit_engine.py` budget gate**) with **`100.0%` dual positive + negative (`Use when` / `Do NOT use for`) routing guards**, compared to `25.8%` dual-trigger coverage across `31` official cloud/enterprise skills.
 2. **Context Noise Compression (`-97.9%` Scan Reduction)**: When briefing across multi-project repositories and the `592`-node Obsidian Second Brain (`1,222,816` tokens total), `/xbrief` (`Cap 8` Two-Pass) + `/xobsidian` (`2-Hop = 4` vault files) loads only **`30,764` tokens** (**`97.48%` noise reduction** / **`39.7×` compression**) in a median disk read time of **`0.79 ms`** (vs `40.77 ms` unbounded).
 3. **System 1 `/xlaya` Triage (`10.06 ms` Median)**: Chunking and ranking `450` fence-safe (`≤ 1,200`-char) heading sections across `20` specs completes in **`10.06 ms`** (`Mean 10.3 ± 0.69 ms`, `44,731.6 chunks/sec`), cutting Pass-B reading tokens by **`98.34%`**.
 4. **Deterministic Red-Team Defect Catch Rate (`100.0%` vs `0.0%`)**: Across `25` seeded security, Qt6/QGIS 4, research citation, doc-sync, and skill-packaging defects, the 8 CLI gates achieve **`25 / 25` (`100.0%` recall)** and **`100.0%` precision** (`0` false positives) in **`6.45 ms`**.
@@ -32,7 +32,7 @@
 
 | Skill Cohort | Count | YAML Desc Chars (`Mean ± SD` / `Median`) | `≤ 500` Char Gate Pass | Dual Trigger Guard (`Use when` + `Do NOT use`) | Full `SKILL.md` Tokens (`Mean ± SD` / `Median`) | Bundled CLI Scripts (`LOC`) |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|
-| **BoostX `v3.2.0` Suite (`/x*` Skills)** | `14` | **`388.57 ± 12.43`** (`392.0`) | **`100.0%`** | **`100.0%`** | `3,352 ± 1,324` (`3,109`) | **`8` (`4,299` LOC)** |
+| **BoostX `v3.3.0` Suite (`/x*` Skills)** | `14` | **`371.29 ± 14.84`** (`375.0`) | **`100.0%`** | **`100.0%`** | `4,160 ± 2,156` (`3,577`) | **`8` (`5,058` LOC)** |
 | **Official Cloud & Enterprise Vendor Skills** | `31` | `428.61 ± 206.17` (`373.0`) | `74.2%` | `25.8%` | `2,559 ± 1,707` (`2,474`) | `5` (`2,712` LOC) |
 | **All Installed Host Skills Pool** | `109` | `323.61 ± 181.14` (`334.0`) | `89.9%` | `29.4%` | `1,898 ± 1,693` (`1,398`) | `56` (`20,710` LOC) |
 
@@ -49,7 +49,7 @@
 \toprule
 \textbf{Skill Cohort} & \textbf{$N$} & \textbf{YAML Chars ($\mu \pm \sigma$)} & \textbf{Median} & \textbf{$\le 500$ Pass} & \textbf{Dual Guards} & \textbf{CLI Scripts (LOC)} \\
 \midrule
-\textbf{BoostX v3.2.0 Suite (\texttt{/x*})} & \textbf{14} & \textbf{$388.57 \pm 12.43$} & \textbf{$392.0$} & \textbf{$100.0\%$} & \textbf{$100.0\%$} & \textbf{8 ($4,299$)} \\
+\textbf{BoostX v3.3.0 Suite (\texttt{/x*})} & \textbf{14} & \textbf{$371.29 \pm 14.84$} & \textbf{$375.0$} & \textbf{$100.0\%$} & \textbf{$100.0\%$} & \textbf{8 ($5,058$)} \\
 Official Cloud \& Vendor Skills & 31 & $428.61 \pm 206.17$ & $373.0$ & $74.2\%$ & $25.8\%$ & 5 ($2,712$) \\
 All Installed Host Skills Pool & 109 & $323.61 \pm 181.14$ & $334.0$ & $89.9\%$ & $29.4\%$ & 56 ($20,710$) \\
 \bottomrule

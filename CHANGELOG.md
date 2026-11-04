@@ -1,5 +1,34 @@
 # Changelog
 
+## v3.3.0
+
+- **Context-Conditioned Single-Layer Universal First-Principles Laws (`UL-01..UL-08` in `skills/xboost/references/deep_audit_protocol.md`)**:
+  - **`UL-01` (Bracketed Support, Scale Conditioning & Graph-Cut Isolation)**: Enforces exact bracketed domain support (`x_left ≤ x ≤ x_right`), explicit scale conditioning, and `0.0` future/cross-cut information leakage across partition boundaries.
+  - **`UL-02` (Exact-Condition Refinement & Absorbing Failure Precedence)**: Enforces exact predicate refinement on candidate sets (`S_exact = {x ∈ S_cand : P(x)}`) and pessimistic absorbing failure tie-breaking (`Failure > Success`).
+  - **`UL-03` (Step-Measure Scaling Convergence & Zero-Forcing Equilibrium Identity)**: Enforces theoretical step-measure convergence order (`O(Δμ^p)`) and exact zero-forcing equilibrium identity (`Δx = 0 ⇒ Δy = 0.0 / y == y_eq` with `0` `NaN`/`Inf`).
+  - **`UL-04` (Extensive Partition, Remainder Conservation & Intended Peer-Branch Routing Completeness)**: Enforces extensive conservation (`∑ Child_k + Remainder ≈ Parent`) and peer-branch routing completeness (`K_peer ⊆ K_eval`, `0` blocking-`continue` drops).
+  - **`UL-05` (Bidirectional Counter-Anchors, Strict Feasibility Dominance & Goal-Matched Objective/Constraint Polarity)**: Pairs simultaneous positive and negative counter-anchors (`A_pos ∧ A_neg`) with strict feasibility dominance (`J(x_infeas) ≺ J(x_feas)`), non-zero marginal sensitivity (`|∂J/∂M| > 0`) on unbounded objectives, goal-matched dispersion (`symmetric MSE/σ` for setpoint tracking vs `one-sided σ_fail` for directional goals), and role-matched `binary / continuous / budgeted` constraints.
+  - **`UL-06` (Piece-Wise Codomain Reachability, Marginal Seam Scaling Order & Non-Degeneracy)**: Verifies live reachability of every declared codomain branch (`count(Branch_k) > 0`), interior marginal seam scaling (`|ΔY(α_2)/ΔY(α_1)| ≈ (α_2/α_1)^p_theory` without accidental `α²` double-application), and non-degeneracy.
+  - **`UL-07` (Read-Only Feature-Stream Decoupling, Cache Idempotency & Post-Gate Non-Regression)**: Prevents in-place feature-stream mutation and cache compounding (`0` `T(T(x))` double-transforms) while locking post-gate non-regression.
+  - **`UL-08` (Live-Entrypoint Parity, Active-Regime Sensitivity & Bounded Complexity)**: Requires testing the live production entrypoint directly (`∃ x ∈ Active_Regime(X) : ΔY ≠ 0`, `N_proc == N_exp`, `source != "fallback"`) under bounded asymptotic complexity.
+- **`/xdeep-research` Wave 2.5 Rejected-Candidate Graveyard & Zero-Retrain Counterfactual Ablation Forensics**:
+  - Mandates inspecting existing pruning logs, rejected candidate archives, and post-processing dampers via zero-retrain counterfactual ablation before proposing new external architectures or expensive retraining loops.
+- **`/xultra` Two-Stage Evolutionary Ratchet (`Stage A → Stage B`)**:
+  - **Stage A (Zero-Retrain Post-Processing Audit)**: Audits existing model/solver states (`0` retraining cost) for unintended post-processing throttles (`UL-04..UL-07`) to lock `Floor_StageA ≥ Floor_0`.
+  - **Stage B (Warm-Start Evolutionary Generations `1..T`)**: Runs warm-start evolutionary generations seeded from the Stage A champion while strictly enforcing `Pass_Set(t+1) ⊇ Pass_Set(StageA)`.
+- **`/xcreate-skill` Mode C (`Post-Session Skill Evolution, Universal Law Ratchet & Pre-Proposal Sieve`) & `5-Gate Universal Law Falsification Protocol`**:
+  - Enforces **Agent-Process Law vs. Domain-Equation Inversion**, the **Global CLI Script Ban** (zero project-specific domain math inside global `skills/*/scripts/*.py`), a mandatory **Pruned Project-Specific Ideas** ledger, a **3-Domain Translation Proof Table** (`Archetypes A × B × C`), and a **7-Point Mathematical Boundary Table** before proposing or editing any global skill.
+- **`/xpublish-audit` (`audit_engine.py` `822` LOC across `8` CLI Engines / `5,058` Total LOC) & YAML Budget Compression (`371.29 ± 14.84` Chars)**:
+  - Upgraded `audit_engine.py` with **Gate 3 Over-Specific Law Detector (`Check 4B`)**, **`≤ 500`-Line Sprawl Gate (`Check 4C`)**, **Raw LaTeX Macro Scanner (`Check 4D`)**, and the **Tri-OS Native Clipboard Protocol (`CF_UNICODETEXT` / `pbcopy` / `wl-copy`)**.
+  - Tightened all `14` BoostX `/x*` skill YAML discovery descriptions to **`371.29 ± 14.84` chars** (`Median 375.0`, range `328–389` chars, `100.0%` within `≤ 400`-char target and `≤ 500`-char gate, `1,348` total discovery tokens).
+
+### Install
+
+See README. Tag: `v3.3.0`.
+```bash
+git clone --branch v3.3.0 https://github.com/iscvlab/boostx.git
+```
+
 ## v3.2.0
 
 - **Prefix `/x*` Namespace Migration & `/xocr` Hybrid PDF/Table Engine (`14 Composable Skills` & `8 Bundled CLI Engines`) — Instant `/x` Autocomplete Discovery**:

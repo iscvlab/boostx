@@ -20,13 +20,13 @@ Operate an AI-first Obsidian Second Brain structured as a **Flat-Root 2-Hop Smal
 
 Never hardcode vault folder names, project names, or machine user paths. Whenever `/xobsidian` is invoked (standalone or in a skill combination), resolve `VAULT_ROOT` and the Hop-0 Index Router dynamically using this 2-tier stdlib resolver:
 
-1. **Tier 1 — OS-Native Obsidian Global Registry (`obsidian.json`)**:
+1. **Tier 1 — Local & Sibling `.obsidian/` Marker Discovery (Workspace-First)**:
+   * Check whether the current working directory itself or any immediate child/sibling directory up to 2 parent levels (`./.obsidian`, `./*/.obsidian`, `../*/.obsidian`, `../../*/.obsidian`) contains an `.obsidian/` folder. This ensures workspace-local vaults are preferred over unrelated global entries.
+2. **Tier 2 — OS-Native Obsidian Global Registry (`obsidian.json`)**:
    * **Windows**: `%APPDATA%/obsidian/obsidian.json`
    * **macOS**: `~/Library/Application Support/obsidian/obsidian.json`
    * **Linux**: `~/.config/obsidian/obsidian.json`
    * Select the registered vault directory with `"open": true` (or most recent timestamp `ts`) that exists on disk.
-2. **Tier 2 — Upward & Sibling `.obsidian/` Marker Fallback**:
-   * If `obsidian.json` is unavailable, scan the current working directory and up to 2 parent levels (`./*`, `../*`, `../../*`) for any directory containing an `.obsidian/` configuration folder.
 3. **Hop-0 Router Discovery**:
    * Inside `VAULT_ROOT`, locate the root index router matching `00 *Index*.md` (or `00_*.md`).
 
@@ -36,33 +36,36 @@ sys.dont_write_bytecode = True
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-appdata = os.environ.get("APPDATA", "").strip()
-candidates = (
-    ([pathlib.Path(appdata) / "obsidian/obsidian.json"] if appdata else [])
-    + [
-        pathlib.Path.home() / "Library/Application Support/obsidian/obsidian.json",
-        pathlib.Path.home() / ".config/obsidian/obsidian.json",
-    ]
-)
 vault = None
-for cfg in candidates:
-    if cfg.is_file():
-        v_map = json.loads(cfg.read_text(encoding="utf-8")).get("vaults", {})
-        ranked = sorted(v_map.values(), key=lambda v: (bool(v.get("open")), v.get("ts", 0)), reverse=True)
-        for item in ranked:
-            p = pathlib.Path(item.get("path", ""))
-            if p.is_dir():
-                vault = p
-                break
-    if vault:
+for base in [pathlib.Path.cwd(), *pathlib.Path.cwd().parents[:2]]:
+    if (base / ".obsidian").is_dir():
+        vault = base
+        break
+    found = [d.parent for d in base.glob("*/.obsidian") if d.is_dir()]
+    if found:
+        vault = found[0]
         break
 if not vault:
-    for base in [pathlib.Path.cwd(), *pathlib.Path.cwd().parents[:2]]:
-        found = [d.parent for d in base.glob("*/.obsidian") if d.is_dir()]
-        if found:
-            vault = found[0]
+    appdata = os.environ.get("APPDATA", "").strip()
+    candidates = (
+        ([pathlib.Path(appdata) / "obsidian/obsidian.json"] if appdata else [])
+        + [
+            pathlib.Path.home() / "Library/Application Support/obsidian/obsidian.json",
+            pathlib.Path.home() / ".config/obsidian/obsidian.json",
+        ]
+    )
+    for cfg in candidates:
+        if cfg.is_file():
+            v_map = json.loads(cfg.read_text(encoding="utf-8")).get("vaults", {})
+            ranked = sorted(v_map.values(), key=lambda v: (bool(v.get("open")), v.get("ts", 0)), reverse=True)
+            for item in ranked:
+                p = pathlib.Path(item.get("path", ""))
+                if p.is_dir():
+                    vault = p
+                    break
+        if vault:
             break
-routers = sorted(vault.glob("00*Index*.md")) if vault else []
+routers = sorted(list(vault.glob("00*Index*.md")) + list(vault.glob("00_*.md"))) if vault else []
 print("VAULT_ROOT:", vault)
 print("HOP0_ROUTER:", routers[0] if routers else None)
 ```
@@ -102,8 +105,8 @@ Whenever creating or updating notes in `VAULT_ROOT`, enforce all five invariants
 
 1. **Zero Ephemeral Repo Duplication**:
    * Never copy transient project schedules, sprint task lists, or local repo file trees into the vault. Store only **reusable domain knowledge**: equations, SI unit bridges, standards, verified case studies, reusable code/component contracts, and empirical parameters.
-2. **Strict Frontmatter & Tag Schema**:
-   * Every note must begin with YAML frontmatter declaring `title`, `type`, `domain`, and hierarchical `tags` (`tier/hub`, `tier/method`, `tier/asset`, or `tier/package`, plus `domain/*` and `status/verified`).
+2. **Strict Frontmatter & Tag Schema (Inherit Active Vault Convention)**:
+   * Every note must begin with YAML frontmatter inheriting the active vault's established schema (e.g., `role / tier / domain / hub / status` or `title / type / domain`, plus hierarchical `tags` such as `tier/hub`, `tier/method`, `tier/asset`, `tier/package`, `domain/*`, and `status/verified`).
 3. **Unique Neighborhood Signature Invariant (`0` Parachutes)**:
    * Never batch-generate leaf notes that link only to the same parent hub or share identical `[[wikilink]]` sets (which causes Force-Atlas-2 graph layout engines to collapse them into artificial peripheral "parachute" arcs).
    * Every atomic note must link to:
@@ -124,12 +127,17 @@ v = pathlib.Path("<VAULT_ROOT>")
 notes = {p.stem: p.read_text(encoding="utf-8") for p in v.glob("*.md")}
 adj = {k: set() for k in notes}
 broken = []
+media_exts = (".png", ".jpg", ".jpeg", ".svg", ".gif", ".webp", ".pdf", ".mp4", ".csv")
 for src, txt in notes.items():
-    for raw in re.findall(r"\[\[([^\]]+)\]\]", txt):
+    clean = re.sub(r"(\x60{3,}|~{3,})[\s\S]*?\1", "", txt)
+    clean = re.sub(r"\x60[^\x60\n]+\x60", "", clean)
+    for raw in re.findall(r"(?<!!)\[\[([^\]]+)\]\]", clean):
         dst = raw.split("|")[0].split("#")[0].strip()
-        if dst and dst not in notes:
+        if not dst or dst.lower().endswith(media_exts):
+            continue
+        if dst not in notes:
             broken.append((src, dst))
-        elif dst and dst != src:
+        elif dst != src:
             adj[src].add(dst)
             adj[dst].add(src)
 orphans = [k for k, nb in adj.items() if not nb]

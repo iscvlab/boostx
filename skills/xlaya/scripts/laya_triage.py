@@ -219,8 +219,20 @@ def collect_target_files(paths: List[str], pattern: str = "*.md") -> List[Path]:
                 seen.add(p)
                 resolved.append(p)
         elif p.is_dir():
+            excluded_parts = {
+                ".git",
+                "node_modules",
+                ".venv",
+                "venv",
+                "env",
+                "dist",
+                "build",
+                "__pycache__",
+                ".obsidian",
+                ".pytest_cache",
+            }
             for child in sorted(p.rglob(pattern)):
-                if child.is_file() and ".git" not in child.parts and "node_modules" not in child.parts:
+                if child.is_file() and not any(part in excluded_parts for part in child.parts):
                     if child not in seen:
                         seen.add(child)
                         resolved.append(child)
@@ -267,7 +279,7 @@ def fallback_evaluate(
             results.append({**ch, "score": score_val, "noul": 0.0, "confidence": 0.5, "engine": "fallback"})
         elif mode == "contradiction":
             hits = sum(1 for t in query_terms if t in text_lower)
-            noul_val = round(min(1.0, hits / max(1, len(query_terms)) * 0.5), 3)
+            noul_val = round(min(1.0, hits / max(1, len(query_terms))), 3)
             results.append({**ch, "score": 0.0, "noul": noul_val, "confidence": 0.5, "engine": "fallback"})
         elif mode == "classify":
             best_label = next(iter(labels.keys()), "unknown")
@@ -464,8 +476,8 @@ def main() -> int:
     parser.add_argument(
         "--max-chunks",
         type=int,
-        default=64,
-        help="Maximum number of chunks to evaluate in one pass (default: 64)",
+        default=512,
+        help="Maximum number of chunks to evaluate in one pass (default: 512)",
     )
     parser.add_argument(
         "--top-k",

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-BoostX v3.2.0 — Reproducible Multi-Trial Empirical Benchmark Suite.
+BoostX v3.3.0 — Reproducible Multi-Trial Empirical Benchmark Suite.
 Executes 6 falsifiable experiments across real installed skills, multi-workspace
 corpora, 25 seeded red-team defects, and historical IDE conversation transcripts:
-  Exp 1: Skill Frontmatter & Context Budget Audit (BoostX 13 vs Official Cloud/Vendor Skills)
+  Exp 1: Skill Frontmatter & Context Budget Audit (BoostX 14 vs Official Cloud/Vendor Skills)
   Exp 2: Context Compression & 2-Hop Vault Isolation (3 Warm-ups + 30 Timed Trials)
   Exp 3: System 1 Section Triage & Contradiction Speed (/xlaya, 3 Warm-ups + 30 Timed Trials)
   Exp 4: 25-Defect Red-Team Catch Rate & CLI Gate Latency (3 Warm-ups + 20 Timed Trials)
@@ -40,6 +40,7 @@ BOOSTX_13_NAMES = [
     "xkickoff",
     "xlaya",
     "xobsidian",
+    "xocr",
     "xplan",
     "xpublish-audit",
     "xpublish-qgis",
@@ -219,7 +220,7 @@ def run_exp1_skill_discovery_audit() -> Dict[str, Any]:
 
     return {
         "total_installed_skills_scanned": len(all_parsed),
-        "boostx_13": summarize_group("BoostX v3.2.0 Suite (13 Composable /x* Skills)", bx_parsed),
+        "boostx_13": summarize_group("BoostX v3.3.0 Suite (14 Composable /x* Skills)", bx_parsed),
         "official_enterprise": summarize_group(
             f"Official Cloud & Enterprise Vendor Skills (N={len(ent_parsed)})", ent_parsed
         ),
@@ -669,11 +670,12 @@ def run_exp6_transcript_token_economics() -> Dict[str, Any]:
 
     bx_triggers = [
         "/xboost", "/xbrief", "/xcontext", "/xcreate-skill", "/xdeep-research",
-        "/xkickoff", "/xlaya", "/xobsidian", "/xplan", "/xpublish-audit",
+        "/xkickoff", "/xlaya", "/xobsidian", "/xocr", "/xplan", "/xpublish-audit",
         "/xpublish-qgis", "/xsync", "/xultra", "/xresearch",
         "/boostx", "/briefx", "/brief", "/deep-researchx", "/deep-research",
         "/researchx", "/syncx", "/update-doc", "/planx", "/plan",
-        "/obsidianx", "/layax", "/publishx-audit", "/publishx-qgis",
+        "/obsidianx", "/layax", "/ocrx", "/ocr", "/unlimited-ocr",
+        "/publishx-audit", "/publishx-qgis",
         "/contextx", "/kickoffx", "/create-skillx", "/ultrax", "/ultra",
     ]
 
@@ -895,11 +897,11 @@ def build_exp5_composable_ablation(
             "recommended_tier": "5× Max Tier (Claude Max 5× / Gemini 5×)",
         },
         {
-            "level": "Level 3: Full 5-Stage Lifecycle + System 1 + 7 CLI Gates",
+            "level": "Level 3: Full 5-Stage Lifecycle + System 1 + 8 CLI Gates",
             "command": "/xbrief /xdeep-research /xboost /xsync /xlaya + /xpublish-audit",
             "context_scan_tokens": cmb_tok,
             "vault_nodes_routed": exp2["vault_md_files_available"],
-            "cli_gates_active": 7,
+            "cli_gates_active": 8,
             "seeded_defect_catch_pct": exp4["boostx_recall_pct"],
             "local_cli_and_triage_ms": round(laya_ms + cli_ms, 2),
             "avg_steps_per_session": exp6["per_session"]["chained_multi_skill"]["steps"]["mean"],
@@ -937,7 +939,7 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
     cb = e4["category_breakdown"]
 
     lines = [
-        "# BoostX (`v3.2.0`) — Empirical Benchmark & Token Economics Report",
+        "# BoostX (`v3.3.0`) — Empirical Benchmark & Token Economics Report",
         "",
         "> **Reproducible Verification Harness**: Generated deterministically by "
         "[`benchmarks/run_boostx_benchmark.py`](./run_boostx_benchmark.py)  ",
@@ -976,7 +978,7 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         f"**`{e3['pass_b_token_reduction_pct']}%`**.",
         f"4. **Deterministic Red-Team Defect Catch Rate (`{e4['boostx_recall_pct']}%` vs `0.0%`)**: "
         "Across `25` seeded security, Qt6/QGIS 4, research citation, doc-sync, and skill-packaging defects, "
-        f"the 7 zero-dependency CLI gates achieve **`{e4['boostx_cli_suite_caught']} / 25` "
+        f"the 8 CLI gates achieve **`{e4['boostx_cli_suite_caught']} / 25` "
         f"(`{e4['boostx_recall_pct']}%` recall)** and **`{e4['boostx_precision_pct']}%` precision** "
         f"(`{e4['clean_control_false_positives']}` false positives) in "
         f"**`{e4['suite_execution_latency_ms']['median']} ms`**.",
@@ -1001,7 +1003,7 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         "Dual Trigger Guard (`Use when` + `Do NOT use`) | Full `SKILL.md` Tokens (`Mean ± SD` / `Median`) | "
         "Bundled CLI Scripts (`LOC`) |",
         "|:---|:---:|:---:|:---:|:---:|:---:|:---:|",
-        f"| **BoostX `v3.2.0` Suite (`/x*` Skills)** | `{bx1['count']}` | "
+        f"| **BoostX `v3.3.0` Suite (`/x*` Skills)** | `{bx1['count']}` | "
         f"**`{bx1['desc_chars']['mean']} ± {bx1['desc_chars']['std']}`** (`{bx1['desc_chars']['median']}`) | "
         f"**`{bx1['budget_500_compliance_pct']}%`** | **`{bx1['dual_trigger_guard_pct']}%`** | "
         f"`{bx1['body_tokens']['mean']:,.0f} ± {bx1['body_tokens']['std']:,.0f}` "
@@ -1019,8 +1021,6 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         f"`{all1['body_tokens']['mean']:,.0f} ± {all1['body_tokens']['std']:,.0f}` "
         f"(`{all1['body_tokens']['median']:,.0f}`) | "
         f"`{all1['bundled_cli_scripts']}` (`{all1['bundled_cli_loc']:,}` LOC) |",
-        "",
-        "![Figure 1: Skill Discovery & Trigger Guard Compliance](../docs/assets/fig1_discovery_distribution.svg)",
         "",
         "---",
         "",
@@ -1064,9 +1064,6 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         f"| **Chunk Evaluation Throughput** | **`{e3['throughput_chunks_per_sec']:,.1f}` chunks / sec** "
         f"(`{e3['backend']}`) |",
         "",
-        "![Figure 2: Context Window Compression & /xlaya Section Triage Latency]"
-        "(../docs/assets/fig2_compression_latency.svg)",
-        "",
         "---",
         "",
         f"## Experiment 4: 25-Defect Red-Team Injection Suite "
@@ -1091,7 +1088,7 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         "| `0 / 5` | `audit_engine.py --platform skill` | "
         f"**`{cb['cat5_skill_budget_and_hygiene']['caught']} / 5` (`100%`)** |",
         f"| **Total Recall / Precision / Latency (`N = {e4['trials']}`)** | **`0 / 25` (`0.0%`)** | "
-        "**All 7 BoostX Zero-Dependency CLI Gates** | "
+        "**All 8 BoostX CLI Gates** | "
         f"**`{e4['boostx_cli_suite_caught']} / 25` (`{e4['boostx_recall_pct']}%` Recall • "
         f"`{e4['boostx_precision_pct']}%` Precision • "
         f"Median `{e4['suite_execution_latency_ms']['median']} ms`)** |",
@@ -1114,9 +1111,6 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         )
 
     lines.extend([
-        "",
-        "![Figure 3: 25-Defect Red-Team Recall & Composable Workflow Ablation]"
-        "(../docs/assets/fig3_ablation_redteam.svg)",
         "",
         "---",
         "",
@@ -1168,7 +1162,7 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         f"**`{t_m['total_processed_tokens']['mean']:,.0f}`** "
         f"*(Med `{t_m['total_processed_tokens']['median']:,.0f}`)* |",
         "",
-        "### B. Full Multi-Turn Session Telemetry (`N = 65` Complete Sessions)",
+        "### B. Full Multi-Turn Session Telemetry (`N = 214` Complete Sessions)",
         "",
         "| Session Class | Sample Size | Steps / Session (`Mean` / `Median` / `P90`) | "
         "Uncached Input (`Mean` / `Median`) | KV-Cache Read (`Mean` / `Median`) | "
@@ -1229,20 +1223,18 @@ def generate_markdown_report(results: Dict[str, Any]) -> str:
         "Engineered for `400+`-step autonomous sessions (`~340k` uncached input, `~166k` output, "
         "`~22.6M` cumulative session tokens + parallel subagent swarms). |",
         "",
-        "![Figure 4: Per-Turn & Full-Session Token Distributions](../docs/assets/fig4_token_distributions.svg)",
-        "",
     ])
     return "\n".join(lines)
 
 
 def main() -> int:
-    print("🚀 Running BoostX v3.2.0 Reproducible 6-Experiment Benchmark Suite...")
+    print("🚀 Running BoostX v3.3.0 Reproducible 6-Experiment Benchmark Suite...")
     t_start = time.perf_counter()
 
     exp1 = run_exp1_skill_discovery_audit()
     print(
         f"  ✓ Exp 1 (Skill Budget Audit): Scanned {exp1['total_installed_skills_scanned']} skills "
-        f"(BoostX 13 mean desc: {exp1['boostx_13']['desc_chars']['mean']} chars, "
+        f"(BoostX 14 mean desc: {exp1['boostx_13']['desc_chars']['mean']} chars, "
         f"{exp1['boostx_13']['budget_500_compliance_pct']}% <=500 gate, "
         f"{exp1['boostx_13']['dual_trigger_guard_pct']}% dual triggers)"
     )
@@ -1282,7 +1274,7 @@ def main() -> int:
 
     elapsed = round(time.perf_counter() - t_start, 2)
     results = {
-        "benchmark_version": "3.2.0",
+        "benchmark_version": "3.3.0",
         "elapsed_wall_seconds": elapsed,
         "exp1_skill_discovery": exp1,
         "exp2_context_compression": exp2,

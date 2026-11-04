@@ -47,7 +47,6 @@ Use these 5 canonical terms in public documentation and deliverables:
 Do not write LIVE, Published, or 1-click install without a verifiable receipt (URL, version table, or installer). [`/xpublish-audit`](../xpublish-audit/SKILL.md) advises on these terms; this skill owns their formal definitions.
 
 ### Formatting and Typography Rules
-* **No Em or En Dashes**: Use standard ASCII hyphens `-` in all user-facing lines and generated documentation.
 * **Strict Zero-LaTeX Math Policy**: In markdown docs, HTML, and chat responses, NEVER use LaTeX math delimiters (such as inline or block dollar math, `\times`, `\rightarrow`). ALWAYS use direct native Unicode symbols: `→`, `←`, `↔`, `•`, `✓`, `✨`, `²`, `³`, `°`, `×`, `÷`, `±`, `≈`, `≤`, `≥`.
 * **Diagrams and Visuals**: Fenced Mermaid blocks (` ```mermaid ... ``` `) for workflows; clean GFM tables with outer pipes (`| Col 1 | Col 2 |`). Zero ASCII box art in documentation.
 
@@ -59,12 +58,12 @@ When two or more documents contradict each other, resolve the discrepancy using 
 
 ```mermaid
 flowchart TD
-    A["Level 1: Verified Non-Fallback Code & Runtime Receipts (Passing Stage 3 Wave 2, source != fallback, N_proc == N_exp)"] -->|Overrides| B["Level 2: Canonical SSOT & Latest Version (Master specs, roadmaps, *_vLatest)"]
+    A["Level 1: Verified Code, Schemas & Non-Fallback Runtime Receipts (Passing Stage 3 Wave 2)"] -->|Overrides| B["Level 2: Canonical SSOT & Latest Version (Master specs, roadmaps, *_vLatest)"]
     B -->|Overrides| C["Level 3: Current Session User Locks (Explicit decisions in active chat)"]
     C -->|Overrides| D["Level 4: Iterative Drafts & Historical Notes (Working notes, older versions)"]
 ```
 
-1. **Level 1 (Verified Non-Fallback Code & Runtime Receipts)**: Source code constants, database tables, test assertions, and generated data files that have **passed Stage 3 Wave 2 verification (`source != "fallback"`, `N_processed == N_expected`, and `UL-04` partition conservation `∑ Child_k + Remainder == Parent`)** strictly override written Markdown prose. Unverified or fallback-truncated outputs never override locked specifications.
+1. **Level 1 (Verified Code, Schemas & Non-Fallback Runtime Receipts)**: Source code constants, database schemas, test assertions, and generated data artifacts that have **passed Stage 3 Wave 2 verification** (with `source != "fallback"`, `N_processed == N_expected`, and `UL-04` extensive partition conservation `∑ Child_k + Remainder ≈ Parent` for data/solver pipelines) strictly override written Markdown prose. Unverified or fallback-truncated outputs never override locked specifications.
 2. **Level 2 (Canonical SSOT & Version Leaders)**: Master architectural plans, specifications, and latest version files (`*_v5`) strictly override older iterative drafts (`*_v4`, `*_v3`).
 3. **Level 3 (Current Session User Lock)**: Decisions locked by the user in the current conversation override older written documentation across all tiers.
 4. **Level 4 (Conflict Quarantine)**: If two top-tier specs have an unresolved structural contradiction not addressed in the chat, **do not guess**. Quarantine the conflict in a `Conflict Ledger` and halt for user confirmation.
@@ -124,7 +123,7 @@ Classify every discovered file into the 5-tier architecture:
 Apply updates systematically from the inside out (Tier 1-2 → Tier 3 → Tier 4 → Tier 5) using surgical `edit_file` (`replace_file_content`) replacements:
 
 1. **Inner Specs First**: Update code signatures, parameter tables, and module READMEs to anchor local truth.
-2. **Ground-Truth, Partition Conservation (`UL-04`) & Non-Fallback Provenance Check**: Before writing a technical metric or breakdown table into high-level docs, run a 1-line check against the actual artifact (e.g. SQLite query, checking `df.shape`, reading JSON/CSV headers, or inspecting code constants) and verify **non-fallback provenance (`source != "fallback"`), full expected coverage (`N_processed == N_expected`), and closed-system partition conservation (`∑ Child_Rows + Remainder == Parent_Total`, `UL-04`)** ([`deep_audit_protocol.md`](../xboost/references/deep_audit_protocol.md)). Never propagate unverified claims or metrics from truncated/fallback runs.
+2. **Ground-Truth & Non-Fallback Provenance Check**: Before writing a technical metric or breakdown table into high-level docs, run a 1-line check against the actual artifact (e.g. SQLite query, checking `df.shape`, reading JSON/CSV headers, or inspecting code constants) and—for quantitative, dataset, or solver outputs—verify **non-fallback provenance (`source != "fallback"`), full expected coverage (`N_processed == N_expected`), and extensive partition conservation (`∑ Child_Rows + Remainder ≈ Parent_Total`, `UL-04`)** ([`deep_audit_protocol.md`](../xboost/references/deep_audit_protocol.md)). Never propagate unverified claims or metrics from truncated/fallback runs.
 3. **Pipelines and Architecture**: Update system flowcharts, roadmaps, and workspace indices.
 4. **Interactive HTML Deliverable Parity**:
    * *DOM Structure*: Verify that container counts (e.g. `<section class="slide">`, `.card`) match the upgraded narrative or data model.

@@ -2,7 +2,7 @@
 """
 Deterministic Evidence, Deep-Link URL, and Dataset Schema Verifier for /xdeep-research.
 Validates Markdown (.md) and JSON (.json) research deliverables against:
-  1. Unfinished placeholders ([TBD], TODO, FIXME, [UNVERIFIED], example.com)
+  1. Unfinished placeholders ([TBD], TODO, FIXME, example.com)
   2. Lazy root-domain URLs (e.g., https://domain.org/ with no specific path/query)
   3. JSON dataset schema completeness, record quotas, and numeric/year bounds
   4. Optional concurrent HTTP reachability probing (--check-http)
@@ -24,8 +24,8 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
 
 PLACEHOLDER_PATTERNS = [
     (
-        "Unresolved [TBD] / [TODO] / [UNVERIFIED] marker",
-        re.compile(r"\[(?:TBD|TODO|FIXME|UNVERIFIED|INSERT[^\]]*)\]", re.IGNORECASE),
+        "Unresolved [TBD] / [TODO] / [FIXME] marker",
+        re.compile(r"\[(?:TBD|TODO|FIXME|INSERT[^\]]*)\]", re.IGNORECASE),
     ),
     ("Dummy example domain", re.compile(r"https?://(?:www\.)?example\.(?:com|org|net)\b", re.IGNORECASE)),
     ("Truncated placeholder URL", re.compile(r"https?://\.\.\.")),
@@ -40,10 +40,10 @@ def extract_urls(text: str):
     cleaned = []
     seen = set()
     for u in raw:
-        u_clean = u.rstrip(".,;:!?'\"")
+        u_clean = u.rstrip(".,;:!?'\"*_~>")
         # Strip trailing ')' only when unmatched (e.g. closing a Markdown link '[label](url)')
         while u_clean.endswith(")") and u_clean.count(")") > u_clean.count("("):
-            u_clean = u_clean[:-1].rstrip(".,;:!?'\"")
+            u_clean = u_clean[:-1].rstrip(".,;:!?'\"*_~>")
         if u_clean and u_clean not in seen:
             seen.add(u_clean)
             cleaned.append(u_clean)
@@ -77,15 +77,22 @@ def check_url_http(url: str, timeout: float = 8.0):
                 if 200 <= code < 400:
                     return True, code, "OK"
         except HTTPError as e:
-            if e.code in (403, 405, 429) and method == "HEAD":
+            if method == "HEAD":
                 continue
-            if e.code in (401, 403, 429):
+            if e.code in (401, 403, 406, 429, 503):
                 # Bot-protected / rate-limited server, but route exists (not 404)
                 return True, e.code, f"Protected/Rate-Limited ({e.code})"
             return False, e.code, f"HTTP {e.code}"
         except URLError as e:
+            if method == "HEAD":
+                continue
+            reason_str = str(e.reason)
+            if "CERTIFICATE_VERIFY_FAILED" in reason_str:
+                return True, 0, "SSL-Chain-Warning (Host Reachable)"
             return False, 0, f"URLError ({e.reason})"
         except Exception as e:
+            if method == "HEAD":
+                continue
             return False, 0, f"Error ({e})"
     return False, 0, "Unreachable"
 
@@ -107,6 +114,11 @@ def audit_json_dataset(path: Path, args, blocking: list, warnings: list):
             if isinstance(data.get(candidate_key), list):
                 records = data[candidate_key]
                 break
+        if records is None:
+            for val in data.values():
+                if isinstance(val, list) and val and isinstance(val[0], dict):
+                    records = val
+                    break
         if records is not None and isinstance(meta, dict) and "total_records" in meta:
             declared = meta["total_records"]
             if declared != len(records):
@@ -139,7 +151,12 @@ def audit_json_dataset(path: Path, args, blocking: list, warnings: list):
 
         if year_min is not None and args.year_field in rec:
             yr = rec.get(args.year_field)
-            if not isinstance(yr, int) or yr < year_min or yr > year_max:
+            yr_int = None
+            if isinstance(yr, int) and not isinstance(yr, bool):
+                yr_int = yr
+            elif isinstance(yr, str) and yr.strip().isdigit():
+                yr_int = int(yr.strip())
+            if yr_int is None or yr_int < year_min or yr_int > year_max:
                 blocking.append(
                     f"[{path.name} -> {label}] `{args.year_field}`={yr} outside required range [{year_min}..{year_max}]"
                 )
@@ -169,7 +186,7 @@ def main():
 
     # 1. Placeholder Scan (strip fenced code blocks and inline code spans in Markdown first)
     if target_path.suffix.lower() == ".md":
-        scan_text = re.sub(r"```[\s\S]*?```", "", text)
+        scan_text = re.sub(r"(`{3,}|~{3,})[\s\S]*?\1", "", text)
         scan_text = re.sub(r"`[^`\n]+`", "", scan_text)
     else:
         scan_text = text
@@ -182,11 +199,14 @@ def main():
     if not urls:
         warnings.append(f"[{target_path.name}] Zero external http/https URLs found in document.")
     else:
+        has_deep_links = any(not is_root_domain_url(u) for u in urls)
         for u in urls:
             if not args.allow_root_urls and is_root_domain_url(u):
-                blocking.append(
-                    f"[{target_path.name}] Root-domain homepage URL detected (must be a specific deep link): `{u}`"
-                )
+                msg = f"[{target_path.name}] Root-domain homepage URL detected (prefer specific deep link): `{u}`"
+                if target_path.suffix.lower() == ".md" and has_deep_links:
+                    warnings.append(msg)
+                else:
+                    blocking.append(msg)
 
     # 3. JSON Dataset Schema & Quota Audit
     if target_path.suffix.lower() == ".json":

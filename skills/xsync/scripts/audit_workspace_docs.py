@@ -17,6 +17,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from urllib.parse import unquote
 
 sys.dont_write_bytecode = True
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
@@ -36,7 +37,9 @@ EXCLUDED_DIRS = {
 }
 
 LATEX_CMD_RE = re.compile(r"\\(?:rightarrow|leftarrow|leftrightarrow|times|approx|pm|leq|geq)\b")
-INLINE_DOLLAR_RE = re.compile(r"(?<![\\`\w])\$(?!\s)([^$\n`]{1,80}?)(?<!\s|\\)\$(?![\w`])")
+INLINE_DOLLAR_RE = re.compile(
+    r"(?<![\\`\w])\$(?!\s|\d[\d,.]*(?:\s|$|[),.;:|]))([^$\n`|]{1,80}?)(?<!\s|\\)\$(?![\w`])"
+)
 MD_LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
 
 
@@ -50,7 +53,7 @@ def strip_code_regions(text: str, suffix: str) -> str:
     """Strip fenced code blocks, inline code spans, and HTML script/style blocks before prose scanning."""
     cleaned = text
     if suffix == ".md":
-        cleaned = re.sub(r"```[\s\S]*?```", "", cleaned)
+        cleaned = re.sub(r"(`{3,}|~{3,})[\s\S]*?\1", "", cleaned)
         cleaned = re.sub(r"``[^\n]+?``", "", cleaned)
         cleaned = re.sub(r"\[`([^`\n]+)`\]\(", r"[\1](", cleaned)
         cleaned = re.sub(r"`[^`\n]+`", "", cleaned)
@@ -88,7 +91,7 @@ def audit_workspace(args) -> int:
         return 1
 
     docs = discover_doc_files(ws_root, include_obsidian=args.include_obsidian)
-    deprecated_terms = [t.strip() for t in args.deprecated.split(",") if t.strip()]
+    deprecated_terms = [t.strip() for t in re.split(r"(?<!\d),|,(?!\d{3}\b)", args.deprecated) if t.strip()]
 
     errors = []
     warnings = []
@@ -112,10 +115,25 @@ def audit_workspace(args) -> int:
         # 1. Relative Markdown Link Verification
         if suffix == ".md":
             for m in MD_LINK_RE.finditer(prose):
-                label, target_url = m.group(1), m.group(2).strip()
-                if target_url.startswith(("http://", "https://", "mailto:", "#", "file://", "conversation://")):
+                label, raw_target = m.group(1), m.group(2).strip()
+                target_url = raw_target.split()[0].strip("<>") if raw_target else ""
+                if not target_url or target_url.startswith(
+                    (
+                        "http://",
+                        "https://",
+                        "mailto:",
+                        "#",
+                        "file://",
+                        "conversation://",
+                        "data:",
+                        "javascript:",
+                        "vscode:",
+                        "obsidian://",
+                        "/",
+                    )
+                ):
                     continue
-                clean_rel = target_url.split("#")[0].split("?")[0].strip()
+                clean_rel = unquote(target_url.split("#")[0].split("?")[0].strip())
                 if not clean_rel:
                     continue
                 resolved = (doc.parent / clean_rel).resolve()
@@ -139,7 +157,11 @@ def audit_workspace(args) -> int:
         is_historical = "changelog" in doc.name.lower() or "history" in doc.name.lower()
         if deprecated_terms and not is_historical:
             for term in deprecated_terms:
-                if term in text:
+                if term[0].isalnum() and term[-1].isalnum():
+                    matched = bool(re.search(rf"(?<!\w){re.escape(term)}(?!\w)", prose))
+                else:
+                    matched = term in prose
+                if matched:
                     deprecated_hits += 1
                     errors.append(f"[{rel_doc}] Deprecated value still present: `{term}`")
 
@@ -176,8 +198,8 @@ def audit_workspace(args) -> int:
             continue
         src_hash = sha256_bytes(src_p)
         dst_hash = sha256_bytes(dst_p)
-        rel_src = src_p.relative_to(ws_root).as_posix()
-        rel_dst = dst_p.relative_to(ws_root).as_posix()
+        rel_src = src_p.relative_to(ws_root).as_posix() if src_p.is_relative_to(ws_root) else src_p.as_posix()
+        rel_dst = dst_p.relative_to(ws_root).as_posix() if dst_p.is_relative_to(ws_root) else dst_p.as_posix()
         if src_hash == dst_hash:
             passes.append(f"Mirror SHA-256 parity verified: `{rel_src}` == `{rel_dst}`")
         else:
@@ -193,8 +215,21 @@ def audit_workspace(args) -> int:
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             check=False,
         )
+        if proc.returncode == 2 and "unrecognized arguments" in (proc.stderr or ""):
+            proc = subprocess.run(
+                [sys.executable, str(local_auditor)],
+                cwd=str(ws_root),
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                check=False,
+            )
         if proc.returncode == 0:
             passes.append("Repo-local `scripts/audit_docs.py` passed (exit code 0).")
         else:
