@@ -47,7 +47,7 @@ Public-claim **vocabulary** (LIVE, REGISTERED, PREPARED, IN PIPELINE) is owned b
    - **Context Budget Protection**: Targets descriptions ≤ 400 characters and warns on descriptions > 500 characters (schema max 1024) to prevent triggering Antigravity's system prompt context budget limit and causing other skills to be silently excluded.
    - Validates `SKILL.md` frontmatter schema (`name`, `description`).
    - Audits model-invocation disclosure (flags `disable-model-invocation: true` to prevent accidental exclusion from Antigravity IDE prompt context).
-   - Enforces POSIX forward slashes in markdown links (`[text](path/to/file)`), verifies relative link target existence, and flags raw LaTeX math macros outside code spans.
+   - Enforces POSIX forward slashes in markdown links (`[text](../xboost/SKILL.md)`), verifies relative link target existence, and flags raw LaTeX math macros outside code spans.
    - Detects arbitrary Bucket 3 quotas, over-specific session equations/probes (enforcing the 5-Gate Universal Law Falsification Protocol in [`/xcreate-skill`](../xcreate-skill/SKILL.md)), `SKILL.md` >500-line sprawl, and personal hardware/persona leaks.
 5. **Platform Invariant Enforcer (QGIS / Food4Rhino / GitHub)**:
    - QGIS: Validates `metadata.txt` (zero unescaped `%`), verifies `def classFactory(iface)` in `__init__.py`, and checks Qt6/QGIS 4 readiness via `check_qt6.py`.

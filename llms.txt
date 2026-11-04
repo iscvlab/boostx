@@ -1,0 +1,34 @@
+# BoostX (iscvlab/boostx)
+
+> Production 14-skill `/x*` AI agent engineering framework and 7 deterministic Python CLI sidecar engines for deep reasoning (`/xboost`), swarm orchestration (`/xultra`), primary-source research (`/xdeep-research`), System 1 semantic triage (`/xlaya`), Obsidian knowledge graphs (`/xobsidian`), hybrid OCR (`/xocr`), doc sync (`/xsync`), and pre-flight release audits (`/xpublish-audit`).
+
+## Core Entrypoints & Universal Install
+
+- [README.md](README.md): Architecture, benchmarks, one-prompt agent installer, and host verification matrix.
+- [scripts/install.ps1](scripts/install.ps1): Windows PowerShell installer (`./scripts/install.ps1 -All`).
+- [scripts/install.sh](scripts/install.sh): macOS and Linux installer (`./scripts/install.sh --all`).
+
+## Skills & Bundled CLI Engines
+
+- [skills/xboost/SKILL.md](skills/xboost/SKILL.md): BoostX deep reasoning, Ponytail x Deep Module design ladder, and Red-Green verification loop.
+- [skills/xultra/SKILL.md](skills/xultra/SKILL.md): Elastic Cognitive Swarm (`K`-vector tournament, evolutionary ratchet, and blind Maker-vs-Checker verification).
+- [skills/xdeep-research/SKILL.md](skills/xdeep-research/SKILL.md): 5-wave primary-source research and blind adversarial audit.
+- [skills/xdeep-research/scripts/verify_evidence.py](skills/xdeep-research/scripts/verify_evidence.py): Automated URL, citation, and evidence gate verifier.
+- [skills/xlaya/SKILL.md](skills/xlaya/SKILL.md): System 1 (`choice`, `score`, `noul`) semantic decision and conflict triage sidecar.
+- [skills/xlaya/scripts/laya_triage.py](skills/xlaya/scripts/laya_triage.py): Fence-safe `<=1,200`-char heading chunker (`#L<start>-L<end>`) and English/Multilingual `convaiinnovations/laya` runner.
+- [skills/xobsidian/SKILL.md](skills/xobsidian/SKILL.md): 2-Hop Hub + Cross-Domain Bridge knowledge graph maintenance.
+- [skills/xobsidian/scripts/audit_vault_graph.py](skills/xobsidian/scripts/audit_vault_graph.py): Wikilink, orphan, and duplicate-neighbor graph auditor.
+- [skills/xocr/SKILL.md](skills/xocr/SKILL.md): Hybrid PyMuPDF vector/table extractor, Thai PUA normalizer, and 4-tier OCR engine.
+- [skills/xocr/scripts/ocr_runner.py](skills/xocr/scripts/ocr_runner.py): CLI engine for PDF/image text and RFC-4180 CSV table extraction.
+- [skills/xplan/SKILL.md](skills/xplan/SKILL.md): Architectural implementation planner with inline grilling and verification matrices.
+- [skills/xbrief/SKILL.md](skills/xbrief/SKILL.md): Same-turn workspace architecture loader and invariant extractor.
+- [skills/xsync/SKILL.md](skills/xsync/SKILL.md): Post-change documentation synchronization and stale-reference purger.
+- [skills/xsync/scripts/audit_workspace_docs.py](skills/xsync/scripts/audit_workspace_docs.py): Automated metric, version, and dead-link scanner.
+- [skills/xpublish-audit/SKILL.md](skills/xpublish-audit/SKILL.md): Pre-flight secret, privacy, Dual-OS, and YAML discovery budget auditor.
+- [skills/xpublish-audit/scripts/audit_engine.py](skills/xpublish-audit/scripts/audit_engine.py): Zero-dependency AST/YAML/regex security and quality linter.
+- [skills/xpublish-qgis/SKILL.md](skills/xpublish-qgis/SKILL.md): Deterministic QGIS plugin release packager and Qt6/QGIS 4 verifier.
+- [skills/xpublish-qgis/scripts/package_qgis_plugin.py](skills/xpublish-qgis/scripts/package_qgis_plugin.py): Single-root ZIP builder and `metadata.txt` validator.
+- [skills/xcreate-skill/SKILL.md](skills/xcreate-skill/SKILL.md): Global skill builder, distiller, and evolutionary auditor.
+- [skills/xcontext/SKILL.md](skills/xcontext/SKILL.md): Session context window, compaction, and SQLite token telemetry inspector.
+- [skills/xcontext/scripts/check_context.py](skills/xcontext/scripts/check_context.py): Transcript and `.vscdb` token usage analyzer.
+- [skills/xkickoff/SKILL.md](skills/xkickoff/SKILL.md): End-of-session progress synthesizer and fresh-session handoff generator.

@@ -108,7 +108,7 @@ Answer these three questions before drafting or proposing edits:
 
 #### A. The Ponytail Senior Dev Filter (Rungs 1–4)
 * **Rung 1 (YAGNI / Rule Check)**: Does this actually need a new skill or rule? If the model already obeys it by default (**No-Op** in `writing-great-skills`), delete it.
-* **Rung 2 (Tool & SSOT Reuse)**: Do native tools, MCP servers, or an existing owner skill already cover this? If yes, point to the existing owner (`[label](../skill/SKILL.md)`) rather than duplicating prose.
+* **Rung 2 (Tool & SSOT Reuse)**: Do native tools, MCP servers, or an existing owner skill already cover this? If yes, point to the existing owner (`[label](../xboost/SKILL.md)`) rather than duplicating prose.
 * **Rung 3 (Structure Selection)**: Choose **Workflow Archetype** (ordered steps + completion criteria), **Task Toolkit Archetype** (independent sub-actions), or **Reference Archetype** (flat peer rules).
 * **Rung 4 (Code vs. No-Code)**: Default to **Pure Instruction (Zero Code)**. Only add `scripts/<name>.py` for deterministic, 100% domain-agnostic parsing/auditing using Python stdlib (`argparse`, `pathlib`, `json`, `re`, `ast`).
 
@@ -170,7 +170,7 @@ description: >
 > **Antigravity Schema Standardization**: Antigravity natively standardizes on `name` and `description`. Avoid non-standard fields like `argument-hint: "<task>"`, as non-standard keys can break slash autocomplete indexing in some IDE builds.
 
 #### 3. Dual-OS, Shell Escaping & Portability Invariants
-* **POSIX Forward Slashes**: Zero backslashes (`\`) inside markdown links `[...](...)`.
+* **POSIX Forward Slashes**: Zero backslashes (`\`) inside markdown links `[label](#section)`.
 * **No Hardcoded Machine User Paths**: Never hardcode `C:\Users\<User>\...` or `/Users/<username>/...`. Use relative paths (`../<skill>/SKILL.md`) or home-relative `~/` and `$env:USERPROFILE` / `%APPDATA%`.
 * **PowerShell & Bash Backtick Safety in One-Liners**: Inside `python -c "..."` double-quoted commands, never write literal backticks `` ` `` (PowerShell treats `` ` `` as an escape character and Bash treats `` `...` `` as command substitution); always use hex escape `\x60` inside regexes.
 * **UTF-8 & Bytecode Python Header Standard**: Every helper script in `scripts/*.py` must start with `sys.dont_write_bytecode = True`, `sys.stdout.reconfigure(encoding="utf-8")`, and pass `encoding="utf-8", errors="replace"` to all `subprocess.run(..., text=True)` calls.

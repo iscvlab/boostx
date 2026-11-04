@@ -6,6 +6,7 @@ param(
     [switch]$Claude,
     [switch]$Grok,
     [switch]$Agents,
+    [switch]$Codex,
     [switch]$All,
     [string]$Workspace = ""
 )
@@ -106,7 +107,7 @@ function Install-Skills([string]$TargetDir, [string]$PlatformName) {
     }
 }
 
-$noHostFlag = -not $Antigravity.IsPresent -and -not $Claude.IsPresent -and -not $Grok.IsPresent -and -not $Agents.IsPresent -and [string]::IsNullOrEmpty($Workspace)
+$noHostFlag = -not $Antigravity.IsPresent -and -not $Claude.IsPresent -and -not $Grok.IsPresent -and -not $Agents.IsPresent -and -not $Codex.IsPresent -and [string]::IsNullOrEmpty($Workspace)
 
 $geminiDir = Join-Path $env:USERPROFILE ".gemini\config\skills"
 if ($Antigravity.IsPresent -or $All.IsPresent -or ($noHostFlag -and (Test-Path (Join-Path $env:USERPROFILE ".gemini")))) {
@@ -128,9 +129,17 @@ $agentsDir = Join-Path $env:USERPROFILE ".agents\skills"
 if ($Agents.IsPresent -or $All.IsPresent -or ($noHostFlag -and (Test-Path (Join-Path $env:USERPROFILE ".agents")))) {
     Install-Skills $agentsDir "Cursor / Codex / Windsurf (.agents)"
 }
+$codexDir = Join-Path $env:USERPROFILE ".codex\skills"
+if ($Codex.IsPresent -or $All.IsPresent -or ($noHostFlag -and (Test-Path (Join-Path $env:USERPROFILE ".codex")))) {
+    Install-Skills $codexDir "Codex (.codex)"
+}
 
 if (-not [string]::IsNullOrEmpty($Workspace) -and (Test-Path $Workspace)) {
     Install-Skills (Join-Path $Workspace ".agents\skills") "Workspace .agents ($Workspace)"
+    $wsClaude = Join-Path $Workspace ".claude\skills"
+    if (Test-Path (Join-Path $Workspace ".claude") -or $Claude.IsPresent -or $All.IsPresent) {
+        Install-Skills $wsClaude "Workspace .claude ($Workspace)"
+    }
     $wsGrok = Join-Path $Workspace ".grok\skills"
     if (Test-Path (Join-Path $Workspace ".grok") -or $Grok.IsPresent) {
         Install-Skills $wsGrok "Workspace .grok ($Workspace)"

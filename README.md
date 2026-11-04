@@ -285,12 +285,12 @@ python skills/xocr/scripts/ocr_runner.py <pdf_or_image> --output ./ocr_out --mod
 
 Clone this repository, then place or link the `skills/*` folders into **your host's skill root**. Because every `SKILL.md` uses standard YAML frontmatter (`name` + `description`), the exact same files work across all hosts without modification:
 
-| Host / Agent Platform | Global Skill Root | Workspace Skill Root |
-|:---|:---|:---|
-| **Claude Code** | `~/.claude/skills` | `<repo>/.claude/skills` |
-| **Grok** | `$GROK_HOME/skills` or `~/.grok/skills` | `<repo>/.grok/skills` |
-| **Gemini / Antigravity** | `~/.gemini/config/skills` | `<repo>/.agents/skills` |
-| **Cursor / Codex / Windsurf** | `~/.agents/skills` | `<repo>/.agents/skills` |
+| Host / Agent Platform | Global Skill Root | Workspace Skill Root | Verification Status |
+|:---|:---|:---|:---|
+| **Gemini / Antigravity** | `~/.gemini/config/skills` | `<repo>/.agents/skills` | **`tested`** (Live E2E verified on Windows 11 across all 14 `/x*` skills & 7 Python CLI sidecars) |
+| **Claude Code** | `~/.claude/skills` | `<repo>/.claude/skills` | **`spec-compatible`** (Path & skill schema verified via `scripts/install.ps1` & `scripts/install.sh`; live host PRs welcome) |
+| **Cursor / Codex / Windsurf** | `~/.agents/skills` / `~/.codex/skills` | `<repo>/.agents/skills` | **`spec-compatible`** (Path & skill schema verified via `scripts/install.ps1` & `scripts/install.sh`; live host PRs welcome) |
+| **Grok** | `$GROK_HOME/skills` or `~/.grok/skills` | `<repo>/.grok/skills` | **`spec-compatible`** (Path & skill schema verified via `scripts/install.ps1` & `scripts/install.sh`; live host PRs welcome) |
 
 ### Option A: Automated Multi-Host Installer (Recommended)
 
@@ -298,14 +298,14 @@ Both installers automatically remove deprecated pre-`v3.2.0` (`*x`, `unlimited-o
 
 **Windows (PowerShell):**
 ```powershell
-git clone https://github.com/iscvlab/boostx.git
+git clone https://github.com/iscvlab/boostx
 cd boostx
-.\scripts\install.ps1 -All
+./scripts/install.ps1 -All
 ```
 
 **macOS / Linux (Bash / Zsh):**
 ```bash
-git clone https://github.com/iscvlab/boostx.git
+git clone https://github.com/iscvlab/boostx
 cd boostx
 chmod +x scripts/install.sh
 ./scripts/install.sh --all
@@ -314,7 +314,7 @@ chmod +x scripts/install.sh
 ### Option B: Direct Copy into a Specific Host Root
 
 ```bash
-git clone https://github.com/iscvlab/boostx.git
+git clone https://github.com/iscvlab/boostx
 
 # Claude Code
 mkdir -p ~/.claude/skills && cp -r boostx/skills/* ~/.claude/skills/
@@ -331,7 +331,7 @@ mkdir -p .agents/skills && cp -r boostx/skills/* .agents/skills/
 
 To pin the `v3.3.0` release tag:
 ```bash
-git clone --branch v3.3.0 https://github.com/iscvlab/boostx.git
+git clone --branch v3.3.0 https://github.com/iscvlab/boostx
 ```
 
 ---
