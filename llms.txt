@@ -16,8 +16,7 @@
 - [skills/xdeep-research/scripts/verify_evidence.py](skills/xdeep-research/scripts/verify_evidence.py): Automated URL, citation, and evidence gate verifier.
 - [skills/xlaya/SKILL.md](skills/xlaya/SKILL.md): System 1 (`choice`, `score`, `noul`) semantic decision and conflict triage sidecar.
 - [skills/xlaya/scripts/laya_triage.py](skills/xlaya/scripts/laya_triage.py): Fence-safe `<=1,200`-char heading chunker (`#L<start>-L<end>`) and English/Multilingual `convaiinnovations/laya` runner.
-- [skills/xobsidian/SKILL.md](skills/xobsidian/SKILL.md): 2-Hop Hub + Cross-Domain Bridge knowledge graph maintenance.
-- [skills/xobsidian/scripts/audit_vault_graph.py](skills/xobsidian/scripts/audit_vault_graph.py): Wikilink, orphan, and duplicate-neighbor graph auditor.
+- [skills/xobsidian/SKILL.md](skills/xobsidian/SKILL.md): 2-Hop Hub + Cross-Domain Bridge knowledge graph maintenance and 1-line Graph Integrity Verification Gate.
 - [skills/xocr/SKILL.md](skills/xocr/SKILL.md): Hybrid PyMuPDF vector/table extractor, Thai PUA normalizer, and 4-tier OCR engine.
 - [skills/xocr/scripts/ocr_runner.py](skills/xocr/scripts/ocr_runner.py): CLI engine for PDF/image text and RFC-4180 CSV table extraction.
 - [skills/xplan/SKILL.md](skills/xplan/SKILL.md): Architectural implementation planner with inline grilling and verification matrices.
@@ -27,7 +26,8 @@
 - [skills/xpublish-audit/SKILL.md](skills/xpublish-audit/SKILL.md): Pre-flight secret, privacy, Dual-OS, and YAML discovery budget auditor.
 - [skills/xpublish-audit/scripts/audit_engine.py](skills/xpublish-audit/scripts/audit_engine.py): Zero-dependency AST/YAML/regex security and quality linter.
 - [skills/xpublish-qgis/SKILL.md](skills/xpublish-qgis/SKILL.md): Deterministic QGIS plugin release packager and Qt6/QGIS 4 verifier.
-- [skills/xpublish-qgis/scripts/package_qgis_plugin.py](skills/xpublish-qgis/scripts/package_qgis_plugin.py): Single-root ZIP builder and `metadata.txt` validator.
+- [skills/xpublish-qgis/scripts/package_qgis.py](skills/xpublish-qgis/scripts/package_qgis.py): Single-root ZIP builder and `metadata.txt` validator.
+- [skills/xpublish-qgis/scripts/check_qt6.py](skills/xpublish-qgis/scripts/check_qt6.py): Qt6/QGIS 4 scoped-enum AST compatibility verifier.
 - [skills/xcreate-skill/SKILL.md](skills/xcreate-skill/SKILL.md): Global skill builder, distiller, and evolutionary auditor.
 - [skills/xcontext/SKILL.md](skills/xcontext/SKILL.md): Session context window, compaction, and SQLite token telemetry inspector.
 - [skills/xcontext/scripts/check_context.py](skills/xcontext/scripts/check_context.py): Transcript and `.vscdb` token usage analyzer.
