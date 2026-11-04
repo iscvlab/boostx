@@ -1,6 +1,6 @@
 # BoostX (iscvlab/boostx)
 
-> Production 14-skill `/x*` AI agent engineering framework and 7 deterministic Python CLI sidecar engines for deep reasoning (`/xboost`), swarm orchestration (`/xultra`), primary-source research (`/xdeep-research`), System 1 semantic triage (`/xlaya`), Obsidian knowledge graphs (`/xobsidian`), hybrid OCR (`/xocr`), doc sync (`/xsync`), and pre-flight release audits (`/xpublish-audit`).
+> Production 14-skill `/x*` AI agent engineering framework and 8 deterministic Python CLI sidecar engines for deep reasoning (`/xboost`), swarm orchestration (`/xultra`), primary-source research (`/xdeep-research`), System 1 semantic triage (`/xlaya` — verified on `xerj-org/xerj#1108` cutting wrong-and-confident fires from `24.49%` to `0.00%`), Obsidian knowledge graphs (`/xobsidian`), hybrid OCR (`/xocr`), doc sync (`/xsync`), and pre-flight release audits (`/xpublish-audit`). Upstream contributions to `xerj-org/xerj` (PRs `#2922`–`#2927`) and `scb-10x/typhoon-ocr` (PR `#15`).
 
 ## Core Entrypoints & Universal Install
 
