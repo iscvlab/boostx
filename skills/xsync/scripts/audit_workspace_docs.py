@@ -35,6 +35,7 @@ EXCLUDED_DIRS = {
     ".vscode",
     ".pytest_cache",
 }
+UNSAFE_PARENT_NAMES = {"desktop", "documents", "downloads", "users", "home", ""}
 
 LATEX_CMD_RE = re.compile(r"\\(?:rightarrow|leftarrow|leftrightarrow|times|approx|pm|leq|geq)\b")
 INLINE_DOLLAR_RE = re.compile(
@@ -84,6 +85,87 @@ def discover_doc_files(workspace_root: Path, include_obsidian: bool = False) -> 
     return sorted(docs)
 
 
+def discover_federated_context(ws_root: Path, include_obsidian: bool = False) -> tuple:
+    """Discover up-tree sibling skill/protocol/profile mirrors and sister READMEs (--federated)."""
+    extra_docs = []
+    auto_mirrors = []
+    ghost_errors = []
+    parent = ws_root.parent
+    global_skills = Path.home() / ".gemini" / "config" / "skills"
+    proto_master = global_skills / "xpublish" / "references" / "github_readme_protocol.md"
+
+    is_safe_parent = (
+        parent != ws_root
+        and parent != Path.home()
+        and parent.name.lower() not in UNSAFE_PARENT_NAMES
+    )
+    candidates = [ws_root]
+    if is_safe_parent:
+        for sib in sorted(parent.iterdir()):
+            if not sib.is_dir() or sib == ws_root or sib.name.startswith(".") or sib.name in EXCLUDED_DIRS:
+                continue
+            if not include_obsidian and (sib / ".obsidian").is_dir():
+                continue
+            candidates.append(sib)
+
+    org_profile_docs = []
+    org_profile_mirrors = []
+
+    for cand in candidates:
+        # 1. Skill Tree Mirrors (skills/<name>/** <-> ~/.gemini/config/skills/<name>/**)
+        skills_sub = cand / "skills"
+        if skills_sub.is_dir() and global_skills.is_dir() and skills_sub.resolve() != global_skills.resolve():
+            if cand != ws_root:
+                extra_docs.extend(discover_doc_files(cand, include_obsidian=include_obsidian))
+            for sdir in sorted(skills_sub.iterdir()):
+                if not sdir.is_dir() or sdir.name.startswith("."):
+                    continue
+                gdir = global_skills / sdir.name
+                if not gdir.is_dir():
+                    ghost_errors.append(
+                        f"[{cand.name}/skills/{sdir.name}] Ghost skill directory not present in global skills root"
+                    )
+                    continue
+                for gfile in sorted(gdir.rglob("*")):
+                    if not gfile.is_file() or "__pycache__" in gfile.parts or gfile.suffix == ".pyc":
+                        continue
+                    rel_f = gfile.relative_to(gdir)
+                    auto_mirrors.append((gfile, sdir / rel_f))
+
+        # 2. Canonical Root Protocol Mirrors (GITHUB_PUBLISHING_PROTOCOL.md)
+        cand_proto = cand / "GITHUB_PUBLISHING_PROTOCOL.md"
+        if cand_proto.is_file():
+            if cand != ws_root:
+                extra_docs.extend(discover_doc_files(cand, include_obsidian=include_obsidian))
+            if proto_master.is_file() and cand_proto.resolve() != proto_master.resolve():
+                auto_mirrors.append((proto_master, cand_proto))
+
+        # 3. Organization Profile README Mirrors (docs/GITHUB_ORG_PROFILE_README.md <-> */profile/README.md)
+        doc_prof = cand / "docs" / "GITHUB_ORG_PROFILE_README.md"
+        if doc_prof.is_file():
+            org_profile_docs.append(doc_prof)
+        for prof_readme in cand.glob("*/profile/README.md"):
+            if prof_readme.is_file():
+                org_profile_mirrors.append(prof_readme)
+
+        # 4. First-Party Sister Git Repo Root READMEs referencing shared skill/bridge ecosystems
+        readme_p = cand / "README.md"
+        if cand != ws_root and (cand / ".git").exists() and readme_p.is_file():
+            try:
+                rtxt = readme_p.read_text(encoding="utf-8", errors="ignore")
+                if any(k in rtxt for k in ("boostx", "mcp-bridges", "/xpublish")):
+                    extra_docs.append(readme_p)
+            except OSError:
+                pass
+
+    for src_prof in org_profile_docs:
+        for dst_prof in org_profile_mirrors:
+            auto_mirrors.append((src_prof, dst_prof))
+
+    dedup_docs = sorted({p.resolve(): p for p in extra_docs}.values())
+    return dedup_docs, auto_mirrors, ghost_errors
+
+
 def audit_workspace(args) -> int:
     ws_root = Path(args.workspace).resolve()
     if not ws_root.is_dir():
@@ -91,9 +173,20 @@ def audit_workspace(args) -> int:
         return 1
 
     docs = discover_doc_files(ws_root, include_obsidian=args.include_obsidian)
+    extra_docs, fed_mirrors, fed_errors = (
+        discover_federated_context(ws_root, include_obsidian=args.include_obsidian)
+        if getattr(args, "federated", False)
+        else ([], [], [])
+    )
+    seen_paths = {p.resolve() for p in docs}
+    for ed in extra_docs:
+        if ed.resolve() not in seen_paths:
+            docs.append(ed)
+            seen_paths.add(ed.resolve())
+
     deprecated_terms = [t.strip() for t in re.split(r"(?<!\d),|,(?!\d{3}\b)", args.deprecated) if t.strip()]
 
-    errors = []
+    errors = list(fed_errors)
     warnings = []
     passes = []
 
@@ -102,7 +195,13 @@ def audit_workspace(args) -> int:
     deprecated_hits = 0
 
     for doc in docs:
-        rel_doc = doc.relative_to(ws_root).as_posix()
+        rel_doc = (
+            doc.relative_to(ws_root).as_posix()
+            if doc.is_relative_to(ws_root)
+            else doc.relative_to(ws_root.parent).as_posix()
+            if doc.is_relative_to(ws_root.parent)
+            else doc.as_posix()
+        )
         try:
             text = doc.read_text(encoding="utf-8", errors="replace")
         except Exception as e:
@@ -173,7 +272,7 @@ def audit_workspace(args) -> int:
         passes.append(f"Deprecated value sweep clean (0 hits for {deprecated_terms}).")
 
     # 4. Exact Content / SHA-256 Distribution Mirror Parity
-    mirror_pairs = []
+    mirror_pairs = list(fed_mirrors)
     for pair_str in args.mirror:
         if ":" in pair_str:
             src_s, dst_s = pair_str.split(":", 1)
@@ -279,6 +378,11 @@ def main():
         "--include-obsidian",
         action="store_true",
         help="Include directories containing .obsidian/ (use only when /xsync /xobsidian is active)",
+    )
+    parser.add_argument(
+        "--federated",
+        action="store_true",
+        help="Enable 3-Signal Bounded Up-Tree & Cross-Repo Mirror Federation across sibling repos and global skills",
     )
     args = parser.parse_args()
     sys.exit(audit_workspace(args))

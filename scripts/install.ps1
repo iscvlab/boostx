@@ -1,5 +1,5 @@
 # BoostX Composable Agent Skills Installer (Windows PowerShell)
-# Copies the 14-skill BoostX (/x*) suite into host skill roots that exist on this machine.
+# Copies the 13-skill BoostX (/x*) suite into host skill roots that exist on this machine.
 
 param(
     [switch]$Antigravity,
@@ -16,6 +16,7 @@ $ScriptDir = Split-Path -Parent $PSScriptRoot
 $SkillsSrc = Join-Path $ScriptDir "skills"
 
 $LegacyDirs = @(
+    "xpublish-audit", "xpublish-qgis",
     "boostx", "briefx", "contextx", "create-skillx", "deep-researchx",
     "kickoffx", "layax", "obsidianx", "ocrx", "planx", "publishx-audit",
     "publishx-qgis", "researchx", "syncx", "ultrax", "unlimited-ocr",
@@ -147,5 +148,5 @@ if (-not [string]::IsNullOrEmpty($Workspace) -and (Test-Path $Workspace)) {
 }
 
 Write-Host "`n============================================================" -ForegroundColor Cyan
-Write-Host "  ✓ BoostX v3.3.0 Installation Complete! All 14 /x* skills ready." -ForegroundColor Green
+Write-Host "  ✓ BoostX v3.3.0 Installation Complete! All 13 /x* skills ready." -ForegroundColor Green
 Write-Host "============================================================" -ForegroundColor Cyan

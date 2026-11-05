@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Deterministic QGIS Plugin Packaging & High-Security Release Script (/xpublish-qgis).
+Deterministic QGIS Plugin Packaging & High-Security Release Script (/xpublish --platform qgis).
 Enforces:
 1. Metadata validity & INI interpolation escaping
 2. Architecture invariant: classFactory(iface) hook in __init__.py
@@ -105,8 +105,8 @@ SECRET_PATTERNS = [
 
 PATH_PATTERNS = [
     ("Windows User Path", re.compile(r"(?i)\b([a-z]:[/\\]users[/\\](?!<)[a-zA-Z0-9_\-\.]+)")),
-    ("macOS User Path", re.compile(r"(?i)(?:^|[\s\"'`=:(])(/Users/(?!<)[a-zA-Z0-9_\-\.]+)")),
-    ("Linux Home Path", re.compile(r"(?:^|[\s\"'`=:(])(/home/(?!<)[a-z0-9_\-\.]+)")),
+    ("macOS User Path", re.compile(r"(?:^|[\s\"'`=:(])(/Users/(?!<|shared\b|runner\b)[a-zA-Z0-9_\-\.]+/)")),
+    ("Linux Home Path", re.compile(r"(?:^|[\s\"'`=:(])(/home/(?!<)[a-zA-Z0-9_\-\.]+)")),
 ]
 
 EXCLUDED_PATH_ALLOWLIST = {
@@ -143,7 +143,6 @@ def validate_metadata(meta_path: Path) -> dict:
 
     content = meta_path.read_text(encoding="utf-8", errors="ignore")
 
-    # Critical INI interpolation check
     for line_no, line in enumerate(content.splitlines(), 1):
         if "%" in line and not line.strip().startswith("#"):
             unescaped = re.search(r"(?<!%)%(?!%)", line)
@@ -165,7 +164,6 @@ def validate_metadata(meta_path: Path) -> dict:
         if field.lower() not in metadata or not metadata[field.lower()].strip():
             raise ValueError(f"Mandatory metadata field `{field}` is missing or empty.")
 
-    # Validate links (must be HTTPS and not localhost)
     for opt in ["repository", "tracker", "homepage"]:
         if opt in metadata:
             val = metadata[opt].strip()
@@ -195,7 +193,6 @@ def audit_security_and_privacy(plugin_dir: Path) -> list:
             file_path = Path(root) / f
             rel = file_path.relative_to(plugin_dir)
 
-            # 1. Text / Secret / Path Scan
             if file_path.suffix.lower() in content_suffixes or f.lower() in {".env", "env"}:
                 try:
                     text = file_path.read_text(encoding="utf-8", errors="ignore")
@@ -220,7 +217,6 @@ def audit_security_and_privacy(plugin_dir: Path) -> list:
                 except Exception as e:
                     issues.append(f"Could not read {file_path.name}: {e}")
 
-            # 2. Python AST Security Analysis
             if file_path.suffix.lower() == ".py":
                 try:
                     py_source = file_path.read_text(encoding="utf-8", errors="ignore")
@@ -228,7 +224,6 @@ def audit_security_and_privacy(plugin_dir: Path) -> list:
 
                     for node in ast.walk(tree):
                         if isinstance(node, ast.Call):
-                            # Dangerous dynamic code execution
                             if isinstance(node.func, ast.Name) and (
                                 node.func.id in {"eval", "exec", "compile", "__import__"}
                             ):
@@ -236,7 +231,6 @@ def audit_security_and_privacy(plugin_dir: Path) -> list:
                                     f"AST Security Violation at {rel}:{node.lineno}: "
                                     f"Dynamic `{node.func.id}()` execution"
                                 )
-                            # Dangerous shell / process execution
                             elif isinstance(node.func, ast.Attribute) and node.func.attr in {"system", "popen"}:
                                 if isinstance(node.func.value, ast.Name) and node.func.value.id in {"os", "posix"}:
                                     issues.append(
@@ -254,7 +248,6 @@ def audit_security_and_privacy(plugin_dir: Path) -> list:
                                             f"AST Security Violation at {rel}:{node.lineno}: "
                                             "`subprocess` with `shell=True`"
                                         )
-                            # Insecure deserialization
                             elif isinstance(node.func, ast.Attribute) and node.func.attr in {"load", "loads"}:
                                 if isinstance(node.func.value, ast.Name) and (
                                     node.func.value.id in {"pickle", "_pickle", "marshal"}
@@ -296,9 +289,15 @@ def audit_flake8_quality(plugin_dir: Path) -> list:
 
     try:
         proc = subprocess.run(
-            cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            check=False,
         )
-        output = proc.stdout.strip()
+        output = (proc.stdout or "").strip()
         if proc.returncode != 0 and output:
             return [line.strip() for line in output.splitlines() if line.strip()]
         return []
@@ -372,13 +371,11 @@ def package_plugin(
     print(f"📦 PRE-FLIGHT RELEASE PACKAGING: {plugin_dir.name}")
     print("=" * 70)
 
-    # Gate 1: Metadata validation
     print("1. Validating metadata.txt syntax & required fields...")
     metadata = validate_metadata(meta_path)
     current_version = metadata["version"]
     print(f"  ✓ Validated metadata.txt: '{metadata['name']}' v{current_version}")
 
-    # Gate 2: QGIS Architecture Invariants
     print("2. Checking QGIS plugin architecture invariants...")
     if not init_path.exists():
         raise FileNotFoundError(f"Missing mandatory `__init__.py` in {plugin_dir}")
@@ -392,7 +389,6 @@ def package_plugin(
     else:
         print("  ✓ `icon.png` verified.")
 
-    # Gate 3: Qt6 / QGIS 4 Forward-Compatibility AST Scan
     if not skip_qt6 and audit_directory_for_qt6:
         print("3. Running Qt6 / QGIS 4 forward-compatibility scan...")
         qt6_issues = audit_directory_for_qt6(plugin_dir)
@@ -407,7 +403,6 @@ def package_plugin(
             )
         print("  ✓ Qt6 / QGIS 4 compatibility: 100% COMPLIANT (Green badge verified)")
 
-    # Gate 4: Flake8 Code Quality & PEP8 Audit
     if not skip_flake8:
         print("4. Running Flake8 code quality & styling audit...")
         flake8_violations = audit_flake8_quality(plugin_dir)
@@ -418,7 +413,6 @@ def package_plugin(
             raise RuntimeError("Flake8 audit failed. Resolve code style violations or pass --skip-flake8.")
         print("  ✓ Flake8 Code Quality: 100% CLEAN (0 violations)")
 
-    # Gate 5: Security, Secret & Privacy Audit
     if not skip_security:
         print("5. Running High-Security & Privacy Audit (secrets, user paths)...")
         security_issues = audit_security_and_privacy(plugin_dir)
@@ -431,7 +425,6 @@ def package_plugin(
             )
         print("  ✓ Security & Privacy: 100% CLEAN (Zero leaked secrets, zero machine paths)")
 
-    # Version bump if requested
     if bump in {"patch", "minor", "major"}:
         new_version = bump_semver(current_version, bump)
         print(f"\n🔄 Bumping semantic version: {current_version} -> {new_version}")
@@ -448,7 +441,6 @@ def package_plugin(
         current_version = new_version
         metadata = validate_metadata(meta_path)
 
-    # Derive package slug and filenames
     output_dir.mkdir(parents=True, exist_ok=True)
     plugin_slug, slug_source = resolve_package_slug(
         plugin_dir, output_dir, explicit_slug=package_name, metadata=metadata
@@ -458,7 +450,6 @@ def package_plugin(
     canonical_zip = output_dir / f"{plugin_slug}.zip"
     versioned_zip = output_dir / zip_filename
 
-    # Compile files to package
     files_to_pack = []
     for root, dirs, files in os.walk(plugin_dir):
         dirs[:] = [d for d in dirs if not any(re.search(pat, d, re.IGNORECASE) for pat in EXCLUDE_PATTERNS)]
@@ -470,7 +461,6 @@ def package_plugin(
     print(f"\n📦 Packaging {len(files_to_pack)} verified files into release archive...")
     print(f"📁 Internal root folder name: `{plugin_slug}/` (resolved from {slug_source})")
 
-    # Deterministic timestamp for reproducible builds (no author machine epoch leak)
     fixed_time = (2026, 1, 1, 0, 0, 0)
 
     for target_zip in [versioned_zip, canonical_zip]:
@@ -479,14 +469,12 @@ def package_plugin(
                 src_file = plugin_dir / rel
                 arcname = f"{plugin_slug}/{rel.as_posix()}"
 
-                # Write with deterministic metadata
                 zinfo = zipfile.ZipInfo(filename=arcname, date_time=fixed_time)
-                zinfo.external_attr = 0o644 << 16  # Standard readable permissions
+                zinfo.external_attr = 0o644 << 16
                 zinfo.compress_type = zipfile.ZIP_DEFLATED
                 with open(src_file, "rb") as f_in:
                     zf.writestr(zinfo, f_in.read())
 
-    # Verify zip internal structure
     with zipfile.ZipFile(versioned_zip, "r") as zf:
         names = zf.namelist()
         root_prefixes = {n.split("/")[0] for n in names if "/" in n}
@@ -519,7 +507,7 @@ def package_plugin(
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Deterministic QGIS Plugin Packaging & Release (/xpublish-qgis)"
+        description="Deterministic QGIS Plugin Packaging & Release (/xpublish --platform qgis)"
     )
     parser.add_argument("plugin_dir", help="Path to plugin directory containing metadata.txt and __init__.py")
     parser.add_argument(

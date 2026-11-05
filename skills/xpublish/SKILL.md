@@ -1,0 +1,113 @@
+---
+name: xpublish
+description: >
+  Pre-flight security/AST audit, upstream PR & review-bot convergence, QGIS Qt6 zip packaging, and GitHub/Food4Rhino/skill release framework (/xpublish, /xpublish-audit, /xpublish-qgis, /publish).
+  Use when running /xpublish, scanning secrets/paths, shipping PRs, packaging QGIS zips, or auditing global skills.
+  Do NOT use for workspace doc sync (/xsync) or authoring skills (/xcreate-skill).
+---
+
+# Unified Publishing, Pre-Flight Audit & Upstream PR Framework (`/xpublish`)
+
+Deterministic pre-flight security/privacy auditor, release packager, and end-to-end publishing framework (`/xpublish`, aliases `/xpublish-audit`, `/xpublish-qgis`, `/publish-audit`, `/publish-qgis`, `/publish`). Portable across Windows, macOS, and Linux with zero hardcoded workspace or machine paths.
+
+---
+
+## 1. Platform Profiles, Security Gates & End-to-End Actions (`--platform`)
+
+Engine flag `--platform`: `pr` | `github` | `qgis` | `food4rhino` | `skill` | `generic`.
+
+| Profile | Blocking Gates (Must Fix Before Ship) | Advisory Checks | End-to-End Packaging & Shipping Protocol |
+| :--- | :--- | :--- | :--- |
+| **`pr`**<br>*(Upstream Pull Request)* | **Diff-scoped (`git diff` touched lines/files only)**: leaked secrets/tokens; hardcoded machine user paths (`C:\Users\<user>`, `/Users/<user>/`, `/home/<user>`); Python `SyntaxError` or unsafe AST calls (`eval`, `exec`, `shell=True`, `pickle`) on added lines; Flake8 violations on added lines; accidental `CRLF` injection or `100644 → 100755` file-mode flip; untracked unignored worktree debris (`git status --porcelain`); unconfigured OS placeholder git author (`User`, `Admin`, `root`, `ubuntu`, `runner`, `localhost`) | Upstream `CONTRIBUTING.md` & PR template check; review-bot inline + outside-diff convergence | Follow [`references/github_readme_protocol.md`](references/github_readme_protocol.md) (`§6`): Dual-Credit Fork, Issue-Claim Etiquette, `Fixes #N` vs. `Part of #N` parity, `≤ 4`-col PR tables, `UTF-16LE` zero-mojibake clipboard, and Review-Bot Convergence (`@coderabbitai`). |
+| **`github`**<br>*(Public Repository Release)* | Secrets/tokens; hardcoded machine user paths; **missing `LICENSE`**; Python `SyntaxError` or unsafe AST calls; Flake8 violations | Missing `README.md`; packaging debris; `README.md` words `Published` / `LIVE` / `1-click install` without receipt | Follow [`references/github_readme_protocol.md`](references/github_readme_protocol.md) (`§1–§5`, `§7–§8`): `0 ms` 20-block Unicode bar charts, White-Mode Mermaid (`< 30 KB` SVG), `<details>` disclosure, and cross-account profile sync. |
+| **`qgis`**<br>*(Official QGIS Plugin Repo)* | Secrets/tokens; machine user paths; unescaped `%` in `metadata.txt`; missing required metadata fields; `__init__.py` lacking `def classFactory(iface)`; Qt6/QGIS 4 AST violations ([`scripts/check_qt6.py`](scripts/check_qt6.py)); Flake8 violations; unsafe AST calls | Packaging debris; missing `icon.png`; broad `except Exception: pass` without `# nosec B110` | Run [`scripts/package_qgis.py`](scripts/package_qgis.py) (`--bump patch\|minor\|major`) and follow [`references/qgis_release_protocol.md`](references/qgis_release_protocol.md) for single-root `.zip` build and `plugins.qgis.org` upload. |
+| **`food4rhino`**<br>*(Rhino / GH Package)* | Secrets/tokens; machine user paths; **no compiled `.gha` or `.dll`**; unsafe AST calls | Missing sample `.gh` canvas | Verify compiled `.gha`/`.dll` assembly and sample `.gh` canvas before uploading to Food4Rhino / YAK. |
+| **`skill`**<br>*(Global Agent Skill)* | Missing/malformed `SKILL.md` frontmatter; invalid `name` (`^[a-z0-9-]+$` or `> 64` chars); `description > 1024` chars; machine user paths; secrets; backslashes `\` in markdown links; recursive self-nesting (`skill/skill`); `SyntaxError` in `scripts/*.py` | Isolated `.agents/skills/` silo instead of `~/.gemini/config/skills/`; `description > 500` chars (`≤ 400` target); `SKILL.md > 500` lines; missing `Do NOT use for...`; `disable-model-invocation: true`; Bucket 3 magic quotas, Gate 3 over-specific equations, raw LaTeX macros outside code spans, or persona strings; missing UTF-8/bytecode header in `scripts/*.py` | Enforce the 5-Gate Universal Law Falsification Protocol in [`/xcreate-skill`](../xcreate-skill/SKILL.md) and commit to the `~/.gemini/config` git ledger. |
+| **`generic`**<br>*(General Deliverable)* | Secrets/tokens; machine user paths; Python `SyntaxError` or unsafe AST calls; Flake8 violations | Packaging debris (`.pyc`, `__pycache__`, `.DS_Store`, `Thumbs.db`); missing `README`/`LICENSE` | Clean all blocking security/path issues and strip temporary scratch debris before handoff. |
+
+Public-claim **vocabulary** (`LIVE`, `REGISTERED`, `PREPARED`, `IN PIPELINE`, `DRAFT`) is owned by [`/xsync`](../xsync/SKILL.md). This skill advises on unverified `Published` / `LIVE` / `1-click install` claims in README files.
+
+---
+
+## 2. 6-Pillar Security, Quality & Packaging Architecture
+
+1. **Secrets & Privacy Gate (Zero Leaks)**:
+   - Scans against high-entropy patterns: AWS, GitHub Classic & Fine-Grained PATs, OpenAI, Anthropic, Google AI, HuggingFace, PyPI, GitLab, NPM, Stripe, SendGrid, Discord Webhooks, RSA/SSH keys, and DB connection strings.
+   - **Dual-OS Path Invariant**: Strictly blocks hardcoded machine user paths (`C:\Users\<user>`, `/Users/<user>/`, `/home/<user>`).
+2. **AST Vulnerability Inspector**:
+   - Blocks dynamic code execution (`eval()`, `exec()`, `compile()`), shell injection (`os.system()`, `subprocess.*(..., shell=True)`), unsafe deserialization (`pickle.load()`, `pickle.loads()`), and insecure temp files (`tempfile.mktemp()`).
+3. **Diff-Scoped PR Gate (`--platform pr`) vs. Full-Package Audit**:
+   - For external upstream repositories (`--platform pr`), isolates secret, machine-path, AST security, and Flake8 checks strictly to **lines added/modified in `git diff`** so pre-existing upstream lint debt never causes false-positive blocks, while enforcing clean `git status --porcelain`, preserved line endings (`LF`), preserved file modes (`100644`), and non-placeholder Git author identity.
+4. **Agent Skill Invariant Enforcer (`--platform skill`)**:
+   - Verifies Universal Globalization (`~/.gemini/config/skills/`), context-budget safety (`description ≤ 400` chars target, `SKILL.md ≤ 500` lines), POSIX forward slashes in markdown links, relative link target existence, zero raw LaTeX macros outside code spans, and zero Bucket 3 magic quotas or Gate 3 overfit equations.
+5. **Deterministic Platform Packagers (`QGIS` / `GitHub` / `Food4Rhino`)**:
+   - **QGIS (`--platform qgis`)**: Co-locates [`scripts/check_qt6.py`](scripts/check_qt6.py) (AST compliance visitor for the green **"QGIS 4 Ready"** badge) and [`scripts/package_qgis.py`](scripts/package_qgis.py) (5-rung package slug resolver, semantic version bumper, scanner-config stripper, and deterministic single-root `.zip` builder; full reference in [`references/qgis_release_protocol.md`](references/qgis_release_protocol.md)).
+   - **GitHub & Upstream PRs (`--platform github` / `--platform pr`)**: Enforces visual README standards, White-Mode Mermaid guardrails, Dual-Credit Fork strategy, and Upstream PR / Review-Bot convergence in [`references/github_readme_protocol.md`](references/github_readme_protocol.md).
+6. **Packaging Hygiene**:
+   - Detects and strips build/OS debris (`.pyc`, `__pycache__`, `Thumbs.db`, `.DS_Store`, `.swp`, `.env`, `scratch*`).
+
+---
+
+## 3. Deterministic CLI Execution
+
+### A. Universal Pre-Flight Audit Engine ([`scripts/audit_engine.py`](scripts/audit_engine.py))
+
+**macOS / Linux**:
+```bash
+# Audit any target profile (pr | github | qgis | food4rhino | skill | generic):
+python3 ~/.gemini/config/skills/xpublish/scripts/audit_engine.py <target_dir> --platform <pr|github|qgis|food4rhino|skill|generic>
+```
+
+**Windows (PowerShell)**:
+```powershell
+# Audit any target profile (pr | github | qgis | food4rhino | skill | generic):
+python "$env:USERPROFILE\.gemini\config\skills\xpublish\scripts\audit_engine.py" <target_dir> --platform <pr|github|qgis|food4rhino|skill|generic>
+```
+
+*Optional Flags*:
+- `--base-ref <git_ref>`: Explicit base ref for `--platform pr` diff comparison (defaults to staged/unstaged diff if dirty, or `HEAD~1..HEAD` if clean).
+- `--skip-flake8`: Bypass Flake8 code quality checks when Flake8 is unavailable.
+- `--skip-qt6`: Bypass Qt6 AST forward-compatibility check for `--platform qgis`.
+
+### B. QGIS Qt6 Checker & Deterministic ZIP Packager ([`scripts/check_qt6.py`](scripts/check_qt6.py) & [`scripts/package_qgis.py`](scripts/package_qgis.py))
+
+**macOS / Linux**:
+```bash
+python3 ~/.gemini/config/skills/xpublish/scripts/check_qt6.py "<plugin_dir>"
+python3 ~/.gemini/config/skills/xpublish/scripts/package_qgis.py "<plugin_dir>" --bump patch
+```
+
+**Windows (PowerShell)**:
+```powershell
+python "$env:USERPROFILE\.gemini\config\skills\xpublish\scripts\check_qt6.py" "<plugin_dir>"
+python "$env:USERPROFILE\.gemini\config\skills\xpublish\scripts\package_qgis.py" "<plugin_dir>" --bump patch
+```
+*(See [`references/qgis_release_protocol.md`](references/qgis_release_protocol.md) for the scoped Qt6 enum migration table, 5-rung package slug ladder, and `plugins.qgis.org` upload steps).*
+
+---
+
+## 4. Composable BoostX Skill Combinations (`/xpublish` × `/x*` × `/browser`)
+
+| Chained Command | End-to-End Execution Synergy |
+| :--- | :--- |
+| **`/xdeep-research /xboost /xultra /xpublish`** *(+ optional `/browser`)* | **End-to-End Upstream PR & Release Pipeline**:<br>1. **Fetch & Triage (`Law 1 API/CLI` + Bounded `/browser`)**: Inspect `CONTRIBUTING.md`, issue comments, and open PRs via GitHub API/CLI (`gh`, `urllib`) in milliseconds; use `/browser` (`< 30s`) only for authenticated user sessions (Gmail notifications, web dashboards) or visual DOM/diagram inspection.<br>2. **Build & Verify (`/xboost /xultra`)**: Implement minimal surgical fix on a feature branch (`MPLBACKEND=Agg` for headless tests) + Blind Critic audit.<br>3. **Pre-Flight & Ship (`/xpublish --platform pr`)**: Run `audit_engine.py <repo> --platform pr`, verify `Fixes #N` (100% parity) vs. `Part of #N` (partial scope) in [`references/github_readme_protocol.md`](references/github_readme_protocol.md) (`§6.D`), push branch, and converge all inline + `outside_diff_range_comments` review-bot feedback to `APPROVED`. |
+| **`/xpublish /xlaya`** | **System 1 Public Claim Verifier**: Pairs `audit_engine.py` with [`/xlaya`](../xlaya/SKILL.md) (`laya_triage.py --mode contradiction`) to verify that `LIVE` / `REGISTERED` / `PREPARED` claims in READMEs match verifiable receipts. |
+| **`/xpublish /xultra`** | **Adversarial Release Gatekeeper Swarm (`Maker ≠ Checker`)**: Runs Law 1 `audit_engine.py` first, shards multi-package/skill audits across specialized Audit Scouts (`Secret/Path`, `AST/Portability`, `3-Bucket & Claim Receipt`), and verifies `0` blocking issues via an independent Blind Release Gatekeeper. |
+| **`/qgis /xpublish`** | **Live QGIS → Official Portal Release Handoff**: Transitions from live QGIS MCP plugin testing (`/qgis`) directly to `audit_engine.py --platform qgis` and `package_qgis.py --bump patch`. |
+
+---
+
+## 5. Standard Output Scorecard
+
+```text
+======================================================================
+PRE-FLIGHT AUDIT SCORECARD
+======================================================================
+Target:    <target_dir>
+Platform:  <pr|github|qgis|food4rhino|skill|generic>
+Files:     <count>
+Blocking:  0
+Advisory:  <count>
+----------------------------------------------------------------------
+✅ VERDICT: PASS (100% Risk-Proof & Safe to Publish)
+```

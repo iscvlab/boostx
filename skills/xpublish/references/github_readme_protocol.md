@@ -1,7 +1,7 @@
-# GitHub Repository Publishing, Visual README & Upstream PR Protocol (`v1.2`)
+# GitHub Repository Publishing, Visual README & Upstream PR Protocol (`v1.3`)
 
-> **Scope**: Universal, domain-agnostic standard for authoring high-impact open-source GitHub repositories across **Agent Skills**, **MCP Server Bridges**, **Desktop GIS/CAD Plugins (QGIS / Rhino / Grasshopper)**, and **CLI / Compute Engines**, plus cross-account profile synchronization and Upstream Pull Requests (`PRs`).  
-> **Core Philosophy**: **Executive Scannability in `< 5 Seconds`**, **Zero-Iframe Visual Bar Charts (`0 ms` Render)**, **White-Mode Minimalist Mermaid Diagrams (`< 30 KB` SVG)**, **Viewport-Safe Table Geometry (`≤ 4` Prose Columns)**, **Zero-Mojibake `UTF-16LE` Clipboard Automation**, and **Progressive Disclosure (`<details>`)**.
+> **Scope**: Universal, domain-agnostic standard for authoring high-impact open-source GitHub repositories across **Agent Skills**, **MCP Server Bridges**, **Desktop GIS/CAD Plugins (QGIS / Rhino / Grasshopper)**, and **CLI / Compute Engines**, plus cross-account profile synchronization and Upstream Pull Requests (`PRs`) via `/xpublish` (`audit_engine.py`, `package_qgis.py`, `check_qt6.py`).  
+> **Core Philosophy**: **Executive Scannability in `< 5 Seconds`**, **Zero-Iframe Visual Bar Charts (`0 ms` Render)**, **White-Mode Minimalist Mermaid Diagrams (`< 30 KB` SVG)**, **Viewport-Safe Table Geometry (`≤ 4` Prose Columns)**, **Zero-Mojibake `UTF-16LE` Clipboard Automation**, **Single-Pass Review-Bot Convergence (`--platform pr`)**, and **Progressive Disclosure (`<details>`)**.
 
 ---
 
@@ -184,7 +184,7 @@ To prevent `README.md` files from becoming walls of text while still providing 1
 
 ---
 
-## 6. Upstream Pull Request (`PR`), Dual-Credit & Clipboard Protocol
+## 6. Upstream Pull Request (`PR`), Dual-Credit & Review-Bot Convergence Protocol
 
 ### A. High-Impact PR Title Formula (`55-78` Characters)
 - **Why Length & Framing Matter**: Titles over `~80` characters truncate (`...`) in GitHub's PR input box, PR list, email notifications, and `git log --oneline`. Conversely, vague titles (`fix bugs & update code`) fail to communicate engineering value to maintainers or portfolio reviewers.
@@ -263,6 +263,27 @@ def launch_prefilled_github_pr(upstream_repo: str, org_fork: str, branch: str, t
         subprocess.run(["xdg-open", url], check=True)
 ```
 
+### D. Upstream PR Etiquette, Closing-Keyword Parity & Review-Bot Convergence (`--platform pr`)
+
+When contributing to external upstream repositories, enforce these four rules before and after opening a PR:
+
+1. **Issue-Claim Etiquette & Maintainer Governance Check**:
+   - Before opening an upstream PR or posting a public comment, inspect `CONTRIBUTING.md`, `.github/PULL_REQUEST_TEMPLATE*`, issue assignees, and linked open PRs via GitHub API/CLI (`Law 1`).
+   - **Direct-PR Repos**: If the issue is unassigned, has no competing open PR, and `CONTRIBUTING.md` does not mandate prior approval, implement the fix + regression test on a clean feature branch and open the PR directly.
+   - **Discussion-First Repos**: If `CONTRIBUTING.md` or maintainer norms require discussing before opening a PR (or when an issue is labeled internal `to-do`), prepare and verify the local branch first, then post a concise 3-line technical root-cause + proposed fix comment on the issue and wait for maintainer sign-off before pushing the PR.
+   - **Human-Consent Gate for Public Posts**: Always obtain explicit user approval before posting public comments or opening PRs under the user's GitHub identity.
+2. **Closing Keyword Parity (`Fixes #N` vs. `Part of #N` / `Addresses #N`)**:
+   - Write auto-closing keywords (`Fixes #N`, `Closes #N`, `Resolves #N`) **only** when the PR satisfies `100%` of the issue's stated sub-requirements, acceptance checkboxes, and target platforms.
+   - When a PR intentionally addresses a subset of a multi-part issue (or fixes one platform/module while leaving sibling items open), use non-closing references (`Part of #N` or `Addresses #N`) and explicitly state which items are covered vs. remaining so neither maintainers nor review bots flag a scope mismatch.
+3. **Diff-Scoped Hygiene (`audit_engine.py --platform pr`)**:
+   - Always run [`../scripts/audit_engine.py`](../scripts/audit_engine.py) with `--platform pr` prior to `git push`.
+   - Format and lint (`ruff`, `flake8`, `black`, `prettier`) **strictly on touched lines/files** so the PR diff never includes unrelated style churn or fails on pre-existing upstream lint debt.
+4. **Automated Review-Bot & Outside-Diff Convergence (`@coderabbitai`, etc.)**:
+   - After opening or pushing to a PR on repositories with automated review bots (`@coderabbitai[bot]`, `sourcery-ai`, `sonarcloud`), fetch **both**:
+     1. Inline diff comments (`/repos/<owner>/<repo>/pulls/<id>/comments`)
+     2. Top-level review bodies (`/repos/<owner>/<repo>/pulls/<id>/reviews`), specifically expanding `<details>` sections for **`Outside diff range comments`** and **`Nitpick comments`** (where assertive bots place findings about callers, sibling state-reset methods, or test assertions outside the modified diff hunk).
+   - **In-Scope Relevance Filter**: Implement fixes for bot comments that affect correctness, state lifecycle, security, or test coverage of the touched feature/function; politely decline or defer out-of-scope pre-existing refactoring suggestions to keep the PR atomic.
+
 ---
 
 ## 7. Cross-Account Profile & Mirror Synchronization Hygiene
@@ -287,4 +308,4 @@ Before pushing any `README.md`, benchmark report, or Upstream PR to GitHub, run 
 - [ ] **Live `mermaid.ink` Compiler Check**: Does every Mermaid block compile via `https://mermaid.ink/svg/pako:...` with `HTTP 200`, `role="flowchart-v2"`, `SyntaxError=False`, and SVG size `< 45 KB`?
 - [ ] **Viewport-Safe Table Width (`≤ 4` Prose Columns)**: Do all explanatory/fix tables have `≤ 4` columns (`# & Target` merged) so the rightmost column never clips inside an `840px` GitHub PR box?
 - [ ] **Zero-Mojibake Encoding Check**: Were all clipboard/file writes executed via UTF-8 (`encoding="utf-8"`) or Win32 `CF_UNICODETEXT` (`UTF-16LE`) with `0` replacement characters (`\ufffd`)?
-- [ ] **Link & Mirror Integrity**: Do `audit_workspace_docs.py --allow-latex` and `audit_engine.py --platform github` pass with `0` blocking issues and `0` advisory warnings?
+- [ ] **Link, Diff & Mirror Integrity**: Do `audit_workspace_docs.py --allow-latex` and `audit_engine.py --platform <github|pr>` pass with `0` blocking issues and `0` advisory warnings?

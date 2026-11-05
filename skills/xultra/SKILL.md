@@ -20,8 +20,9 @@ Portable across **Google Gemini / Antigravity, Claude Code, Grok, Cursor, and Co
 
 Never hardcode arbitrary subagent counts or arbitrary word-count caps. Derive the exact swarm topology in Step 0 using four laws:
 
-1. **Law 1 — Code-Over-Swarm Split (Deterministic Compute vs. Semantic Reasoning)**:
+1. **Law 1 — Code-Over-Swarm Split & Bounded `/browser` Routing (Deterministic Compute vs. Semantic Reasoning)**:
    * Never spawn LLM subagents to perform deterministic math, regex scanning, CSV/SQLite joins, HTTP status checks, PDF/table extraction, or AST linting that a parallel Python CLI script (`concurrent.futures`, `asyncio`, `sqlite3`, `laya_triage.py`, `ocr_runner.py`, `audit_engine.py`, `verify_evidence.py`) can execute in milliseconds with `0` token cost.
+   * **API/CLI-First vs. Bounded `/browser` (`< 30s`) Split**: When `/browser` is included in a combo (`/xdeep-research /xboost /xultra /browser`), fetch public bulk metadata, issue/PR threads, diffs, and CI logs via fast Law 1 CLI/API calls (`gh`, `git`, `urllib`, `curl`) first; reserve `/browser` subagents strictly for authenticated web sessions (Gmail/dashboards), JS-hydrated SPAs, live visual DOM/SVG verification, or user-opened tabs under a single-goal `< 30s` budget.
    * Execute Law 1 deterministic scripts *first* to bound the exact problem surface; reserve System 2 subagents strictly for semantic reasoning, design synthesis, primary-source interpretation, and adversarial falsification.
 2. **Law 2 — True Orthogonality Sizing (`K` Vectors for Coupled Problems, `N = 1`)**:
    * When tackling a single coupled architectural, algorithmic, or visual problem (`N = 1`), spawn `K` parallel builders **only** for genuinely orthogonal paradigms (`K ≥ 2` distinct algorithms, module seams, numerical schemes, or visual systems).
@@ -62,7 +63,7 @@ Users may chain slash commands in any prompt order (e.g., `/xobsidian /xdeep-res
 flowchart LR
     S1["Stage 1: Context & Cache (/xbrief + /xobsidian + /xlaya)"] --> S2["Stage 2: Research & Proof (/xdeep-research + /xlaya)"]
     S2 --> S3["Stage 3: Plan & Execute (/xplan -> /xboost Swarm)"]
-    S3 --> S4["Stage 4: Sync, Audit & Ratchet (/xsync + /xobsidian + /xpublish-audit)"]
+    S3 --> S4["Stage 4: Sync, Audit & Ship (/xsync + /xobsidian + /xpublish)"]
 ```
 
 * **Cross-Cutting Modifiers Active Across All Stages**:
@@ -161,7 +162,7 @@ Never truncate required primary-source evidence to fit an arbitrary word cap, an
 | **[`/xobsidian`](../xobsidian/SKILL.md) `/xultra`** *(Strict Opt-In)* | Locks a **Pre-Assigned Bridge Matrix** in the Shared Seam Header (guaranteeing unique `[[wikilink]]` neighbor sets), then fans out rolling Vault Builder waves across `VAULT_ROOT`. | Graph Topology Auditor synchronizing `Hub - *.md` tables and running the Graph Integrity Gate (`BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`). |
 | **[`/xlaya`](../xlaya/SKILL.md) `/xultra`** | Runs Law 1 `laya_triage.py` (`shortlist`, `contradiction`, or `rubric`) in milliseconds (`0` output tokens) to prune low-signal chunks before spawning System 2 subagents. | Dispatches System 2 Builder/Critic shards strictly on the high-signal `#L<start>-L<end>` ranges flagged by System 1. |
 | **[`/xocr`](../xocr/SKILL.md) `/xultra`** | Shards multi-PDF corpora or multi-hundred-page volumes across workers via [`../xocr/scripts/ocr_runner.py`](../xocr/scripts/ocr_runner.py) by **disjoint PDF files** or **disjoint `--pages` ranges** (`--pages 1-50`, `--pages 51-100`) writing to isolated `--output` folders (`Pointer-Not-Payload` returning `ocr_manifest.json` + `table_p*.csv` paths). | Blind Extraction Critic verifies `garble_ratio == 0.0` in `ocr_manifest.json`, checks `tables_extracted > 0` on tabular pages, and cross-verifies CSV column totals against printed "Total" rows. |
-| **[`/xcreate-skill`](../xcreate-skill/SKILL.md) `/xultra`** & **[`/xpublish-audit`](../xpublish-audit/SKILL.md) `/xultra`** | Runs Law 1 `audit_engine.py` + 3-Bucket numeric regex scan, then shards skill/package audits across specialized Audit Scouts (`Secret/Path`, `AST/Portability`, `3-Bucket Quota & Claim Receipt`). | Independent Blind Release Gatekeeper verifying `0` blocking issues, `0` Bucket 3 magic quotas, and `0` unverified `LIVE` claims. |
+| **[`/xcreate-skill`](../xcreate-skill/SKILL.md) `/xultra`** & **[`/xpublish`](../xpublish/SKILL.md) `/xultra`** | Runs Law 1 `audit_engine.py` (`--platform pr\|github\|qgis\|food4rhino\|skill\|generic`) + 3-Bucket numeric regex scan, then shards skill/package/PR audits across specialized Audit Scouts (`Secret/Path`, `AST/Portability`, `3-Bucket Quota & Claim Receipt`). | Independent Blind Release Gatekeeper verifying `0` blocking issues, `0` Bucket 3 magic quotas, `0` unverified `LIVE` claims, and `100%` review-bot convergence on PRs. |
 | **`/rhino` / `/grasshopper` / `/qgis` / `/illustrator` / `/figma` + `/xultra`** | **Parallel Brains, Single Mouse**: Wave 1 shards author disjoint `RhinoCommon`/`.gh`/`.gpkg`+`.qml`/`.svg`/`_vA.._vK.html` payloads on disk (or isolated `spawn_slot` / `instance` processes) with `solve=false` and zero shared UI selection calls. | Serialized Wave 2 MCP Integrator & Blind Critic commits layers/graphs sequentially, runs `get_context` / 1-line QA / `RuntimeMessages`, and captures `get_viewport_image` / canvas screenshots. |
 
 ---

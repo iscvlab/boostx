@@ -1,6 +1,6 @@
 # BoostX (iscvlab/boostx)
 
-> Production 14-skill `/x*` AI agent engineering framework and 8 deterministic Python CLI sidecar engines for deep reasoning (`/xboost`), swarm orchestration (`/xultra`), primary-source research (`/xdeep-research`), System 1 semantic triage (`/xlaya` — verified on `xerj-org/xerj#1108` cutting wrong-and-confident fires from `24.49%` to `0.00%`), Obsidian knowledge graphs (`/xobsidian`), hybrid OCR (`/xocr`), doc sync (`/xsync`), and pre-flight release audits (`/xpublish-audit`). Upstream contributions to `xerj-org/xerj` (PRs `#2922`–`#2927`) and `scb-10x/typhoon-ocr` (PR `#15`).
+> Production 13-skill `/x*` AI agent engineering framework and 8 deterministic Python CLI sidecar engines (`5,373` LOC) for deep reasoning (`/xboost`), swarm orchestration (`/xultra`), primary-source research (`/xdeep-research`), System 1 semantic triage (`/xlaya` — verified on `xerj-org/xerj#1108` cutting wrong-and-confident fires from `24.49%` to `0.00%`), Obsidian knowledge graphs (`/xobsidian`), hybrid OCR (`/xocr`), doc sync (`/xsync`), and unified pre-flight release audits, upstream PR convergence & QGIS 4 packaging (`/xpublish`). Upstream contributions to `xerj-org/xerj` (PRs `#2922`–`#2927`) and `scb-10x/typhoon-ocr` (PR `#15`).
 
 ## Core Entrypoints & Universal Install
 
@@ -23,11 +23,12 @@
 - [skills/xbrief/SKILL.md](skills/xbrief/SKILL.md): Same-turn workspace architecture loader and invariant extractor.
 - [skills/xsync/SKILL.md](skills/xsync/SKILL.md): Post-change documentation synchronization and stale-reference purger.
 - [skills/xsync/scripts/audit_workspace_docs.py](skills/xsync/scripts/audit_workspace_docs.py): Automated metric, version, and dead-link scanner.
-- [skills/xpublish-audit/SKILL.md](skills/xpublish-audit/SKILL.md): Pre-flight secret, privacy, Dual-OS, and YAML discovery budget auditor.
-- [skills/xpublish-audit/scripts/audit_engine.py](skills/xpublish-audit/scripts/audit_engine.py): Zero-dependency AST/YAML/regex security and quality linter.
-- [skills/xpublish-qgis/SKILL.md](skills/xpublish-qgis/SKILL.md): Deterministic QGIS plugin release packager and Qt6/QGIS 4 verifier.
-- [skills/xpublish-qgis/scripts/package_qgis.py](skills/xpublish-qgis/scripts/package_qgis.py): Single-root ZIP builder and `metadata.txt` validator.
-- [skills/xpublish-qgis/scripts/check_qt6.py](skills/xpublish-qgis/scripts/check_qt6.py): Qt6/QGIS 4 scoped-enum AST compatibility verifier.
+- [skills/xpublish/SKILL.md](skills/xpublish/SKILL.md): Unified pre-flight secret/AST/YAML auditor, upstream PR review-bot convergence gate, and QGIS 4 release packager (`/xpublish`, `/xpublish-audit`, `/xpublish-qgis`, `/publish`).
+- [skills/xpublish/references/github_readme_protocol.md](skills/xpublish/references/github_readme_protocol.md): GitHub Repository Publishing & Visual README Protocol `v1.3` (including `§6.D` Upstream PR Etiquette & Review-Bot Convergence).
+- [skills/xpublish/references/qgis_release_protocol.md](skills/xpublish/references/qgis_release_protocol.md): 5-Gate Deterministic QGIS 4 / Qt6 Release Packaging Protocol.
+- [skills/xpublish/scripts/audit_engine.py](skills/xpublish/scripts/audit_engine.py): Zero-dependency AST/YAML/regex security, skill budget, and diff-scoped PR linter (`--platform pr|github|qgis|food4rhino|skill|generic`, `1,044` LOC).
+- [skills/xpublish/scripts/package_qgis.py](skills/xpublish/scripts/package_qgis.py): Single-root ZIP builder and `metadata.txt` validator (`553` LOC).
+- [skills/xpublish/scripts/check_qt6.py](skills/xpublish/scripts/check_qt6.py): Qt6/QGIS 4 scoped-enum AST compatibility verifier (`395` LOC).
 - [skills/xcreate-skill/SKILL.md](skills/xcreate-skill/SKILL.md): Global skill builder, distiller, and evolutionary auditor.
 - [skills/xcontext/SKILL.md](skills/xcontext/SKILL.md): Session context window, compaction, and SQLite token telemetry inspector.
 - [skills/xcontext/scripts/check_context.py](skills/xcontext/scripts/check_context.py): Transcript and `.vscdb` token usage analyzer.

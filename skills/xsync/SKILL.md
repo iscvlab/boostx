@@ -4,7 +4,7 @@ description: >
   Synchronize documentation after a system, API, schema, metric, or architectural change (/xsync, /update-doc, /doc-sync).
   Use when running /xsync, /update-doc, /doc-sync, or /audit-docs to sync docs,
   purge stale references, arbitrate conflicts, or update metrics across markdown and HTML.
-  Do NOT use for publishing (/xpublish-audit) or authoring skills (/xcreate-skill).
+  Do NOT use for publishing (/xpublish) or authoring skills (/xcreate-skill).
 ---
 
 # `/xsync` (Portable Cross-Document Synchronizer)
@@ -44,7 +44,7 @@ Use these 5 canonical terms in public documentation and deliverables:
 | **IN PIPELINE** | Intended next; not released. |
 | **DRAFT** | Internal only. |
 
-Do not write LIVE, Published, or 1-click install without a verifiable receipt (URL, version table, or installer). [`/xpublish-audit`](../xpublish-audit/SKILL.md) advises on these terms; this skill owns their formal definitions.
+Do not write LIVE, Published, or 1-click install without a verifiable receipt (URL, version table, or installer). [`/xpublish`](../xpublish/SKILL.md) advises on these terms; this skill owns their formal definitions.
 
 ### Formatting and Typography Rules
 * **Strict Zero-LaTeX Math Policy**: In markdown docs, HTML, and chat responses, NEVER use LaTeX math delimiters (such as inline or block dollar math, `\times`, `\rightarrow`). ALWAYS use direct native Unicode symbols: `→`, `←`, `↔`, `•`, `✓`, `✨`, `²`, `³`, `°`, `×`, `÷`, `±`, `≈`, `≤`, `≥`.
@@ -83,17 +83,23 @@ From the active conversation and git status, explicitly record:
    * *Active SSOTs*: Architecture maps, READMEs, API tables, active links, and status badges must be 100% updated.
    * *Immutable Historical Records*: Changelog entries and historical logs that record past events preserve historical context while logging the new milestone.
 
-### Step 2: Dynamic Workspace Scan, `/xlaya` Sidecar & Ghost Sweep
+### Step 2: Dynamic Workspace Scan, Up-Tree Federation, `/xlaya` Sidecar & Ghost Sweep
 
-Search markdown, HTML, and web documentation across the workspace (excluding `.git/`, `node_modules/`, and **any directory containing an `.obsidian/` subfolder**):
+Search markdown, HTML, and web documentation across the workspace and its federated upstream/sibling mirrors (excluding `.git/`, `node_modules/`, and **any directory containing an `.obsidian/` subfolder**):
 
 1. **Target Asset Discovery & Composable Boundaries**:
    * *Markdown Suites*: Root README, module docs, schemas, roadmaps, specifications, and portfolios.
    * *Interactive Web Artifacts*: Presentation slide decks, architecture viewers, dashboard portals, storyboards, and reports.
    * *Shadow Mirrors*: Identify whether modified documents are duplicated in distribution packages (e.g. `dist/docs/`, `package_name/docs_reference/`, or mirrored sub-workspaces).
-   * *Strict Opt-In [`/xobsidian`](../xobsidian/SKILL.md) Boundary (`/xsync /xobsidian`)*: By default, **never** scan or modify an Obsidian vault (`*/.obsidian/..`) during `/xsync`. Only when `/xobsidian` (or `/obsidian-vault`) is explicitly paired in the command (`/xsync /xobsidian`) should you resolve the active vault via [`/xobsidian`](../xobsidian/SKILL.md) and synchronize affected reusable atomic notes and `Hub - *.md` tables alongside repository docs.
+   * *3-Signal Bounded Up-Tree & Cross-Repo Federation (`--federated`)*: Never restrict synchronization strictly to `cwd` when the session delta modifies shared skills, canonical protocols, or cross-repository links:
+     1. **Signal A — Outbound Relative Link Graph (`../` & `../../`)**: Parse outbound relative links in `cwd`'s Markdown files (`[label](../../<sibling_repo>/...)`) to discover referenced sibling repositories.
+     2. **Signal B — Sibling Git Clone & Global Skill Mirror Federation**: Inspect immediate sibling directories (`../*` and `../*/*`) and global agent skill roots (`~/.gemini/config/skills/`, `~/.claude/skills/`) for:
+        - **Mirrored Skill Trees (`skills/<name>/`)**: Enforce 100% SHA-256 byte parity between global `skills/<name>/{SKILL.md,references/*,scripts/*}` and any sibling repo packaging that skill, plus `0` leftover ghost skill directories.
+        - **Canonical Root Protocols & Profile READMEs**: Enforce 100% SHA-256 parity across mirrored protocols (`GITHUB_PUBLISHING_PROTOCOL.md` ↔ `skills/xpublish/references/github_readme_protocol.md`) and org/personal profile READMEs (`docs/GITHUB_ORG_PROFILE_README.md` ↔ `profile/README.md`), and sweep first-party sibling `README.md` sister-project references for deprecated counts/names.
+        - **Standalone Cross-Repo Link Hygiene**: Never write relative file links (`../<other-repo-skill>/SKILL.md` or `../SKILL.md`) inside files that are mirrored to separate git repositories or root protocol mirrors; use inline code identifiers (`` `/<skill>` ``) so each standalone repository passes link checks independently.
+     3. **Signal C — Safe Parent Stop-List & Opt-In Vault Boundary**: Never climb into OS root or generic user directories (`/`, `C:\`, `~`, `Desktop`, `Documents`, `Downloads`), and by default **never** scan or modify any directory containing `.obsidian/` (`*/.obsidian/..`) unless [`/xobsidian`](../xobsidian/SKILL.md) is explicitly chained (`/xsync /xobsidian`).
    * *Opt-In [`/xlaya`](../xlaya/SKILL.md) Semantic Contradiction Pre-Filter (`/xsync /xlaya`)*: When chained with `/xlaya` (or `/laya`), run the `noul` hypothesis scanner across candidate `.md` and `.html` paragraphs to detect semantic contradictions against the SSOT that keyword grep misses, then apply surgical fixes via `edit_file`.
-   * *Opt-In [`/xultra`](../xultra/SKILL.md) Cognitive-Density Sync Swarm (`/xsync /xultra`)*: When chained with `/xultra`, lock the **Canonical Fact & Metric Delta Header** in Step 1 first, then partition relation-set updates via **Cognitive-Density Sharding** ([`/xultra`](../xultra/SKILL.md) Law 3 — 1 dedicated subagent per heavy interactive HTML deck/dashboard/viewer, and tier-clustered subagents for lightweight Markdown specs across rolling waves), followed by an independent **Blind Adversarial Sync Auditor** (`Maker ≠ Checker`) running `audit_workspace_docs.py` and SHA-256 mirror verification.
+   * *Opt-In [`/xultra`](../xultra/SKILL.md) Cognitive-Density Sync Swarm (`/xsync /xultra`)*: When chained with `/xultra`, lock the **Canonical Fact & Metric Delta Header** in Step 1 first, then partition relation-set updates via **Cognitive-Density Sharding** ([`/xultra`](../xultra/SKILL.md) Law 3 — 1 dedicated subagent per heavy interactive HTML deck/dashboard/viewer, and tier-clustered subagents for lightweight Markdown specs across rolling waves), followed by an independent **Blind Adversarial Sync Auditor** (`Maker ≠ Checker`) running `audit_workspace_docs.py --federated` and SHA-256 mirror verification.
 2. **Ghost Reference, Dead Link & Forked Sibling Doc Sweep**:
    * If any file was renamed, merged, or deleted, grep the workspace for its old base name and relative path.
    * Update or remove dangling hyperlinks, navigation cards, and table references pointing to the deceased file.
@@ -138,14 +144,14 @@ Verify completion programmatically before concluding:
 
 1. **Zero-Stale Grep Sweep**: Search the active relation set for deprecated terms. Expected result: **zero hits** (outside historical changelogs).
 2. **Hyperlink and Anchor Verification**: Verify all relative links (`../`) and HTML anchor IDs resolve properly.
-3. **Execute Universal Sync Verifier**: Run the bundled repo-agnostic auditor ([`scripts/audit_workspace_docs.py`](scripts/audit_workspace_docs.py), which also delegates to a local `scripts/audit_docs.py` if present in the repo) and verify exit code `0`:
+3. **Execute Universal Sync Verifier**: Run the bundled repo-agnostic auditor ([`scripts/audit_workspace_docs.py`](scripts/audit_workspace_docs.py), adding `--federated` to audit up-tree sibling skill/protocol/profile mirrors alongside the active workspace) and verify exit code `0`:
    * **Windows (PowerShell)**:
      ```powershell
-     python "$env:USERPROFILE\.gemini\config\skills\xsync\scripts\audit_workspace_docs.py" "<workspace_root>" --deprecated "<old_val_1>,<old_val_2>"
+     python "$env:USERPROFILE\.gemini\config\skills\xsync\scripts\audit_workspace_docs.py" "<workspace_root>" --federated --deprecated "<old_val_1>,<old_val_2>"
      ```
    * **macOS / Linux**:
      ```bash
-     python3 ~/.gemini/config/skills/xsync/scripts/audit_workspace_docs.py "<workspace_root>" --deprecated "<old_val_1>,<old_val_2>"
+     python3 ~/.gemini/config/skills/xsync/scripts/audit_workspace_docs.py "<workspace_root>" --federated --deprecated "<old_val_1>,<old_val_2>"
      ```
 4. **Render the Synchronization Ledger**: Present the final audit scorecard:
 

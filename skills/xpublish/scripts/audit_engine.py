@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Universal Package & Release Pre-Flight Audit Engine (/xpublish-audit).
-Performs secret, privacy, security, Flake8 quality, and platform-specific audits
-prior to releasing to GitHub, QGIS, or Food4Rhino.
+Universal Package, Upstream PR & Release Pre-Flight Audit Engine (/xpublish).
+Performs secret, privacy, security, Flake8 quality, diff-scoped PR hygiene,
+and platform-specific audits prior to releasing to GitHub, QGIS, Food4Rhino, or Upstream PRs.
 """
 
 import sys
@@ -13,6 +13,7 @@ import argparse
 import subprocess
 import configparser
 from pathlib import Path
+from typing import Dict, Set
 from urllib.parse import unquote
 
 # Prevent bytecode debris in audited directories
@@ -65,7 +66,7 @@ SECRET_PATTERNS = [
 PATH_PATTERNS = [
     ("Windows Absolute User Path", re.compile(r"(?i)\b([a-z]:[/\\]users[/\\](?!<)[a-zA-Z0-9_\-\.]+)")),
     ("macOS Absolute User Path", re.compile(r"(?:^|[\s\"'`=:(])(/Users/(?!<|shared\b|runner\b)[a-zA-Z0-9_\-\.]+/)")),
-    ("Linux Absolute Home Path", re.compile(r"(?:^|[\s\"'`=:(])(/home/(?!<)[a-z0-9_\-\.]+)")),
+    ("Linux Absolute Home Path", re.compile(r"(?:^|[\s\"'`=:(])(/home/(?!<)[a-zA-Z0-9_\-\.]+)")),
 ]
 
 EXCLUDED_PATH_ALLOWLIST = {
@@ -79,6 +80,10 @@ FORBIDDEN_FILES = {
     ".ds_store", "thumbs.db", "desktop.ini"
 }
 FORBIDDEN_EXTS = {".pyc", ".pyo", ".pyd", ".swp", ".bak", ".tmp"}
+
+PLACEHOLDER_GIT_AUTHORS = {
+    "user", "admin", "administrator", "root", "ubuntu", "runner", "default", "owner", "pc", "desktop"
+}
 
 
 class AuditResult:
@@ -99,7 +104,46 @@ class AuditResult:
         self.warnings.append(f"{prefix}{msg}")
 
 
-def audit_file_content(path: Path, result: AuditResult):
+def scan_line_for_secrets_and_paths(line: str, file_str: str, line_no: int, result: AuditResult):
+    """Inspect a single line of text for secrets, tokens, or hardcoded machine user paths."""
+    clean_line = line.strip()
+    if clean_line.startswith("#") and "pattern" in clean_line.lower():
+        return
+
+    for label, pat in SECRET_PATTERNS:
+        match = pat.search(clean_line)
+        if match:
+            matched_val = match.group(0)
+            low_val = matched_val.lower()
+            if label == "Generic Secret Assignment" and any(
+                ph in low_val
+                for ph in (
+                    "your_",
+                    "_here",
+                    "placeholder",
+                    "example",
+                    "dummy",
+                    "changeme",
+                    "replace_",
+                    "xxxx",
+                    "todo",
+                )
+            ):
+                continue
+            masked = matched_val[:4] + "..." + matched_val[-4:] if len(matched_val) > 8 else "***"
+            result.add_blocking(f"Potential {label} detected: `{masked}`", file_str, line_no)
+
+    for label, pat in PATH_PATTERNS:
+        match = pat.search(clean_line)
+        if match:
+            matched_path = match.group(1).lower()
+            if not any(allowed in matched_path for allowed in EXCLUDED_PATH_ALLOWLIST):
+                result.add_blocking(
+                    f"Hardcoded absolute machine user path ({label}): `{match.group(1)}`", file_str, line_no
+                )
+
+
+def audit_file_content(path: Path, result: AuditResult, allowed_lines: Set[int] = None):
     """Scan file lines for secrets, credentials, and hardcoded absolute machine paths."""
     try:
         content = path.read_text(encoding="utf-8", errors="ignore")
@@ -107,51 +151,13 @@ def audit_file_content(path: Path, result: AuditResult):
         result.add_warning(f"Unable to read file: {e}", str(path))
         return
 
-    lines = content.splitlines()
-
-    for idx, line in enumerate(lines, 1):
-        clean_line = line.strip()
-
-        # Skip comment headers describing patterns
-        if clean_line.startswith("#") and "pattern" in clean_line.lower():
+    for idx, line in enumerate(content.splitlines(), 1):
+        if allowed_lines is not None and idx not in allowed_lines:
             continue
-
-        # 1. Check Secrets
-        for label, pat in SECRET_PATTERNS:
-            match = pat.search(clean_line)
-            if match:
-                matched_val = match.group(0)
-                low_val = matched_val.lower()
-                if label == "Generic Secret Assignment" and any(
-                    ph in low_val
-                    for ph in (
-                        "your_",
-                        "_here",
-                        "placeholder",
-                        "example",
-                        "dummy",
-                        "changeme",
-                        "replace_",
-                        "xxxx",
-                        "todo",
-                    )
-                ):
-                    continue
-                masked = matched_val[:4] + "..." + matched_val[-4:] if len(matched_val) > 8 else "***"
-                result.add_blocking(f"Potential {label} detected: `{masked}`", str(path), idx)
-
-        # 2. Check Hardcoded Machine Paths
-        for label, pat in PATH_PATTERNS:
-            match = pat.search(clean_line)
-            if match:
-                matched_path = match.group(1).lower()
-                if not any(allowed in matched_path for allowed in EXCLUDED_PATH_ALLOWLIST):
-                    result.add_blocking(
-                        f"Hardcoded absolute machine user path ({label}): `{match.group(1)}`", str(path), idx
-                    )
+        scan_line_for_secrets_and_paths(line, str(path), idx, result)
 
 
-def audit_python_ast(path: Path, result: AuditResult):
+def audit_python_ast(path: Path, result: AuditResult, allowed_lines: Set[int] = None):
     """Parse Python AST to detect dangerous security calls, shell injection, and broad exception passes."""
     try:
         source = path.read_text(encoding="utf-8", errors="ignore")
@@ -162,89 +168,94 @@ def audit_python_ast(path: Path, result: AuditResult):
 
     lines = source.splitlines()
 
+    def in_scope(lineno: int) -> bool:
+        return allowed_lines is None or lineno in allowed_lines
+
     class SecurityVisitor(ast.NodeVisitor):
         def visit_Call(self, node):
-            # 1. Check eval / exec / compile / __import__
-            if isinstance(node.func, ast.Name) and node.func.id in {"eval", "exec", "compile", "__import__"}:
-                result.add_blocking(
-                    f"Dangerous dynamic code execution call: `{node.func.id}()`", str(path), node.lineno
-                )
-
-            # 2. Check os.system, os.popen, posix.system
-            if isinstance(node.func, ast.Attribute):
-                if node.func.attr in {"system", "popen"}:
-                    if isinstance(node.func.value, ast.Name) and node.func.value.id in {"os", "posix"}:
-                        result.add_blocking(
-                            f"Insecure `{node.func.value.id}.{node.func.attr}()` invocation. "
-                            f"Use parameterized `subprocess.run(..., shell=False)`",
-                            str(path), node.lineno
-                        )
-
-            # 3. Check subprocess shell=True
-            if isinstance(node.func, ast.Attribute) and node.func.attr in {
-                "Popen", "run", "call", "check_call", "check_output"
-            }:
-                for kw in node.keywords:
-                    if kw.arg == "shell" and isinstance(kw.value, ast.Constant) and kw.value.value is True:
-                        result.add_blocking(
-                            "Subprocess execution with `shell=True` (Shell Injection risk)", str(path), node.lineno
-                        )
-
-            # 4. Check unsafe deserialization (pickle / shelve / marshal)
-            if isinstance(node.func, ast.Attribute):
-                if node.func.attr in {"load", "loads"} and isinstance(node.func.value, ast.Name) and (
-                    node.func.value.id in {"pickle", "_pickle", "marshal"}
-                ):
+            if in_scope(getattr(node, "lineno", 0)):
+                # 1. Check eval / exec / compile / __import__
+                if isinstance(node.func, ast.Name) and node.func.id in {"eval", "exec", "compile", "__import__"}:
                     result.add_blocking(
-                        f"Insecure deserialization with `{node.func.value.id}` (Arbitrary Code Execution risk)",
-                        str(path), node.lineno
+                        f"Dangerous dynamic code execution call: `{node.func.id}()`", str(path), node.lineno
                     )
-                elif (
-                    node.func.attr == "mktemp" and isinstance(node.func.value, ast.Name)
-                    and node.func.value.id == "tempfile"
-                ):
-                    result.add_blocking(
-                        "Insecure `tempfile.mktemp()` (Symlink race condition risk). "
-                        "Use `NamedTemporaryFile` or `mkstemp`", str(path), node.lineno
-                    )
-                # Check dangerous Windows memory injection primitives
-                elif node.func.attr in {
-                    "VirtualAlloc", "VirtualAllocEx", "WriteProcessMemory", "CreateRemoteThread"
+
+                # 2. Check os.system, os.popen, posix.system
+                if isinstance(node.func, ast.Attribute):
+                    if node.func.attr in {"system", "popen"}:
+                        if isinstance(node.func.value, ast.Name) and node.func.value.id in {"os", "posix"}:
+                            result.add_blocking(
+                                f"Insecure `{node.func.value.id}.{node.func.attr}()` invocation. "
+                                f"Use parameterized `subprocess.run(..., shell=False)`",
+                                str(path), node.lineno
+                            )
+
+                # 3. Check subprocess shell=True
+                if isinstance(node.func, ast.Attribute) and node.func.attr in {
+                    "Popen", "run", "call", "check_call", "check_output"
                 }:
-                    result.add_blocking(
-                        f"High-risk memory injection API call detected: `{node.func.attr}`", str(path), node.lineno
-                    )
+                    for kw in node.keywords:
+                        if kw.arg == "shell" and isinstance(kw.value, ast.Constant) and kw.value.value is True:
+                            result.add_blocking(
+                                "Subprocess execution with `shell=True` (Shell Injection risk)", str(path), node.lineno
+                            )
 
-            # 5. Check outbound network sockets / HTTP requests
-            if isinstance(node.func, ast.Attribute):
-                if node.func.attr in {"urlopen", "get", "post", "put", "delete", "connect"} and (
-                    isinstance(node.func.value, ast.Name)
-                ):
-                    if node.func.value.id in {"requests", "urllib", "httpx", "aiohttp", "socket"}:
-                        result.add_warning(
-                            f"Network outbound call `{node.func.value.id}.{node.func.attr}()` detected. "
-                            "Ensure this call is user-authorized, HTTPS-only, and transmits no private telemetry.",
+                # 4. Check unsafe deserialization (pickle / shelve / marshal)
+                if isinstance(node.func, ast.Attribute):
+                    if node.func.attr in {"load", "loads"} and isinstance(node.func.value, ast.Name) and (
+                        node.func.value.id in {"pickle", "_pickle", "marshal"}
+                    ):
+                        result.add_blocking(
+                            f"Insecure deserialization with `{node.func.value.id}` (Arbitrary Code Execution risk)",
                             str(path), node.lineno
                         )
+                    elif (
+                        node.func.attr == "mktemp" and isinstance(node.func.value, ast.Name)
+                        and node.func.value.id == "tempfile"
+                    ):
+                        result.add_blocking(
+                            "Insecure `tempfile.mktemp()` (Symlink race condition risk). "
+                            "Use `NamedTemporaryFile` or `mkstemp`", str(path), node.lineno
+                        )
+                    elif node.func.attr in {
+                        "VirtualAlloc", "VirtualAllocEx", "WriteProcessMemory", "CreateRemoteThread"
+                    }:
+                        result.add_blocking(
+                            f"High-risk memory injection API call detected: `{node.func.attr}`", str(path), node.lineno
+                        )
+
+                # 5. Check outbound network sockets / HTTP requests
+                if isinstance(node.func, ast.Attribute):
+                    if node.func.attr in {"urlopen", "get", "post", "put", "delete", "connect"} and (
+                        isinstance(node.func.value, ast.Name)
+                    ):
+                        if node.func.value.id in {"requests", "urllib", "httpx", "aiohttp", "socket"}:
+                            result.add_warning(
+                                f"Network outbound call `{node.func.value.id}.{node.func.attr}()` detected. "
+                                "Ensure this call is user-authorized, HTTPS-only, and transmits no private telemetry.",
+                                str(path), node.lineno
+                            )
 
             self.generic_visit(node)
 
         def visit_ExceptHandler(self, node):
-            # Check try-except-pass on generic Exception (Bandit B110)
-            if node.body and len(node.body) == 1 and isinstance(node.body[0], ast.Pass):
-                end_line = getattr(node.body[0], "lineno", node.lineno)
-                span_lines = lines[max(0, node.lineno - 1): min(len(lines), end_line)]
-                if not any("# nosec" in ln for ln in span_lines):
-                    is_broad = False
-                    if node.type is None:  # bare except:
-                        is_broad = True
-                    elif isinstance(node.type, ast.Name) and node.type.id in {"Exception", "BaseException"}:
-                        is_broad = True
+            if in_scope(getattr(node, "lineno", 0)):
+                if node.body and len(node.body) == 1 and isinstance(node.body[0], ast.Pass):
+                    end_line = getattr(node.body[0], "lineno", node.lineno)
+                    span_lines = lines[max(0, node.lineno - 1): min(len(lines), end_line)]
+                    if not any("# nosec" in ln for ln in span_lines):
+                        is_broad = False
+                        if node.type is None:
+                            is_broad = True
+                        elif isinstance(node.type, ast.Name) and node.type.id in {"Exception", "BaseException"}:
+                            is_broad = True
 
-                    if is_broad:
-                        result.add_warning(
-                            "Broad `except Exception: pass` without `# nosec B110` or logging", str(path), node.lineno
-                        )
+                        if is_broad:
+                            result.add_warning(
+                                "Broad `except Exception: pass` without `# nosec B110` or logging",
+                                str(path),
+                                node.lineno,
+                            )
 
             self.generic_visit(node)
 
@@ -252,8 +263,8 @@ def audit_python_ast(path: Path, result: AuditResult):
     visitor.visit(tree)
 
 
-def audit_flake8(target: Path, result: AuditResult):
-    """Audit project code quality and PEP8 compliance using Flake8 with local .flake8 configuration."""
+def audit_flake8(target: Path, result: AuditResult, scoped_lines_by_file: Dict[Path, Set[int]] = None):
+    """Audit project code quality using Flake8 (optionally scoped to PR diff lines)."""
     flake8_cfg = target / ".flake8"
     if not flake8_cfg.exists():
         parent_cfg = target.parent / ".flake8"
@@ -263,7 +274,14 @@ def audit_flake8(target: Path, result: AuditResult):
     cmd = [sys.executable, "-m", "flake8"]
     if flake8_cfg.exists():
         cmd.append(f"--config={flake8_cfg}")
-    cmd.append(str(target))
+
+    if scoped_lines_by_file is not None:
+        py_targets = [str(p) for p in scoped_lines_by_file.keys() if p.suffix.lower() == ".py" and p.exists()]
+        if not py_targets:
+            return
+        cmd.extend(py_targets)
+    else:
+        cmd.append(str(target))
 
     try:
         proc = subprocess.run(
@@ -278,10 +296,23 @@ def audit_flake8(target: Path, result: AuditResult):
         output = (proc.stdout or "").strip()
 
         if proc.returncode != 0 and output:
+            kept = 0
             for line in output.splitlines():
                 clean = line.strip()
-                if clean:
-                    result.add_blocking(f"Flake8 Style/Lint Violation: {clean}")
+                if not clean:
+                    continue
+                if scoped_lines_by_file is not None:
+                    m = re.match(r"^(.*?):(\d+):(\d+):\s*(.*)$", clean)
+                    if m:
+                        fpath = Path(m.group(1)).resolve()
+                        lno = int(m.group(2))
+                        allowed = scoped_lines_by_file.get(fpath)
+                        if allowed is not None and lno not in allowed:
+                            continue
+                kept += 1
+                result.add_blocking(f"Flake8 Style/Lint Violation: {clean}")
+            if kept == 0 and scoped_lines_by_file is not None:
+                print("  ✓ Diff-Scoped Flake8 Audit: 100% CLEAN on modified lines")
         elif proc.returncode == 0:
             print("  ✓ Flake8 Code Quality Audit: 100% CLEAN (0 violations)")
     except FileNotFoundError:
@@ -292,6 +323,186 @@ def audit_flake8(target: Path, result: AuditResult):
         result.add_warning(f"Flake8 audit failed to run: {e}")
 
 
+def parse_unified_diff_added_lines(target: Path, diff_text: str) -> Dict[Path, Set[int]]:
+    """Parse `git diff -U0` output to map each modified file to its set of added/modified line numbers."""
+    added_by_file: Dict[Path, Set[int]] = {}
+    current_file: Path = None
+    hunk_re = re.compile(r"^@@ -\d+(?:,\d+)? \+(\d+)(?:,(\d+))? @@")
+
+    for raw_line in diff_text.splitlines():
+        if raw_line.startswith("+++ b/"):
+            rel_path = raw_line[6:].strip()
+            current_file = (target / rel_path).resolve()
+            added_by_file.setdefault(current_file, set())
+        elif raw_line.startswith("+++ /dev/null"):
+            current_file = None
+        elif current_file is not None and raw_line.startswith("@@ "):
+            m = hunk_re.match(raw_line)
+            if m:
+                start_line = int(m.group(1))
+                count = int(m.group(2)) if m.group(2) is not None else 1
+                for lno in range(start_line, start_line + count):
+                    added_by_file[current_file].add(lno)
+
+    return added_by_file
+
+
+def audit_pr_diff_invariants(
+    target: Path, result: AuditResult, base_ref: str = "", skip_flake8: bool = False
+):
+    """
+    Execute diff-scoped Upstream PR pre-flight audit (`--platform pr`):
+    1. Verify git repository & clean untracked worktree (`git status --porcelain`).
+    2. Verify Git author identity is not an OS placeholder (`User`, `Admin`, `root`, `ubuntu`, `localhost`).
+    3. Resolve diff (`base_ref`, working tree changes, or `HEAD~1..HEAD`) and inspect added lines (`+`) only.
+    4. Block accidental CRLF line-ending injection or `100644 -> 100755` executable mode flips.
+    5. Run diff-scoped Secret, Machine-Path, Python AST Security, and Flake8 checks on touched lines/files.
+    """
+    git_dir = target / ".git"
+    if not git_dir.exists():
+        result.add_blocking(
+            "Target directory is not a Git repository (`.git` missing for `--platform pr`)", str(target)
+        )
+        return
+
+    # 1. Check untracked worktree debris (`git status --porcelain`)
+    st_proc = subprocess.run(
+        ["git", "-C", str(target), "status", "--porcelain"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        check=False,
+    )
+    for st_line in (st_proc.stdout or "").splitlines():
+        if st_line.startswith("?? "):
+            untracked = st_line[3:].strip()
+            result.add_blocking(
+                f"Untracked unignored file in worktree: `{untracked}`. "
+                "Remove scratch debris or stage intentionally before shipping PR.",
+                str(target / untracked),
+            )
+
+    # 2. Check Git author identity (latest commit or git config)
+    author_proc = subprocess.run(
+        ["git", "-C", str(target), "log", "-1", "--format=%an|%ae"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        check=False,
+    )
+    author_out = (author_proc.stdout or "").strip()
+    if "|" in author_out:
+        author_name, author_email = [p.strip() for p in author_out.split("|", 1)]
+        if author_name.lower() in PLACEHOLDER_GIT_AUTHORS:
+            result.add_blocking(
+                f"Git commit author name `{author_name}` is an unconfigured OS placeholder. "
+                "Set `git config user.name` to your real identity before pushing.",
+                str(target),
+            )
+        if not author_email or "@" not in author_email or author_email.lower().endswith(("@localhost", "@example.com")):
+            result.add_blocking(
+                f"Git commit author email `{author_email}` is invalid or local-only. "
+                "Set `git config user.email` to your GitHub-linked email before pushing.",
+                str(target),
+            )
+
+    # 3. Determine diff base and capture unified diff (`-U0`)
+    diff_cmd = ["git", "-C", str(target), "diff", "-U0"]
+    if base_ref:
+        diff_cmd.append(base_ref)
+    else:
+        # Check if there are staged or unstaged changes against HEAD; otherwise compare HEAD~1..HEAD
+        wt_proc = subprocess.run(
+            ["git", "-C", str(target), "diff", "--name-only", "HEAD"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            check=False,
+        )
+        if (wt_proc.stdout or "").strip():
+            diff_cmd.append("HEAD")
+        else:
+            diff_cmd.extend(["HEAD~1", "HEAD"])
+
+    diff_proc = subprocess.run(
+        diff_cmd,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        check=False,
+    )
+    diff_text = diff_proc.stdout or ""
+    added_by_file = parse_unified_diff_added_lines(target, diff_text)
+    result.files_scanned = len(added_by_file)
+
+    # 4. Check accidental file-mode flips (`100644 -> 100755`) & CRLF injection in touched files
+    cur_diff_file = ""
+    old_mode = ""
+    for raw_line in diff_text.splitlines():
+        if raw_line.startswith("diff --git "):
+            parts = raw_line.split(" b/")
+            cur_diff_file = parts[-1].strip() if len(parts) > 1 else ""
+            old_mode = ""
+        elif raw_line.startswith("old mode "):
+            old_mode = raw_line.split()[-1].strip()
+        elif raw_line.startswith("new mode "):
+            new_mode = raw_line.split()[-1].strip()
+            if old_mode == "100644" and new_mode == "100755" and not cur_diff_file.endswith(".sh"):
+                result.add_blocking(
+                    f"Accidental executable file-mode flip (`100644 -> 100755`) on `{cur_diff_file}`",
+                    str(target / cur_diff_file),
+                )
+
+    content_suffixes = {
+        ".py", ".txt", ".md", ".json", ".yml", ".yaml", ".ini", ".cs",
+        ".xml", ".html", ".env", ".ps1", ".sh", ".toml", ".cfg", ".conf",
+    }
+
+    for fpath, line_set in added_by_file.items():
+        if not fpath.exists() or not fpath.is_file():
+            continue
+        fname = fpath.name.lower()
+        if fname in FORBIDDEN_FILES or fpath.suffix.lower() in FORBIDDEN_EXTS or fname.startswith("scratch"):
+            result.add_blocking(f"Forbidden build or scratch artifact in PR diff: `{fpath.name}`", str(fpath))
+
+        # Check CRLF injection on text files
+        if fpath.suffix.lower() in content_suffixes and fpath.suffix.lower() != ".ps1":
+            try:
+                raw_bytes = fpath.read_bytes()
+                if b"\r\n" in raw_bytes:
+                    result.add_blocking(
+                        "CRLF (`\\r\\n`) line endings detected in modified file. "
+                        "Normalize to LF (`\\n`) before PR push.",
+                        str(fpath),
+                    )
+            except OSError as exc:
+                result.add_warning(f"Unable to inspect line endings: {exc}", str(fpath))
+
+        if fpath.suffix.lower() in content_suffixes or fname in {".env", "env"}:
+            audit_file_content(fpath, result, allowed_lines=line_set)
+
+        if fpath.suffix.lower() == ".py" and not fname.startswith("test_"):
+            audit_python_ast(fpath, result, allowed_lines=line_set)
+        elif fpath.suffix.lower() == ".py":
+            # Still verify valid Python syntax on test files
+            try:
+                ast.parse(fpath.read_text(encoding="utf-8", errors="ignore"), filename=str(fpath))
+            except SyntaxError as e:
+                result.add_blocking(f"Python SyntaxError in test file: {e.msg}", str(fpath), e.lineno or 0)
+
+    if not skip_flake8 and added_by_file:
+        print("🔍 Checking Diff-Scoped Flake8 code quality on modified lines...")
+        audit_flake8(target, result, scoped_lines_by_file=added_by_file)
+
+
 def audit_qgis_metadata(path: Path, result: AuditResult):
     """Audit QGIS metadata.txt for interpolation syntax, required fields, and versions."""
     if not path.exists():
@@ -300,7 +511,6 @@ def audit_qgis_metadata(path: Path, result: AuditResult):
 
     content = path.read_text(encoding="utf-8", errors="ignore")
 
-    # Critical check: raw unescaped '%' causes configparser InterpolationSyntaxError
     for line_no, line in enumerate(content.splitlines(), 1):
         if "%" in line:
             unescaped = re.search(r"(?<!%)%(?!%)", line)
@@ -323,7 +533,6 @@ def audit_qgis_metadata(path: Path, result: AuditResult):
             if not cp.has_option("general", field) or not cp.get("general", field).strip():
                 result.add_blocking(f"Mandatory metadata field missing or empty: `{field}`", str(path))
 
-        # Check repository & tracker
         for opt in ["repository", "tracker", "homepage"]:
             if cp.has_option("general", opt):
                 val = cp.get("general", opt)
@@ -351,10 +560,9 @@ def audit_qgis_plugin_invariants(target: Path, result: AuditResult, skip_qt6: bo
             "Missing `icon.png` or `icon.svg` (required for QGIS toolbar and plugin manager)", str(target)
         )
 
-    # Optional Qt6 AST check if check_qt6 is available
+    # Co-located Qt6 AST check in the same `scripts/` folder
     if not skip_qt6:
-        qt6_script = Path(__file__).resolve().parent.parent.parent / "xpublish-qgis" / "scripts" / "check_qt6.py"
-
+        qt6_script = Path(__file__).resolve().parent / "check_qt6.py"
         if qt6_script.exists():
             try:
                 import importlib.util
@@ -376,7 +584,11 @@ def audit_qgis_plugin_invariants(target: Path, result: AuditResult, skip_qt6: bo
 
 
 def run_audit(
-    target_dir: str, platform: str = "generic", skip_flake8: bool = False, skip_qt6: bool = False
+    target_dir: str,
+    platform: str = "generic",
+    skip_flake8: bool = False,
+    skip_qt6: bool = False,
+    base_ref: str = "",
 ) -> AuditResult:
     target = Path(target_dir).resolve()
     result = AuditResult()
@@ -385,10 +597,13 @@ def run_audit(
         result.add_blocking(f"Target directory does not exist: {target}")
         return result
 
-    print(f"🔍 Starting /xpublish-audit on: {target}")
+    print(f"🔍 Starting /xpublish audit on: {target}")
     print(f"📦 Platform Profile: {platform.upper()}\n")
 
-    # Check packaging hygiene for directories
+    if platform.lower() == "pr":
+        audit_pr_diff_invariants(target, result, base_ref=base_ref, skip_flake8=skip_flake8)
+        return result
+
     all_files = []
     excluded_walk_dirs = {
         ".git",
@@ -468,14 +683,12 @@ def run_audit(
         audit_qgis_metadata(meta_file, result)
         audit_qgis_plugin_invariants(target, result, skip_qt6=skip_qt6)
 
-        # Check single top-level folder rule if looking at dist zip
         dist_dir = target / "dist"
         if dist_dir.exists():
             zips = list(dist_dir.glob("*.zip"))
             if zips:
                 result.add_warning(
-                    "dist/*.zip present. For QGIS single-root zip shape and Qt6 checks, run /xpublish-qgis. "
-                    "This audit does not reimplement zip packaging."
+                    "dist/*.zip present. For QGIS single-root zip packaging, run `package_qgis.py` in /xpublish."
                 )
 
     elif platform.lower() == "food4rhino":
@@ -511,11 +724,9 @@ def audit_skill_invariants(target: Path, result: AuditResult):
         result.add_blocking("Missing mandatory `SKILL.md` in skill directory", str(target))
         return
 
-    # Check recursive self-nesting
     if (target / target.name).exists() and (target / target.name).is_dir():
         result.add_blocking(f"Recursive self-nesting detected: `{target.name}/{target.name}`", str(target))
 
-    # Check Universal Globalization Scope
     target_abs = str(target.resolve()).replace("\\", "/")
     if "/.agents/skills/" in target_abs or target_abs.endswith("/.agents/skills") or "/.agents/" in target_abs:
         result.add_warning(
@@ -532,7 +743,6 @@ def audit_skill_invariants(target: Path, result: AuditResult):
         result.add_blocking(f"Failed to read `SKILL.md`: {e}", str(skill_md))
         return
 
-    # Parse YAML frontmatter
     lines = content.splitlines()
     if not lines or lines[0].strip() != "---":
         result.add_blocking("Frontmatter must start with `---` on line 1", str(skill_md), 1)
@@ -555,7 +765,6 @@ def audit_skill_invariants(target: Path, result: AuditResult):
         import yaml
         fm_data = yaml.safe_load("\n".join(fm_lines)) or {}
     except Exception:
-        # Fallback simple parser
         for fm_line in fm_lines:
             if ":" in fm_line:
                 k, v = fm_line.split(":", 1)
@@ -707,8 +916,6 @@ def audit_skill_invariants(target: Path, result: AuditResult):
         except Exception:
             continue
 
-        # Strip fenced code blocks and inline code spans that wrap an entire [text](url) example,
-        # while unwrapping backticks inside link labels like [`file.py`](path/to/file.py)
         clean_md = re.sub(r"(`{3,}|~{3,})[\s\S]*?\1", "", md_text)
         clean_md = re.sub(r"``[^\n]+?``", "", clean_md)
         clean_md = re.sub(r"\[`([^`\n]+)`\]\(", r"[\1](", clean_md)
@@ -778,17 +985,32 @@ def audit_skill_invariants(target: Path, result: AuditResult):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Universal Package Pre-Flight Audit Engine (/xpublish-audit)")
-    parser.add_argument("target", help="Path to project directory to audit")
+    parser = argparse.ArgumentParser(
+        description="Universal Package, Upstream PR & Release Pre-Flight Audit Engine (/xpublish)"
+    )
+    parser.add_argument("target", help="Path to project directory or git repository to audit")
     parser.add_argument(
-        "--platform", choices=["generic", "qgis", "food4rhino", "github", "skill"], default="generic",
-        help="Platform profile to evaluate against"
+        "--platform",
+        choices=["generic", "pr", "qgis", "food4rhino", "github", "skill"],
+        default="generic",
+        help="Platform profile to evaluate against",
+    )
+    parser.add_argument(
+        "--base-ref",
+        default="",
+        help="Explicit git base ref for --platform pr diff comparison (default: working tree or HEAD~1)",
     )
     parser.add_argument("--skip-flake8", action="store_true", help="Skip Flake8 code quality audit")
     parser.add_argument("--skip-qt6", action="store_true", help="Skip Qt6 / QGIS 4 forward-compatibility AST scan")
     args = parser.parse_args()
 
-    res = run_audit(args.target, platform=args.platform, skip_flake8=args.skip_flake8, skip_qt6=args.skip_qt6)
+    res = run_audit(
+        args.target,
+        platform=args.platform,
+        skip_flake8=args.skip_flake8,
+        skip_qt6=args.skip_qt6,
+        base_ref=args.base_ref,
+    )
 
     print("\n" + "=" * 70)
     print("PRE-FLIGHT AUDIT SCORECARD")

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Deterministic Qt6 / QGIS 4 Forward-Compatibility Checker (/xpublish-qgis).
+Deterministic Qt6 / QGIS 4 Forward-Compatibility Checker (/xpublish --platform qgis).
 Performs AST static analysis to ensure 100% compliance with plugins.qgis.org
 Qt6 / QGIS 4 automated checks (guaranteeing the official 'QGIS 4 Ready' badge).
 """
@@ -283,14 +283,12 @@ class Qt6CompatibilityVisitor(ast.NodeVisitor):
         if isinstance(node.value, ast.Name):
             cls_name = node.value.id
         elif isinstance(node.value, ast.Attribute) and isinstance(node.value.value, ast.Name):
-            # Support module-qualified access such as QtCore.Qt.AlignCenter or QtWidgets.QFrame.NoFrame
             if node.value.attr in KNOWN_QT_SCOPED_ENUMS or node.value.attr in {"QImage", "QPainter", "QRegExp"}:
                 cls_name = node.value.attr
 
         if cls_name:
             attr = node.attr
 
-            # Check removed/renamed APIs
             if (cls_name, attr) in REMOVED_OR_RENAMED_APIS:
                 msg = REMOVED_OR_RENAMED_APIS[(cls_name, attr)]
                 self.issues.append((
@@ -299,7 +297,6 @@ class Qt6CompatibilityVisitor(ast.NodeVisitor):
                     "ERROR",
                     f"'{cls_name}.{attr}' - {msg}"
                 ))
-            # Check QImage Format prefix
             elif cls_name == "QImage" and attr.startswith("Format_"):
                 self.issues.append((
                     node.lineno,
@@ -307,7 +304,6 @@ class Qt6CompatibilityVisitor(ast.NodeVisitor):
                     "ERROR",
                     f"Un-scoped enum '{cls_name}.{attr}'. Add 'Format' before '{attr}': '{cls_name}.Format.{attr}'"
                 ))
-            # Check known scoped enums
             elif cls_name in KNOWN_QT_SCOPED_ENUMS:
                 for scope, values in KNOWN_QT_SCOPED_ENUMS[cls_name].items():
                     if attr in values:
@@ -320,7 +316,6 @@ class Qt6CompatibilityVisitor(ast.NodeVisitor):
                         ))
                         break
 
-        # Check exec_() deprecation
         if node.attr == "exec_":
             self.issues.append((
                 node.lineno,
@@ -341,7 +336,6 @@ def audit_directory_for_qt6(
     all_issues = []
 
     for root, dirs, files in os.walk(target_dir):
-        # Filter directories in-place
         dirs[:] = [d for d in dirs if not any(re.search(pat, d, re.IGNORECASE) for pat in ignores)]
         for file in files:
             if not file.endswith(".py"):
@@ -371,7 +365,14 @@ def audit_directory_for_qt6(
 
 
 def main():
-    target = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(".")
+    import argparse
+    parser = argparse.ArgumentParser(
+        description="Deterministic Qt6 / QGIS 4 Forward-Compatibility Checker (/xpublish --platform qgis)"
+    )
+    parser.add_argument("target", nargs="?", default=".", help="Path to QGIS plugin directory")
+    args = parser.parse_args()
+
+    target = Path(args.target)
     issues = audit_directory_for_qt6(target)
 
     print(f"🔍 Checking Qt6 / QGIS 4 Forward-Compatibility for: {target.resolve()}")

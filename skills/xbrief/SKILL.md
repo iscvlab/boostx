@@ -3,7 +3,7 @@ name: xbrief
 description: >
   Load related workspace markdown, extract structural architecture and locked invariants, then execute the user's task in the same turn (/xbrief, /brief).
   Use when the user runs /xbrief or /brief, or asks to read the docs then or brief then.
-  Do NOT use for doc sync (/xsync), planning (/xplan), publishing (/xpublish-audit), skill authoring (/xcreate-skill), or handoff (/xkickoff).
+  Do NOT use for doc sync (/xsync), planning (/xplan), publishing (/xpublish), skill authoring (/xcreate-skill), or handoff (/xkickoff).
 ---
 
 # `/xbrief` (Portable Workspace Briefing Engine)
@@ -27,7 +27,7 @@ Red failure modes to prevent:
 | Execute complex multi-file coding, debugging, or simulations | [`/xboost`](../xboost/SKILL.md) (or chain `/xbrief /xboost`) |
 | Primary-source API/SDK lookup or 5-wave precedent harvesting | [`/xdeep-research`](../xdeep-research/SKILL.md) |
 | Sync or rewrite documentation across the workspace | [`/xsync`](../xsync/SKILL.md) |
-| Pre-flight security checks or QGIS plugin packaging | [`/xpublish-audit`](../xpublish-audit/SKILL.md), [`/xpublish-qgis`](../xpublish-qgis/SKILL.md) |
+| Pre-flight security checks, upstream PRs, or QGIS plugin packaging | [`/xpublish`](../xpublish/SKILL.md) |
 | Check conversation context compaction health | [`/xcontext`](../xcontext/SKILL.md) |
 | Author or distill a global agent skill | [`/xcreate-skill`](../xcreate-skill/SKILL.md) |
 | Extract text and CSV tables from standalone PDFs or scanned images | [`/xocr`](../xocr/SKILL.md) |

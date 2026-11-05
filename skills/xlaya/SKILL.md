@@ -2,7 +2,7 @@
 name: xlaya
 description: >
   System 1 fast semantic decision, section shortlisting, and conflict triage sidecar (/xlaya, /laya).
-  Use when running /xlaya or /laya standalone or chained (/xsync /xlaya, /xbrief /xlaya, /xdeep-research /xlaya, /xpublish-audit /xlaya)
+  Use when running /xlaya or /laya standalone or chained (/xsync /xlaya, /xbrief /xlaya, /xdeep-research /xlaya, /xpublish /xlaya)
   for local classification (choice), scoring (score), or truth validation (noul).
   Do NOT use for prose generation or code authoring (/xboost).
 ---
@@ -11,7 +11,7 @@ description: >
 
 A lightweight, non-autoregressive **System 1 decision layer** for agent workflows (`/xlaya`, alias `/laya`), powered by the local `laya` Python library (`convaiinnovations/laya` and `convaiinnovations/laya-multilingual`) and the bundled [`laya_triage.py`](scripts/laya_triage.py) CLI engine.
 
-Runs as a standalone decision helper or as a pluggable zero-token accelerator chained with other `/x...` skills (`/xsync /xlaya`, `/xbrief /xlaya`, `/xplan /xlaya`, `/xdeep-research /xlaya`, `/xpublish-audit /xlaya`, `/xlaya /xultra`).
+Runs as a standalone decision helper or as a pluggable zero-token accelerator chained with other `/x...` skills (`/xsync /xlaya`, `/xbrief /xlaya`, `/xplan /xlaya`, `/xdeep-research /xlaya`, `/xpublish /xlaya`, `/xlaya /xultra`).
 
 Operates on **Dual-Process Cognitive Architecture**:
 - **System 1 (`laya` Python Engine)**: Ultra-fast, zero-LLM-token local semantic triage (`output_tokens: 0`), fence-safe heading chunking (`≤ 1,200` chars / `~300` tokens fitting `ModernBERT-large`'s `512`-token window), section shortlisting (`shortlist`), ordinal scoring (`score`), and calibrated contradiction testing (`noul`).
@@ -30,7 +30,7 @@ Operates on **Dual-Process Cognitive Architecture**:
 | **Fast semantic contradiction hunting across docs** | Chain `/xsync /xlaya` (`laya_triage.py --mode contradiction --ssot "..."`) |
 | **Shortlisting relevant `#L<start>-L<end>` sections in a large doc corpus** | Chain `/xbrief /xlaya` or `/xplan /xlaya` (`laya_triage.py --mode shortlist --query "..."`) |
 | **Scoring documentation completeness or filtering scraped candidates** | Chain `/xdeep-research /xlaya` (`laya_triage.py --mode rubric`) |
-| **Pre-flight public claim verification (`LIVE` vs `PREPARED`)** | Chain `/xpublish-audit /xlaya` (`laya_triage.py --mode contradiction`) |
+| **Pre-flight public claim verification (`LIVE` vs `PREPARED`)** | Chain `/xpublish /xlaya` (`laya_triage.py --mode contradiction`) |
 | **Large-scale bilingual (Thai + English) text classification / scoring** | Run `/xlaya` standalone (`--mode classify` or Python API, auto-routed via `laya.is_english()`) |
 | **Text generation, rewriting prose, or authoring code** | Do NOT use `/xlaya` (Delegate to Antigravity System 2 / [`/xboost`](../xboost/SKILL.md)) |
 | **Exact keyword, symbol, or regex lookup** | Do NOT use `/xlaya` (Use native grep / `rg` / `Select-String`) |
@@ -49,7 +49,7 @@ Prefer invoking [`scripts/laya_triage.py`](scripts/laya_triage.py) instead of wr
 # 1. Shortlist top-K sections (#L<start>-L<end>) for /xbrief or /xplan
 python "$env:USERPROFILE\.gemini\config\skills\xlaya\scripts\laya_triage.py" <path> --mode shortlist --query "<target topic>" --top-k 8
 
-# 2. Hunt semantic contradictions against canonical SSOT for /xsync or /xpublish-audit
+# 2. Hunt semantic contradictions against canonical SSOT for /xsync or /xpublish
 python "$env:USERPROFILE\.gemini\config\skills\xlaya\scripts\laya_triage.py" <path> --mode contradiction --ssot "<canonical truth>" --threshold 0.60
 
 # 3. Score technical completeness rubric (0..4) + optional SSOT check
@@ -153,9 +153,9 @@ Invoke [`scripts/laya_triage.py`](scripts/laya_triage.py) on the target file/dir
 - **Role Division**:
   - Between Wave 2 (Harvester Swarm) and Wave 3 (Blind Adversarial Auditor), `/xlaya` scores harvested candidates using `--mode rubric` (`score` + `noul`) to prune low-specificity stubs before spawning expensive Auditor subagent turns.
 
-### 5.4 [`/xpublish-audit`](../xpublish-audit/SKILL.md) + `/xlaya` (`/xpublish-audit /xlaya` — Public Claim Verifier)
+### 5.4 [`/xpublish`](../xpublish/SKILL.md) + `/xlaya` (`/xpublish /xlaya` — Public Claim Verifier)
 - **Role Division**:
-  - `/xpublish-audit` runs deterministic AST, secret, path, and packaging checks via `audit_engine.py`.
+  - `/xpublish` runs deterministic AST, secret, path, and packaging checks via `audit_engine.py`.
   - `/xlaya` evaluates README and release prose using `--mode contradiction` to verify that public status claims (`LIVE`, `REGISTERED`, `PREPARED`, `IN PIPELINE`) match verifiable receipts.
 
 ### 5.5 [`/xultra`](../xultra/SKILL.md) + `/xlaya` (`/xlaya /xultra` — System 1 Gatekeeper Before System 2 Swarm Fan-Out)

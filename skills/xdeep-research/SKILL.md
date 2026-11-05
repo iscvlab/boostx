@@ -139,6 +139,7 @@ For Tier 3 investigations, decompose across **parallel Harvester Subagents sized
 
 1. **Deep-Link Content Scraping Mandatory**:
    * Harvesters must **never** trust search-snippet blurbs alone. For every candidate fact or case study, the Harvester must fetch the actual page or file text (`read_file`, `read_url_content`, `search_web`, Python `urllib`, or [`../xocr/scripts/ocr_runner.py`](../xocr/scripts/ocr_runner.py) for `.pdf`/image sources) to extract verbatim evidence.
+   * **When Paired with `/browser` (`/xdeep-research /browser` or `/xdeep-research /xboost /xultra /browser`)**: Fetch public static specs, repository source, issue/PR threads, and CI logs via fast CLI/API probes (`gh`, `urllib`, `read_url_content`) first; dispatch bounded (`< 30s`) `/browser` scouts only for authenticated web sessions (e.g., Gmail, private dashboards), JS-hydrated SPAs, or live visual DOM/chart inspection.
    * **Ban on Root-Domain Lazy Links**: Never cite a bare homepage (`https://example.org/`) as proof. Every citation must be a specific deep link (`https://example.org/projects/specific-project-slug`) or exact local `file:///path#L10-L20`.
 2. **Structured Evidence Dossier Return**:
    * Each Harvester returns a structured dossier containing:
