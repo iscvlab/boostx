@@ -7,9 +7,9 @@ description: >
   Do NOT use for trivial edits, syntax typos, or doc-only sync (use /xsync).
 ---
 
-# Antigravity XBoost Protocol (`/xboost`)
+# XBoost Protocol (`/xboost`)
 
-When `/xboost` is invoked or high-discipline engineering is required, enter the **Antigravity XBoost Protocol**. This protocol dynamically synthesizes a **Task-Smart × Project-Smart Goal Contract**, enforces systematic root-cause analysis, anti-overengineering constraints (Ponytail × Deep Module Ladder), Dual-OS + OneDrive + IDE/CLI parity, composable `/goal` marathon discipline, and non-negotiable verification gates.
+When `/xboost` is invoked or high-discipline engineering is required, enter the **XBoost Protocol**. This protocol dynamically synthesizes a **Task-Smart × Project-Smart Goal Contract**, enforces systematic root-cause analysis, anti-overengineering constraints (Ponytail × Deep Module Ladder), Dual-OS + OneDrive + IDE/CLI agent parity, composable `/goal` marathon discipline, and non-negotiable verification gates.
 
 ---
 
@@ -167,7 +167,7 @@ An XBoost task is **only complete when terminal execution logs provide concrete 
 
 ## 3. Universal Parity Protocol (Dual-OS + OneDrive Multi-PC + IDE/CLI)
 
-Whenever engineering across a multi-machine ecosystem (Windows, macOS, and Linux workstations synced via cloud storage or Git, across both **Antigravity IDE** and **Antigravity CLI `agy`**):
+Whenever engineering across a multi-machine ecosystem (Windows, macOS, and Linux workstations synced via cloud storage or Git, across both **GUI/IDE agents** and **headless CLI agents**):
 
 1. **Strict Relative & Dynamic Home Path Invariant (OneDrive Multi-PC Safe)**:
   - Never hardcode machine-specific user profile paths (`C:\Users\<User>\...` or `/Users/<username>/...`) in configuration files, plugin hooks, skills, scripts, or documentation—hardcoded usernames break other PCs as soon as OneDrive syncs.
@@ -180,10 +180,10 @@ Whenever engineering across a multi-machine ecosystem (Windows, macOS, and Linux
   - Always use forward slashes `/` or `pathlib.Path` / `os.path.join` across Python, JavaScript, and configuration files.
 3. **Shell Dialect & NTFS Junction Awareness**:
   - Distinguish between PowerShell on Windows (`Get-ChildItem`, `Select-String`, `$env:VAR`) and zsh/bash on macOS/Linux (`ls`, `grep`, `export VAR`).
-  - Remember that in Windows PowerShell 5.1, `Get-ChildItem -Recurse` does not traverse into NTFS directory junctions (such as `~/.gemini/config` → `OneDrive/gemini-config`) unless you `cd` into or directly target the resolved path.
-4. **Antigravity Dual-Surface Parity (`Antigravity IDE` ↔ `Antigravity CLI / agy`)**:
-  - `agy` CLI executes plugin hooks (`PreToolUse`/`PostToolUse` in `hooks.json`) strictly as direct process invocations without a shell wrapper and **fails-closed** on non-zero exit codes.
-  - Always use relative script filenames inside plugin hook definitions (never hardcoded user profile paths or shell-only `; exit 0` suffixes) so hooks work identically across IDE and CLI on all OneDrive-synced machines.
+  - Remember that in Windows PowerShell 5.1, `Get-ChildItem -Recurse` does not traverse into NTFS directory junctions (such as global agent skill folders linked to `OneDrive`) unless you `cd` into or directly target the resolved path.
+4. **Dual-Surface Agent Parity (`IDE Agent` ↔ `Headless CLI Agent`)**:
+  - Headless CLI agents execute lifecycle hooks (`PreToolUse`/`PostToolUse` in `hooks.json`) strictly as direct process invocations without a shell wrapper and **fail-closed** on non-zero exit codes.
+  - Always use relative script filenames inside plugin hook definitions (never hardcoded user profile paths or shell-only `; exit 0` suffixes) so hooks work identically across IDE and CLI agents on all cloud-synced machines.
 5. **Encoding & Line Endings Standard**:
   - Always enforce UTF-8 output streams in Python tools:
     ```python

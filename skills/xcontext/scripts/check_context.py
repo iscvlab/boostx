@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 """
 Context Compaction & Token Telemetry Diagnostic Helper (check_context.py)
-Analyzes the active Antigravity IDE / 2.0 / CLI transcript and SQLite step databases
+Analyzes active AI agent conversation transcripts (JSONL) and SQLite step databases
 to determine the current compaction round, active window pressure, step metrics,
-memory drift risk, and cross-platform token consumption (--tokens, --days N, --all-time).
+memory drift risk, and cross-agent token consumption (--tokens, --days N, --all-time).
 
 Part of the /xcontext skill. Cross-platform (Windows, macOS, Linux).
 Zero external dependencies (Python stdlib only).
@@ -213,9 +213,14 @@ def find_active_conversation_dir(conv_id=None):
     return None
 
 
-def analyze_transcript(conv_dir):
-    """Parse transcript.jsonl (and companion SQLite .db if needed) for context & token metrics."""
-    transcript_path = os.path.join(conv_dir, ".system_generated", "logs", "transcript.jsonl")
+def analyze_transcript(conv_dir_or_file):
+    """Parse transcript.jsonl (or any agent JSONL session log + companion SQLite .db) for context & token metrics."""
+    if os.path.isfile(conv_dir_or_file):
+        transcript_path = conv_dir_or_file
+        conv_dir = os.path.dirname(conv_dir_or_file)
+    else:
+        conv_dir = conv_dir_or_file
+        transcript_path = os.path.join(conv_dir, ".system_generated", "logs", "transcript.jsonl")
     if not os.path.isfile(transcript_path):
         return None
 
@@ -246,8 +251,10 @@ def analyze_transcript(conv_dir):
 
             if msg_type == "USER_INPUT" and source == "USER_EXPLICIT":
                 user_inputs += 1
+            elif msg_type == "user" and not data.get("isSidechain"):
+                user_inputs += 1
 
-            is_checkpoint = msg_type == "CHECKPOINT" or (
+            is_checkpoint = msg_type in ("CHECKPOINT", "summary", "compaction") or (
                 source == "SYSTEM"
                 and msg_type != "SYSTEM_MESSAGE"
                 and content.lstrip().startswith("# Resuming from a compaction")
@@ -257,7 +264,7 @@ def analyze_transcript(conv_dir):
 
             if msg_type == "PLANNER_RESPONSE":
                 for tc in data.get("tool_calls", []) or []:
-                    if isinstance(tc, dict) and tc.get("name") == "invoke_subagent":
+                    if isinstance(tc, dict) and tc.get("name") in ("invoke_subagent", "Task"):
                         subagents_spawned += 1
 
     # Fallback to companion SQLite conversations/<id>.db if transcript omits token fields (Antigravity IDE)
@@ -553,10 +560,13 @@ def print_telemetry_report(report):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Analyze Antigravity context compaction & cross-platform token telemetry"
+        description="Analyze agent context compaction & cross-session token telemetry"
     )
     parser.add_argument(
         "--conv-id", type=str, default=None, help="Target conversation ID (full UUID or prefix)"
+    )
+    parser.add_argument(
+        "--transcript", type=str, default=None, help="Explicit path to any agent JSONL transcript file"
     )
     parser.add_argument("--json", action="store_true", help="Output raw JSON instead of markdown")
     parser.add_argument(
@@ -570,9 +580,9 @@ def main():
     )
     args = parser.parse_args()
 
-    conv_dir = find_active_conversation_dir(args.conv_id)
+    conv_dir = args.transcript if args.transcript else find_active_conversation_dir(args.conv_id)
     if not conv_dir:
-        print("Error: Could not locate active conversation directory in brain logs.", file=sys.stderr)
+        print("Error: Could not locate active conversation directory or transcript.", file=sys.stderr)
         sys.exit(1)
 
     metrics = analyze_transcript(conv_dir)

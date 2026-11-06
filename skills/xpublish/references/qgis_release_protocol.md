@@ -68,18 +68,12 @@ flowchart LR
 ```
 
 ### Step 1: Execute Pre-Flight Audits
-Before packaging, run the universal security, Flake8, and Qt6 forward-compatibility scan ([`../scripts/audit_engine.py`](../scripts/audit_engine.py) and [`../scripts/check_qt6.py`](../scripts/check_qt6.py)):
+Before packaging, run the universal security, Flake8, and Qt6 forward-compatibility scan ([`../scripts/audit_engine.py`](../scripts/audit_engine.py) and [`../scripts/check_qt6.py`](../scripts/check_qt6.py), where `<SKILL_DIR>` is the `xpublish` skill directory):
 
-* **Windows (PowerShell)**:
-  ```powershell
-  python "$env:USERPROFILE\.gemini\config\skills\xpublish\scripts\audit_engine.py" "<plugin_dir>" --platform qgis
-  python "$env:USERPROFILE\.gemini\config\skills\xpublish\scripts\check_qt6.py" "<plugin_dir>"
-  ```
-* **macOS / Linux**:
-  ```bash
-  python3 ~/.gemini/config/skills/xpublish/scripts/audit_engine.py "<plugin_dir>" --platform qgis
-  python3 ~/.gemini/config/skills/xpublish/scripts/check_qt6.py "<plugin_dir>"
-  ```
+```bash
+python "<SKILL_DIR>/scripts/audit_engine.py" "<plugin_dir>" --platform qgis
+python "<SKILL_DIR>/scripts/check_qt6.py" "<plugin_dir>"
+```
 
 ### Step 2: Semantic Version Management & Metadata Verification
 QGIS enforces strict unique version numbers per plugin name in its database. You **cannot overwrite** an existing version number via the upload form.
@@ -112,23 +106,16 @@ tags=axonometric,isometric,cartography,diagram
 ### Step 3: Package Release ZIP Archive (5 Integrated Quality Gates)
 Run the deterministic packaging engine ([`../scripts/package_qgis.py`](../scripts/package_qgis.py)):
 
-* **Windows (PowerShell)**:
-  ```powershell
-  # Package current version (automatically enforces all 5 gates):
-  python "$env:USERPROFILE\.gemini\config\skills\xpublish\scripts\package_qgis.py" "<plugin_dir>"
+```bash
+# Package current version (automatically enforces all 5 gates):
+python "<SKILL_DIR>/scripts/package_qgis.py" "<plugin_dir>"
 
-  # Automatically bump patch version and package:
-  python "$env:USERPROFILE\.gemini\config\skills\xpublish\scripts\package_qgis.py" "<plugin_dir>" --bump patch
+# Automatically bump patch version and package:
+python "<SKILL_DIR>/scripts/package_qgis.py" "<plugin_dir>" --bump patch
 
-  # Explicitly override internal package folder name:
-  python "$env:USERPROFILE\.gemini\config\skills\xpublish\scripts\package_qgis.py" "<plugin_dir>" --package-name "<slug>"
-  ```
-* **macOS / Linux**:
-  ```bash
-  python3 ~/.gemini/config/skills/xpublish/scripts/package_qgis.py "<plugin_dir>"
-  python3 ~/.gemini/config/skills/xpublish/scripts/package_qgis.py "<plugin_dir>" --bump patch
-  python3 ~/.gemini/config/skills/xpublish/scripts/package_qgis.py "<plugin_dir>" --package-name "<slug>"
-  ```
+# Explicitly override internal package folder name:
+python "<SKILL_DIR>/scripts/package_qgis.py" "<plugin_dir>" --package-name "<slug>"
+```
 
 #### Deterministic Package Name Resolution Ladder (5 Rungs):
 1. **CLI Flag (`--package-name <slug>`)**: Highest priority manual override.

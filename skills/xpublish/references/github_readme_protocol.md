@@ -15,6 +15,8 @@ Every public repository `README.md` follows a clean 6-layer visual hierarchy, ad
    - 1-paragraph bold summary stating what the project does, who it is for, and its primary improvement over manual or baseline workflows.
 2. **`## ⚡ TL;DR — Capabilities & Performance at a Glance`**:
    - **`3–5` Executive Highlights**: Concise bullet points summarizing the core capability and empirical impact.
+   - **One-Prompt Universal Agent Install (Mandatory for Archetypes A & B — Agent Skills & MCP Bridges)**:
+     Include a copy-pasteable `text` prompt block right in the `TL;DR` (and in `Universal Installation`) so any user on **any AI agent (cloud, IDE, CLI, or local LLM)** can simply paste 1 prompt into their agent to auto-detect their OS/skill directory, install, and verify the suite without manual path hunting, framed with universal **`Any AI Agent (Cloud • IDE • CLI • Local LLM)`** compatibility rather than locking to a fixed vendor list.
    - **Archetype-Adaptive Focus & Routing Guide** *(include a configuration/mode routing guide only if the project offers multiple modes, tools, or profiles)*:
 
 | Repository Archetype | What to Highlight in `TL;DR` Bullets | What to Compare in the Horizontal Bar Table |

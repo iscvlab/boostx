@@ -11,7 +11,7 @@ description: >
 
 Cross-document synchronization, conflict arbitration, and zero-stale audit for **whatever repository is open now** (`/xsync`, aliases `/update-doc`, `/doc-sync`, `/audit-docs`).
 
-Discover changes from **the active conversation**, then systematically scan and align **all markdown, HTML, and web documentation in the current workspace**. Portable across Antigravity IDE, `agy` CLI, Claude Code, Cursor, and multi-agent platforms across Windows, macOS, and Linux.
+Discover changes from **the active conversation**, then systematically scan and align **all markdown, HTML, and web documentation in the current workspace**. Portable across any AI coding agent (cloud, IDE, CLI, or local LLM) across Windows, macOS, and Linux.
 
 Do not assume specific project filenames, schema counts, or local author paths.
 
@@ -93,7 +93,7 @@ Search markdown, HTML, and web documentation across the workspace and its federa
    * *Shadow Mirrors*: Identify whether modified documents are duplicated in distribution packages (e.g. `dist/docs/`, `package_name/docs_reference/`, or mirrored sub-workspaces).
    * *3-Signal Bounded Up-Tree & Cross-Repo Federation (`--federated`)*: Never restrict synchronization strictly to `cwd` when the session delta modifies shared skills, canonical protocols, or cross-repository links:
      1. **Signal A — Outbound Relative Link Graph (`../` & `../../`)**: Parse outbound relative links in `cwd`'s Markdown files (`[label](../../<sibling_repo>/...)`) to discover referenced sibling repositories.
-     2. **Signal B — Sibling Git Clone & Global Skill Mirror Federation**: Inspect immediate sibling directories (`../*` and `../*/*`) and global agent skill roots (`~/.gemini/config/skills/`, `~/.claude/skills/`) for:
+     2. **Signal B — Sibling Git Clone & Global Skill Mirror Federation**: Inspect immediate sibling directories (`../*` and `../*/*`) and installed global agent skill roots (`~/.agents/skills/`, `~/.<agent>/skills/`, `~/.<agent>/config/skills/`) for:
         - **Mirrored Skill Trees (`skills/<name>/`)**: Enforce 100% SHA-256 byte parity between global `skills/<name>/{SKILL.md,references/*,scripts/*}` and any sibling repo packaging that skill, plus `0` leftover ghost skill directories.
         - **Canonical Root Protocols & Profile READMEs**: Enforce 100% SHA-256 parity across mirrored protocols (`GITHUB_PUBLISHING_PROTOCOL.md` ↔ `skills/xpublish/references/github_readme_protocol.md`) and org/personal profile READMEs (`docs/GITHUB_ORG_PROFILE_README.md` ↔ `profile/README.md`), and sweep first-party sibling `README.md` sister-project references for deprecated counts/names.
         - **Standalone Cross-Repo Link Hygiene**: Never write relative file links (`../<other-repo-skill>/SKILL.md` or `../SKILL.md`) inside files that are mirrored to separate git repositories or root protocol mirrors; use inline code identifiers (`` `/<skill>` ``) so each standalone repository passes link checks independently.
@@ -144,15 +144,10 @@ Verify completion programmatically before concluding:
 
 1. **Zero-Stale Grep Sweep**: Search the active relation set for deprecated terms. Expected result: **zero hits** (outside historical changelogs).
 2. **Hyperlink and Anchor Verification**: Verify all relative links (`../`) and HTML anchor IDs resolve properly.
-3. **Execute Universal Sync Verifier**: Run the bundled repo-agnostic auditor ([`scripts/audit_workspace_docs.py`](scripts/audit_workspace_docs.py), adding `--federated` to audit up-tree sibling skill/protocol/profile mirrors alongside the active workspace) and verify exit code `0`:
-   * **Windows (PowerShell)**:
-     ```powershell
-     python "$env:USERPROFILE\.gemini\config\skills\xsync\scripts\audit_workspace_docs.py" "<workspace_root>" --federated --deprecated "<old_val_1>,<old_val_2>"
-     ```
-   * **macOS / Linux**:
-     ```bash
-     python3 ~/.gemini/config/skills/xsync/scripts/audit_workspace_docs.py "<workspace_root>" --federated --deprecated "<old_val_1>,<old_val_2>"
-     ```
+3. **Execute Universal Sync Verifier**: Run the bundled repo-agnostic auditor ([`scripts/audit_workspace_docs.py`](scripts/audit_workspace_docs.py), adding `--federated` to audit up-tree sibling skill/protocol/profile mirrors and multi-agent skill roots alongside the active workspace) relative to this skill's directory (`<SKILL_DIR>`) and verify exit code `0`:
+   ```bash
+   python "<SKILL_DIR>/scripts/audit_workspace_docs.py" "<workspace_root>" --federated --deprecated "<old_val_1>,<old_val_2>"
+   ```
 4. **Render the Synchronization Ledger**: Present the final audit scorecard:
 
 | Tier | File Path | Action | Deprecated Value Purged | Ground-Truth Invariant Verified | Status |

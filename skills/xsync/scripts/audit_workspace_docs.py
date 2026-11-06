@@ -85,14 +85,76 @@ def discover_doc_files(workspace_root: Path, include_obsidian: bool = False) -> 
     return sorted(docs)
 
 
+LEGACY_GHOST_SKILLS = {
+    "xpublish-audit", "xpublish-qgis", "boostx", "briefx", "contextx",
+    "create-skillx", "deep-researchx", "kickoffx", "layax", "obsidianx",
+    "ocrx", "planx", "publishx-audit", "publishx-qgis", "researchx",
+    "syncx", "ultrax", "unlimited-ocr",
+}
+
+
+def discover_agent_skill_roots() -> list:
+    """Discover all installed global AI agent skill roots on the host machine."""
+    home = Path.home()
+    script_root = Path(__file__).resolve().parents[2]
+    env_root = os.environ.get("AGENT_SKILLS_DIR", "").strip()
+    candidates = []
+    if (script_root / "xsync").is_dir() and (script_root / "xpublish").is_dir():
+        candidates.append(script_root)
+    if env_root:
+        candidates.append(Path(env_root))
+    candidates.extend([
+        home / ".agents" / "skills",
+        home / ".claude" / "skills",
+        home / ".codex" / "skills",
+        home / ".cursor" / "skills",
+        home / ".grok" / "skills",
+        home / ".gemini" / "config" / "skills",
+    ])
+    for dot_dir in sorted(home.glob(".*")):
+        if dot_dir.is_dir():
+            if (dot_dir / "skills").is_dir():
+                candidates.append(dot_dir / "skills")
+            if (dot_dir / "config" / "skills").is_dir():
+                candidates.append(dot_dir / "config" / "skills")
+    roots = []
+    seen = set()
+    for c in candidates:
+        if c.is_dir():
+            rp = c.resolve()
+            if rp not in seen:
+                seen.add(rp)
+                roots.append(c)
+    return roots
+
+
 def discover_federated_context(ws_root: Path, include_obsidian: bool = False) -> tuple:
-    """Discover up-tree sibling skill/protocol/profile mirrors and sister READMEs (--federated)."""
+    """Discover up-tree sibling skill/protocol/profile mirrors and multi-agent skill roots (--federated)."""
     extra_docs = []
     auto_mirrors = []
     ghost_errors = []
     parent = ws_root.parent
-    global_skills = Path.home() / ".gemini" / "config" / "skills"
+    agent_roots = discover_agent_skill_roots()
+    global_skills = agent_roots[0] if agent_roots else (Path.home() / ".agents" / "skills")
     proto_master = global_skills / "xpublish" / "references" / "github_readme_protocol.md"
+
+    # Cross-check all installed local agent skill roots against primary global_skills SSOT
+    for aroot in agent_roots[1:]:
+        for sdir in sorted(aroot.iterdir()):
+            if not sdir.is_dir() or sdir.name.startswith("."):
+                continue
+            if sdir.name in LEGACY_GHOST_SKILLS:
+                ghost_errors.append(
+                    f"[{aroot}/skills/{sdir.name}] Legacy deprecated skill directory still present"
+                )
+                continue
+            gdir = global_skills / sdir.name
+            if gdir.is_dir():
+                for gfile in sorted(gdir.rglob("*")):
+                    if not gfile.is_file() or "__pycache__" in gfile.parts or gfile.suffix == ".pyc":
+                        continue
+                    rel_f = gfile.relative_to(gdir)
+                    auto_mirrors.append((gfile, sdir / rel_f))
 
     is_safe_parent = (
         parent != ws_root
@@ -112,7 +174,7 @@ def discover_federated_context(ws_root: Path, include_obsidian: bool = False) ->
     org_profile_mirrors = []
 
     for cand in candidates:
-        # 1. Skill Tree Mirrors (skills/<name>/** <-> ~/.gemini/config/skills/<name>/**)
+        # 1. Skill Tree Mirrors (skills/<name>/** <-> <GLOBAL_SKILLS_ROOT>/<name>/**)
         skills_sub = cand / "skills"
         if skills_sub.is_dir() and global_skills.is_dir() and skills_sub.resolve() != global_skills.resolve():
             if cand != ws_root:

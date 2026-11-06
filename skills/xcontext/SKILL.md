@@ -1,16 +1,16 @@
 ---
 name: xcontext
 description: >
-  Inspect Antigravity conversation transcript and SQLite step logs to report context compaction round, active window pressure, token telemetry, and memory risk (/xcontext, /context).
+  Inspect agent conversation transcripts and session step logs to report context compaction round, active window pressure, token telemetry, and memory risk (/xcontext, /context).
   Use when the user checks compaction round, context health, window capacity, or token usage (--tokens, --days N, --all-time), or runs /xcontext.
   Do NOT use for doc sync (/xsync) or kickoff prompts (/xkickoff).
 ---
 
 # `/xcontext` (Context, Compaction & Token Telemetry Diagnostic)
 
-Inspect the active Antigravity conversation transcript (`transcript.jsonl`) and SQLite step databases (`conversations/*.db`), determine the exact **Context Compaction Round**, **Active Window Pressure (`steps_since_compaction`)**, **Session & Cross-Platform Token Telemetry** (across Antigravity 2.0, Antigravity IDE, and Antigravity CLI), and evaluate the risk of memory drift and hallucination.
+Inspect the active AI agent conversation transcript (`transcript.jsonl` or `--transcript <path>`) and session step databases (`conversations/*.db`), determine the exact **Context Compaction Round**, **Active Window Pressure (`steps_since_compaction`)**, **Session & Cross-Agent Token Telemetry**, and evaluate the risk of memory drift and hallucination.
 
-Portable across Windows, macOS, and Linux. Zero external dependencies (Python standard library only).
+Portable across any AI coding agent on Windows, macOS, and Linux. Zero external dependencies (Python standard library only).
 
 Red failure modes to prevent:
 1. Pushing long pair-programming sessions past Round 2+ where the model suffers from silent memory degradation and hallucinations.
@@ -38,20 +38,17 @@ Red failure modes to prevent:
 
 ### Step 1: Execute the Diagnostic Script
 
-Run the deterministic context analyzer ([`scripts/check_context.py`](scripts/check_context.py)) via the Global Customizations Root:
+Run the deterministic context analyzer ([`scripts/check_context.py`](scripts/check_context.py)) relative to this skill's directory (`<SKILL_DIR>`):
 
-* **Windows (PowerShell)**:
-  ```powershell
-  python "$env:USERPROFILE\.gemini\config\skills\xcontext\scripts\check_context.py"
-  ```
-* **macOS / Linux**:
+* **Windows / macOS / Linux**:
   ```bash
-  python3 ~/.gemini/config/skills/xcontext/scripts/check_context.py
+  python "<SKILL_DIR>/scripts/check_context.py"
   ```
 
 *(Optional flags:
 - `--conv-id <id_or_prefix>`: Target a specific session UUID or prefix.
-- `--tokens` / `--days <N>` / `--all-time`: Aggregate cross-platform token telemetry (`input_tokens`, `cache_read_tokens`, `output_tokens`, `thinking_tokens`, and `subagents_spawned`) across Antigravity 2.0, Antigravity IDE, and Antigravity CLI, including a monthly breakdown table.
+- `--transcript <path>`: Inspect any agent's explicit `.jsonl` session transcript file directly.
+- `--tokens` / `--days <N>` / `--all-time`: Aggregate cross-session token telemetry (`input_tokens`, `cache_read_tokens`, `output_tokens`, `thinking_tokens`, and `subagents_spawned`), including a monthly breakdown table.
 - `--json`: Output structured JSON.
 By default, `check_context.py` automatically filters out isolated subagent transcripts so it always inspects the active main user conversation).*
 

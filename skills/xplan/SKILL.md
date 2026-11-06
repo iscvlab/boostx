@@ -7,11 +7,11 @@ description: >
   Do NOT use for direct code execution (/xboost) or doc sync (/xsync).
 ---
 
-# Antigravity Architectural & Implementation Planner (`/xplan`)
+# XPlan Architectural & Implementation Planner (`/xplan`)
 
-When `/xplan` (or alias `/plan`) is invoked, enter the **Antigravity XPlan Protocol**. XPlan constructs a rigorous, decision-complete `implementation_plan.md` artifact combining **inline structured grilling**, **Ponytail × Deep Module seam evaluation**, **Mermaid architecture diagrams**, and a **falsifiable Red → Green verification matrix**—with **zero chat-window interrogation**.
+When `/xplan` (or alias `/plan`) is invoked, enter the **XPlan Protocol**. XPlan constructs a rigorous, decision-complete `implementation_plan.md` artifact combining **inline structured grilling**, **Ponytail × Deep Module seam evaluation**, **Mermaid architecture diagrams**, and a **falsifiable Red → Green verification matrix**—with **zero chat-window interrogation**.
 
-Portable across Antigravity IDE, `agy` CLI, Claude Code, and multi-agent environments across Windows, macOS, and Linux.
+Portable across any AI coding agent (cloud, IDE, CLI, or local LLM) across Windows, macOS, and Linux.
 
 Red failure modes to prevent:
 1. **Chat Interruption Anti-Pattern**: Asking clarifying questions in the chat bubble (or blocking on modal prompts) instead of writing structured decision options inside `implementation_plan.md`.

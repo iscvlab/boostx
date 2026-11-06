@@ -6,13 +6,13 @@ description: >
   Do NOT use for trivial 1-line edits or local triage (/xlaya).
 ---
 
-# Antigravity XUltra Protocol (`/xultra`)
+# XUltra Protocol (`/xultra`)
 
 When `/xultra` (or alias `/ultra`) is invoked standalone or chained with any BoostX `/x...` skill, enter the **XUltra Elastic Cognitive Swarm & Adversarial Verification Protocol**. XUltra multiplies System 2 compute across isolated subagent context windows while keeping the **Main Thread at Compaction Round 0** (`🟢 HEALTHY`).
 
 Unlike rigid headcount spawners that hardcode fixed agent quotas, `/xultra` derives swarm topology from first principles—sizing execution across **Cognitive-Density Shards (`N`) × Orthogonal Paradigm Vectors (`K`) × Elastic Critic Shards (`C`) × Evolutionary Ratchet Generations (`T`)**, enforcing a **2-Tier `Wave 2A Elastic Critic Shards → Wave 2B Serialized Main Checker` Falsification Gate (`Maker ≠ Checker`)**, and requiring **Pointer-Not-Payload Returns** so raw work never bloats the main conversation.
 
-Portable across **Google Gemini / Antigravity, Claude Code, Grok, Cursor, and Codex** on **Windows, macOS, and Linux**.
+Portable across **any AI coding agent (cloud, IDE, CLI, or local LLM)** on **Windows, macOS, and Linux**.
 
 ---
 
@@ -100,14 +100,12 @@ Before spawning subagents, output the 4-line **XUltra Swarm Contract**:
 | **4. Physical Sciences, Numerical Solvers & Computational Geometry** *(FEM/CFD, C#/ILGPU, Scientific Computing)* | `K` numerical schemes, `N` solver/module workers bound to an explicit SI Unit Bridge, or `T` convergence ratchet loops. | Verifies the **Physics & Numerical Triad** (`zero-forcing equilibrium Δx = 0 ⇒ Δy = 0.0` with no `NaN`/`Inf`, 1D Analytical Toy Benchmark, conservation/CFL/step-scaling stability `UL-01..UL-08`). |
 | **5. Research, Security & Knowledge Graphs** *(Docs, Specs, Literature, Obsidian)* | `N` cognitive-density scouts (1 scout per heavy candidate/spec; clustered scouts for lightweight items) or disjoint 5-Tier doc/vault workers. | Executes `verify_evidence.py`, `audit_workspace_docs.py`, `audit_engine.py`, 3-Bucket numeric audit, and Graph Integrity (`BROKEN=0`). |
 
-### B. Multi-Host Dispatch Adapter & Build-Lock Safety
+### B. Universal Agent Runtime Dispatch Adapter & Build-Lock Safety
 
-| Host Runtime | Parallel Subagent Dispatch | Read-Only Scout | Read-Write Builder / Critic | Workspace & Build-Lock Isolation |
+| Agent Runtime Capability | Parallel Subagent Dispatch | Read-Only Scout | Read-Write Builder / Critic | Workspace & Build-Lock Isolation |
 | :--- | :--- | :--- | :--- | :--- |
-| **Gemini / Antigravity** | Parallel `invoke_subagent` calls in same turn | `TypeName="research"` | `TypeName="self"` | Disjoint `_vA.._vK` files on shared tree, or `Workspace="branch"` (when `.git` exists) |
-| **Claude Code** | Parallel `Task` calls in single assistant turn | `subagent_type="Explore"` | `subagent_type="general-purpose"` | Disjoint file paths or git worktrees in `<scratch>/xultra/` |
-| **Grok / Cursor / Codex** | Native parallel background agent tool | Read-only scout | Full execution agent | Disjoint output paths + serialized build verification |
-| **Single-Agent Fallback** | **Sequential Multi-Persona Tournament** | Bounded Pass A → B reads | Writes `_vA.._vK` to disk → switches to **Blind Critic Persona** | Disjoint files + mandatory deterministic CLI verification |
+| **Multi-Agent IDE / CLI Runtime**<br>*(`invoke_subagent` / `Task` / Background Agent API)* | Parallel subagent calls in a single assistant turn | Read-only scout (`TypeName="research"` / `Explore`) | Full execution agent (`TypeName="self"` / `general-purpose`) | Disjoint `_vA.._vK` files on shared tree, or isolated git worktree / `Workspace="branch"` |
+| **Single-Agent / Local LLM Runtime**<br>*(Sequential Fallback)* | **Sequential Multi-Persona Tournament** | Bounded Pass A → B reads | Writes `_vA.._vK` to disk → switches to **Blind Critic Persona** | Disjoint files + mandatory deterministic CLI verification |
 
 > [!IMPORTANT]
 > **Build-Lock, Git-Index & Live Desktop MCP Serialization Gate (Anti-"Multiple-Mouses" Invariant)**:

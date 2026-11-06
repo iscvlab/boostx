@@ -8,7 +8,7 @@ description: >
 
 # `/xbrief` (Portable Workspace Briefing Engine)
 
-Read a focused, high-authority set of **markdown documents** in the **current workspace**, extract overarching structural architecture and locked invariants, then execute the user's task in the same turn. Portable across Antigravity IDE, `agy` CLI, Claude Code, Cursor, and multi-agent platforms across Windows, macOS, and Linux.
+Read a focused, high-authority set of **markdown documents** in the **current workspace**, extract overarching structural architecture and locked invariants, then execute the user's task in the same turn. Portable across any AI coding agent (cloud, IDE, CLI, or local LLM) across Windows, macOS, and Linux.
 
 Do not crawl the entire tree. Do not dump raw file contents back to the user.
 

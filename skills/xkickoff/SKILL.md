@@ -15,7 +15,7 @@ This skill performs a three-way bridge:
 2. **Strategic Options Formulation**: Analyzes active roadmaps to offer orthogonal, roadmap-grounded next-step paths.
 3. **Pristine Kickoff Prompt Generation**: Assembles a self-contained prompt block containing locked invariants, active file paths, and task-matched `/x...` slash commands (`/xbrief`, `/xplan`, `/xdeep-research`, `/xlaya`, `/xobsidian`, `/xboost`, [`/xultra`](../xultra/SKILL.md), `/goal`) for the new chat.
 
-Portable across Antigravity IDE, `agy` CLI, Claude Code, Cursor, and multi-agent platforms across Windows, macOS, and Linux.
+Portable across any AI coding agent (cloud, IDE, CLI, or local LLM) across Windows, macOS, and Linux.
 
 Red failure modes to prevent:
 1. Leaving uncommitted, unsynchronized facts behind when starting a fresh chat.

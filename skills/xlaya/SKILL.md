@@ -15,7 +15,7 @@ Runs as a standalone decision helper or as a pluggable zero-token accelerator ch
 
 Operates on **Dual-Process Cognitive Architecture**:
 - **System 1 (`laya` Python Engine)**: Ultra-fast, zero-LLM-token local semantic triage (`output_tokens: 0`), fence-safe heading chunking (`≤ 1,200` chars / `~300` tokens fitting `ModernBERT-large`'s `512`-token window), section shortlisting (`shortlist`), ordinal scoring (`score`), and calibrated contradiction testing (`noul`).
-- **System 2 (Antigravity Agent)**: Deep deliberative reasoning, surgical code/doc editing (`edit_file`), tool execution, and strategic synthesis.
+- **System 2 (Host AI Agent)**: Deep deliberative reasoning, surgical code/doc editing (`edit_file`), tool execution, and strategic synthesis.
 
 > [!IMPORTANT]
 > **Does `/xlaya` Need `/goal`? No — It Needs a Question Schema (`--query` / `--ssot` / `questions`)**:
@@ -32,7 +32,7 @@ Operates on **Dual-Process Cognitive Architecture**:
 | **Scoring documentation completeness or filtering scraped candidates** | Chain `/xdeep-research /xlaya` (`laya_triage.py --mode rubric`) |
 | **Pre-flight public claim verification (`LIVE` vs `PREPARED`)** | Chain `/xpublish /xlaya` (`laya_triage.py --mode contradiction`) |
 | **Large-scale bilingual (Thai + English) text classification / scoring** | Run `/xlaya` standalone (`--mode classify` or Python API, auto-routed via `laya.is_english()`) |
-| **Text generation, rewriting prose, or authoring code** | Do NOT use `/xlaya` (Delegate to Antigravity System 2 / [`/xboost`](../xboost/SKILL.md)) |
+| **Text generation, rewriting prose, or authoring code** | Do NOT use `/xlaya` (Delegate to Host Agent System 2 / [`/xboost`](../xboost/SKILL.md)) |
 | **Exact keyword, symbol, or regex lookup** | Do NOT use `/xlaya` (Use native grep / `rg` / `Select-String`) |
 
 ---
@@ -44,24 +44,19 @@ Prefer invoking [`scripts/laya_triage.py`](scripts/laya_triage.py) instead of wr
 2. **Auto-routes English vs Multilingual checkpoints** via `laya.is_english()` (`convaiinnovations/laya` for English; `subfolder="multilingual"` for Thai / bilingual text).
 3. **Gracefully degrades** to a deterministic pure-Python scorer if `laya` is not installed.
 
-### Windows (PowerShell)
-```powershell
+### CLI Execution (`<SKILL_DIR>` = directory containing this `SKILL.md`)
+```bash
 # 1. Shortlist top-K sections (#L<start>-L<end>) for /xbrief or /xplan
-python "$env:USERPROFILE\.gemini\config\skills\xlaya\scripts\laya_triage.py" <path> --mode shortlist --query "<target topic>" --top-k 8
+python "<SKILL_DIR>/scripts/laya_triage.py" <path> --mode shortlist --query "<target topic>" --top-k 8
 
 # 2. Hunt semantic contradictions against canonical SSOT for /xsync or /xpublish
-python "$env:USERPROFILE\.gemini\config\skills\xlaya\scripts\laya_triage.py" <path> --mode contradiction --ssot "<canonical truth>" --threshold 0.60
+python "<SKILL_DIR>/scripts/laya_triage.py" <path> --mode contradiction --ssot "<canonical truth>" --threshold 0.60
 
 # 3. Score technical completeness rubric (0..4) + optional SSOT check
-python "$env:USERPROFILE\.gemini\config\skills\xlaya\scripts\laya_triage.py" <path> --mode rubric --ssot "<canonical truth>"
+python "<SKILL_DIR>/scripts/laya_triage.py" <path> --mode rubric --ssot "<canonical truth>"
 
 # 4. Classify chunks into caller-defined categories
-python "$env:USERPROFILE\.gemini\config\skills\xlaya\scripts\laya_triage.py" <path> --mode classify --labels "arch:Architecture|cli:CLI engines|guide:Workflow guide"
-```
-
-### macOS / Linux (Bash / Zsh)
-```bash
-python3 "$HOME/.gemini/config/skills/xlaya/scripts/laya_triage.py" <path> --mode shortlist --query "<target topic>" --top-k 8
+python "<SKILL_DIR>/scripts/laya_triage.py" <path> --mode classify --labels "arch:Architecture|cli:CLI engines|guide:Workflow guide"
 ```
 
 ---

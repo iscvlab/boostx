@@ -6,9 +6,9 @@ description: >
   global agent skills. Do NOT use for workspace doc sync (/xsync) or package release checks (/xpublish).
 ---
 
-# Antigravity Skill Creator & Universal Law Auditor (`/xcreate-skill`)
+# Universal Skill Creator & Law Auditor (`/xcreate-skill`)
 
-Authoring, distilling, evolving, and verifying production-grade global agent skills across **Antigravity IDE**, **Antigravity CLI (`agy`)**, **Claude Code**, and cross-platform multi-agent environments.
+Authoring, distilling, evolving, and verifying production-grade global agent skills across **any AI coding agent (cloud, IDE, CLI, or local LLM)** on Windows, macOS, and Linux.
 
 This skill synthesizes four core frameworks:
 1. **The [`/xboost`](../xboost/SKILL.md) Protocol**: 4-phase engineering lifecycle (Red Invariant Gate → Ponytail × 5-Gate Universal Law Filter → Dual-OS Surgical Build → Ruthless 3-Tier Verification).
@@ -20,31 +20,26 @@ This skill synthesizes four core frameworks:
 
 ## 1. Scope & Universal Globalization Policy
 
-Every agent skill authored or upgraded via `/xcreate-skill` **MUST reside in the Global Customizations Root** so that it is instantly accessible across **every workspace** and synchronized across **every device** (Windows, macOS, and Linux workstations):
+Every agent skill authored or upgraded via `/xcreate-skill` **MUST reside in the Global Agent Skills Root (`<GLOBAL_SKILLS_ROOT>`)** so that it is instantly accessible across **every workspace** and synchronized across **every device and AI agent** (Windows, macOS, and Linux workstations):
 
-| Target Path | Physical Cloud Storage | Behavior Across Workspaces & Devices |
+| Target Path | Physical Cloud Storage / Multi-Agent Link | Behavior Across Workspaces & Devices |
 | :--- | :--- | :--- |
-| **`~/.gemini/config/skills/<skill-name>/`** | **OneDrive (`gemini-config/skills/<name>/`)**<br>• Windows: `C:\Users\<User>\OneDrive\gemini-config\skills\<name>\`<br>• macOS: `~/Library/CloudStorage/OneDrive-Personal/gemini-config/skills/<name>/` | **Universal Globalization**: Automatically loaded into every workspace on all machines. Real-time background sync via OneDrive. Zero git-push or symlink chore required. |
+| **`<GLOBAL_SKILLS_ROOT>/<skill-name>/`**<br>*(e.g., `~/.agents/skills/<name>/` or `~/.<agent>/skills/<name>/`)* | **Cloud-Synced SSOT (OneDrive / Git)** linked via NTFS Junctions or symlinks across all installed local agent roots (`~/.agents/skills`, `~/.<agent>/skills`, `~/.<agent>/config/skills`) | **Universal Globalization**: Automatically loaded into every workspace across all local & cloud AI agents on all machines. Real-time background sync via cloud storage. |
 
 > [!IMPORTANT]
 > **The Universal Globalization Invariant (Zero Project-Local Silos)**:
-> Never create skills inside a workspace-local `.agents/skills/<name>/` folder. Local project skills become isolated silos that are invisible when opening other repositories, and they cause version drift between machines. Always write directly to `~/.gemini/config/skills/<name>/`.
+> Never isolate reusable skills inside a single project's workspace-local `.agents/skills/<name>/` folder. Project-local silos are invisible when opening other repositories and cause version drift between machines. Always write directly to your Global Agent Skills Root (`<GLOBAL_SKILLS_ROOT>/<name>/`).
 
 > [!IMPORTANT]
 > **The NTFS Junction & Real Directory Rule**:
-> When authoring global skills on Windows where `~/.gemini/config` is an NTFS junction to `OneDrive\gemini-config`, **always create real directories** inside `skills/<name>/`. Never create nested secondary junctions, as IDE file watchers and Node.js globbers refuse to traverse recursive reparse points.
+> When authoring global skills on Windows where the global agent skills root is an NTFS junction to a cloud-synced folder (`OneDrive`), **always create real directories** inside `skills/<name>/`. Never create nested secondary junctions, as IDE file watchers and Node.js globbers refuse to traverse recursive reparse points.
 
 > [!TIP]
 > **Global Git Ledger & Rollback Protection (Dual-OS)**:
-> The global config root is version-controlled via Git. After creating or updating a skill, commit the change:
-> - **macOS / Linux**:
->   ```bash
->   git -C ~/.gemini/config add -A && git -C ~/.gemini/config commit -m "feat(skills): update <skill-name>"
->   ```
-> - **Windows (PowerShell)**:
->   ```powershell
->   git -C "$env:USERPROFILE\.gemini\config" add -A; git -C "$env:USERPROFILE\.gemini\config" commit -m "feat(skills): update <skill-name>"
->   ```
+> When the global skills root is version-controlled via Git, commit the change after creating or updating a skill:
+> ```bash
+> git -C "<GLOBAL_SKILLS_ROOT>" add -A && git -C "<GLOBAL_SKILLS_ROOT>" commit -m "feat(skills): update <skill-name>"
+> ```
 
 ---
 
@@ -68,7 +63,7 @@ Operate in one of three distinct modes based on user intent:
      * Core `/x*` skills govern **how the AI agent investigates, plans, verifies, and orchestrates subagents**—they are **NOT** domain physics/finance/ML textbooks.
      * Never copy a project's domain equation or solver heuristic into a global skill. Instead ask: *"What flaw in the AI agent's reasoning or verification process allowed this bug to happen, and is it already covered by an existing `UL-01..UL-08` probe?"*
   2. **The Global CLI Script Ban**:
-     * **Never** propose adding a project-specific helper script (or domain-specific CLI check) into `~/.gemini/config/skills/<skill>/scripts/*.py`. Global skill scripts may only operate on universal primitives shared across all projects (`.md` links, `.json` schemas, `.pdf` OCR, `git` diffs, Python AST security, SQLite transcript telemetry). Keep domain scripts inside the project repository's own `scripts/` folder.
+     * **Never** propose adding a project-specific helper script (or domain-specific CLI check) into `<GLOBAL_SKILLS_ROOT>/<skill>/scripts/*.py`. Global skill scripts may only operate on universal primitives shared across all projects (`.md` links, `.json` schemas, `.pdf` OCR, `git` diffs, Python AST security, SQLite transcript telemetry). Keep domain scripts inside the project repository's own `scripts/` folder.
   3. **Anti-Confirmation-Bias Counter-Paradigm Stress Test (`∀` Non-Breakage vs. `∃` Happy-Path Trap)**:
      * Finding *one* example in Domains A, B, and C where a candidate rule works (`∃ example : works`) does **NOT** prove universality! If there exists **any standard paradigm** in another field where the rule causes mathematical errors, solver divergence, deadlocks, or false positives (`∃ valid_paradigm : breaks`), the rule is **FALSIFIED and MUST BE PRUNED**. Every candidate rule must explicitly survive all **5 Counter-Paradigm Stress Checks**:
        1. **Regularization & Pareto Trade-Offs**: Must *never* enforce a greedy primary-objective floor (`M_primary(x_cand) ≥ M_primary(x_inc)`) that blocks legitimate regularization (`L_data + λ·R_sec` in ML, Tikhonov inverse problems, LQR control), simulated annealing, or Pareto frontier trade-offs.
@@ -105,7 +100,7 @@ Answer these three questions before drafting or proposing edits:
    * **Model-Invoked** (Default): Keeps a rich `description` (`≤ 400` chars target) with leading words, positive triggers, and an explicit `Do NOT use for...` exclusion clause. Contributes context load every turn; agent can trigger it autonomously.
    * **User-Invoked**: Set `disable-model-invocation: true`. Note that `description` is **still mandatory in YAML frontmatter** (write a concise 1-line human-facing summary; positive/negative trigger clauses become optional).
      > [!WARNING]
-     > **`disable-model-invocation: true` suppresses prompt context**: In Antigravity IDE, setting this flag completely strips the skill from the agent prompt's `<skills>` catalog. Only set this for manual user-typed commands.
+     > **`disable-model-invocation: true` suppresses prompt context**: In host agent runtimes, setting this flag completely strips the skill from the agent prompt's `<skills>` catalog. Only set this for manual user-typed commands.
 3. **Bidirectional Trigger & Behavioral Probes (`A_pos ∧ A_neg`)**:
    * **Positive Probe (`A_pos`)**: A prompt or input fixture that *must* trigger/pass the skill or rule.
    * **Negative Counter-Anchor (`A_neg`)**: A related out-of-scope prompt or counter-domain fixture that *must NOT* falsely trigger or break under the rule.
@@ -177,7 +172,7 @@ description: >
 ```
 
 > [!NOTE]
-> **Antigravity Schema Standardization**: Antigravity natively standardizes on `name` and `description`. Avoid non-standard fields like `argument-hint: "<task>"`, as non-standard keys can break slash autocomplete indexing in some IDE builds.
+> **Universal Skill Schema Standardization**: Universal agent skills standardize on `name` and `description`. Avoid non-standard fields like `argument-hint: "<task>"`, as non-standard keys can break slash autocomplete indexing in some agent runtimes.
 
 #### 3. Dual-OS, Shell Escaping & Portability Invariants
 * **POSIX Forward Slashes**: Zero backslashes (`\`) inside markdown links `[...](...)`.
@@ -202,7 +197,7 @@ flowchart LR
 * `SKILL.md` is `≤ 500` lines (disclosing deep reference tables into `references/*.md` when needed) and contains zero raw LaTeX math macros (`\rightarrow`, `\times`, `\approx`).
 
 #### Tier 2: 5-Gate Universal Law, Anti-Hardcode & Live CLI Counter-Anchor Scan
-* **Universal Globalization Check**: Confirm the skill lives in `~/.gemini/config/skills/<name>/` (never in workspace `.agents/skills/`).
+* **Universal Globalization Check**: Confirm the skill lives in the Global Agent Skills Root (`<GLOBAL_SKILLS_ROOT>/<name>/`, never in a single project's workspace `.agents/skills/`).
 * **Zero-Hardcode & Secret Audit**: Scan all `.md`, `.py`, `.sh`, `.json` files using the exact case-sensitive boundary patterns enforced by [`audit_engine.py`](../xpublish/scripts/audit_engine.py):
   * **Windows Path**: `(?i)\b([a-z]:[/\\]users[/\\](?!<)[a-zA-Z0-9_\-\.]+)`
   * **macOS Path** *(case-sensitive `/Users/` with trailing `/` so REST routes like `/users/profile` never false-positive)*: `(?:^|[\s"'`=:(])(/Users/(?!<|shared\b|runner\b)[a-zA-Z0-9_\-\.]+/)`
@@ -214,17 +209,12 @@ flowchart LR
     2. Execute a live **Bidirectional Counter-Anchor Probe (`A_pos ∧ A_neg`)**: verify the script returns `0 Blocking` on valid edge-case inputs (`A_pos`, e.g., bold Markdown links `**[Label](https://...)**`, `$100 to $200` currency, paths with spaces) and accurately flags a synthetic defect (`A_neg`).
 
 #### Tier 3: Automated Pre-Flight Engine Verification (`audit_engine.py --platform skill`)
-Execute [`/xpublish`](../xpublish/SKILL.md) with `--platform skill` across all created or modified skills:
+Execute [`/xpublish`](../xpublish/SKILL.md) with `--platform skill` across all created or modified skills (`<SKILLS_ROOT>` is your active skills directory):
 
-* **macOS / Linux**:
-  ```bash
-  python3 ~/.gemini/config/skills/xpublish/scripts/audit_engine.py ~/.gemini/config/skills/<skill-name> --platform skill
-  ```
-* **Windows (PowerShell)**:
-  ```powershell
-  python "$env:USERPROFILE\.gemini\config\skills\xpublish\scripts\audit_engine.py" "$env:USERPROFILE\.gemini\config\skills\<skill-name>" --platform skill
-  ```
-Must exit with **`VERDICT: PASS`** (`0` blocking issues, `0` unaddressed advisories) before committing to `~/.gemini/config`.
+```bash
+python "<SKILLS_ROOT>/xpublish/scripts/audit_engine.py" "<SKILLS_ROOT>/<skill-name>" --platform skill
+```
+Must exit with **`VERDICT: PASS`** (`0` blocking issues, `0` unaddressed advisories) before committing to the global skills git ledger.
 
 ---
 
@@ -235,7 +225,7 @@ Must exit with **`VERDICT: PASS`** (`0` blocking issues, `0` unaddressed advisor
 | **`/xcreate-skill /xdeep-research`** | **Primary-Source Spec & Equation Lock**: Inspects local pinned manifests/SDKs or authoritative literature in Wave 1 before drafting Mode B tool skills or Mode C mathematical laws (`0` hallucinated CLI flags or unverified equations). |
 | **`/xcreate-skill /xboost`** | **4-Phase Red→Green Skill & CLI Engineering**: Applies the 5-Gate Universal Law Falsification Protocol, authors stdlib-first CLI verifiers (`scripts/*.py`), and runs live `A_pos ∧ A_neg` counter-anchor probes in Phase 4. |
 | **`/xcreate-skill /xultra`** | **3-Wave Adversarial Skill Audit Swarm (`Maker ≠ Checker`)**:<br>• **Wave 1**: Runs Law 1 deterministic `audit_engine.py --platform skill` + 3-Bucket & Gate 3 regex scans.<br>• **Wave 2A (`Blind Counter-Domain Critic Subagent — Mandatory Pre-Proposal in Mode C`)**: Spawns an independent Read-Only Critic (`TypeName="research"`) **before** presenting Mode C suggestions to the user (even on *"suggest-only"* prompts) to attack candidate rules across **Archetypes A × B × C** and the 5 Counter-Paradigm Stress Checks, classifying items into **`REMOVE (Ponytail YAGNI / Fixed-Equation / Covered by Existing UL)`** vs. **`SURGICAL FIX`**.<br>• **Wave 2B**: Applies approved surgical edits (or reports `"0 Upgrades Needed"` when all candidates are pruned), verifies cross-skill SSOT pointers, and re-runs `audit_engine.py --platform skill`. |
-| **`/xcreate-skill /xsync`** | **Cross-Skill Relation-Set Sync**: Sweeps all sibling skills in `~/.gemini/config/skills/` sharing modified CLI flags, mode names, regexes, or `UL` law IDs so zero cross-skill contradictions remain. |
+| **`/xcreate-skill /xsync`** | **Cross-Skill Relation-Set Sync**: Sweeps all sibling skills in `<GLOBAL_SKILLS_ROOT>/` sharing modified CLI flags, mode names, regexes, or `UL` law IDs so zero cross-skill contradictions remain. |
 | **`/xcreate-skill /xobsidian`** *(Strict Opt-In)* | Without `/xobsidian`, never touch any Obsidian vault. When `/xobsidian` is included, ratchet converged `#tier/method` or `#tier/package` ecosystem notes into `VAULT_ROOT` after Tier 3 passes (`BROKEN=0`, `ORPHANS=0`, `DUP_NEIGHBOR_GROUPS=0`). |
 
 ---
@@ -246,4 +236,4 @@ When reporting a newly created or upgraded skill to the user, provide:
 1. **Pruned Project-Specific Items vs. Approved Universal Laws** *(for Mode C upgrades)*: What session-specific items were filtered out and why.
 2. **3-Domain Translation Proof (`Archetypes A × B × C`)**: Concise proof that every added law holds across Continuous Solvers, Discrete Web/API Systems, and Non-Code Research/Docs.
 3. **SSOT Location & Changed Files**: Clickable `file://` links to modified `SKILL.md`, `references/*.md`, and `scripts/*.py`.
-4. **Verification Scorecard**: Confirmation that `audit_engine.py --platform skill`, `flake8`, live `A_pos ∧ A_neg` CLI probes, and `~/.gemini/config` Git commit passed `100% CLEAN`.
+4. **Verification Scorecard**: Confirmation that `audit_engine.py --platform skill`, `flake8`, live `A_pos ∧ A_neg` CLI probes, and global skills Git commit passed `100% CLEAN`.

@@ -6,9 +6,9 @@ description: >
   Do NOT use for workspace briefing (/xbrief), bug repro (/diagnosing-bugs), or doc sync (/xsync).
 ---
 
-# Antigravity XDeep-Research Protocol (`/xdeep-research`)
+# XDeep-Research Protocol (`/xdeep-research`)
 
-When `/xdeep-research` (or aliases `/deep-research`, `/xresearch`) is invoked, enter the **Antigravity XDeep-Research Protocol**. XDeep-Research unifies **fast primary-source SDK/DB/binary inspection** with a **5-Wave Multi-Agent Harvester ↔ Blind Adversarial Auditor & 100%-Proof Synthesis Engine**.
+When `/xdeep-research` (or aliases `/deep-research`, `/xresearch`) is invoked, enter the **XDeep-Research Protocol**. XDeep-Research unifies **fast primary-source SDK/DB/binary inspection** with a **5-Wave Multi-Agent Harvester ↔ Blind Adversarial Auditor & 100%-Proof Synthesis Engine**.
 
 It scales ceremony to research scope—executing **Tier 1 Fast Inline Probes** with zero subagent latency for single API/manifest/SQLite checks, and scaling to the full **5-Wave Harvester ↔ Blind Adversarial Auditor Swarm** with [`verify_evidence.py`](scripts/verify_evidence.py) for precedent harvesting, dataset fact-checking, multi-system benchmarks, and scientific/standard formulation.
 
@@ -27,10 +27,10 @@ Match execution topology to research scope and host subagent capabilities in Ste
 | **Tier 3 — 5-Wave Deep Research Swarm** | Precedent/dataset harvesting, fact-checking existing JSON/DB/drafts, comparing ≥ 2 architectures, or formulating mathematical/standard models. | Execute the full **5-Wave Harvester ↔ Blind Adversarial Auditor Lifecycle** (Cognitive-Density Harvester Sharding + `verify_evidence.py` + Orthogonal Blind Auditor + Prune-and-Replace Loop). |
 
 ### B. Host Subagent Write-Permission & Pointer-Not-Payload Return Contract
-In multi-agent runtimes (Antigravity IDE, `agy` CLI, Claude Code), prevent **Read-Only Subagent Deadlocks**, **Arbitrary Evidence Truncation**, and **Main-Context Bloat**:
+In multi-agent runtimes (cloud, IDE, CLI, or local agent frameworks), prevent **Read-Only Subagent Deadlocks**, **Arbitrary Evidence Truncation**, and **Main-Context Bloat**:
 1. **Capability-Aware Subagent Selection**:
-   * **Direct-Write Subagent (`TypeName="self"` in Antigravity / `general-purpose` in Claude Code)**: Use when the subagent should both investigate *and* write the Markdown report or dataset directly to disk.
-   * **Read-Only Subagent (`TypeName="research"` in Antigravity / `Explore` / `cavecrew-investigator`)**: Has **read-only tools** (`enable_write_tools=false`). Never instruct a read-only subagent to save files; instead, instruct it to return a structured citation payload so the main thread writes the Markdown file.
+   * **Direct-Write Subagent (`TypeName="self"` / `general-purpose` / full-access worker)**: Use when the subagent should both investigate *and* write the Markdown report or dataset directly to disk.
+   * **Read-Only Subagent (`TypeName="research"` / `Explore` / `cavecrew-investigator`)**: Has **read-only tools** (`enable_write_tools=false`). Never instruct a read-only subagent to save files; instead, instruct it to return a structured citation payload so the main thread writes the Markdown file.
 2. **Pointer-Not-Payload Return Contract (`/cavecrew` & [`/xultra`](../xultra/SKILL.md) Discipline)**:
    * **For Write-Capable Subagents**: Write the research Markdown or dataset directly to disk. Never paste the full report into the reply message; return a **Compact Pointer Receipt** containing only:
      1. `Saved Path`: Clickable `[filename.md](file:///...)`
@@ -157,15 +157,10 @@ For Tier 3 investigations, decompose across **parallel Harvester Subagents sized
 ### A. Independent Adversarial Audit
 After Wave 2 completes, run a two-layer audit on all harvested candidates:
 1. **Deterministic Script Gate ([`scripts/verify_evidence.py`](scripts/verify_evidence.py))**:
-   Run the bundled verification CLI against the draft Markdown or JSON file to catch bare root-domain URLs, placeholder tokens (`[TBD]`, `TODO`), schema/count mismatches, out-of-bounds years, and dead HTTP links:
-   * **Windows (PowerShell)**:
-     ```powershell
-     python "$env:USERPROFILE\.gemini\config\skills\xdeep-research\scripts\verify_evidence.py" "<target_md_or_json>" --check-http
-     ```
-   * **macOS / Linux**:
-     ```bash
-     python3 ~/.gemini/config/skills/xdeep-research/scripts/verify_evidence.py "<target_md_or_json>" --check-http
-     ```
+   Run the bundled verification CLI relative to this skill's directory (`<SKILL_DIR>`) against the draft Markdown or JSON file to catch bare root-domain URLs, placeholder tokens (`[TBD]`, `TODO`), schema/count mismatches, out-of-bounds years, and dead HTTP links:
+   ```bash
+   python "<SKILL_DIR>/scripts/verify_evidence.py" "<target_md_or_json>" --check-http
+   ```
 2. **Blind Adversarial Auditor Subagent(s)**:
    For multi-record datasets, case studies, or critical specifications, spawn dedicated **Auditor Subagent(s)** (`C ≥ 1` sized by [`/xultra`](../xultra/SKILL.md) Law 3) instructed with a **Red-Team Falsification Prompt**:
    * *"Assume the Harvester conflated entity names, confused announcement/draft years with actual release/completion years, misattributed authors, or cited unsupported numbers. Independently verify each record against its primary source and classify as `VERIFIED`, `INCORRECT (with actual truth)`, or `UNVERIFIED`."*

@@ -4,11 +4,11 @@
 [![Version](https://img.shields.io/badge/version-v3.3.0-blue.svg)](https://github.com/iscvlab/boostx/releases/tag/v3.3.0)
 [![Skills](https://img.shields.io/badge/Suite-13_Composable_%2Fx_Skills-005FB8)](#3-the-13-skill-suite)
 [![CLI Engines](https://img.shields.io/badge/CLI_Gates-8_Python_Engines_(100%25_Recall)-059669)](#5-bundled-zero-dependency-cli-engines)
-[![Platforms](https://img.shields.io/badge/Platforms-Claude_•_Grok_•_Gemini_•_Cursor_•_Codex-8A2BE2)](#6-universal-installation)
+[![Agents](https://img.shields.io/badge/Agents-Any_AI_Agent_(Cloud_•_IDE_•_CLI_•_Local_LLM)-8A2BE2)](#6-universal-installation)
 [![Dual-OS](https://img.shields.io/badge/Dual--OS-Windows_•_macOS_•_Linux-success)](#6-universal-installation)
 [![Upstream XERJ](https://img.shields.io/badge/Upstream_PRs-xerj--org%2Fxerj_%232922--%232927-D97706)](https://github.com/xerj-org/xerj/pulls?q=is%3Apr+author%3Anapattan)
 
-**BoostX** (`iscvlab/boostx` `v3.3.0`) is a unified, composable **`/x*` skill ecosystem and deterministic CLI verification harness** for AI coding agents engineered by **[ISCV | Isocurve Research Lab (`@iscvlab`)](https://github.com/iscvlab)**. Type `/x` in any supported IDE or CLI to surface all **13 composable skills** (`xboost`, `xbrief`, `xcontext`, `xcreate-skill`, `xdeep-research`, `xkickoff`, `xlaya`, `xobsidian`, `xocr`, `xplan`, `xpublish`, `xsync`, `xultra`) and **8 zero-dependency Python CLI engines** (`5,373` LOC) across **Claude Code, Grok, Google Gemini / Antigravity, Cursor, and Codex** on **Windows, macOS, and Linux**.
+**BoostX** (`iscvlab/boostx` `v3.3.0`) is a unified, composable **`/x*` skill ecosystem and deterministic CLI verification harness** for AI coding agents engineered by **[ISCV | Isocurve Research Lab (`@iscvlab`)](https://github.com/iscvlab)**. Type `/x` in any supported IDE or CLI—or load the portable `SKILL.md` protocols into **any AI coding agent — cloud, IDE, CLI, or local LLM (`Ollama`, `vLLM`, `LM Studio`, `OpenHands`, `Cline`, `Continue`, `Aider`, `Claude Code`, `Codex`, `Cursor`, `Grok`, `Gemini / Antigravity`, or custom agent frameworks)**—to surface all **13 composable skills** (`xboost`, `xbrief`, `xcontext`, `xcreate-skill`, `xdeep-research`, `xkickoff`, `xlaya`, `xobsidian`, `xocr`, `xplan`, `xpublish`, `xsync`, `xultra`) and **8 zero-dependency Python CLI engines** (`5,450` LOC) on **Windows, macOS, and Linux**.
 
 Sister toolkits & upstream contributions: **[mcp-bridges](https://github.com/iscvlab/mcp-bridges)** (7 Model Context Protocol automation bridges for QGIS, Rhino 3D, Grasshopper, Adobe Illustrator, and Figma · **Selected for the [XERJ Corpus Hub](https://hub.xerj.org)**) · **[xocr](https://github.com/iscvlab/xocr)** (Hybrid Document AI, Two-Stage LaTeX `booktabs` & HTML Table Surgery, and Local `SCB 10X Typhoon-OCR v1.5` × `Baidu Unlimited-OCR-2` Engine · **[Upstream PR #15 to `scb-10x/typhoon-ocr`](https://github.com/scb-10x/typhoon-ocr/pull/15)**) · **[Upstream PRs #2922–#2927 to `xerj-org/xerj`](https://github.com/xerj-org/xerj/pulls?q=is%3Apr+author%3Anapattan)** (Gemini & Antigravity skill root discovery [`#2926`](https://github.com/xerj-org/xerj/pull/2926), legacy Thai PDF PUA normalization [`#2925`](https://github.com/xerj-org/xerj/pull/2925), Windows MSVC unit test fixes [`#2924`](https://github.com/xerj-org/xerj/pull/2924), Antigravity MCP verification [`#2923`](https://github.com/xerj-org/xerj/pull/2923)/[`#2927`](https://github.com/xerj-org/xerj/pull/2927), and `/xlaya` System-1 watcher boundary benchmark on [`#1108`](https://github.com/xerj-org/xerj/issues/1108)).
 
@@ -17,22 +17,28 @@ Sister toolkits & upstream contributions: **[mcp-bridges](https://github.com/isc
 ## ⚡ TL;DR - Capabilities & Performance at a Glance (`v3.3.0`)
 
 * **Composable 5-Stage Lifecycle (`Stage 1 → Stage 5`)**: Chain any combination of `/x*` slash skills in a single prompt (`/xbrief /xdeep-research /xboost /xsync /xobsidian /xultra /goal`). BoostX automatically normalizes the execution order into `Context → Research → Plan/Build → Sync/Ratchet`.
-* **`-97.5%` Context Noise Reduction + `14.55 ms` System 1 Triage**: `/xbrief` (`Cap 8` Two-Pass reader) + `/xobsidian` (opt-in `2-Hop` Second Brain router) compresses `1,473,377` raw workspace/vault tokens down to **`36,816` high-authority tokens (`40.0×` compression)** in **`1.03 ms`**, while `/xlaya` (`laya_triage.py`) ranks `608` heading chunks across `23` specs in **`14.55 ms`** (`-98.89%` Pass-B reading tokens).
-* **`100.0%` Red-Team Defect Recall (`25 / 25` in `7.74 ms`)**: `8` bundled Python CLI engines (`5,373 LOC`) enforce 16-pattern secret scanning, Python AST security checks, diff-scoped upstream PR hygiene (`--platform pr`), Qt6/QGIS 4 scoped-enum validation, deep-link URL verification, SHA-256 mirror parity, and `≤ 400`-char YAML skill budgets (**`370.85 ± 17.29` chars** across all `13` skills, **`0%` sibling skill truncation**).
+* **`-97.5%` Context Noise Reduction + `13.73 ms` System 1 Triage**: `/xbrief` (`Cap 8` Two-Pass reader) + `/xobsidian` (opt-in `2-Hop` Second Brain router) compresses `1,473,613` raw workspace/vault tokens down to **`36,876` high-authority tokens (`40.0×` compression)** in **`0.9 ms`**, while `/xlaya` (`laya_triage.py`) ranks `606` heading chunks across `23` specs in **`13.73 ms`** (`-98.89%` Pass-B reading tokens).
+* **`100.0%` Red-Team Defect Recall (`25 / 25` in `6.99 ms`)**: `8` bundled Python CLI engines (`5,450 LOC`) enforce 16-pattern secret scanning, Python AST security checks, diff-scoped upstream PR hygiene (`--platform pr`), Qt6/QGIS 4 scoped-enum validation, deep-link URL verification, SHA-256 mirror parity, and `≤ 400`-char YAML skill budgets (**`370.54 ± 16.97` chars** across all `13` skills, **`0%` sibling skill truncation**).
 * **Which Subscription Quota Tier Should You Pair With BoostX?**
-  * **`1× Base Pro` (`Claude Pro`, `Gemini Advanced`, `Cursor Pro`)**: Best for **Single-Skill Tactical Tasks** (`/xbrief`, `/xdeep-research` Tier 1, localized `/xboost` - `~19.3 steps/turn`).
-  * **`5× High-Throughput` (`Claude Max 5×`, `Gemini 5×` - Recommended Minimum)**: Best for **Daily Chained Multi-Skill Sprints** (`/xbrief /xdeep-research /xboost /xsync /xobsidian` - `~73.3 steps/turn`, `3.37×` verification depth).
-  * **`20× Ultra` (`Gemini Ultra 20×`, `Claude Max 20×`)**: Engineered for **`400+`-Step Autonomous `/goal` Marathons & `/xultra` (`N × K × C × T`) Multi-Agent Swarms** (`~526.4 steps/session`, `~28.77M` cumulative session tokens).
+  * **`1× Base Pro` (`Claude Pro`, `Gemini Advanced`, `Cursor Pro`, or Local LLM)**: Best for **Single-Skill Tactical Tasks** (`/xbrief`, `/xdeep-research` Tier 1, localized `/xboost` - `~19.2 steps/turn`).
+  * **`5× High-Throughput` (`Claude Max 5×`, `Gemini 5×` - Recommended Minimum)**: Best for **Daily Chained Multi-Skill Sprints** (`/xbrief /xdeep-research /xboost /xsync /xobsidian` - `~73.7 steps/turn`, `3.39×` verification depth).
+  * **`20× Ultra` (`Gemini Ultra 20×`, `Claude Max 20×`)**: Engineered for **`400+`-Step Autonomous `/goal` Marathons & `/xultra` (`N × K × C × T`) Multi-Agent Swarms** (`~530.4 steps/session`, `~29.00M` cumulative session tokens).
 
-### Horizontal Bar Comparison (`N = 108` Skills • `807` Docs/Vault Nodes • `25` Red-Team Defects • `1130` Real IDE Turns)
+Try it now with a **one-prompt agent install** (copy and paste into any AI coding agent):
+
+```text
+Install iscvlab/boostx (https://github.com/iscvlab/boostx): detect my OS and your active global or workspace skills directory, clone the repository, install all 13 /x* skills (Windows: ./scripts/install.ps1 -All; macOS/Linux: ./scripts/install.sh --all; or copy skills/* directly into your active skills folder), run python skills/xpublish/scripts/audit_engine.py skills/xboost --platform skill to verify the CLI harness, and confirm all 13 /x* commands are ready.
+```
+
+### Horizontal Bar Comparison (`N = 108` Skills • `807` Docs/Vault Nodes • `25` Red-Team Defects • `1135` Real IDE Turns)
 
 | Evaluation Dimension | Workflow / Cohort Configuration | Visual Comparison Bar | Measured Result & Delta vs. Baseline |
 | :--- | :--- | :--- | :--- |
-| **1. Red-Team Defect Catch Rate ↑**<br>*(25 Seeded Defects across 5 Pillars)* | **Level 3: Full 5-Stage + 8 CLI Gates**<br>Level 2: `/xbrief` + `/xdeep-research` + `/xboost`<br>Level 1: `/xboost` Standalone (2 Gates)<br>Level 0: Prompt-Only Baseline (0 Gates) | `████████████████████` **`100.0% (25/25)`**<br>`████████████████░░░░` `80.0% (20/25)`<br>`████████░░░░░░░░░░░░` `40.0% (10/25)`<br>`░░░░░░░░░░░░░░░░░░░░` `0.0% (0/25)` | **`0` False Positives in Median `7.74 ms`** ✨<br>`4` Active CLI Verification Gates<br>`2` Active CLI Verification Gates<br>No Deterministic Pre-LLM Enforcement |
-| **2. Context Noise Compression ↑**<br>*(807 Repo + Vault Files, `1.47M` tok)* | **`/xbrief` (`Cap 8`) Repo-Only**<br>**`/xbrief` (`Cap 8`) + `/xobsidian` (`2-Hop`)**<br>Unbounded Repo + Vault Crawl | `████████████████████` **`97.81% Removed (45.6×)`**<br>`████████████████████` **`97.5% Removed (40.0×)`**<br>`░░░░░░░░░░░░░░░░░░░░` `0.0% Removed (1.0×)` | **`32,276` tok in Median `1.03 ms`** ✨<br>**`36,816` tok (`12` files) in `1.03 ms`** ✨<br>`1,473,377` tok (`807` files) in `52.88 ms` |
-| **3. System 1 Section Triage ↑**<br>*(23 Specs / 608 Chunks, `133.7k` tok)* | **BoostX `/xlaya` Top-5 Shortlist**<br>Unfiltered Full-Corpus Pass-B Read | `████████████████████` **`98.89% Saved (90.2×)`**<br>`░░░░░░░░░░░░░░░░░░░░` `0.0% Saved (1.0×)` | **`1,482` tok in Median `14.55 ms`** (`41.8k` chunks/s) ✨<br>`133,673` tok (Full 23-File Read) |
-| **4. Dual-Trigger Budget Guard ↑**<br>*(`Use when` + `Do NOT use` across `N=108`)* | **BoostX `v3.3.0` Suite (`N = 13`)**<br>All Installed Host Skills (`N = 108`)<br>Official Cloud/Vendor Skills (`N = 31`) | `████████████████████` **`100.0% (13/13)`**<br>`███████████████████░` `93.5%`<br>`█████████████████░░░` `87.1%` | **`370.85 ± 17.29` chars (`0%` Truncation)** ✨<br>`324.45 ± 49.83` chars (`99.1%` `≤500` pass)<br>`331.1 ± 63.41` chars (`96.8%` `≤500` pass) |
-| **5. Verification Depth / Turn ↑**<br>*(`N = 1130` Real IDE Prompt Turns)* | **Chained Multi-Skill `/x*` Turn (`N=258`)**<br>Single `/x*` Skill Turn (`N = 115`)<br>Standard Turn Without `/x*` (`N = 757`) | `████████████████████` **`73.3 Steps (3.37×)`**<br>`██████░░░░░░░░░░░░░░` `19.3 Steps`<br>`██████░░░░░░░░░░░░░░` `21.8 Steps (1.0×)` | **`3.90M` tok/turn (`70.3k` new in, `21.4k` out)** ✨<br>`1.03M` tok/turn (`15.6k` new in, `5.2k` out)<br>`1.22M` tok/turn (`11.8k` new in, `6.2k` out) |
+| **1. Red-Team Defect Catch Rate ↑**<br>*(25 Seeded Defects across 5 Pillars)* | **Level 3: Full 5-Stage + 8 CLI Gates**<br>Level 2: `/xbrief` + `/xdeep-research` + `/xboost`<br>Level 1: `/xboost` Standalone (2 Gates)<br>Level 0: Prompt-Only Baseline (0 Gates) | `████████████████████` **`100.0% (25/25)`**<br>`████████████████░░░░` `80.0% (20/25)`<br>`████████░░░░░░░░░░░░` `40.0% (10/25)`<br>`░░░░░░░░░░░░░░░░░░░░` `0.0% (0/25)` | **`0` False Positives in Median `6.99 ms`** ✨<br>`4` Active CLI Verification Gates<br>`2` Active CLI Verification Gates<br>No Deterministic Pre-LLM Enforcement |
+| **2. Context Noise Compression ↑**<br>*(807 Repo + Vault Files, `1.47M` tok)* | **`/xbrief` (`Cap 8`) Repo-Only**<br>**`/xbrief` (`Cap 8`) + `/xobsidian` (`2-Hop`)**<br>Unbounded Repo + Vault Crawl | `████████████████████` **`97.81% Removed (45.6×)`**<br>`████████████████████` **`97.5% Removed (40.0×)`**<br>`░░░░░░░░░░░░░░░░░░░░` `0.0% Removed (1.0×)` | **`32,336` tok in Median `0.93 ms`** ✨<br>**`36,876` tok (`12` files) in `0.9 ms`** ✨<br>`1,473,613` tok (`807` files) in `48.59 ms` |
+| **3. System 1 Section Triage ↑**<br>*(23 Specs / 606 Chunks, `133.8k` tok)* | **BoostX `/xlaya` Top-5 Shortlist**<br>Unfiltered Full-Corpus Pass-B Read | `████████████████████` **`98.89% Saved (90.3×)`**<br>`░░░░░░░░░░░░░░░░░░░░` `0.0% Saved (1.0×)` | **`1,482` tok in Median `13.73 ms`** (`44.1k` chunks/s) ✨<br>`133,773` tok (Full 23-File Read) |
+| **4. Dual-Trigger Budget Guard ↑**<br>*(`Use when` + `Do NOT use` across `N=108`)* | **BoostX `v3.3.0` Suite (`N = 13`)**<br>All Installed Host Skills (`N = 108`)<br>Official Cloud/Vendor Skills (`N = 31`) | `████████████████████` **`100.0% (13/13)`**<br>`███████████████████░` `93.5%`<br>`█████████████████░░░` `87.1%` | **`370.54 ± 16.97` chars (`0%` Truncation)** ✨<br>`324.42 ± 49.78` chars (`99.1%` `≤500` pass)<br>`331.1 ± 63.41` chars (`96.8%` `≤500` pass) |
+| **5. Verification Depth / Turn ↑**<br>*(`N = 1135` Real IDE Prompt Turns)* | **Chained Multi-Skill `/x*` Turn (`N=260`)**<br>Single `/x*` Skill Turn (`N = 116`)<br>Standard Turn Without `/x*` (`N = 759`) | `████████████████████` **`73.7 Steps (3.39×)`**<br>`██████░░░░░░░░░░░░░░` `19.2 Steps`<br>`██████░░░░░░░░░░░░░░` `21.8 Steps (1.0×)` | **`3.92M` tok/turn (`70.3k` new in, `21.5k` out)** ✨<br>`1.02M` tok/turn (`15.5k` new in, `5.2k` out)<br>`1.21M` tok/turn (`11.9k` new in, `6.2k` out) |
 
 ---
 
@@ -158,9 +164,9 @@ boostx/skills/
 
 | Skill & Command (Aliases) | Core Architecture & Protocol | Failure Modes Prevented |
 |:---|:---|:---|
-| **9. XSync**<br>`/xsync` (`/update-doc`, `/doc-sync`, `/audit-docs`) | Exhaustive multi-file and cross-repository synchronizer with bundled `scripts/audit_workspace_docs.py` (`392` LOC). Applies a **4-Level Conflict Arbitration Hierarchy** (`Level 1: Verified Non-Fallback Code & Runtime Receipts [source != "fallback", N_proc == N_exp, UL-04 Partition Conservation] > Level 2: Canonical SSOT > Level 3: Session User Lock > Level 4: Drafts`), **3-Signal Bounded Up-Tree & Cross-Repo Mirror Federation (`--federated`)** (auto-discovering sibling skill/protocol/profile clones and sister READMEs while enforcing safe parent stop-lists), consolidates forked sibling docs, verifies relative links, Zero-LaTeX compliance, SHA-256 mirror parity, and `--deprecated` sweeps across **Tiers 1-5**, and outputs a verified **Synchronization Ledger**. | Touching 1-2 surface files while leaving stale numbers in sibling repos, propagating mock/fallback or truncated metrics into docs, or breaking HTML slide/card counters. |
+| **9. XSync**<br>`/xsync` (`/update-doc`, `/doc-sync`, `/audit-docs`) | Exhaustive multi-file and cross-repository synchronizer with bundled `scripts/audit_workspace_docs.py` (`454` LOC). Applies a **4-Level Conflict Arbitration Hierarchy** (`Level 1: Verified Non-Fallback Code & Runtime Receipts [source != "fallback", N_proc == N_exp, UL-04 Partition Conservation] > Level 2: Canonical SSOT > Level 3: Session User Lock > Level 4: Drafts`), **3-Signal Bounded Up-Tree & Cross-Repo Mirror Federation (`--federated`)** (auto-discovering sibling skill/protocol/profile clones and sister READMEs while enforcing safe parent stop-lists), consolidates forked sibling docs, verifies relative links, Zero-LaTeX compliance, SHA-256 mirror parity, and `--deprecated` sweeps across **Tiers 1-5**, and outputs a verified **Synchronization Ledger**. | Touching 1-2 surface files while leaving stale numbers in sibling repos, propagating mock/fallback or truncated metrics into docs, or breaking HTML slide/card counters. |
 | **10. XCreate-Skill**<br>`/xcreate-skill` (`/create-skill`) | **4-Step Cognitive Distillation Protocol & Mode C (`Post-Session Skill Evolution, Universal Law Ratchet & Pre-Proposal Sieve`)**: (1) Universal Globalization into `~/.gemini/config/skills/<name>/`, (2) **Context Budget Guard** (`≤ 400 chars` YAML description with explicit `Use when...` and `Do NOT use for...` triggers so host IDEs never drop sibling skills), (3) **`5-Gate Universal Law Falsification Protocol`** (`Agent-Process Law vs. Domain-Equation Inversion`, `Global CLI Script Ban` blocking project domain math in `skills/*/scripts/*.py`, mandatory `Pruned Project-Specific Ideas` ledger, `3-Domain Translation Proof Table` `Archetypes A × B × C`, and `7-Point Mathematical Boundary Table`), and (4) mandatory `--platform skill` audit. | Workspace-siloed skills, leaking single-project domain equations or CLI scripts into global agent skills, bloated frontmatter descriptions (`> 400` chars), and unverified helper scripts. |
-| **11. XPublish**<br>`/xpublish` (`/xpublish-audit`, `/xpublish-qgis`, `/publish`) | **Unified 6-Pillar Pre-Flight Release Gate, Upstream PR Convergence & QGIS 4 / Qt6 Packager** (`skills/xpublish/scripts/{audit_engine.py,check_qt6.py,package_qgis.py}`, `1,992` combined LOC across `audit_engine.py` `1,044` LOC, `check_qt6.py` `395` LOC, and `package_qgis.py` `553` LOC). Supports `--platform pr\|github\|qgis\|food4rhino\|skill\|generic` (including diff-scoped `audit_pr_diff_invariants`), 16 high-entropy secret patterns, hardcoded user paths (`C:\Users\...`, `/Users/...`), Python AST security risks (`eval`, `shell=True`, `pickle`), Flake8 compliance, **Gate 3 Over-Specific Law Detector (`Check 4B`)**, **`≤ 500`-Line Sprawl Gate (`Check 4C`)**, **Raw LaTeX Macro Scanner (`Check 4D`)**, **Tri-OS Clipboard Protocol (`CF_UNICODETEXT` / `pbcopy` / `wl-copy`)**, **GitHub Repository Publishing Protocol `v1.3` ([`references/github_readme_protocol.md`](skills/xpublish/references/github_readme_protocol.md), including `§6.D` Upstream PR Etiquette & Review-Bot Convergence)**, and **5-Gate Deterministic QGIS Release Packaging ([`references/qgis_release_protocol.md`](skills/xpublish/references/qgis_release_protocol.md))**. | Leaked API keys, developer username leaks, shell injection vulnerabilities, upstream PR scope creep or unresolved review-bot threads, `> 500`-line `SKILL.md` sprawl, raw LaTeX macros in prose, `plugins.qgis.org` server `InterpolationSyntaxError`, and Qt5 unscoped enum crashes in QGIS 4. |
+| **11. XPublish**<br>`/xpublish` (`/xpublish-audit`, `/xpublish-qgis`, `/publish`) | **Unified 6-Pillar Pre-Flight Release Gate, Upstream PR Convergence & QGIS 4 / Qt6 Packager** (`skills/xpublish/scripts/{audit_engine.py,check_qt6.py,package_qgis.py}`, `1,997` combined LOC across `audit_engine.py` `1,049` LOC, `check_qt6.py` `395` LOC, and `package_qgis.py` `553` LOC). Supports `--platform pr\|github\|qgis\|food4rhino\|skill\|generic` (including diff-scoped `audit_pr_diff_invariants`), 16 high-entropy secret patterns, hardcoded user paths (`C:\Users\...`, `/Users/...`), Python AST security risks (`eval`, `shell=True`, `pickle`), Flake8 compliance, **Gate 3 Over-Specific Law Detector (`Check 4B`)**, **`≤ 500`-Line Sprawl Gate (`Check 4C`)**, **Raw LaTeX Macro Scanner (`Check 4D`)**, **Tri-OS Clipboard Protocol (`CF_UNICODETEXT` / `pbcopy` / `wl-copy`)**, **GitHub Repository Publishing Protocol `v1.3` ([`references/github_readme_protocol.md`](skills/xpublish/references/github_readme_protocol.md), including `§6.D` Upstream PR Etiquette & Review-Bot Convergence)**, and **5-Gate Deterministic QGIS Release Packaging ([`references/qgis_release_protocol.md`](skills/xpublish/references/qgis_release_protocol.md))**. | Leaked API keys, developer username leaks, shell injection vulnerabilities, upstream PR scope creep or unresolved review-bot threads, `> 500`-line `SKILL.md` sprawl, raw LaTeX macros in prose, `plugins.qgis.org` server `InterpolationSyntaxError`, and Qt5 unscoped enum crashes in QGIS 4. |
 
 ### Stage 5: Session Continuity
 
@@ -205,18 +211,18 @@ Both `/xsync` and `/xpublish` enforce five canonical status terms across all pub
 
 ### 4.4 Empirical Benchmark & Token Economics ([`benchmarks/BENCHMARK_REPORT.md`](benchmarks/BENCHMARK_REPORT.md))
 
-Reproducible multi-trial measurements (`3` warm-ups + `20-30` timed iterations via [`benchmarks/run_boostx_benchmark.py`](benchmarks/run_boostx_benchmark.py)) across `108` installed skills, `807` repository/vault markdown files (`600`-node Obsidian Second Brain), `25` seeded red-team defects, and `465` real IDE sessions (`1130` prompt turns):
+Reproducible multi-trial measurements (`3` warm-ups + `20-30` timed iterations via [`benchmarks/run_boostx_benchmark.py`](benchmarks/run_boostx_benchmark.py)) across `108` installed skills, `807` repository/vault markdown files (`600`-node Obsidian Second Brain), `25` seeded red-team defects, and `469` real IDE sessions (`1135` prompt turns):
 
 | Benchmark Dimension | Unstructured / Prompt-Only Baseline | `BoostX v3.3.0` Composable `/x*` Suite | Empirical Delta & Receipt |
 |:---|:---|:---|:---|
-| **1. System-Prompt Discovery Guard** | `96.8%` `≤ 500`-char pass • `87.1%` dual triggers *(Official Cloud/Vendor cohort, `N=31`)* | **`370.85 ± 17.29` chars** (`100%` `≤ 400`-char & `≤ 500`-char pass • `100%` `Use when` + `Do NOT use` guards across all `13` `/x*` skills) | **`0%` Sibling Skill Truncation** |
-| **2. Briefing & Vault Context Compression** | `807` files (`1,473,377` tokens in Median `52.88 ms`) | **`/xbrief` (`Cap 8`) + `/xobsidian` (`2-Hop = 4` files) = `36,816` tokens** in **`1.03 ms`** | **`-97.5%` Context Noise (`40.0×` Compression)** |
-| **3. System 1 `/xlaya` Section Triage** | Full-corpus read (`133,673` tokens across `23` specs / `608` chunks) | **Top-5 `#L<start>-L<end>` sections (`1,482` tokens) in Median `14.55 ms`** (`41,786.9` chunks/sec) | **`-98.89%` Pass-B Reading Tokens** |
-| **4. 25-Defect Red-Team Catch Rate** | `0 / 25` (`0.0%` deterministic pre-LLM enforcement) | **`25 / 25` (`100.0%` Recall • `100.0%` Precision • `0` False Positives)** in **Median `7.74 ms`** | **8 Bundled CLI Engines (`5,373` LOC)** |
-| **5. Real Turn & Session Token Depth** | `21.8` steps/turn (`11.8k` new input • `6.2k` output • `1.22M` total/turn) | **`73.3` steps/turn (`3.37×`)** • **`70.3k` new input (`5.95×`)** • **`21.4k` output (`3.45×`)** • **`28.77M` tok/session (`18.92×`)** | **Recommended: `5×` Max (Sprints) / `20×` Ultra (Swarms & Marathons)** |
+| **1. System-Prompt Discovery Guard** | `96.8%` `≤ 500`-char pass • `87.1%` dual triggers *(Official Cloud/Vendor cohort, `N=31`)* | **`370.54 ± 16.97` chars** (`100%` `≤ 400`-char & `≤ 500`-char pass • `100%` `Use when` + `Do NOT use` guards across all `13` `/x*` skills) | **`0%` Sibling Skill Truncation** |
+| **2. Briefing & Vault Context Compression** | `807` files (`1,473,613` tokens in Median `48.59 ms`) | **`/xbrief` (`Cap 8`) + `/xobsidian` (`2-Hop = 4` files) = `36,876` tokens** in **`0.9 ms`** | **`-97.5%` Context Noise (`40.0×` Compression)** |
+| **3. System 1 `/xlaya` Section Triage** | Full-corpus read (`133,773` tokens across `23` specs / `606` chunks) | **Top-5 `#L<start>-L<end>` sections (`1,482` tokens) in Median `13.73 ms`** (`44,136.9` chunks/sec) | **`-98.89%` Pass-B Reading Tokens** |
+| **4. 25-Defect Red-Team Catch Rate** | `0 / 25` (`0.0%` deterministic pre-LLM enforcement) | **`25 / 25` (`100.0%` Recall • `100.0%` Precision • `0` False Positives)** in **Median `6.99 ms`** | **8 Bundled CLI Engines (`5,450` LOC)** |
+| **5. Real Turn & Session Token Depth** | `21.8` steps/turn (`11.9k` new input • `6.2k` output • `1.21M` total/turn) | **`73.7` steps/turn (`3.39×`)** • **`70.3k` new input (`5.93×`)** • **`21.5k` output (`3.46×`)** • **`29.00M` tok/session (`19.17×`)** | **Recommended: `5×` Max (Sprints) / `20×` Ultra (Swarms & Marathons)** |
 | **6. Hybrid PDF, `booktabs` & VLM HTML Table Extraction (`/xocr` `v2.1.0`)** | `0 / 6` tables when `pdfplumber` is absent; `1`-row collapsed `booktabs` cells; unparsed HTML `<table>` tags; `5.11×` VLM upscale token bloat | **`19-97 ms/page` vector (`15.0×-3,326×` faster)** + **`-35.9%` vision tokens** + **`+9.11%` Table EditSim (`50.75%`)** & **HTML `<table>` → CSV surgery** via local `SCB 10X Typhoon-OCR v1.5` | **`100%` Vector & Scanned Table Fidelity ([Upstream PR #15](https://github.com/scb-10x/typhoon-ocr/pull/15))** |
 
-> **Transparency on Token Consumption**: BoostX reduces low-value file-scanning noise by **`97.5%`**, then deliberately invests that freed context capacity into **`3.37×` more verification steps** and **`5.95×` more primary-source & CLI telemetry inputs** per chained turn. While single-skill runs work comfortably on `1×` Pro plans, daily chained workflows (`/xbrief /xdeep-research /xboost /xsync /xobsidian`) are best paired with **`5×` High-Throughput tiers** (Claude Max `5×`, Gemini `5×`), and `400+`-step autonomous `/goal` marathons or `/xultra` / `/xdeep-research` multi-agent swarms are engineered for **`20×` Ultra tiers** (Gemini Ultra `20×`, Claude Max `20×`).
+> **Transparency on Token Consumption**: BoostX reduces low-value file-scanning noise by **`97.5%`**, then deliberately invests that freed context capacity into **`3.39×` more verification steps** and **`5.93×` more primary-source & CLI telemetry inputs** per chained turn. While single-skill runs work comfortably on `1×` Pro plans (or local LLM endpoints), daily chained workflows (`/xbrief /xdeep-research /xboost /xsync /xobsidian`) are best paired with **`5×` High-Throughput tiers** (Claude Max `5×`, Gemini `5×`), and `400+`-step autonomous `/goal` marathons or `/xultra` / `/xdeep-research` multi-agent swarms are engineered for **`20×` Ultra tiers** (Gemini Ultra `20×`, Claude Max `20×`).
 
 <details>
 <summary><b>LaTeX (booktabs) Source for Academic Citations — BoostX v3.3.0 Empirical Benchmark Summary</b></summary>
@@ -224,17 +230,17 @@ Reproducible multi-trial measurements (`3` warm-ups + `20-30` timed iterations v
 ```latex
 \begin{table}[htbp]
 \centering
-\caption{BoostX v3.3.0 Empirical Evaluation across Skill Discovery ($N=108$), Context Compression ($n=30$), Red-Team Recall ($N=25$), and Session Telemetry ($N=465$).}
+\caption{BoostX v3.3.0 Empirical Evaluation across Skill Discovery ($N=108$), Context Compression ($n=30$), Red-Team Recall ($N=25$), and Session Telemetry ($N=469$).}
 \label{tab:boostx_empirical_summary}
 \begin{tabular}{llcc}
 \toprule
 \textbf{Benchmark Dimension} & \textbf{Unstructured / Vendor Baseline} & \textbf{BoostX v3.3.0 (\texttt{/x*} Suite, $N=13$)} & \textbf{Empirical Delta} \\
 \midrule
-1. System-Prompt Discovery Guard & $96.8\%$ $\le 500$-char $\cdot$ $87.1\%$ dual guards & \textbf{$370.85 \pm 17.29$ chars} ($100\%$ dual guards) & \textbf{$0\%$ Sibling Truncation} \\
-2. Briefing \& 2-Hop Vault Compression & $807$ files ($1,473,377$ tok in $52.88\text{ ms}$) & \textbf{$12$ files ($36,816$ tok in $1.03\text{ ms}$)} & \textbf{$-97.5\%$ Noise ($40.0\times$)} \\
-3. System 1 \texttt{/xlaya} Section Triage & $133,673$ tok ($23$ specs / $608$ chunks) & \textbf{Top-5 ($1,482$ tok in $14.55\text{ ms}$)} & \textbf{$-98.89\%$ Pass-B Tokens} \\
-4. 25-Defect Red-Team Catch Rate & $0 / 25$ ($0.0\%$ pre-LLM enforcement) & \textbf{$25 / 25$ ($100.0\%$ Recall in $7.74\text{ ms}$)} & \textbf{8 CLI Engines ($5,373$ LOC)} \\
-5. Real Turn \& Session Token Depth & $21.8$ steps/turn ($1.52\text{M}$ tok/session) & \textbf{$73.3$ steps/turn ($28.77\text{M}$ tok/session)} & \textbf{$3.37\times$ Verification Depth} \\
+1. System-Prompt Discovery Guard & $96.8\%$ $\le 500$-char $\cdot$ $87.1\%$ dual guards & \textbf{$370.54 \pm 16.97$ chars} ($100\%$ dual guards) & \textbf{$0\%$ Sibling Truncation} \\
+2. Briefing \& 2-Hop Vault Compression & $807$ files ($1,473,613$ tok in $48.59\text{ ms}$) & \textbf{$12$ files ($36,876$ tok in $0.9\text{ ms}$)} & \textbf{$-97.5\%$ Noise ($40.0\times$)} \\
+3. System 1 \texttt{/xlaya} Section Triage & $133,773$ tok ($23$ specs / $606$ chunks) & \textbf{Top-5 ($1,482$ tok in $13.73\text{ ms}$)} & \textbf{$-98.89\%$ Pass-B Tokens} \\
+4. 25-Defect Red-Team Catch Rate & $0 / 25$ ($0.0\%$ pre-LLM enforcement) & \textbf{$25 / 25$ ($100.0\%$ Recall in $6.99\text{ ms}$)} & \textbf{8 CLI Engines ($5,450$ LOC)} \\
+5. Real Turn \& Session Token Depth & $21.8$ steps/turn ($1.51\text{M}$ tok/session) & \textbf{$73.7$ steps/turn ($29.00\text{M}$ tok/session)} & \textbf{$3.39\times$ Verification Depth} \\
 6. Hybrid PDF \& Table Engine (\texttt{/xocr}) & $0/6$ tables (no \texttt{pdfplumber}) $\cdot$ raw HTML & \textbf{$19\text{--}97\text{ ms/p}$ vector ($15\text{--}3326\times$) + HTML CSV} & \textbf{$-35.9\%$ Tok / $+9.1\%$ Tab (PR \#15)} \\
 \bottomrule
 \end{tabular}
@@ -247,7 +253,7 @@ Reproducible multi-trial measurements (`3` warm-ups + `20-30` timed iterations v
 
 ## 5. Bundled Zero-Dependency CLI Engines
 
-All eight bundled Python CLI scripts (`5,373` total LOC) run on **Python 3.8+ standard library** (`ast`, `re`, `json`, `zipfile`, `urllib`, `configparser`, `hashlib`, `pathlib`, with optional `laya` neural acceleration in `laya_triage.py` and `PyMuPDF`/`EasyOCR` in `ocr_runner.py`) with UTF-8 stream guards (`sys.stdout.reconfigure(encoding='utf-8')`) and zero bytecode pollution (`sys.dont_write_bytecode = True`):
+All eight bundled Python CLI scripts (`5,450` total LOC) run on **Python 3.8+ standard library** (`ast`, `re`, `json`, `zipfile`, `urllib`, `configparser`, `hashlib`, `pathlib`, with optional `laya` neural acceleration in `laya_triage.py` and `PyMuPDF`/`EasyOCR` in `ocr_runner.py`) with UTF-8 stream guards (`sys.stdout.reconfigure(encoding='utf-8')`) and zero bytecode pollution (`sys.dont_write_bytecode = True`):
 
 ```bash
 # 1. Pre-flight security, secret, AST, Flake8, PR diff & platform audit (/xpublish)
@@ -283,7 +289,7 @@ python skills/xocr/scripts/ocr_runner.py <pdf_or_image> --output ./ocr_out --mod
 
 ## 6. Universal Installation
 
-Clone this repository, then place or link the `skills/*` folders into **your host's skill root**. Because every `SKILL.md` uses standard YAML frontmatter (`name` + `description`), the exact same files work across all hosts without modification:
+Every BoostX skill uses portable Markdown (`SKILL.md`) with standard YAML frontmatter (`name` + `description`) and pure Python 3.8+ standard-library CLI engines. The exact same files work across **any AI coding agent — cloud, IDE, CLI, or local LLM (`Ollama`, `vLLM`, `LM Studio`, `OpenHands`, `Cline`, `Continue`, `Aider`, `Claude Code`, `Codex`, `Cursor`, `Grok`, `Gemini / Antigravity`, or custom agent frameworks)** on **Windows, macOS, and Linux**:
 
 | Host / Agent Platform | Global Skill Root | Workspace Skill Root | Verification Status |
 |:---|:---|:---|:---|
@@ -291,16 +297,27 @@ Clone this repository, then place or link the `skills/*` folders into **your hos
 | **Claude Code** | `~/.claude/skills` | `<repo>/.claude/skills` | **`spec-compatible`** (Path & skill schema verified via `scripts/install.ps1` & `scripts/install.sh`; live host PRs welcome) |
 | **Cursor / Codex / Windsurf** | `~/.agents/skills` / `~/.codex/skills` | `<repo>/.agents/skills` | **`spec-compatible`** (Path & skill schema verified via `scripts/install.ps1` & `scripts/install.sh`; live host PRs welcome) |
 | **Grok** | `$GROK_HOME/skills` or `~/.grok/skills` | `<repo>/.grok/skills` | **`spec-compatible`** (Path & skill schema verified via `scripts/install.ps1` & `scripts/install.sh`; live host PRs welcome) |
+| **Local LLM & Custom Agent Frameworks** (`Ollama`, `vLLM`, `LM Studio`, `OpenHands`, `Cline`, `Continue`, `Aider`) | `~/.agents/skills` or `$AGENT_SKILLS_DIR` (`-Target <dir>` / `--target <dir>`) | `<repo>/.agents/skills` | **`spec-compatible`** (Universal Markdown `SKILL.md` + stdlib Python CLI harness; supports custom target directories via `-Target` / `--target`) |
 
-### Option A: Automated Multi-Host Installer (Recommended)
+### Option A: One-Prompt Copy-Paste Agent Install (Works with Any AI Agent — Cloud, IDE, CLI, or Local LLM)
 
-Both installers automatically remove deprecated legacy (`*x`, `unlimited-ocr`, `xpublish-audit`, `xpublish-qgis`) directories before installing the 13 `/x*` skills.
+Copy and paste this single prompt into **any AI coding agent** (Claude Code, Cursor, Codex, Gemini/Antigravity, Grok, Cline, Continue, OpenHands, or a local LLM agent):
+
+```text
+Install iscvlab/boostx (https://github.com/iscvlab/boostx): detect my OS and your active global or workspace skills directory, clone the repository, install all 13 /x* skills (Windows: ./scripts/install.ps1 -All; macOS/Linux: ./scripts/install.sh --all; or copy skills/* directly into your active skills folder), run python skills/xpublish/scripts/audit_engine.py skills/xboost --platform skill to verify the CLI harness, and confirm all 13 /x* commands are ready.
+```
+
+### Option B: Automated Multi-Agent Installer (`install.ps1 -All` / `install.sh --all` / `-Target <dir>`)
+
+Both installers automatically remove deprecated legacy (`*x`, `unlimited-ocr`, `xpublish-audit`, `xpublish-qgis`) directories before installing the 13 `/x*` skills across all detected agent roots (or any custom `-Target` / `--target` / `$AGENT_SKILLS_DIR` path).
 
 **Windows (PowerShell):**
 ```powershell
 git clone https://github.com/iscvlab/boostx
 cd boostx
 ./scripts/install.ps1 -All
+# Or install into any custom / local LLM agent directory:
+./scripts/install.ps1 -Target "$HOME/.continue/skills"
 ```
 
 **macOS / Linux (Bash / Zsh):**
@@ -309,12 +326,17 @@ git clone https://github.com/iscvlab/boostx
 cd boostx
 chmod +x scripts/install.sh
 ./scripts/install.sh --all
+# Or install into any custom / local LLM agent directory:
+./scripts/install.sh --target ~/.continue/skills
 ```
 
-### Option B: Direct Copy into a Specific Host Root
+### Option C: Direct Copy into Any Agent Skill Root (`~/.agents/skills`, `~/.<agent>/skills`, or `<repo>/.agents/skills`)
 
 ```bash
 git clone https://github.com/iscvlab/boostx
+
+# Universal .agents root (Cursor, Codex, Windsurf, Cline, OpenHands, Local LLM Agents)
+mkdir -p ~/.agents/skills && cp -r boostx/skills/* ~/.agents/skills/
 
 # Claude Code
 mkdir -p ~/.claude/skills && cp -r boostx/skills/* ~/.claude/skills/
@@ -325,7 +347,7 @@ mkdir -p ~/.grok/skills && cp -r boostx/skills/* ~/.grok/skills/
 # Google Gemini / Antigravity
 mkdir -p ~/.gemini/config/skills && cp -r boostx/skills/* ~/.gemini/config/skills/
 
-# Project-local (.agents/skills)
+# Project-local workspace (.agents/skills)
 mkdir -p .agents/skills && cp -r boostx/skills/* .agents/skills/
 ```
 

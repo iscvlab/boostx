@@ -728,11 +728,16 @@ def audit_skill_invariants(target: Path, result: AuditResult):
         result.add_blocking(f"Recursive self-nesting detected: `{target.name}/{target.name}`", str(target))
 
     target_abs = str(target.resolve()).replace("\\", "/")
-    if "/.agents/skills/" in target_abs or target_abs.endswith("/.agents/skills") or "/.agents/" in target_abs:
+    home_agents_abs = str((Path.home() / ".agents").resolve()).replace("\\", "/")
+    is_workspace_agents_silo = (
+        ("/.agents/skills/" in target_abs or target_abs.endswith("/.agents/skills") or "/.agents/" in target_abs)
+        and not target_abs.startswith(home_agents_abs)
+    )
+    if is_workspace_agents_silo:
         result.add_warning(
             f"Skill is isolated in workspace `.agents/skills/` ({target.name}). "
-            "Universal Globalization standard requires all agent skills to be stored in the Global Customizations "
-            "Root (`~/.gemini/config/skills/<name>/` / `OneDrive/gemini-config/skills/<name>/`) so they appear "
+            "Universal Globalization standard recommends storing shared agent skills in your Global Agent "
+            "Skills Root (`~/.agents/skills/<name>/` or `~/.<agent>/skills/<name>/`) so they appear "
             "in every workspace and synchronize automatically across all devices.",
             str(skill_md),
         )
@@ -804,7 +809,7 @@ def audit_skill_invariants(target: Path, result: AuditResult):
         elif len(desc_str) > 500:
             result.add_warning(
                 f"Skill description is {len(desc_str)} characters long (>500 chars). "
-                "Aim for a compact description (≤ 250-400 chars) to prevent triggering Antigravity's "
+                "Aim for a compact description (≤ 250-400 chars) to prevent triggering the host AI agent's "
                 "system prompt context budget limit, which silently drops skills from the active list.",
                 str(skill_md),
             )
@@ -828,14 +833,14 @@ def audit_skill_invariants(target: Path, result: AuditResult):
     if fm_data.get("disable-model-invocation", False) is True:
         result.add_warning(
             "`disable-model-invocation: true` detected. This skill is user-invoked only and will be "
-            "completely stripped from the LLM prompt context (<skills>) in Antigravity IDE. "
+            "completely stripped from the LLM prompt context (<skills>) in host agent runtimes. "
             "Avoid if you expect pair-programming agents to discover and invoke it autonomously.",
             str(skill_md),
         )
     if "argument-hint" in fm_data:
         result.add_warning(
-            "Non-standard Claude Code frontmatter `argument-hint` detected. "
-            "Antigravity natively standardizes on `name` and `description`.",
+            "Non-standard frontmatter key `argument-hint` detected. "
+            "Universal agent skill schemas standardize on `name` and `description`.",
             str(skill_md),
         )
 

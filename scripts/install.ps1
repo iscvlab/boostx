@@ -8,7 +8,8 @@ param(
     [switch]$Agents,
     [switch]$Codex,
     [switch]$All,
-    [string]$Workspace = ""
+    [string]$Workspace = "",
+    [string]$Target = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -25,7 +26,7 @@ $LegacyDirs = @(
 )
 
 Write-Host "============================================================" -ForegroundColor Cyan
-Write-Host "  ⚡ BoostX Agent Skills (v3.3.0) - Windows Installer" -ForegroundColor Cyan
+Write-Host "  * BoostX Agent Skills (v3.3.0) - Windows Installer" -ForegroundColor Cyan
 Write-Host "============================================================" -ForegroundColor Cyan
 Write-Host "Source: $SkillsSrc"
 
@@ -70,11 +71,11 @@ function Install-Skills([string]$TargetDir, [string]$PlatformName) {
     $physTarget = Resolve-PhysicalPath $TargetDir
     $physSrc = Resolve-PhysicalPath $SkillsSrc
     if ($physTarget -eq $physSrc) {
-        Write-Host "`nSkipping $PlatformName ($TargetDir) — source and destination resolve to the same physical directory." -ForegroundColor DarkGray
+        Write-Host "`nSkipping $PlatformName ($TargetDir) - source and destination resolve to the same physical directory." -ForegroundColor DarkGray
         return
     }
     if ($installedPhysicalDirs.ContainsKey($physTarget)) {
-        Write-Host "`nSkipping $PlatformName ($TargetDir) — physical directory already updated via $($installedPhysicalDirs[$physTarget])." -ForegroundColor DarkGray
+        Write-Host "`nSkipping $PlatformName ($TargetDir) - physical directory already updated via $($installedPhysicalDirs[$physTarget])." -ForegroundColor DarkGray
         return
     }
     $installedPhysicalDirs[$physTarget] = $PlatformName
@@ -84,7 +85,10 @@ function Install-Skills([string]$TargetDir, [string]$PlatformName) {
     foreach ($oldName in $LegacyDirs) {
         $oldPath = Join-Path $TargetDir $oldName
         if (Test-Path $oldPath) {
-            Remove-Item $oldPath -Recurse -Force
+            Remove-Item $oldPath -Recurse -Force -ErrorAction SilentlyContinue
+            if (Test-Path $oldPath) {
+                cmd /c "rmdir /s /q `"$oldPath`"" 2>$null
+            }
             Write-Host "  - Removed legacy /$oldName" -ForegroundColor DarkGray
         }
     }
@@ -94,21 +98,33 @@ function Install-Skills([string]$TargetDir, [string]$PlatformName) {
         $dest = Join-Path $TargetDir $skillName
 
         if ((Test-Path $dest) -and ((Resolve-PhysicalPath $_.FullName) -eq (Resolve-PhysicalPath $dest))) {
-            Write-Host "  ✓ Skipped /$skillName (source == destination)" -ForegroundColor DarkGray
+            Write-Host "  [OK] Skipped /$skillName (source == destination)" -ForegroundColor DarkGray
             return
         }
 
         if (Test-Path $dest) {
-            Remove-Item $dest -Recurse -Force
+            Remove-Item $dest -Recurse -Force -ErrorAction SilentlyContinue
+            if (Test-Path $dest) {
+                cmd /c "rmdir /s /q `"$dest`"" 2>$null
+            }
         }
 
         # Copy as real directory to prevent nested junction recursion limits
-        Copy-Item $_.FullName $dest -Recurse -Force
-        Write-Host "  ✓ Installed /$skillName" -ForegroundColor Green
+        if (Test-Path $dest) {
+            Copy-Item (Join-Path $_.FullName "*") $dest -Recurse -Force
+        } else {
+            Copy-Item $_.FullName $dest -Recurse -Force
+        }
+        Write-Host "  [OK] Installed /$skillName" -ForegroundColor Green
     }
 }
 
-$noHostFlag = -not $Antigravity.IsPresent -and -not $Claude.IsPresent -and -not $Grok.IsPresent -and -not $Agents.IsPresent -and -not $Codex.IsPresent -and [string]::IsNullOrEmpty($Workspace)
+$customTarget = if (-not [string]::IsNullOrEmpty($Target)) { $Target } elseif ($env:AGENT_SKILLS_DIR) { $env:AGENT_SKILLS_DIR } else { "" }
+$noHostFlag = -not $Antigravity.IsPresent -and -not $Claude.IsPresent -and -not $Grok.IsPresent -and -not $Agents.IsPresent -and -not $Codex.IsPresent -and [string]::IsNullOrEmpty($Workspace) -and [string]::IsNullOrEmpty($customTarget)
+
+if (-not [string]::IsNullOrEmpty($customTarget)) {
+    Install-Skills $customTarget "Custom Agent Target ($customTarget)"
+}
 
 $geminiDir = Join-Path $env:USERPROFILE ".gemini\config\skills"
 if ($Antigravity.IsPresent -or $All.IsPresent -or ($noHostFlag -and (Test-Path (Join-Path $env:USERPROFILE ".gemini")))) {
@@ -128,11 +144,25 @@ if ($Grok.IsPresent -or $All.IsPresent -or ($noHostFlag -and (Test-Path $grokHom
 
 $agentsDir = Join-Path $env:USERPROFILE ".agents\skills"
 if ($Agents.IsPresent -or $All.IsPresent -or ($noHostFlag -and (Test-Path (Join-Path $env:USERPROFILE ".agents")))) {
-    Install-Skills $agentsDir "Cursor / Codex / Windsurf (.agents)"
+    Install-Skills $agentsDir "Universal .agents (Cursor / Codex / Windsurf / Local LLM Agents)"
 }
 $codexDir = Join-Path $env:USERPROFILE ".codex\skills"
 if ($Codex.IsPresent -or $All.IsPresent -or ($noHostFlag -and (Test-Path (Join-Path $env:USERPROFILE ".codex")))) {
     Install-Skills $codexDir "Codex (.codex)"
+}
+
+if ($All.IsPresent -or $noHostFlag) {
+    Get-ChildItem -Directory -Force $env:USERPROFILE -ErrorAction SilentlyContinue | Where-Object { $_.Name.StartsWith(".") } | ForEach-Object {
+        foreach ($sub in @("skills", "config\skills")) {
+            $cand = Join-Path $_.FullName $sub
+            if (Test-Path $cand) {
+                $physCand = Resolve-PhysicalPath $cand
+                if (-not $installedPhysicalDirs.ContainsKey($physCand)) {
+                    Install-Skills $cand "Auto-Discovered Agent ($($_.Name)/$($sub.Replace('\', '/')))"
+                }
+            }
+        }
+    }
 }
 
 if (-not [string]::IsNullOrEmpty($Workspace) -and (Test-Path $Workspace)) {
@@ -148,5 +178,5 @@ if (-not [string]::IsNullOrEmpty($Workspace) -and (Test-Path $Workspace)) {
 }
 
 Write-Host "`n============================================================" -ForegroundColor Cyan
-Write-Host "  ✓ BoostX v3.3.0 Installation Complete! All 13 /x* skills ready." -ForegroundColor Green
+Write-Host "  [OK] BoostX v3.3.0 Installation Complete! All 13 /x* skills ready." -ForegroundColor Green
 Write-Host "============================================================" -ForegroundColor Cyan
