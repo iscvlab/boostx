@@ -56,6 +56,9 @@ Extract core nouns, identifiers, and status words from the prompt, discarding ge
 
 Search `*.md` in the current workspace, including hidden skill or configuration directories when host permissions allow.
 
+* **Bounded Up-Tree Parent-Umbrella Discovery (Symmetric with [`/xsync`](../xsync/SKILL.md) `--federated`)**:
+  * Inspect outbound relative links (`../`, `../../`) in root Markdown files and check the immediate parent directory (`..`).
+  * When `cwd.parent` is a multi-repo umbrella directory (i.e., `cwd.parent != cwd`, `cwd.parent != ~`, and `cwd.parent.name.lower()` is **not** in `{desktop, documents, downloads, users, home, root, tmp, temp, var, etc}`), include top-level parent umbrella SSOTs (`../*PLAYBOOK*.md`, `../*PROTOCOL*.md`, `../*PLAN*.md`, `../*PORTFOLIO*.md`) in candidate discovery so shared cross-workspace pattern playbooks and architectural guardrails are automatically inherited.
 * **Exclusions**: `.git`, `node_modules`, `dist`, `build`, `__pycache__`, `.venv`, vendor bundles, and **any directory containing an `.obsidian/` subfolder** (so Obsidian Second Brain notes never pollute or consume the 8-file Repository SSOT cap during standard `/xbrief` runs).
 * **Strict Opt-In [`/xobsidian`](../xobsidian/SKILL.md) Combinator Rule (`/xbrief /xobsidian`)**:
   * **Default (Without `/xobsidian`)**: Do **not** read or query any Obsidian vault.

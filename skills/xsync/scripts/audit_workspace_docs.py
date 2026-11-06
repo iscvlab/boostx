@@ -163,6 +163,14 @@ def discover_federated_context(ws_root: Path, include_obsidian: bool = False) ->
     )
     candidates = [ws_root]
     if is_safe_parent:
+        for pfile in sorted(parent.glob("*.md")):
+            if pfile.is_file() and any(
+                k in pfile.name.upper() for k in ("PLAYBOOK", "PROTOCOL", "PLAN", "PORTFOLIO")
+            ):
+                extra_docs.append(pfile)
+                if pfile.name == "GITHUB_PUBLISHING_PROTOCOL.md" and proto_master.is_file():
+                    if pfile.resolve() != proto_master.resolve():
+                        auto_mirrors.append((proto_master, pfile))
         for sib in sorted(parent.iterdir()):
             if not sib.is_dir() or sib == ws_root or sib.name.startswith(".") or sib.name in EXCLUDED_DIRS:
                 continue

@@ -90,7 +90,7 @@ graph TD
 
 ### A. Context Inheritance & Existing-Study Check First ([`/xbrief`](../xbrief/SKILL.md) Hook)
 Before inventing new rules or spawning external search waves:
-1. Perform a fast bounded check of the active workspace for existing domain conventions (`CONTEXT.md`, `AGENTS.md`, `Guidelines/*.md`, `docs/*protocol*.md`, or target `.json`/`.sqlite` schemas). If local rules exist, inherit their exact schema, category/date buckets, and narrative format.
+1. Perform a fast bounded check of the active workspace (and safe parent umbrella `../*PLAYBOOK*.md` / `../*PROTOCOL*.md` when `cwd.parent` is not a generic OS root/user folder) for existing domain conventions (`CONTEXT.md`, `AGENTS.md`, `Guidelines/*.md`, `docs/*protocol*.md`, `*PLAYBOOK*.md`, or target `.json`/`.sqlite` schemas). If local rules or a cross-workspace pattern playbook exist, inherit their exact schema, pattern taxonomy, and false-positive guardrails.
 2. **Single-SSOT In-Place Upsert & Iterative Delta Routing**: Check `<artifactDir>/scratch/boostx_state.md` and `docs/` (`docs/research/` or module `docs/`) for an existing `RESEARCH_<TOPIC>.md` covering the active subsystem. If a canonical study already exists, **never fork a duplicate `RESEARCH_*.md` file** and **never re-run full 5-wave external web searches for facts already locked**; route Waves 2–3 strictly to unresearched delta questions (and internal 4-Axis Forensic Codebase Auditing `UL-01..UL-08` when auditing a codebase or simulation engine), updating the existing `RESEARCH_<TOPIC>.md` in-place with sequential heading numbering.
 
 ### B. Synthesize the 2D Research Contract (`Intent × Domain`)
@@ -141,11 +141,11 @@ For Tier 3 investigations, decompose across **parallel Harvester Subagents sized
    * Harvesters must **never** trust search-snippet blurbs alone. For every candidate fact or case study, the Harvester must fetch the actual page or file text (`read_file`, `read_url_content`, `search_web`, Python `urllib`, or [`../xocr/scripts/ocr_runner.py`](../xocr/scripts/ocr_runner.py) for `.pdf`/image sources) to extract verbatim evidence.
    * **When Paired with `/browser` (`/xdeep-research /browser` or `/xdeep-research /xboost /xultra /browser`)**: Fetch public static specs, repository source, issue/PR threads, and CI logs via fast CLI/API probes (`gh`, `urllib`, `read_url_content`) first; dispatch bounded (`< 30s`) `/browser` scouts only for authenticated web sessions (e.g., Gmail, private dashboards), JS-hydrated SPAs, or live visual DOM/chart inspection.
    * **Ban on Root-Domain Lazy Links**: Never cite a bare homepage (`https://example.org/`) as proof. Every citation must be a specific deep link (`https://example.org/projects/specific-project-slug`) or exact local `file:///path#L10-L20`.
-2. **Structured Evidence Dossier Return**:
+2. **Structured Evidence Dossier Return & Enclosing-Scope Citation Parity**:
    * Each Harvester returns a structured dossier containing:
      * `Candidate / Claim ID`
      * `Extracted Fields / Equations / Metrics`
-     * `Primary Deep-Link URL or Local Path`
+     * `Primary Deep-Link URL or Local Path` — when citing source code lines (`#L<start>-L<end>`), report **both** the exact bottleneck/statement lines and the **enclosing function/method boundary** (`def ...` / `fn ...` start–end lines verified via AST or `grep -n`) so downstream builders never misalign method boundaries.
      * `Verbatim Evidence Snippet` (the exact verbatim passage, equation, or table row from the source proving the date, author, formula, or metric)
 
 ---

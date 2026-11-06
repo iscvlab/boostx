@@ -269,10 +269,11 @@ def launch_prefilled_github_pr(upstream_repo: str, org_fork: str, branch: str, t
 
 When contributing to external upstream repositories, enforce these four rules before and after opening a PR:
 
-1. **Issue-Claim Etiquette & Maintainer Governance Check**:
-   - Before opening an upstream PR or posting a public comment, inspect `CONTRIBUTING.md`, `.github/PULL_REQUEST_TEMPLATE*`, issue assignees, and linked open PRs via GitHub API/CLI (`Law 1`).
-   - **Direct-PR Repos**: If the issue is unassigned, has no competing open PR, and `CONTRIBUTING.md` does not mandate prior approval, implement the fix + regression test on a clean feature branch and open the PR directly.
-   - **Discussion-First Repos**: If `CONTRIBUTING.md` or maintainer norms require discussing before opening a PR (or when an issue is labeled internal `to-do`), prepare and verify the local branch first, then post a concise 3-line technical root-cause + proposed fix comment on the issue and wait for maintainer sign-off before pushing the PR.
+1. **Issue-Claim Etiquette, Live `HEAD` Repro & Maintainer Governance Check**:
+   - Before opening an upstream PR or posting a public comment, inspect `CONTRIBUTING.md`, `.github/PULL_REQUEST_TEMPLATE*`, `.github/workflows/*`, `.releaserc*`, `AI_POLICY.md`, issue assignees, and linked open PRs via GitHub API/CLI (`Law 1`).
+   - **Live `HEAD` Reproduction & Target Branch Pre-Gate**: Before writing code for an older open issue, verify on a fresh clone of the repository's actual default/integration branch (`gh api repos/<owner>/<repo> --jq .default_branch` or `CONTRIBUTING.md` target branch such as `develop` vs. `main`) that the issue has **not** already been silently resolved at `HEAD`. Check whether the repo enforces **DCO sign-off (`git commit -s` / `Signed-off-by:`)**, **Conventional Commits** (`fix:` / `feat:` / `perf:`), or an **entry in `docs/changelog.rst` / `CHANGELOG.md`**.
+   - **Direct-PR Repos**: If the issue is unassigned, reproducible at `HEAD`, has no competing open PR, and `CONTRIBUTING.md` does not mandate prior approval, implement the fix + regression test on a clean feature branch and open the PR directly.
+   - **Discussion-First Repos**: If `CONTRIBUTING.md` or maintainer norms require discussing before opening a PR (or when proposing an unsolicited proactive optimization on a conservative academic/institutional repository), prepare and verify the local branch first, then post a concise 3-line technical root-cause / benchmark receipt comment on the issue (or open a Benchmark Issue) and wait for maintainer sign-off before pushing the PR.
    - **Human-Consent Gate for Public Posts**: Always obtain explicit user approval before posting public comments or opening PRs under the user's GitHub identity.
 2. **Closing Keyword Parity (`Fixes #N` vs. `Part of #N` / `Addresses #N`)**:
    - Write auto-closing keywords (`Fixes #N`, `Closes #N`, `Resolves #N`) **only** when the PR satisfies `100%` of the issue's stated sub-requirements, acceptance checkboxes, and target platforms.
