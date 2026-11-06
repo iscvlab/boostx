@@ -1,5 +1,27 @@
 # Changelog
 
+## v3.4.0
+
+- **Cross-Workspace Compound Learning Playbook (`docs/COMPOUND_LEARNING_PLAYBOOK.md`) & Two-Tier Autonomy Architecture (`Tier A` Auto-Ratchet vs. `Tier B` Human-Consent Gate)**:
+  - **Public Compound Learning Playbook (`docs/COMPOUND_LEARNING_PLAYBOOK.md`)**: Codified **17 Reusable Engineering Defect & Bottleneck Archetypes** (`PAT-VEC-01..03`, `PAT-SPARSE-01`, `PAT-GRAPH-01`, `PAT-STATE-01..02`, `PAT-NUM-01`, `PAT-GIS-01..02`, `PAT-3D-01`, `PAT-CAD-01`, `PAT-MCP-01`, `PAT-OCR-01`, `PAT-WEB-01`, `PAT-QUANT-01`, `PAT-IOT-01`, `PAT-ENV-01`, `PAT-GIT-01`), **7 Institutional CI Governance Fingerprints (`GOV-01..07`)**, and **4 False-Positive Mirage Guardrails (`FALS-01..04`)**, illustrated with a monochrome academic engineering workflow diagram.
+  - **Two-Tier Autonomy Boundary**: Separated **Tier A (`Autonomous Pattern & Doc Ratchet` across `COMPOUND_LEARNING_PLAYBOOK.md`, repository docs, and opt-in `/xobsidian` notes)** from **Tier B (`Report-First Human-Consent Gate` for global `SKILL.md` files, `UL-01..UL-08`, bundled `scripts/*.py`, and public upstream PR submissions)**.
+- **`S1–S4` Skill Protocol & CLI Upgrades (`/xbrief`, `/xsync`, `/xdeep-research`, `/xcreate-skill`, `/xpublish` — `5,458` Total CLI LOC)**:
+  - **`S1` (`/xbrief` + `/xsync` Bounded Up-Tree Playbook Discovery & Tier A Auto-Ratchet, `audit_workspace_docs.py` `462` LOC)**: Upgraded `/xbrief` to walk up to `2` ancestor levels under a safe stop-list to load `COMPOUND_LEARNING_PLAYBOOK.md` in Stage 1, and upgraded `/xsync` (`--federated`) + `audit_workspace_docs.py` (`454 → 462` LOC; `5,450 → 5,458` total CLI LOC across `8` engines) to autonomously ratchet verified `PAT-*` / `GOV-*` / `FALS-*` entries in Stage 4.
+  - **`S2` (`/xdeep-research` Wave 1 Live `HEAD` Verification, Enclosing-Scope AST Check & Unlinked-PR Collision Gate)**: Embedded `FALS-01` (Silent `HEAD` Fix check), `FALS-02` (upward `def`/`class` enclosing-method check), `FALS-03` (unlinked open PR scan), `FALS-04` (intersection `|` vs union `&` nodata semantics), and `GOV-01..07` into `/xdeep-research`.
+  - **`S3` (`/xcreate-skill` Mode C Tier B Human-Consent Gate)**: Locked the Report-First Human-Consent boundary requiring the 5-Gate Universal Law Falsification Sieve + Wave 2A Blind Counter-Domain Critic before editing any global skill.
+  - **`S4` (`/xpublish --platform pr` Mixed `CRLF` / `LF` Upstream Line-Ending Parity Guard — `PAT-GIT-01`)**: Upgraded `/xpublish` and `references/github_readme_protocol.md` to verify `b'\r\n' in git show origin/<base>:<file>` before committing upstream PRs, preventing accidental whole-file line-ending diffs.
+- **18 Empirical Upstream Open-Source Contributions (`Batch 0` + `Group A` + `Group B`, `4.0×` – `1,735.6×` Verified Speedups)**:
+  - **Batch 0 (`xerj-org/xerj` `#2922–#2927` & `scb-10x/typhoon-ocr` `#15`)**: `4 MERGED` PRs + `3 OPEN` PRs/benchmarks (`-35.9%` vision token bloat, `1,912/1,954` Windows MSVC tests passing, `25/25` Thai PDF PUA tests passing).
+  - **Group A — Geospatial & Vision (`5` Contributions)**: `opengeos/geoai #960` (CodeRabbit `APPROVED`), `opengeos/segment-geospatial #569` (CodeRabbit `APPROVED`), `martibosch/pylandstats #77` (`4.0×` vectorized `np.bincount` patch centroids), `Weecology/DeepForest #1440`, and `gboeing/osmnx #1405`.
+  - **Group B — Climate Risk, ESG & Urban Physics (`6` Contributions across `5` Ecosystems)**: `os-climate/physrisk #651` (`32.5×` & `1,669.6×` speedups), `ladybug-tools/uwg #292` (`1,735.6×` deep-soil speedup + `Fixes #291`), `Deltares/hydromt #1566` (`27.5×` `shapely.box` speedup + `Fixes #1563`), `CLIMADA-project/climada_python #1349 & #1350` (`69.3×` & `14.0×` speedups + `Fixes #1331`), and `natcap/invest #2813 & #2829` (`23.4×` UCM & `19.2×` UFRM speedups).
+
+### Install
+
+See README. Tag: `v3.4.0`.
+```bash
+git clone --branch v3.4.0 https://github.com/iscvlab/boostx.git
+```
+
 ## v3.3.0
 
 - **Unified `/xpublish` Consolidation (`14 → 13 Composable Skills`, `5,450` CLI LOC, `--platform pr` Diff-Scoped Auditor, `GITHUB_PUBLISHING_PROTOCOL.md` `v1.3` `§6.D` Review-Bot Convergence, and `/xboost` + `/xultra` + `/xdeep-research` Bounded `/browser` & Headless Test Routing)**:
